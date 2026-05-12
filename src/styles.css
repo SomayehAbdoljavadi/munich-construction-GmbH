@@ -168,6 +168,43 @@
   animation: drawLine 2.4s var(--ease-out-expo) forwards;
 }
 
+/* Looping blueprint construction animation: draw → hold → fade → redraw */
+@keyframes blueprintDraw {
+  0%   { stroke-dashoffset: var(--dash, 1000); opacity: 0; }
+  4%   { opacity: 1; }
+  28%  { stroke-dashoffset: 0; opacity: 1; }
+  86%  { stroke-dashoffset: 0; opacity: 1; }
+  96%  { stroke-dashoffset: 0; opacity: 0; }
+  100% { stroke-dashoffset: var(--dash, 1000); opacity: 0; }
+}
+.blueprint-line {
+  stroke-dasharray: var(--dash, 1000);
+  stroke-dashoffset: var(--dash, 1000);
+  animation: blueprintDraw 11s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  animation-delay: var(--delay, 0s);
+  filter: drop-shadow(0 0 6px color-mix(in oklab, var(--gold) 35%, transparent));
+}
+@keyframes windowGlow {
+  0%, 30%, 100% { opacity: 0; }
+  40%   { opacity: 0.9; }
+  85%   { opacity: 0.6; }
+  95%   { opacity: 0; }
+}
+.blueprint-window {
+  animation: windowGlow 11s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes scanSweep {
+  0%   { transform: translateY(-10%); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(110%); opacity: 0; }
+}
+.blueprint-scan {
+  animation: scanSweep 11s ease-in-out infinite;
+  transform-origin: center;
+}
+
 .gold-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold) 70%, transparent);
