@@ -22,27 +22,21 @@ const stroke = (dash: number, delay: number): LineStyle => ({
 type WinStyle = React.CSSProperties & { ["--delay"]?: string };
 const win = (delay: number): WinStyle => ({ ["--delay"]: `${delay}s` });
 
-// Center hero building — traced directly from the Munich Construction logo:
-// a tall slanted main tower on the left, a notched secondary peak on the
-// right, and an inner parallelogram tower with a vertical door slit.
-const LOGO_OUTER =
-  "M 270 500 " +
-  "L 270 380 " +
-  "L 380 250 " +
-  "L 380 290 " +
-  "L 410 258 " +
-  "L 462 320 " +
-  "L 462 500 Z";
+// Center hero tower — derived from the Munich Construction logo silhouette.
+const LOGO_SILHOUETTE =
+  "M 250 500 " +
+  "L 280 500 " +
+  "L 280 360 " +
+  "L 322 280 " +
+  "L 334 298 " +
+  "L 350 252 " +
+  "L 396 320 " +
+  "L 396 372 " +
+  "L 440 388 " +
+  "L 440 500 " +
+  "L 470 500";
 
-// Inner parallelogram tower — the signature interior shape of the logo.
-const LOGO_INNER =
-  "M 295 458 " +
-  "L 295 395 " +
-  "L 358 308 " +
-  "L 358 372 Z";
-
-// Vertical door / window slit on the right portion of the logo.
-const LOGO_DOOR = "M 428 365 L 428 440";
+const LOGO_DOOR = "M 360 350 L 360 410";
 
 // Left modern tower (slim high-rise with stepped crown).
 const LEFT_TOWER =
@@ -137,33 +131,24 @@ export function HeroSkylineArt() {
         <path d={FAR_RIGHT_TOWER} className="hs-line" style={stroke(1300, 2.4)} />
       </g>
 
-      {/* === HERO LOGO BUILDING (gold, glowing) — traced from Munich Construction logo === */}
-      <g filter="url(#hsGlow)" fill="none">
+      {/* === HERO LOGO SILHOUETTE (gold, glowing) === */}
+      <g filter="url(#hsGlow)">
         <path
-          d={LOGO_OUTER}
+          d={LOGO_SILHOUETTE}
           stroke="url(#hsGold)"
-          strokeWidth="2.4"
+          strokeWidth="2.2"
           strokeLinejoin="miter"
           strokeLinecap="square"
           className="hs-line hs-pulse"
-          style={stroke(1500, 2.9)}
-        />
-        <path
-          d={LOGO_INNER}
-          stroke="url(#hsGold)"
-          strokeWidth="2"
-          strokeLinejoin="miter"
-          strokeLinecap="square"
-          className="hs-line"
-          style={stroke(420, 3.9)}
+          style={stroke(1400, 2.9)}
         />
         <path
           d={LOGO_DOOR}
           stroke="url(#hsGold)"
-          strokeWidth="2"
+          strokeWidth="1.8"
           strokeLinecap="round"
           className="hs-line"
-          style={stroke(80, 4.5)}
+          style={stroke(80, 4.4)}
         />
       </g>
 

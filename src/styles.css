@@ -275,51 +275,56 @@
   animation: introTextIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 2.6s forwards;
 }
 
-/* === Hero skyline (HeroSkylineArt) — sequential one-shot reveal ===
-   1) Building animation plays (~7s)
-   2) Building fades out (1s)
-   3) GIF fades in and stays (after ~7.5s) */
+/* === Hero skyline (HeroSkylineArt) — 14s premium loop === */
 @keyframes hsDraw {
   0%   { stroke-dashoffset: var(--dash, 1000); opacity: 0; }
-  6%   { opacity: 1; }
-  70%  { stroke-dashoffset: 0; opacity: 1; }
-  90%  { stroke-dashoffset: 0; opacity: 1; }
-  100% { stroke-dashoffset: 0; opacity: 0; }
+  3%   { opacity: 1; }
+  35%  { stroke-dashoffset: 0; opacity: 1; }
+  88%  { stroke-dashoffset: 0; opacity: 1; }
+  97%  { stroke-dashoffset: 0; opacity: 0; }
+  100% { stroke-dashoffset: var(--dash, 1000); opacity: 0; }
 }
 .hs-line {
   stroke-dasharray: var(--dash, 1000);
   stroke-dashoffset: var(--dash, 1000);
-  animation: hsDraw 8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation: hsDraw 14s cubic-bezier(0.65, 0, 0.35, 1) infinite;
   animation-delay: var(--delay, 0s);
 }
 @keyframes hsPulse {
-  0%, 55%, 100% { filter: drop-shadow(0 0 4px rgba(232,196,65,0.35)); }
+  0%, 60%, 100% { filter: drop-shadow(0 0 4px rgba(232,196,65,0.35)); }
   75%           { filter: drop-shadow(0 0 14px rgba(232,196,65,0.85)); }
 }
 .hs-pulse {
   animation:
-    hsDraw 8s cubic-bezier(0.65, 0, 0.35, 1) forwards,
-    hsPulse 8s ease-in-out forwards;
+    hsDraw 14s cubic-bezier(0.65, 0, 0.35, 1) infinite,
+    hsPulse 14s ease-in-out infinite;
   animation-delay: var(--delay, 0s);
 }
 @keyframes hsWindow {
-  0%, 55%   { opacity: 0; }
-  65%   { opacity: 0.95; filter: drop-shadow(0 0 4px rgba(255,215,107,0.7)); }
-  88%   { opacity: 0.85; filter: drop-shadow(0 0 3px rgba(255,215,107,0.5)); }
-  100%  { opacity: 0; }
+  0%, 38%, 100% { opacity: 0; }
+  46%   { opacity: 0.95; filter: drop-shadow(0 0 4px rgba(255,215,107,0.7)); }
+  78%   { opacity: 0.6; filter: drop-shadow(0 0 2px rgba(255,215,107,0.4)); }
+  94%   { opacity: 0; }
 }
 .hs-window {
   opacity: 0;
-  animation: hsWindow 8s ease-in-out forwards;
+  animation: hsWindow 14s ease-in-out infinite;
   animation-delay: var(--delay, 0s);
 }
-/* Final-reveal GIF — appears only after the building animation has fully
-   faded out, then holds (looping the GIF itself) for the rest of the visit. */
+/* Final-reveal GIF fade — synced to the 14s SVG loop.
+   SVG buildings finish illuminating ~75%, fade out 96-100%.
+   GIF eases in from 72%, fully visible 90-99%, then a quick soft
+   fade-out across the loop seam so the next draw starts on black. */
 @keyframes hsFinalReveal {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
+  0%       { opacity: 0.35; }
+  6%       { opacity: 0; }
+  72%      { opacity: 0; }
+  90%      { opacity: 1; }
+  99%      { opacity: 1; }
+  100%     { opacity: 0.35; }
 }
 .hs-final-reveal {
   opacity: 0;
-  animation: hsFinalReveal 1.4s cubic-bezier(0.4, 0, 0.2, 1) 8s forwards;
+  animation: hsFinalReveal 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  mix-blend-mode: screen;
 }
