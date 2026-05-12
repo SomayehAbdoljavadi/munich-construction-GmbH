@@ -136,24 +136,33 @@ export function HeroSkylineArt() {
         <path d={FAR_RIGHT_TOWER} className="hs-line" style={stroke(1300, 2.4)} />
       </g>
 
-      {/* === HERO LOGO SILHOUETTE (gold, glowing) === */}
+      {/* === HERO LOGO SILHOUETTE (gold, glowing) — traced from the brand mark === */}
       <g filter="url(#hsGlow)">
+        <path
+          d={LOGO_BASE}
+          stroke="url(#hsGold)"
+          strokeWidth="2.2"
+          strokeLinecap="square"
+          className="hs-line"
+          style={stroke(350, 2.6)}
+        />
         <path
           d={LOGO_SILHOUETTE}
           stroke="url(#hsGold)"
-          strokeWidth="2.2"
+          strokeWidth="2.4"
           strokeLinejoin="miter"
           strokeLinecap="square"
+          fill="none"
           className="hs-line hs-pulse"
-          style={stroke(1400, 2.9)}
+          style={stroke(1500, 3.0)}
         />
         <path
           d={LOGO_DOOR}
           stroke="url(#hsGold)"
-          strokeWidth="1.8"
+          strokeWidth="2"
           strokeLinecap="round"
           className="hs-line"
-          style={stroke(80, 4.4)}
+          style={stroke(95, 4.6)}
         />
       </g>
 
