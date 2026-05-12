@@ -137,24 +137,33 @@ export function HeroSkylineArt() {
         <path d={FAR_RIGHT_TOWER} className="hs-line" style={stroke(1300, 2.4)} />
       </g>
 
-      {/* === HERO LOGO SILHOUETTE (gold, glowing) === */}
-      <g filter="url(#hsGlow)">
+      {/* === HERO LOGO BUILDING (gold, glowing) — traced from Munich Construction logo === */}
+      <g filter="url(#hsGlow)" fill="none">
         <path
-          d={LOGO_SILHOUETTE}
+          d={LOGO_OUTER}
           stroke="url(#hsGold)"
-          strokeWidth="2.2"
+          strokeWidth="2.4"
           strokeLinejoin="miter"
           strokeLinecap="square"
           className="hs-line hs-pulse"
-          style={stroke(1400, 2.9)}
+          style={stroke(1500, 2.9)}
+        />
+        <path
+          d={LOGO_INNER}
+          stroke="url(#hsGold)"
+          strokeWidth="2"
+          strokeLinejoin="miter"
+          strokeLinecap="square"
+          className="hs-line"
+          style={stroke(420, 3.9)}
         />
         <path
           d={LOGO_DOOR}
           stroke="url(#hsGold)"
-          strokeWidth="1.8"
+          strokeWidth="2"
           strokeLinecap="round"
           className="hs-line"
-          style={stroke(80, 4.4)}
+          style={stroke(80, 4.5)}
         />
       </g>
 
