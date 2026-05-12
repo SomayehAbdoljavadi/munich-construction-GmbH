@@ -134,16 +134,18 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
-        <div className="min-h-screen flex flex-col">
-          <SiteHeader />
-          <main className="flex-1">
-            <Outlet />
-          </main>
-          <SiteFooter />
-          <WhatsAppFloat />
-        </div>
-      </LanguageProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <div className="min-h-screen flex flex-col bg-background text-foreground">
+            <SiteHeader />
+            <main className="flex-1">
+              <Outlet />
+            </main>
+            <SiteFooter />
+            <WhatsAppFloat />
+          </div>
+        </LanguageProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
