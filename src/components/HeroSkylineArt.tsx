@@ -247,12 +247,7 @@ export function HeroSkylineArt() {
           className="hs-line" style={stroke(34, 4.6)} />
       </g>
 
-      {/* slow architectural scan sweep */}
-      <rect
-        x="0" y="0" width="800" height="80"
-        fill="url(#hsScan)"
-        className="hs-scan"
-      />
-    </svg>
+      </svg>
+    </div>
   );
 }
