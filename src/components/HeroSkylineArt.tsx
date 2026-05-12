@@ -41,7 +41,8 @@ export function HeroSkylineArt() {
           autoPlay
           muted
           playsInline
-          className="max-w-full max-h-full object-contain transition-opacity duration-700"
+          className="max-w-full max-h-full object-contain transition-opacity ease-in-out"
+          style={{ opacity: fadingOut ? 0 : 1, transitionDuration: "1200ms" }}
           style={{ opacity: fadingOut ? 0 : 1 }}
         />
       )}
