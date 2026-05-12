@@ -11,21 +11,23 @@ import {
 import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { LanguageProvider } from "@/lib/i18n";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Fehler 404</p>
-        <h1 className="font-display text-6xl mt-4">Seite nicht gefunden</h1>
+        <p className="font-mono text-[10px] uppercase tracking-widest text-gold">404</p>
+        <h1 className="font-display text-5xl mt-4">Page not found</h1>
         <p className="mt-4 text-sm text-muted-foreground">
-          Die angeforderte Seite existiert nicht oder wurde verschoben.
+          The page you're looking for doesn't exist or has been moved.
         </p>
         <Link
           to="/"
-          className="inline-block mt-8 px-8 py-3 bg-foreground text-background font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-primary transition-colors"
+          className="inline-block mt-8 px-8 py-3 bg-ink text-white font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-gold hover:text-ink transition-colors"
         >
-          Zur Startseite
+          Home
         </Link>
       </div>
     </div>
@@ -38,22 +40,19 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-[60vh] items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="font-display text-4xl">Etwas ist schiefgelaufen</h1>
+        <h1 className="font-display text-4xl">Something went wrong</h1>
         <p className="mt-4 text-sm text-muted-foreground">
-          Die Seite konnte nicht geladen werden.
+          We couldn't load this page.
         </p>
         <div className="mt-8 flex justify-center gap-3">
           <button
             onClick={() => { router.invalidate(); reset(); }}
-            className="px-6 py-3 bg-foreground text-background font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-primary transition-colors"
+            className="px-6 py-3 bg-ink text-white font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-gold hover:text-ink transition-colors"
           >
-            Erneut versuchen
+            Retry
           </button>
-          <a
-            href="/"
-            className="px-6 py-3 border border-border font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-muted transition-colors"
-          >
-            Startseite
+          <a href="/" className="px-6 py-3 border border-border font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-muted transition-colors">
+            Home
           </a>
         </div>
       </div>
@@ -66,17 +65,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Steiner & Co. — Bauunternehmen München" },
+      { title: "Munich Construction GmbH — Hochwertiges Bauen in München" },
       {
         name: "description",
         content:
-          "Steiner & Co. GmbH — Bauunternehmen aus München. Hochbau, Holzbau und Sanierung mit bayerischer Ingenieurskunst seit 1954.",
+          "Munich Construction GmbH — Bauunternehmen aus München. Neubau, Renovierung, Sanierung, Brandschutz, Genehmigung und Werkplanung aus einer Hand.",
       },
-      { name: "author", content: "Steiner & Co. GmbH" },
-      { property: "og:title", content: "Steiner & Co. — Bauunternehmen München" },
-      { property: "og:description", content: "Hochbau, Holzbau und Denkmalsanierung in München und Oberbayern. Seit 1954." },
+      { name: "author", content: "Munich Construction GmbH" },
+      { property: "og:title", content: "Munich Construction GmbH" },
+      { property: "og:description", content: "Hochwertiges Bauen in München — Neubau, Sanierung, Brandschutz und Werkplanung." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "theme-color", content: "#0d0d0d" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -84,7 +84,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "GeneralContractor",
+          name: "Munich Construction GmbH",
+          url: "https://www.munichconstruction.de",
+          telephone: "+49 89 57843675",
+          email: "m.mardi@munichconstruction.de",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Theresienstraße 93",
+            postalCode: "80333",
+            addressLocality: "München",
+            addressCountry: "DE",
+          },
+          areaServed: "München",
+        }),
       },
     ],
   }),
@@ -112,13 +133,16 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen flex flex-col">
-        <SiteHeader />
-        <main className="flex-1">
-          <Outlet />
-        </main>
-        <SiteFooter />
-      </div>
+      <LanguageProvider>
+        <div className="min-h-screen flex flex-col">
+          <SiteHeader />
+          <main className="flex-1">
+            <Outlet />
+          </main>
+          <SiteFooter />
+          <WhatsAppFloat />
+        </div>
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }
