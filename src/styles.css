@@ -328,3 +328,64 @@
   animation: hsFinalReveal 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   mix-blend-mode: screen;
 }
+
+/* ===== Munich Construction premium intro (4s, plays once) ===== */
+@keyframes mcGridIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.mc-grid {
+  opacity: 0;
+  animation: mcGridIn 1s ease-out forwards;
+}
+.mc-ground {
+  stroke-dasharray: 700;
+  stroke-dashoffset: 700;
+  animation: mcDrawOnce 0.8s ease-out 0.6s forwards;
+}
+@keyframes mcDrawOnce {
+  to { stroke-dashoffset: 0; }
+}
+.mc-side {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: mcDrawOnce 1.4s ease-out forwards;
+}
+.mc-side-a { animation-delay: 1.0s; }
+.mc-side-b { animation-delay: 1.2s; }
+
+.mc-draw {
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: mcDrawOnce 1.2s cubic-bezier(0.65,0,0.35,1) forwards;
+  filter: drop-shadow(0 0 3px rgba(232,196,65,0.35));
+}
+.mc-d1 { animation-delay: 1.2s; }
+.mc-d2 { animation-delay: 1.6s; stroke-dasharray: 1100; stroke-dashoffset: 1100; }
+.mc-d3 { animation-delay: 2.1s; }
+.mc-d4 { animation-delay: 2.6s; stroke-dasharray: 200; stroke-dashoffset: 200; }
+
+@keyframes mcWinOn {
+  0% { opacity: 0; }
+  100% { opacity: 0.95; filter: drop-shadow(0 0 5px rgba(245,210,122,0.8)); }
+}
+.mc-win {
+  opacity: 0;
+  animation: mcWinOn 0.5s ease-out forwards;
+}
+.mc-w1 { animation-delay: 3.0s; }
+.mc-w2 { animation-delay: 3.15s; }
+.mc-w3 { animation-delay: 3.3s; }
+.mc-w4 { animation-delay: 3.4s; }
+.mc-w5 { animation-delay: 3.55s; }
+.mc-w6 { animation-delay: 3.2s; }
+.mc-w7 { animation-delay: 3.35s; }
+
+@keyframes mcCrossIn {
+  0% { opacity: 0; transform: scale(0.6); }
+  100% { opacity: 0.9; transform: scale(1); }
+}
+.mc-cross {
+  transform-origin: 410px 180px;
+  animation: mcCrossIn 0.6s ease-out 2.4s forwards;
+}
