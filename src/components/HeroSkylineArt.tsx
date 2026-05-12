@@ -22,21 +22,26 @@ const stroke = (dash: number, delay: number): LineStyle => ({
 type WinStyle = React.CSSProperties & { ["--delay"]?: string };
 const win = (delay: number): WinStyle => ({ ["--delay"]: `${delay}s` });
 
-// Center hero tower — derived from the Munich Construction logo silhouette.
+// Center hero tower — traced from the Munich Construction logo:
+// slim slanted left tower with angled crown, a lower right wing roof,
+// and a horizontal base line. Single closed silhouette.
 const LOGO_SILHOUETTE =
-  "M 250 500 " +
-  "L 280 500 " +
-  "L 280 360 " +
-  "L 322 280 " +
-  "L 334 298 " +
-  "L 350 252 " +
-  "L 396 320 " +
-  "L 396 372 " +
-  "L 440 388 " +
-  "L 440 500 " +
-  "L 470 500";
+  "M 270 500 " +
+  "L 270 410 " +     // tower base left side up
+  "L 300 380 " +     // small angled ledge
+  "L 318 200 " +     // up slim peak (left edge, slanted)
+  "L 402 168 " +     // slanted top crown (rises to the right)
+  "L 402 244 " +     // down right edge of peak
+  "L 470 296 " +     // slant down to roof shoulder
+  "L 522 348 " +     // continue slant onto right wing
+  "L 522 500 " +     // right side down to base
+  "Z";
 
-const LOGO_DOOR = "M 360 350 L 360 410";
+// Vertical door/window slit on the right wing — the logo signature mark.
+const LOGO_DOOR = "M 452 322 L 452 412";
+
+// Horizontal base line that anchors the logo composition.
+const LOGO_BASE = "M 220 500 L 570 500";
 
 // Left modern tower (slim high-rise with stepped crown).
 const LEFT_TOWER =
