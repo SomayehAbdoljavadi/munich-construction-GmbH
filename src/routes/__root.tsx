@@ -13,6 +13,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { LanguageProvider } from "@/lib/i18n";
+import { ThemeProvider } from "@/lib/theme";
 
 function NotFoundComponent() {
   return (
