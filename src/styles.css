@@ -274,3 +274,50 @@
   opacity: 0;
   animation: introTextIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 2.6s forwards;
 }
+
+/* === Hero skyline (HeroSkylineArt) — 14s premium loop === */
+@keyframes hsDraw {
+  0%   { stroke-dashoffset: var(--dash, 1000); opacity: 0; }
+  3%   { opacity: 1; }
+  35%  { stroke-dashoffset: 0; opacity: 1; }
+  88%  { stroke-dashoffset: 0; opacity: 1; }
+  97%  { stroke-dashoffset: 0; opacity: 0; }
+  100% { stroke-dashoffset: var(--dash, 1000); opacity: 0; }
+}
+.hs-line {
+  stroke-dasharray: var(--dash, 1000);
+  stroke-dashoffset: var(--dash, 1000);
+  animation: hsDraw 14s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes hsPulse {
+  0%, 60%, 100% { filter: drop-shadow(0 0 4px rgba(232,196,65,0.35)); }
+  75%           { filter: drop-shadow(0 0 14px rgba(232,196,65,0.85)); }
+}
+.hs-pulse {
+  animation:
+    hsDraw 14s cubic-bezier(0.65, 0, 0.35, 1) infinite,
+    hsPulse 14s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes hsWindow {
+  0%, 38%, 100% { opacity: 0; }
+  46%   { opacity: 0.95; filter: drop-shadow(0 0 4px rgba(255,215,107,0.7)); }
+  78%   { opacity: 0.6; filter: drop-shadow(0 0 2px rgba(255,215,107,0.4)); }
+  94%   { opacity: 0; }
+}
+.hs-window {
+  opacity: 0;
+  animation: hsWindow 14s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes hsScan {
+  0%   { transform: translateY(-10%); opacity: 0; }
+  8%   { opacity: 0.5; }
+  40%  { opacity: 0.5; }
+  60%  { transform: translateY(110%); opacity: 0; }
+  100% { transform: translateY(110%); opacity: 0; }
+}
+.hs-scan {
+  animation: hsScan 14s ease-in-out infinite;
+}

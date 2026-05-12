@@ -12,7 +12,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { useT, type TranslationKey } from "@/lib/i18n";
-import { HeroBuildingArt } from "@/components/HeroBuildingArt";
+import { HeroSkylineArt } from "@/components/HeroSkylineArt";
 import heroBg from "@/assets/mc-hero-bg.jpg";
 
 export const Route = createFileRoute("/")({
@@ -102,18 +102,8 @@ function HomePage() {
           </div>
 
           <div className="lg:col-span-5 relative animate-fade-in [animation-delay:300ms]">
-            <div className="mx-auto w-full max-w-[560px] px-4 sm:px-8 py-6 md:py-10 flex items-center justify-center">
-              <video
-                className="w-full h-auto block pointer-events-none select-none"
-                src="/media/munich-logo-anim.mp4"
-                poster="/media/munich-logo-anim.gif"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                aria-hidden
-              />
+            <div className="mx-auto w-full max-w-[640px] aspect-[8/5] flex items-center justify-center">
+              <HeroSkylineArt />
             </div>
           </div>
         </div>

@@ -201,7 +201,7 @@ export function HeroSkylineArt() {
         {/* Far-right slim tower windows */}
         {Array.from({ length: 9 }).map((_, r) => (
           <rect
-            key={`fr-${i}-${r}`}
+            key={`fr-${r}`}
             x={708}
             y={252 + r * 24}
             width="34"
