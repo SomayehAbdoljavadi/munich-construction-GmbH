@@ -54,14 +54,24 @@ const FAR_RIGHT_TOWER =
 const FAR_LEFT =
   "M 20 500 L 20 420 L 60 420 L 60 500 Z";
 
+const FINAL_GIF = "/media/munich-final-reveal.gif";
+
 export function HeroSkylineArt() {
   return (
-    <svg
-      viewBox="0 0 800 560"
-      className="w-full h-full"
-      aria-hidden
-      fill="none"
-    >
+    <div className="relative w-full h-full">
+      {/* Final-reveal GIF: softly fades in at the end of the loop */}
+      <img
+        src={FINAL_GIF}
+        alt=""
+        aria-hidden
+        className="hs-final-reveal absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
+      />
+      <svg
+        viewBox="0 0 800 560"
+        className="relative w-full h-full"
+        aria-hidden
+        fill="none"
+      >
       <defs>
         <linearGradient id="hsGold" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#fff19a" />
@@ -98,16 +108,14 @@ export function HeroSkylineArt() {
         ))}
       </g>
 
-      {/* horizon datum + verticals — drawn first as "construction guides" */}
-      <g stroke="url(#hsGold)" strokeWidth="0.6" opacity="0.55">
-        <line x1="10" y1="500" x2="790" y2="500"
-          className="hs-line" style={stroke(780, 0.0)} />
+      {/* vertical construction sight lines (no horizontal datum) */}
+      <g stroke="url(#hsGold)" strokeWidth="0.6" opacity="0.5">
         <line x1="360" y1="40" x2="360" y2="540"
-          className="hs-line" style={stroke(500, 0.4)} strokeDasharray="2 5" />
+          className="hs-line" style={stroke(500, 0.2)} strokeDasharray="2 5" />
         <line x1="115" y1="80" x2="115" y2="540"
-          className="hs-line" style={stroke(460, 0.55)} strokeDasharray="2 5" />
+          className="hs-line" style={stroke(460, 0.4)} strokeDasharray="2 5" />
         <line x1="600" y1="80" x2="600" y2="540"
-          className="hs-line" style={stroke(460, 0.7)} strokeDasharray="2 5" />
+          className="hs-line" style={stroke(460, 0.55)} strokeDasharray="2 5" />
       </g>
 
       {/* === BUILDING OUTLINES (white structural lines) === */}
@@ -155,9 +163,6 @@ export function HeroSkylineArt() {
         {/* Far-right tower top */}
         <path d="M 690 220 L 745 220 L 745 260 L 760 260"
           className="hs-line" style={stroke(135, 4.0)} />
-        {/* Base ground accent */}
-        <line x1="20" y1="500" x2="780" y2="500"
-          className="hs-line" style={stroke(760, 4.2)} />
       </g>
 
       {/* === WINDOWS — progressive illumination === */}
@@ -242,12 +247,7 @@ export function HeroSkylineArt() {
           className="hs-line" style={stroke(34, 4.6)} />
       </g>
 
-      {/* slow architectural scan sweep */}
-      <rect
-        x="0" y="0" width="800" height="80"
-        fill="url(#hsScan)"
-        className="hs-scan"
-      />
-    </svg>
+      </svg>
+    </div>
   );
 }

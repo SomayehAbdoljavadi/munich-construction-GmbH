@@ -311,13 +311,13 @@
   animation: hsWindow 14s ease-in-out infinite;
   animation-delay: var(--delay, 0s);
 }
-@keyframes hsScan {
-  0%   { transform: translateY(-10%); opacity: 0; }
-  8%   { opacity: 0.5; }
-  40%  { opacity: 0.5; }
-  60%  { transform: translateY(110%); opacity: 0; }
-  100% { transform: translateY(110%); opacity: 0; }
+@keyframes hsFinalReveal {
+  0%, 70%  { opacity: 0; }
+  88%      { opacity: 1; }
+  98%      { opacity: 1; }
+  100%     { opacity: 0; }
 }
-.hs-scan {
-  animation: hsScan 14s ease-in-out infinite;
+.hs-final-reveal {
+  opacity: 0;
+  animation: hsFinalReveal 14s ease-in-out infinite;
 }
