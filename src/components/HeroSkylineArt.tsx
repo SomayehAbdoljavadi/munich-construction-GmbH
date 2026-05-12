@@ -230,35 +230,36 @@ export function HeroSkylineArt() {
           />
         ))}
 
-        {/* Hero tower accent windows */}
-        {[0, 1, 2, 3].map((r) => (
+        {/* Hero tower accent windows — slim peak interior */}
+        {[0, 1, 2, 3, 4].map((r) => (
           <rect
             key={`hr-${r}`}
-            x={296}
-            y={380 + r * 22}
-            width="6"
-            height="8"
-            className="hs-window"
-            style={win(6.4 + r * 0.1)}
-          />
-        ))}
-        {[0, 1, 2, 3].map((r) => (
-          <rect
-            key={`hr2-${r}`}
-            x={418}
-            y={400 + r * 20}
-            width="6"
+            x={344}
+            y={232 + r * 26}
+            width="34"
             height="6"
             className="hs-window"
-            style={win(6.6 + r * 0.1)}
+            style={win(6.6 + r * 0.12)}
+          />
+        ))}
+        {/* Right wing accent windows */}
+        {[0, 1, 2].map((r) => (
+          <rect
+            key={`hr2-${r}`}
+            x={486}
+            y={372 + r * 22}
+            width="26"
+            height="6"
+            className="hs-window"
+            style={win(7.0 + r * 0.12)}
           />
         ))}
       </g>
 
-      {/* survey crosshair on hero peak */}
+      {/* survey crosshair on hero crown */}
       <g stroke="url(#hsGold)" strokeWidth="1">
-        <circle cx="350" cy="252" r="5" fill="none"
-          className="hs-line" style={stroke(34, 4.6)} />
+        <circle cx="402" cy="168" r="5" fill="none"
+          className="hs-line" style={stroke(34, 4.8)} />
       </g>
 
       </svg>
