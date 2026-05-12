@@ -54,14 +54,24 @@ const FAR_RIGHT_TOWER =
 const FAR_LEFT =
   "M 20 500 L 20 420 L 60 420 L 60 500 Z";
 
+const FINAL_GIF = "/media/munich-final-reveal.gif";
+
 export function HeroSkylineArt() {
   return (
-    <svg
-      viewBox="0 0 800 560"
-      className="w-full h-full"
-      aria-hidden
-      fill="none"
-    >
+    <div className="relative w-full h-full">
+      {/* Final-reveal GIF: softly fades in at the end of the loop */}
+      <img
+        src={FINAL_GIF}
+        alt=""
+        aria-hidden
+        className="hs-final-reveal absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
+      />
+      <svg
+        viewBox="0 0 800 560"
+        className="relative w-full h-full"
+        aria-hidden
+        fill="none"
+      >
       <defs>
         <linearGradient id="hsGold" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#fff19a" />
