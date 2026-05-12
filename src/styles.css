@@ -34,6 +34,10 @@
   --color-gold-soft: var(--gold-soft);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
+  --color-surface-inverse: var(--surface-inverse);
+  --color-surface-inverse-foreground: var(--surface-inverse-foreground);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-hairline: var(--hairline);
 
   --font-display: 'Playfair Display', Georgia, serif;
   --font-sans: 'Inter', system-ui, sans-serif;
