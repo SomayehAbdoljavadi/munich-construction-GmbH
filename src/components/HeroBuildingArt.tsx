@@ -1,13 +1,12 @@
 /**
  * Munich Construction — animated architectural blueprint.
  *
- * A premium, looping line-drawing inspired by the company logo:
- * a framed silhouette assembled from gold construction lines into
- * a modern building / "M" rooftop motif. Pure SVG + CSS, themed via
- * design tokens so it works in both dark and light mode.
- *
- * The full cycle runs ~11s: thin gold guides → building silhouette →
- * gold "M" arches → window glow → fade and redraw.
+ * The silhouette is traced directly from the company logo: a tall stepped
+ * left tower with two angled peaks, a long slanted roofline cascading down
+ * to a lower right-side wing, anchored on a continuous ground line. Drawn
+ * as gold construction lines over a blueprint grid, then held and redrawn
+ * on a calm ~11s loop. Pure SVG + CSS, themed with design tokens so it
+ * works in both dark and light mode.
  */
 type LineStyle = React.CSSProperties & {
   ["--dash"]?: string;
@@ -19,6 +18,25 @@ const line = (dash: number, delay: number): LineStyle => ({
   ["--delay"]: `${delay}s`,
 });
 
+// Silhouette traced from the Munich Construction logo (viewBox 600x600).
+// Single continuous polyline: ground → left tower → twin peaks → long
+// slanted roofline → right wing → ground.
+const SILHOUETTE =
+  "M 40 500 " +
+  "L 150 500 " +
+  "L 150 285 " +     // up the left tower's left edge
+  "L 240 135 " +     // up to first (left) peak
+  "L 262 168 " +     // small valley
+  "L 292 90 " +      // up to tallest peak (center)
+  "L 378 215 " +     // long slant down toward the right
+  "L 378 305 " +     // step down (shoulder of left mass)
+  "L 460 335 " +     // continue slant onto right wing roof
+  "L 460 500 " +     // down right wing's right edge
+  "L 560 500";       // ground extending right
+
+// Inner door/window slit on the central tower (logo motif).
+const DOOR = "M 322 200 L 322 295";
+
 export function HeroBuildingArt() {
   return (
     <svg
@@ -29,7 +47,7 @@ export function HeroBuildingArt() {
     >
       <defs>
         <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="oklch(0.88 0.13 88)" />
+          <stop offset="0%" stopColor="oklch(0.9 0.13 90)" />
           <stop offset="100%" stopColor="oklch(0.72 0.17 75)" />
         </linearGradient>
         <radialGradient id="heroGlow" cx="50%" cy="62%" r="55%">
@@ -38,7 +56,7 @@ export function HeroBuildingArt() {
         </radialGradient>
         <linearGradient id="scanGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="oklch(0.78 0.16 80 / 0)" />
-          <stop offset="50%" stopColor="oklch(0.78 0.16 80 / 0.35)" />
+          <stop offset="50%" stopColor="oklch(0.78 0.16 80 / 0.28)" />
           <stop offset="100%" stopColor="oklch(0.78 0.16 80 / 0)" />
         </linearGradient>
       </defs>
@@ -61,122 +79,85 @@ export function HeroBuildingArt() {
         ))}
       </g>
 
-      {/* logo-inspired outer frame (drawn first, like a blueprint border) */}
-      <rect
-        x="60" y="80" width="480" height="460"
-        stroke="var(--gold)" strokeWidth="1.2" rx="2"
-        className="blueprint-line" style={line(1880, 0)}
-      />
-
-      {/* construction guide lines — thin gold scaffolding */}
-      <g stroke="url(#goldGrad)" strokeWidth="0.8" opacity="0.85">
-        <line x1="60" y1="500" x2="540" y2="500"
-          className="blueprint-line" style={line(480, 0.4)} />
+      {/* construction guide lines — thin gold scaffolding aligned to logo */}
+      <g stroke="url(#goldGrad)" strokeWidth="0.7" opacity="0.7">
+        {/* horizon datum */}
+        <line x1="20" y1="500" x2="580" y2="500"
+          className="blueprint-line" style={line(560, 0.2)} />
+        {/* vertical sight lines through key peaks */}
         <line x1="150" y1="80" x2="150" y2="540"
-          className="blueprint-line" style={line(460, 0.7)} />
-        <line x1="300" y1="80" x2="300" y2="540"
+          className="blueprint-line" style={line(460, 0.5)} />
+        <line x1="292" y1="40" x2="292" y2="540"
+          className="blueprint-line" style={line(500, 0.7)} />
+        <line x1="460" y1="80" x2="460" y2="540"
           className="blueprint-line" style={line(460, 0.9)} />
-        <line x1="450" y1="80" x2="450" y2="540"
-          className="blueprint-line" style={line(460, 1.1)} />
-        {/* diagonal sight lines */}
-        <line x1="60" y1="540" x2="300" y2="120"
-          className="blueprint-line" style={line(490, 1.3)} />
-        <line x1="540" y1="540" x2="300" y2="120"
-          className="blueprint-line" style={line(490, 1.3)} />
+        {/* diagonal sight rays converging on the tallest peak */}
+        <line x1="40" y1="540" x2="292" y2="90"
+          className="blueprint-line" style={line(520, 1.1)} />
+        <line x1="560" y1="540" x2="292" y2="90"
+          className="blueprint-line" style={line(520, 1.1)} />
+        {/* eave-height datum */}
+        <line x1="40" y1="335" x2="560" y2="335"
+          className="blueprint-line" style={line(520, 1.3)} strokeDasharray="2 4" />
       </g>
 
-      {/* main building silhouette — three vertical towers, M roofline */}
-      <g
+      {/* faint white blueprint shadow of the silhouette */}
+      <path
+        d={SILHOUETTE}
         style={{ color: "var(--foreground)" }}
         stroke="currentColor"
-        strokeWidth="1.6"
+        strokeWidth="0.8"
+        opacity="0.18"
         strokeLinejoin="miter"
         strokeLinecap="square"
-        opacity="0.9"
-      >
-        {/* tower A (left) */}
-        <path d="M 110 500 L 110 290 L 220 230 L 220 500 Z"
-          className="blueprint-line" style={line(1080, 1.7)} />
-        {/* tower B (center, tallest — apex of the M) */}
-        <path d="M 240 500 L 240 200 L 300 130 L 360 200 L 360 500 Z"
-          className="blueprint-line" style={line(1320, 2.1)} />
-        {/* tower C (right) */}
-        <path d="M 380 500 L 380 250 L 490 310 L 490 500 Z"
-          className="blueprint-line" style={line(1080, 2.5)} />
-      </g>
-
-      {/* gold "M" architectural arches — the logo motif */}
-      <path
-        d="M 90 480 L 90 320 L 175 220 L 260 320 L 300 260 L 340 320 L 425 240 L 510 320 L 510 480"
-        stroke="url(#goldGrad)" strokeWidth="2" strokeLinejoin="round"
-        className="blueprint-line" style={line(1500, 3.0)}
       />
 
-      {/* window grid — soft gold rectangles that glow */}
-      <g fill="var(--gold)">
-        {/* tower A */}
-        {Array.from({ length: 7 }).map((_, r) =>
-          Array.from({ length: 3 }).map((_, c) => (
-            <rect
-              key={`a-${r}-${c}`}
-              x={120 + c * 32} y={310 + r * 26}
-              width="20" height="14" rx="1"
-              className="blueprint-window"
-              style={{ ["--delay" as never]: `${3.4 + (r + c) * 0.06}s`, opacity: 0 }}
-            />
-          ))
-        )}
-        {/* tower B */}
-        {Array.from({ length: 10 }).map((_, r) =>
-          Array.from({ length: 3 }).map((_, c) => (
-            <rect
-              key={`b-${r}-${c}`}
-              x={250 + c * 32} y={220 + r * 26}
-              width="20" height="14" rx="1"
-              className="blueprint-window"
-              style={{ ["--delay" as never]: `${3.6 + (r + c) * 0.05}s`, opacity: 0 }}
-            />
-          ))
-        )}
-        {/* tower C */}
-        {Array.from({ length: 8 }).map((_, r) =>
-          Array.from({ length: 3 }).map((_, c) => (
-            <rect
-              key={`c-${r}-${c}`}
-              x={390 + c * 32} y={290 + r * 24}
-              width="20" height="12" rx="1"
-              className="blueprint-window"
-              style={{ ["--delay" as never]: `${3.8 + (r + c) * 0.06}s`, opacity: 0 }}
-            />
-          ))
-        )}
-      </g>
+      {/* MAIN GOLD SILHOUETTE — derived from the Munich Construction logo */}
+      <path
+        d={SILHOUETTE}
+        stroke="url(#goldGrad)"
+        strokeWidth="2.6"
+        strokeLinejoin="miter"
+        strokeLinecap="square"
+        className="blueprint-line"
+        style={line(2200, 1.6)}
+      />
 
-      {/* survey crosshair on apex */}
+      {/* central tower's vertical door/window — logo signature detail */}
+      <path
+        d={DOOR}
+        stroke="url(#goldGrad)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        className="blueprint-line"
+        style={line(100, 3.4)}
+      />
+
+      {/* survey crosshair on the tallest peak */}
       <g stroke="url(#goldGrad)" strokeWidth="1">
-        <circle cx="300" cy="130" r="6" fill="none"
+        <circle cx="292" cy="90" r="6" fill="none"
           className="blueprint-line" style={line(40, 3.2)} />
-        <line x1="290" y1="130" x2="310" y2="130"
+        <line x1="282" y1="90" x2="302" y2="90"
           className="blueprint-line" style={line(20, 3.3)} />
-        <line x1="300" y1="120" x2="300" y2="140"
+        <line x1="292" y1="80" x2="292" y2="100"
           className="blueprint-line" style={line(20, 3.3)} />
       </g>
 
-      {/* dimension ticks at the base */}
-      <g stroke="var(--gold)" strokeWidth="0.8" opacity="0.6">
-        {[110, 220, 240, 300, 360, 380, 490].map((x, i) => (
+      {/* dimension ticks at base — only at silhouette's structural points */}
+      <g stroke="var(--gold)" strokeWidth="0.8" opacity="0.55">
+        {[150, 240, 292, 378, 460].map((x, i) => (
           <line
             key={`tick-${i}`}
             x1={x} y1="510" x2={x} y2="520"
             className="blueprint-line"
-            style={line(10, 3.5 + i * 0.05)}
+            style={line(10, 3.6 + i * 0.05)}
           />
         ))}
       </g>
 
-      {/* AI/architectural scan sweep */}
+      {/* AI / architectural scan sweep */}
       <rect
-        x="60" y="80" width="480" height="40"
+        x="20" y="40" width="560" height="60"
         fill="url(#scanGrad)"
         className="blueprint-scan"
       />
