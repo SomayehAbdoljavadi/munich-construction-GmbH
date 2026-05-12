@@ -22,21 +22,26 @@ const stroke = (dash: number, delay: number): LineStyle => ({
 type WinStyle = React.CSSProperties & { ["--delay"]?: string };
 const win = (delay: number): WinStyle => ({ ["--delay"]: `${delay}s` });
 
-// Center hero tower — derived from the Munich Construction logo silhouette.
+// Center hero tower — traced from the Munich Construction logo:
+// slim slanted left tower with angled crown, a lower right wing roof,
+// and a horizontal base line. Single closed silhouette.
 const LOGO_SILHOUETTE =
-  "M 250 500 " +
-  "L 280 500 " +
-  "L 280 360 " +
-  "L 322 280 " +
-  "L 334 298 " +
-  "L 350 252 " +
-  "L 396 320 " +
-  "L 396 372 " +
-  "L 440 388 " +
-  "L 440 500 " +
-  "L 470 500";
+  "M 270 500 " +
+  "L 270 410 " +     // tower base left side up
+  "L 300 380 " +     // small angled ledge
+  "L 318 200 " +     // up slim peak (left edge, slanted)
+  "L 402 168 " +     // slanted top crown (rises to the right)
+  "L 402 244 " +     // down right edge of peak
+  "L 470 296 " +     // slant down to roof shoulder
+  "L 522 348 " +     // continue slant onto right wing
+  "L 522 500 " +     // right side down to base
+  "Z";
 
-const LOGO_DOOR = "M 360 350 L 360 410";
+// Vertical door/window slit on the right wing — the logo signature mark.
+const LOGO_DOOR = "M 452 322 L 452 412";
+
+// Horizontal base line that anchors the logo composition.
+const LOGO_BASE = "M 220 500 L 570 500";
 
 // Left modern tower (slim high-rise with stepped crown).
 const LEFT_TOWER =
@@ -131,24 +136,33 @@ export function HeroSkylineArt() {
         <path d={FAR_RIGHT_TOWER} className="hs-line" style={stroke(1300, 2.4)} />
       </g>
 
-      {/* === HERO LOGO SILHOUETTE (gold, glowing) === */}
+      {/* === HERO LOGO SILHOUETTE (gold, glowing) — traced from the brand mark === */}
       <g filter="url(#hsGlow)">
+        <path
+          d={LOGO_BASE}
+          stroke="url(#hsGold)"
+          strokeWidth="2.2"
+          strokeLinecap="square"
+          className="hs-line"
+          style={stroke(350, 2.6)}
+        />
         <path
           d={LOGO_SILHOUETTE}
           stroke="url(#hsGold)"
-          strokeWidth="2.2"
+          strokeWidth="2.4"
           strokeLinejoin="miter"
           strokeLinecap="square"
+          fill="none"
           className="hs-line hs-pulse"
-          style={stroke(1400, 2.9)}
+          style={stroke(1500, 3.0)}
         />
         <path
           d={LOGO_DOOR}
           stroke="url(#hsGold)"
-          strokeWidth="1.8"
+          strokeWidth="2"
           strokeLinecap="round"
           className="hs-line"
-          style={stroke(80, 4.4)}
+          style={stroke(95, 4.6)}
         />
       </g>
 
@@ -216,35 +230,36 @@ export function HeroSkylineArt() {
           />
         ))}
 
-        {/* Hero tower accent windows */}
-        {[0, 1, 2, 3].map((r) => (
+        {/* Hero tower accent windows — slim peak interior */}
+        {[0, 1, 2, 3, 4].map((r) => (
           <rect
             key={`hr-${r}`}
-            x={296}
-            y={380 + r * 22}
-            width="6"
-            height="8"
-            className="hs-window"
-            style={win(6.4 + r * 0.1)}
-          />
-        ))}
-        {[0, 1, 2, 3].map((r) => (
-          <rect
-            key={`hr2-${r}`}
-            x={418}
-            y={400 + r * 20}
-            width="6"
+            x={344}
+            y={232 + r * 26}
+            width="34"
             height="6"
             className="hs-window"
-            style={win(6.6 + r * 0.1)}
+            style={win(6.6 + r * 0.12)}
+          />
+        ))}
+        {/* Right wing accent windows */}
+        {[0, 1, 2].map((r) => (
+          <rect
+            key={`hr2-${r}`}
+            x={486}
+            y={372 + r * 22}
+            width="26"
+            height="6"
+            className="hs-window"
+            style={win(7.0 + r * 0.12)}
           />
         ))}
       </g>
 
-      {/* survey crosshair on hero peak */}
+      {/* survey crosshair on hero crown */}
       <g stroke="url(#hsGold)" strokeWidth="1">
-        <circle cx="350" cy="252" r="5" fill="none"
-          className="hs-line" style={stroke(34, 4.6)} />
+        <circle cx="402" cy="168" r="5" fill="none"
+          className="hs-line" style={stroke(34, 4.8)} />
       </g>
 
       </svg>
