@@ -235,3 +235,42 @@
   }
   h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.01em; }
 }
+
+/* Brand intro loader */
+@keyframes introDraw {
+  0%   { stroke-dashoffset: var(--dash, 2200); opacity: 0; }
+  6%   { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+@keyframes introGlow {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(232,196,65,0.35)); }
+  50%      { filter: drop-shadow(0 0 14px rgba(232,196,65,0.7)); }
+}
+@keyframes introGuide {
+  0%   { transform: scaleX(0); opacity: 0; }
+  100% { transform: scaleX(1); opacity: 0.3; }
+}
+@keyframes introTextIn {
+  0%   { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.intro-stroke {
+  stroke-dasharray: var(--dash, 2200);
+  stroke-dashoffset: var(--dash, 2200);
+  animation:
+    introDraw 2.4s cubic-bezier(0.65, 0, 0.35, 1) 0.2s forwards,
+    introGlow 1.8s ease-in-out 2.6s infinite;
+}
+.intro-stroke-late {
+  animation:
+    introDraw 0.6s cubic-bezier(0.65, 0, 0.35, 1) 2.2s forwards,
+    introGlow 1.8s ease-in-out 2.6s infinite;
+}
+.intro-guide {
+  transform-origin: left center;
+  animation: introGuide 0.6s ease-out forwards;
+}
+.intro-text {
+  opacity: 0;
+  animation: introTextIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 2.6s forwards;
+}
