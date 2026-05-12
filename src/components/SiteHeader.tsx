@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { Logo } from "./Logo";
 import { useT, type Lang } from "@/lib/i18n";
+import { useTheme } from "@/lib/theme";
 
 const links = [
   { to: "/", key: "nav.home" },
@@ -18,9 +19,9 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-ink text-white border-b border-white/5 backdrop-blur-md">
+    <header className="sticky top-0 z-50 bg-surface-inverse text-surface-inverse-foreground border-b border-white/5 backdrop-blur-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-6 px-5 md:px-8 py-4">
-        <Link to="/" className="text-white">
+        <Link to="/" className="text-surface-inverse-foreground">
           <Logo />
         </Link>
 
@@ -29,8 +30,8 @@ export function SiteHeader() {
             <Link
               key={l.to}
               to={l.to}
-              className="text-white/70 hover:text-gold transition-colors"
-              activeProps={{ className: "text-gold" }}
+              className="text-current/70 opacity-70 hover:opacity-100 hover:text-gold transition-colors"
+              activeProps={{ className: "text-gold opacity-100" }}
               activeOptions={{ exact: l.to === "/" }}
             >
               {t(l.key)}
@@ -38,7 +39,8 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
           <LangSwitch lang={lang} setLang={setLang} />
           <Link
             to="/contact"
@@ -49,7 +51,7 @@ export function SiteHeader() {
           <button
             aria-label="Menu"
             onClick={() => setOpen((o) => !o)}
-            className="lg:hidden text-white"
+            className="lg:hidden"
           >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -57,15 +59,15 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-white/5 bg-ink animate-fade-in">
+        <div className="lg:hidden border-t border-white/5 bg-surface-inverse animate-fade-in">
           <div className="px-5 py-6 flex flex-col gap-4 text-sm tracking-[0.2em] uppercase">
             {links.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
                 onClick={() => setOpen(false)}
-                className="text-white/80 hover:text-gold"
-                activeProps={{ className: "text-gold" }}
+                className="opacity-80 hover:text-gold"
+                activeProps={{ className: "text-gold opacity-100" }}
                 activeOptions={{ exact: l.to === "/" }}
               >
                 {t(l.key)}
@@ -85,6 +87,21 @@ export function SiteHeader() {
   );
 }
 
+function ThemeToggle() {
+  const { theme, toggle } = useTheme();
+  const isDark = theme === "dark";
+  return (
+    <button
+      onClick={toggle}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      title={isDark ? "Light mode" : "Dark mode"}
+      className="size-9 grid place-items-center border border-white/15 hover:border-gold hover:text-gold transition-colors"
+    >
+      {isDark ? <Sun size={15} /> : <Moon size={15} />}
+    </button>
+  );
+}
+
 function LangSwitch({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
   return (
     <div className="flex items-center font-mono text-[11px] tracking-widest border border-white/15">
@@ -93,7 +110,7 @@ function LangSwitch({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void 
           key={l}
           onClick={() => setLang(l)}
           className={`px-2.5 py-1 uppercase transition-colors ${
-            lang === l ? "bg-gold text-ink" : "text-white/60 hover:text-white"
+            lang === l ? "bg-gold text-ink" : "opacity-60 hover:opacity-100"
           }`}
           aria-pressed={lang === l}
         >
