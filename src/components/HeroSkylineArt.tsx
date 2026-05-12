@@ -43,7 +43,7 @@ export function HeroSkylineArt() {
           playsInline
           className="max-w-full max-h-full object-contain transition-opacity ease-in-out"
           style={{ opacity: fadingOut ? 0 : 1, transitionDuration: "1200ms" }}
-          style={{ opacity: fadingOut ? 0 : 1 }}
+          
         />
       )}
       {showGif && (
