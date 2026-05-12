@@ -98,16 +98,14 @@ export function HeroSkylineArt() {
         ))}
       </g>
 
-      {/* horizon datum + verticals — drawn first as "construction guides" */}
-      <g stroke="url(#hsGold)" strokeWidth="0.6" opacity="0.55">
-        <line x1="10" y1="500" x2="790" y2="500"
-          className="hs-line" style={stroke(780, 0.0)} />
+      {/* vertical construction sight lines (no horizontal datum) */}
+      <g stroke="url(#hsGold)" strokeWidth="0.6" opacity="0.5">
         <line x1="360" y1="40" x2="360" y2="540"
-          className="hs-line" style={stroke(500, 0.4)} strokeDasharray="2 5" />
+          className="hs-line" style={stroke(500, 0.2)} strokeDasharray="2 5" />
         <line x1="115" y1="80" x2="115" y2="540"
-          className="hs-line" style={stroke(460, 0.55)} strokeDasharray="2 5" />
+          className="hs-line" style={stroke(460, 0.4)} strokeDasharray="2 5" />
         <line x1="600" y1="80" x2="600" y2="540"
-          className="hs-line" style={stroke(460, 0.7)} strokeDasharray="2 5" />
+          className="hs-line" style={stroke(460, 0.55)} strokeDasharray="2 5" />
       </g>
 
       {/* === BUILDING OUTLINES (white structural lines) === */}
@@ -155,9 +153,6 @@ export function HeroSkylineArt() {
         {/* Far-right tower top */}
         <path d="M 690 220 L 745 220 L 745 260 L 760 260"
           className="hs-line" style={stroke(135, 4.0)} />
-        {/* Base ground accent */}
-        <line x1="20" y1="500" x2="780" y2="500"
-          className="hs-line" style={stroke(760, 4.2)} />
       </g>
 
       {/* === WINDOWS — progressive illumination === */}
