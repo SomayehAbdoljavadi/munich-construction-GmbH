@@ -14,11 +14,13 @@ export function Logo({ className = "", showWordmark = true, variant = "light" }:
         className="size-10 shrink-0"
         aria-hidden
       >
-        {/* outer frame */}
-        <rect x="3" y="3" width="42" height="42" stroke={stroke} strokeWidth="1.5" />
+        {/* solid black background tile */}
+        <rect x="0" y="0" width="48" height="48" fill="#0a0a0a" />
+        {/* outer gold frame */}
+        <rect x="6" y="6" width="36" height="36" stroke="var(--gold)" strokeWidth="1.5" fill="none" />
         {/* gold M as architectural roofline */}
         <path
-          d="M10 36 L10 14 L24 28 L38 14 L38 36"
+          d="M13 35 L13 16 L24 27 L35 16 L35 35"
           stroke="var(--gold)"
           strokeWidth="2"
           strokeLinejoin="miter"
@@ -26,7 +28,7 @@ export function Logo({ className = "", showWordmark = true, variant = "light" }:
           fill="none"
         />
         {/* base line */}
-        <line x1="10" y1="40" x2="38" y2="40" stroke="var(--gold)" strokeWidth="1.5" />
+        <line x1="13" y1="38" x2="35" y2="38" stroke="var(--gold)" strokeWidth="1.5" />
       </svg>
       {showWordmark && (
         <div className="leading-none">
