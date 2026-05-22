@@ -1,4 +1,3 @@
-import logoImg from "@/assets/munich-logo.jpg";
 import { THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
 import "leaflet/dist/leaflet.css";
 import type { LatLngExpression, Map as LeafletMap } from "leaflet";
@@ -34,7 +33,7 @@ export function LocationMap({ className = "" }: { className?: string }) {
 
       const logoIcon = L.divIcon({
         className: "mc-map-marker",
-        html: `<a href="${THERESIENSTRASSE_MAPS_URL}" target="_blank" rel="noopener noreferrer" class="mc-map-marker-shell" aria-label="Open ${ADDRESS} in Google Maps"><span class="mc-map-marker-glow"></span><span class="mc-map-marker-logo"><img src="${logoImg}" alt="Munich Construction GmbH" draggable="false" /></span><span class="mc-map-marker-tip"></span></a>`,
+        html: `<a href="${THERESIENSTRASSE_MAPS_URL}" target="_blank" rel="noopener noreferrer" class="mc-map-marker-shell" aria-label="Open ${ADDRESS} in Google Maps"><span class="mc-map-marker-glow"></span><span class="mc-map-marker-logo"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="mcGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f5d27a"/><stop offset="50%" stop-color="#e8c441"/><stop offset="100%" stop-color="#b8862a"/></linearGradient></defs><g fill="none" stroke="url(#mcGold)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 30 L10 16 L18 10 L18 30 Z"/><path d="M18 30 L18 18 L26 14 L26 30 Z"/><path d="M22 18 L22 22 M22 25 L22 28"/><path d="M14 20 L14 23 M14 26 L14 29"/></g></svg></span><span class="mc-map-marker-tip"></span></a>`,
         iconSize: [56, 70],
         iconAnchor: [28, 70],
       });
