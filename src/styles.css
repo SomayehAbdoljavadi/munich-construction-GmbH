@@ -389,3 +389,133 @@
   transform-origin: 410px 180px;
   animation: mcCrossIn 0.6s ease-out 2.4s forwards;
 }
+
+/* ===== Munich Construction — cinematic city hero ===== */
+.mc-city { position: relative; isolation: isolate; }
+.mc-city-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 45%, transparent 0%, transparent 55%, rgba(0,0,0,0.55) 100%),
+    radial-gradient(ellipse 120% 80% at 50% 110%, rgba(212,161,74,0.10) 0%, transparent 60%);
+  z-index: 2;
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: mcCityVignetteIn 1.4s ease-out 0.2s forwards;
+}
+@keyframes mcCityVignetteIn { to { opacity: 1; } }
+
+/* Blueprint grid fade-in */
+.mc-city-grid {
+  opacity: 0;
+  animation: mcCityGridIn 1.2s ease-out 0.1s forwards;
+}
+.mc-city-grid-bold { animation-delay: 0.35s; }
+@keyframes mcCityGridIn { to { opacity: 1; } }
+
+.mc-city-horizon {
+  opacity: 0;
+  animation: mcCityGridIn 1.8s ease-out 0.6s forwards;
+}
+
+/* Parallax drift — gentle, infinite, low amplitude */
+.mc-city-parallax-far  { animation: mcCityDriftFar  28s ease-in-out infinite alternate; transform-origin: center bottom; }
+.mc-city-parallax-mid  { animation: mcCityDriftMid  22s ease-in-out infinite alternate; transform-origin: center bottom; }
+.mc-city-parallax-near { animation: mcCityDriftNear 18s ease-in-out infinite alternate; transform-origin: center bottom; }
+@keyframes mcCityDriftFar  { from { transform: translate3d(-4px,0,0); } to { transform: translate3d(4px,0,0); } }
+@keyframes mcCityDriftMid  { from { transform: translate3d(-8px,0,0); } to { transform: translate3d(8px,0,0); } }
+@keyframes mcCityDriftNear { from { transform: translate3d(-14px,0,0); } to { transform: translate3d(14px,0,0); } }
+
+/* Tower draw-in: line trace + rise */
+.mc-city-tower {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: mcCityTowerIn 1.2s cubic-bezier(0.2,0.7,0.2,1) forwards;
+}
+@keyframes mcCityTowerIn {
+  0%   { opacity: 0; transform: translateY(22px); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.mc-city-far  { opacity: 0; }
+.mc-city-far.mc-city-tower  { animation-duration: 1.1s; }
+.mc-city-mid.mc-city-tower  { animation-duration: 1.2s; }
+.mc-city-near.mc-city-tower { animation-duration: 1.4s; }
+
+/* Stroke draw effect */
+.mc-city-stroke {
+  stroke-dasharray: 1600;
+  stroke-dashoffset: 1600;
+  animation: mcCityStrokeIn 1.6s cubic-bezier(0.7,0,0.2,1) forwards;
+  animation-delay: inherit;
+  filter: drop-shadow(0 0 2px rgba(232,180,74,0.35));
+}
+.mc-city-far .mc-city-stroke  { opacity: 0.45; }
+.mc-city-mid .mc-city-stroke  { opacity: 0.75; }
+.mc-city-near .mc-city-stroke { opacity: 1; }
+@keyframes mcCityStrokeIn { to { stroke-dashoffset: 0; } }
+
+/* Windows: dark until "lit", then warm glow */
+.mc-city-window {
+  fill: url(#mcWinGrad);
+  opacity: 0;
+  filter: drop-shadow(0 0 2px rgba(245,210,122,0.0));
+  animation: mcCityWinOn 0.8s ease-out forwards, mcCityWinFlicker 7s ease-in-out 6s infinite;
+}
+.mc-city-window-dim { animation: mcCityWinOn 0.8s ease-out forwards; }
+.mc-city-far .mc-city-window  { fill: #e0b75a; }
+.mc-city-mid .mc-city-window  { fill: #f1c863; }
+.mc-city-near .mc-city-window { fill: #fde0a4; }
+@keyframes mcCityWinOn {
+  0%   { opacity: 0; filter: drop-shadow(0 0 0 rgba(245,210,122,0)); }
+  60%  { opacity: 1; }
+  100% { opacity: 0.92; filter: drop-shadow(0 0 3px rgba(245,210,122,0.85)); }
+}
+.mc-city-window-dim { opacity: 0.35 !important; }
+@keyframes mcCityWinFlicker {
+  0%, 92%, 100% { opacity: 0.92; }
+  94% { opacity: 0.4; }
+  96% { opacity: 0.92; }
+  97% { opacity: 0.55; }
+  98% { opacity: 0.92; }
+}
+
+/* Ground baseline draws across */
+.mc-city-ground {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: mcCityStrokeIn 1.4s ease-out 0.4s forwards;
+}
+
+/* Ground reflection glow swells in */
+.mc-city-reflect {
+  opacity: 0;
+  animation: mcCityReflectIn 2s ease-out 3.5s forwards, mcCityReflectPulse 6s ease-in-out 6s infinite;
+  transform-origin: center top;
+}
+@keyframes mcCityReflectIn { to { opacity: 1; } }
+@keyframes mcCityReflectPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Horizon light pulse sweep */
+.mc-city-pulse {
+  animation: mcCityPulse 9s ease-in-out 5s infinite;
+}
+@keyframes mcCityPulse {
+  0%, 100% { opacity: 0; }
+  40% { opacity: 0.7; }
+  60% { opacity: 0.4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mc-city-parallax-far,
+  .mc-city-parallax-mid,
+  .mc-city-parallax-near,
+  .mc-city-window,
+  .mc-city-reflect,
+  .mc-city-pulse { animation: none !important; }
+  .mc-city-window { opacity: 0.85; }
+}
