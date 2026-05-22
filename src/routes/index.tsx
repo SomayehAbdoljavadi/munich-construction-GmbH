@@ -159,8 +159,8 @@ function HomePage() {
                   <div className={`size-12 grid place-items-center mb-8 border ${isDark ? "border-gold/30 text-gold" : "border-gold text-gold"}`}>
                     <Icon size={22} strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-display text-2xl mb-3">{t(s.titleKey)}</h3>
-                  <p className={`text-sm leading-relaxed ${isDark ? "text-white/65" : "text-muted-foreground"}`}>
+                  <h3 className="font-display text-2xl xl:text-3xl mb-3">{t(s.titleKey)}</h3>
+                  <p className={`text-sm xl:text-base leading-relaxed ${isDark ? "text-white/65" : "text-muted-foreground"}`}>
                     {t(s.textKey)}
                   </p>
                   <ArrowUpRight
