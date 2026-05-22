@@ -4,7 +4,6 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -166,29 +165,17 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isHome = pathname === "/";
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <LanguageProvider>
           <BrandIntro />
-          <div
-            className={`mc-app-root flex flex-col bg-background text-foreground ${
-              isHome ? "h-screen overflow-hidden" : "min-h-screen"
-            }`}
-          >
+          <div className="mc-app-root min-h-screen flex flex-col bg-background text-foreground">
             <SiteHeader />
-            <main
-              className={
-                isHome
-                  ? "flex-1 overflow-y-auto snap-y snap-mandatory scroll-smooth"
-                  : "flex-1"
-              }
-            >
+            <main className="flex-1">
               <Outlet />
             </main>
-            {!isHome && <SiteFooter />}
+            <SiteFooter />
             <WhatsAppFloat />
           </div>
         </LanguageProvider>
