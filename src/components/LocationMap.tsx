@@ -39,7 +39,7 @@ export function LocationMap({ className = "" }: { className?: string }) {
         iconAnchor: [28, 70],
       });
 
-      const marker = L.marker(MAP_CENTER, { icon: logoIcon, title: ADDRESS, riseOnHover: true }).addTo(map);
+      const marker = L.marker(MAP_CENTER, { icon: logoIcon, title: ADDRESS, riseOnHover: true });
       marker.on("add", () => {
         const markerLink = marker.getElement()?.querySelector<HTMLAnchorElement>(".mc-map-marker-shell");
         markerLink?.addEventListener("click", (event) => {
@@ -48,6 +48,7 @@ export function LocationMap({ className = "" }: { className?: string }) {
           window.open(THERESIENSTRASSE_MAPS_URL, "_blank", "noopener,noreferrer");
         });
       });
+      marker.addTo(map);
 
       // Reset control styled like native zoom controls
       const ResetControl = L.Control.extend({
