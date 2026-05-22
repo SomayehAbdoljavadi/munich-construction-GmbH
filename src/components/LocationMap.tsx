@@ -1,3 +1,4 @@
+import markerImg from "@/assets/map-marker.png";
 import { THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
 import "leaflet/dist/leaflet.css";
 import type { LatLngExpression, Map as LeafletMap } from "leaflet";
@@ -33,9 +34,9 @@ export function LocationMap({ className = "" }: { className?: string }) {
 
       const logoIcon = L.divIcon({
         className: "mc-map-marker",
-        html: `<a href="${THERESIENSTRASSE_MAPS_URL}" target="_blank" rel="noopener noreferrer" class="mc-map-marker-shell" aria-label="Open ${ADDRESS} in Google Maps"><span class="mc-map-marker-glow"></span><span class="mc-map-marker-logo"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="mcGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f7e08a"/><stop offset="45%" stop-color="#e8c441"/><stop offset="100%" stop-color="#a8761f"/></linearGradient></defs><g fill="none" stroke="url(#mcGold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 38 L12 20 L22 10 L22 38 Z"/><path d="M22 38 L22 18 L34 22 L34 38 Z"/><line x1="28" y1="26" x2="28" y2="29"/><line x1="28" y1="32" x2="28" y2="35"/></g></svg></span><span class="mc-map-marker-tip"></span></a>`,
-        iconSize: [56, 70],
-        iconAnchor: [28, 70],
+        html: `<a href="${THERESIENSTRASSE_MAPS_URL}" target="_blank" rel="noopener noreferrer" class="mc-map-marker-shell" aria-label="Open ${ADDRESS} in Google Maps"><img src="${markerImg}" alt="Munich Construction" draggable="false" class="mc-map-marker-img" /></a>`,
+        iconSize: [64, 80],
+        iconAnchor: [32, 78],
       });
 
       const marker = L.marker(MAP_CENTER, { icon: logoIcon, title: ADDRESS, riseOnHover: true });
