@@ -3,6 +3,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { useT } from "@/lib/i18n";
+import { LocationMap } from "@/components/LocationMap";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({

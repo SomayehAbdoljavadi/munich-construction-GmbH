@@ -15,6 +15,7 @@ import {
 import { useT, type TranslationKey } from "@/lib/i18n";
 import { HeroSkylineArt } from "@/components/HeroSkylineArt";
 import { SiteFooter } from "@/components/SiteFooter";
+import { LocationMap } from "@/components/LocationMap";
 import heroBg from "@/assets/mc-hero-bg.jpg";
 
 export const Route = createFileRoute("/")({
