@@ -1,20 +1,26 @@
 import logoImg from "@/assets/munich-logo.jpg";
 import { openMapInNewTab, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
-import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { RotateCcw } from "lucide-react";
+import type { LatLngExpression, Map as LeafletMap } from "leaflet";
 import { useEffect, useRef } from "react";
 
 const ADDRESS = "Theresienstraße 93, 80333 München";
-const MAP_CENTER: L.LatLngExpression = [48.1519814, 11.5606717];
+const MAP_CENTER: LatLngExpression = [48.1519814, 11.5606717];
 const MAP_ZOOM = 16;
 
 export function LocationMap({ className = "" }: { className?: string }) {
   const mapNodeRef = useRef<HTMLDivElement | null>(null);
-  const mapRef = useRef<L.Map | null>(null);
+  const mapRef = useRef<LeafletMap | null>(null);
 
   useEffect(() => {
     if (!mapNodeRef.current || mapRef.current) return;
+
+    let cancelled = false;
+    let activeMap: LeafletMap | null = null;
+
+    import("leaflet").then((L) => {
+      if (!mapNodeRef.current || mapRef.current || cancelled) return;
 
     const map = L.map(mapNodeRef.current, {
       center: MAP_CENTER,
@@ -39,9 +45,12 @@ export function LocationMap({ className = "" }: { className?: string }) {
       .on("click", () => window.open(THERESIENSTRASSE_MAPS_URL, "_blank", "noopener,noreferrer"));
 
     mapRef.current = map;
+      activeMap = map;
+    });
 
     return () => {
-      map.remove();
+      cancelled = true;
+      activeMap?.remove();
       mapRef.current = null;
     };
   }, []);
