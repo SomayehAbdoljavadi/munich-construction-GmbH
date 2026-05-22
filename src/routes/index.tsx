@@ -78,17 +78,17 @@ function HomePage() {
         />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/80 to-ink" />
 
-        <div className="relative max-w-7xl mx-auto px-5 md:px-8 pt-16 md:pt-24 pb-24 md:pb-32 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-8 space-y-8">
+        <div className="relative container-wide pt-16 md:pt-24 pb-24 md:pb-32 grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
+          <div className="lg:col-span-7 xl:col-span-7 space-y-8">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold animate-fade-up">
               {t("hero.eyebrow")}
             </p>
-            <h1 className="font-display leading-[1.1] text-balance animate-fade-up [animation-delay:100ms]">
-              <span className="block gold-text whitespace-nowrap text-2xl sm:text-3xl md:text-4xl lg:text-5xl">{t("hero.titleBrand")}</span>
-              <span className="block mt-3 text-white whitespace-nowrap text-base sm:text-lg md:text-xl lg:text-2xl">{t("hero.titleRest")}</span>
+            <h1 className="font-display leading-[1.05] text-balance animate-fade-up [animation-delay:100ms]">
+              <span className="block gold-text whitespace-nowrap text-[clamp(1.75rem,4.2vw,4.5rem)]">{t("hero.titleBrand")}</span>
+              <span className="block mt-3 text-white whitespace-nowrap text-[clamp(0.95rem,1.5vw,1.875rem)]">{t("hero.titleRest")}</span>
             </h1>
             <div className="gold-divider w-32 animate-scale-line [animation-delay:300ms]" />
-            <p className="text-base md:text-lg text-white/70 max-w-2xl leading-relaxed animate-fade-up [animation-delay:400ms]">
+            <p className="text-fluid-lead text-white/70 max-w-[60ch] animate-fade-up [animation-delay:400ms]">
               {t("hero.subtitle")}
             </p>
             <div className="flex flex-wrap gap-4 animate-fade-up [animation-delay:500ms]">
@@ -117,8 +117,8 @@ function HomePage() {
             </ul>
           </div>
 
-          <div className="lg:col-span-4 relative animate-fade-in [animation-delay:300ms] mt-12 md:mt-20 lg:mt-32">
-            <div className="mx-auto w-full max-w-[1250px] aspect-[8/5] flex items-center justify-center scale-105 sm:scale-115 lg:scale-125 origin-center transition-transform">
+          <div className="lg:col-span-5 xl:col-span-5 relative animate-fade-in [animation-delay:300ms] mt-12 md:mt-20 lg:mt-0">
+            <div className="mx-auto w-full max-w-[1600px] aspect-[8/5] flex items-center justify-center scale-105 sm:scale-115 lg:scale-125 xl:scale-[1.35] 2xl:scale-[1.5] origin-center transition-transform">
               <HeroSkylineArt />
             </div>
           </div>
@@ -130,16 +130,16 @@ function HomePage() {
 
       {/* SLIDE 2: SERVICES */}
       <section className="bg-background py-24 md:py-32 min-h-screen flex items-center [scroll-snap-align:start]">
-        <div className="max-w-7xl mx-auto px-5 md:px-8 w-full">
+        <div className="container-wide w-full">
           <div className="max-w-3xl mb-16">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
               {t("services.eyebrow")}
             </p>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-tight">
+            <h2 className="font-display h-fluid-section">
               {t("services.title")}
             </h2>
             <div className="gold-divider w-24 mt-8" />
-            <p className="text-muted-foreground text-lg mt-8 leading-relaxed">
+            <p className="text-fluid-lead text-muted-foreground mt-8">
               {t("services.lede")}
             </p>
           </div>
@@ -159,8 +159,8 @@ function HomePage() {
                   <div className={`size-12 grid place-items-center mb-8 border ${isDark ? "border-gold/30 text-gold" : "border-gold text-gold"}`}>
                     <Icon size={22} strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-display text-2xl mb-3">{t(s.titleKey)}</h3>
-                  <p className={`text-sm leading-relaxed ${isDark ? "text-white/65" : "text-muted-foreground"}`}>
+                  <h3 className="font-display text-2xl xl:text-3xl mb-3">{t(s.titleKey)}</h3>
+                  <p className={`text-sm xl:text-base leading-relaxed ${isDark ? "text-white/65" : "text-muted-foreground"}`}>
                     {t(s.textKey)}
                   </p>
                   <ArrowUpRight
@@ -181,17 +181,17 @@ function HomePage() {
           backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
           backgroundSize: "32px 32px",
         }} />
-        <div className="relative max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="relative container-wide grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20">
           <div className="space-y-10">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
                 {t("contact.eyebrow")}
               </p>
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-tight">
+              <h2 className="font-display h-fluid-section">
                 {t("contact.title")}
               </h2>
               <div className="gold-divider w-24 mt-8" />
-              <p className="text-white/70 text-lg mt-8 leading-relaxed max-w-md">
+              <p className="text-fluid-lead text-white/70 mt-8 max-w-[55ch]">
                 {t("contact.lede")}
               </p>
             </div>

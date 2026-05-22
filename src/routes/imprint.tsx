@@ -19,7 +19,7 @@ function ImprintPage() {
   return (
     <>
       <section className="bg-ink text-white py-20 md:py-28">
-        <div className="max-w-4xl mx-auto px-5 md:px-8">
+        <div className="container-text">
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
             Legal · Munich Construction GmbH
           </p>

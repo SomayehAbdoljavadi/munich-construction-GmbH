@@ -20,7 +20,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 text-foreground border-b border-border backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-6 px-5 md:px-8 py-4">
+      <div className="container-wide flex items-center justify-between gap-6 py-4">
         <Link to="/" className="text-foreground">
           <Logo />
         </Link>
