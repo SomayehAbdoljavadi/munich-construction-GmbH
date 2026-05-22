@@ -220,18 +220,29 @@
 /* ===== Responsive layout containers ===== */
 .container-wide {
   width: 100%;
-  max-width: min(94vw, 1760px);
+  max-width: min(96vw, 1920px);
   margin-inline: auto;
-  padding-inline: 1.25rem;
+  padding-inline: clamp(1rem, 2vw, 3rem);
 }
 @media (min-width: 768px) {
-  .container-wide { padding-inline: 2rem; }
+  .container-wide { padding-inline: clamp(1.5rem, 2.25vw, 3.5rem); }
 }
 @media (min-width: 1536px) {
-  .container-wide { padding-inline: 3rem; max-width: min(92vw, 1800px); }
+  .container-wide { max-width: min(97vw, 1960px); }
 }
 @media (min-width: 1920px) {
-  .container-wide { padding-inline: 4rem; max-width: min(90vw, 1880px); }
+  .container-wide { max-width: min(98vw, 2160px); }
+}
+
+.homepage-section {
+  width: 100vw;
+  max-width: none;
+}
+
+.homepage-wide {
+  width: min(97vw, 2160px);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 2.6vw, 4rem);
 }
 
 .container-text {
@@ -264,6 +275,7 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-feature-settings: "ss01", "cv11";
+    overflow-x: hidden;
   }
   ::selection {
     background-color: oklch(0.78 0.16 80 / 0.3);
