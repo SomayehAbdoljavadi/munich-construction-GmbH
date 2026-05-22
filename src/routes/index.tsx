@@ -130,7 +130,7 @@ function HomePage() {
 
       {/* SLIDE 2: SERVICES */}
       <section className="bg-background py-24 md:py-32 min-h-screen flex items-center [scroll-snap-align:start]">
-        <div className="max-w-7xl mx-auto px-5 md:px-8">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 w-full">
           <div className="max-w-3xl mb-16">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
               {t("services.eyebrow")}
