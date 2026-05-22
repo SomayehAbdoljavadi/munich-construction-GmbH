@@ -67,7 +67,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-5 md:px-8 py-5 flex flex-col md:flex-row justify-between gap-2 text-[11px] text-white/40 font-mono uppercase tracking-widest">
+        <div className="container-wide py-5 flex flex-col md:flex-row justify-between gap-2 text-[11px] text-white/40 font-mono uppercase tracking-widest">
           <span>© {new Date().getFullYear()} Munich Construction GmbH · {t("footer.rights")}</span>
           <span>www.munichconstruction.de</span>
         </div>
