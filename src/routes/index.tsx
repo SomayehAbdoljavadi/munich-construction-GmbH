@@ -66,7 +66,7 @@ function HomePage() {
   return (
     <>
       {/* SLIDE 1: HERO */}
-      <section className="relative bg-ink text-white overflow-hidden min-h-screen flex items-center [scroll-snap-align:start]">
+      <section className="homepage-section relative bg-ink text-white overflow-hidden min-h-screen flex items-center [scroll-snap-align:start]">
         <div
           aria-hidden
           className="absolute inset-0 opacity-30"
@@ -78,7 +78,7 @@ function HomePage() {
         />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/80 to-ink" />
 
-        <div className="relative container-wide pt-16 md:pt-24 pb-24 md:pb-32 grid grid-cols-1 lg:[grid-template-columns:minmax(0,1.15fr)_minmax(0,0.85fr)] gap-10 xl:gap-16 items-center">
+        <div className="relative homepage-wide pt-16 md:pt-24 pb-24 md:pb-32 grid grid-cols-1 lg:[grid-template-columns:minmax(0,1.04fr)_minmax(560px,0.96fr)] gap-10 xl:gap-[clamp(4rem,6vw,9rem)] items-center">
           <div className="relative z-10 min-w-0 space-y-8">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold animate-fade-up">
               {t("hero.eyebrow")}
@@ -117,8 +117,8 @@ function HomePage() {
             </ul>
           </div>
 
-          <div className="min-w-0 relative z-0 animate-fade-in [animation-delay:300ms] mt-12 md:mt-20 lg:mt-0">
-            <div className="mx-auto w-full max-w-[1600px] aspect-[8/5] flex items-center justify-center scale-100 sm:scale-105 lg:scale-110 xl:scale-115 2xl:scale-125 origin-center transition-transform">
+          <div className="min-w-0 relative z-0 animate-fade-in [animation-delay:300ms] mt-12 md:mt-20 lg:mt-0 lg:-mr-[clamp(1rem,3vw,5rem)]">
+            <div className="mx-auto w-full max-w-none aspect-[8/5] flex items-center justify-center scale-100 sm:scale-105 lg:scale-115 xl:scale-125 2xl:scale-[1.35] origin-center transition-transform">
 
               <HeroSkylineArt />
             </div>
@@ -130,9 +130,9 @@ function HomePage() {
       </section>
 
       {/* SLIDE 2: SERVICES */}
-      <section className="bg-background py-24 md:py-32 min-h-screen flex items-center [scroll-snap-align:start]">
-        <div className="container-wide w-full">
-          <div className="max-w-3xl mb-16">
+      <section className="homepage-section bg-background py-[clamp(5rem,8vh,9rem)] min-h-screen flex items-center [scroll-snap-align:start]">
+        <div className="homepage-wide w-full">
+          <div className="max-w-[min(56rem,92vw)] mb-[clamp(3rem,5vw,6rem)]">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
               {t("services.eyebrow")}
             </p>
@@ -145,7 +145,7 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-px bg-border border border-border">
             {services.map((s, i) => {
               const Icon = s.icon;
               const isDark = i % 2 === 1;
@@ -153,7 +153,7 @@ function HomePage() {
                 <Link
                   key={s.titleKey}
                   to="/services"
-                  className={`group relative p-10 transition-all hover:shadow-premium ${
+                  className={`group relative p-[clamp(2rem,3vw,4rem)] min-h-[clamp(15rem,18vw,23rem)] transition-all hover:shadow-premium ${
                     isDark ? "bg-ink text-white hover:bg-ink-soft" : "bg-card text-foreground hover:bg-secondary"
                   }`}
                 >
@@ -176,13 +176,13 @@ function HomePage() {
       </section>
 
       {/* SLIDE 3: CONTACT + FOOTER */}
-      <section className="bg-ink text-white relative overflow-hidden min-h-screen flex flex-col [scroll-snap-align:start]">
-        <div className="flex-1 py-24 md:py-32">
+      <section className="homepage-section bg-ink text-white relative overflow-hidden min-h-screen flex flex-col [scroll-snap-align:start]">
+        <div className="flex-1 py-[clamp(5rem,7vh,8rem)] flex items-center">
         <div aria-hidden className="absolute inset-0 opacity-[0.04]" style={{
           backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
           backgroundSize: "32px 32px",
         }} />
-        <div className="relative container-wide grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20">
+        <div className="relative homepage-wide grid grid-cols-1 lg:[grid-template-columns:minmax(0,0.9fr)_minmax(520px,1.1fr)] gap-12 xl:gap-[clamp(4rem,6vw,8rem)] items-center">
           <div className="space-y-10">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
@@ -228,11 +228,11 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="border border-white/10">
+          <div className="border border-white/10 min-h-[clamp(26rem,48vh,42rem)]">
             <iframe
               title="Munich Construction GmbH map"
               src="https://www.openstreetmap.org/export/embed.html?bbox=11.5640%2C48.1455%2C11.5760%2C48.1525&amp;layer=mapnik&amp;marker=48.1490%2C11.5700"
-              className="w-full aspect-[4/5] grayscale"
+              className="w-full h-full min-h-[clamp(26rem,48vh,42rem)] grayscale"
               loading="lazy"
             />
           </div>
