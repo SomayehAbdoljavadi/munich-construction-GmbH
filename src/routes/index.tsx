@@ -11,6 +11,7 @@ import {
   Phone,
   Mail,
   MapPin,
+  HardHat,
 } from "lucide-react";
 import { useT, type TranslationKey } from "@/lib/i18n";
 import { HeroSkylineArt } from "@/components/HeroSkylineArt";
@@ -200,7 +201,7 @@ function HomePage() {
             </div>
 
             <div className="space-y-6">
-              <ContactRow icon={<MapPin size={18} />} label="Mehdi Mardi · Dipl.-Ing.">
+              <ContactRow icon={<HardHat size={18} />} label="Mehdi Mardi · Dipl.-Ing.">
                 Geschäftsführer | Hochbau
               </ContactRow>
               <ContactRow icon={<MapPin size={18} />} label={t("contact.office")}>
