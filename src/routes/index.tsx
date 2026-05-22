@@ -167,7 +167,7 @@ function HomePage() {
       </section>
 
       {/* SLIDE 3: CONTACT + LOCATION */}
-      <section className="bg-ink text-white py-24 md:py-32 relative overflow-hidden">
+      <section id="contact" className="bg-ink text-white py-24 md:py-32 relative overflow-hidden min-h-screen snap-start flex items-center">
         <div aria-hidden className="absolute inset-0 opacity-[0.04]" style={{
           backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
           backgroundSize: "32px 32px",
