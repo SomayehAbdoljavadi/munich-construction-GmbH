@@ -26,6 +26,14 @@ const translations: Dict = {
     de: "Munich Construction GmbH — Ihr Partner für hochwertiges Bauen in München",
     en: "Munich Construction GmbH — Your Partner for High-Quality Construction in Munich",
   },
+  "hero.titleBrand": {
+    de: "Munich Construction GmbH",
+    en: "Munich Construction GmbH",
+  },
+  "hero.titleRest": {
+    de: "Ihr Partner für hochwertiges Bauen in München",
+    en: "Your Partner for High-Quality Construction in Munich",
+  },
   "hero.subtitle": {
     de: "Neubau, Renovierung, Sanierung, Brandschutz, Genehmigung und Werkplanung — alles aus einer Hand.",
     en: "New construction, renovation, refurbishment, fire protection, permit planning and execution planning — all from one source.",

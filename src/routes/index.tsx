@@ -68,8 +68,9 @@ function HomePage() {
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold animate-fade-up">
               {t("hero.eyebrow")}
             </p>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-balance animate-fade-up [animation-delay:100ms]">
-              {t("hero.title")}
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] text-balance animate-fade-up [animation-delay:100ms]">
+              <span className="block gold-text">{t("hero.titleBrand")}</span>
+              <span className="block mt-2 text-white">{t("hero.titleRest")}</span>
             </h1>
             <div className="gold-divider w-32 animate-scale-line [animation-delay:300ms]" />
             <p className="text-base md:text-lg text-white/70 max-w-2xl leading-relaxed animate-fade-up [animation-delay:400ms]">
