@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin, Instagram, Youtube } from "lucide-react";
 import { Logo } from "./Logo";
 import { useT } from "@/lib/i18n";
+import { HEITERWANGER_MAPS_URL, openMapInNewTab, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
 
 export function SiteFooter() {
   const { t } = useT();
@@ -52,7 +53,8 @@ export function SiteFooter() {
               <MapPin size={16} className="mt-0.5 text-gold shrink-0" />
               <span className="space-y-2">
                 <a
-                  href="https://www.google.com/maps/place/Theresienstra%C3%9Fe+93,+80333+M%C3%BCnchen/@48.151985,11.5580914,17z/data=!4m6!3m5!1s0x479e75e14e4a11e5:0x957ab2c38fed5ce9!8m2!3d48.1519814!4d11.5606717!16s%2Fg%2F11bw3fcx47?entry=ttu&g_ep=EgoyMDI2MDUxNy4wIKXMDSoASAFQAw%3D%3D"
+                  href={THERESIENSTRASSE_MAPS_URL}
+                  onClick={(event) => openMapInNewTab(event, THERESIENSTRASSE_MAPS_URL)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:text-gold hover:underline transition-colors"
@@ -60,7 +62,8 @@ export function SiteFooter() {
                   Theresienstraße 93<br />80333 München
                 </a>
                 <a
-                  href="https://www.google.com/maps/place/Heiterwanger+Str.+30,+81373+M%C3%BCnchen/@48.121977,11.5248948,17z/data=!3m1!4b1!4m6!3m5!1s0x479dd8b9d30737a3:0x6d7bc7c9cc50c5a4!8m2!3d48.1219734!4d11.5274751!16s%2Fg%2F11rg62lk67?entry=ttu&g_ep=EgoyMDI2MDUxNy4wIKXMDSoASAFQAw%3D%3D"
+                  href={HEITERWANGER_MAPS_URL}
+                  onClick={(event) => openMapInNewTab(event, HEITERWANGER_MAPS_URL)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:text-gold hover:underline transition-colors"
