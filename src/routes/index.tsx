@@ -49,11 +49,7 @@ const services: Array<{
 function HomePage() {
   const { t } = useT();
 
-  useEffect(() => {
-    const html = document.documentElement;
-    html.classList.add("snap-y", "snap-proximity", "scroll-smooth");
-    return () => html.classList.remove("snap-y", "snap-proximity", "scroll-smooth");
-  }, []);
+
 
   return (
     <>
