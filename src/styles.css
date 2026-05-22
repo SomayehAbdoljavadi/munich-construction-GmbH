@@ -237,51 +237,18 @@
   place-items: center;
 }
 
-.mc-map-marker-glow {
-  position: absolute;
-  inset: -0.5rem;
-  z-index: -1;
-  border-radius: 999px;
-  background: color-mix(in oklab, var(--gold) 45%, transparent);
-  filter: blur(20px);
-  transform: scale(1.6);
-}
-
-.mc-map-marker-logo {
-  width: 3.5rem;
-  height: 3.5rem;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  border-radius: 999px;
-  background: radial-gradient(circle at 30% 25%, #1a1a1a 0%, #0a0a0a 70%, #000 100%);
-  border: 1.5px solid var(--gold);
-  box-shadow:
-    0 0 0 1px oklch(0 0 0 / 0.6),
-    0 8px 24px oklch(0 0 0 / 0.55),
-    0 0 18px color-mix(in oklab, var(--gold) 40%, transparent),
-    inset 0 1px 0 color-mix(in oklab, var(--gold) 25%, transparent);
+.mc-map-marker-img {
+  width: 4rem;
+  height: 5rem;
+  object-fit: contain;
+  display: block;
+  filter: grayscale(0) drop-shadow(0 6px 12px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 14px rgba(232, 196, 65, 0.35));
   transition: transform 180ms ease;
+  pointer-events: auto;
 }
 
-.mc-map-marker-shell:hover .mc-map-marker-logo {
-  transform: scale(1.1);
-}
-
-.mc-map-marker-logo svg {
-  width: 2.25rem;
-  height: 2.25rem;
-  filter: drop-shadow(0 0 3px color-mix(in oklab, var(--gold) 60%, transparent));
-}
-
-.mc-map-marker-tip {
-  width: 0.85rem;
-  height: 0.85rem;
-  margin-top: -0.45rem;
-  transform: rotate(45deg);
-  background: linear-gradient(135deg, #f5d27a 0%, #e8c441 50%, #b8862a 100%);
-  border: 1.5px solid #0a0a0a;
-  box-shadow: 0 4px 8px oklch(0 0 0 / 0.5);
+.mc-map-marker-shell:hover .mc-map-marker-img {
+  transform: scale(1.08);
 }
 
 /* ===== Responsive layout containers ===== */
