@@ -130,18 +130,18 @@ function HomePage() {
       </section>
 
       {/* SLIDE 2: SERVICES */}
-      <section className="homepage-section bg-background py-[clamp(2.8rem,5.8vh,5.8rem)] min-h-screen flex items-center [scroll-snap-align:start]">
+      <section className="homepage-section bg-background py-[clamp(3.4rem,7vh,7rem)] min-h-screen flex items-center [scroll-snap-align:start]">
         <div className="homepage-wide w-full flex flex-col justify-center">
-          <div className="max-w-none mb-[clamp(1.4rem,3.6vh,2.9rem)]">
-            <p className="font-mono text-[15px] uppercase tracking-[0.3em] text-gold mb-3">
+          <div className="max-w-none mb-[clamp(1.7rem,4.3vh,3.5rem)]">
+            <p className="font-mono text-[18px] uppercase tracking-[0.3em] text-gold mb-4">
               {t("services.eyebrow")}
             </p>
-            <h2 className="font-display text-[clamp(1.8rem,2.9vw,3.25rem)] leading-tight">
+            <h2 className="font-display text-[clamp(2.2rem,3.5vw,3.9rem)] leading-tight">
               {t("services.title.line1")}<br />
               {t("services.title.line2")}
             </h2>
-            <div className="gold-divider w-28 mt-5" />
-            <p className="text-lg md:text-xl text-muted-foreground mt-5 max-w-[70ch]">
+            <div className="gold-divider w-32 mt-6" />
+            <p className="text-xl md:text-2xl text-muted-foreground mt-6 max-w-[70ch]">
               {t("services.lede")}
             </p>
           </div>
@@ -154,20 +154,20 @@ function HomePage() {
                 <Link
                   key={s.titleKey}
                   to="/services"
-                  className={`group relative p-[clamp(1.4rem,2.3vw,2.5rem)] min-h-[clamp(13rem,24vh,20rem)] transition-all hover:shadow-premium ${
+                  className={`group relative p-[clamp(1.7rem,2.8vw,3rem)] min-h-[clamp(15.5rem,29vh,24rem)] transition-all hover:shadow-premium ${
                     isDark ? "bg-ink text-white hover:bg-ink-soft" : "bg-card text-foreground hover:bg-secondary"
                   }`}
                 >
-                  <div className={`size-14 grid place-items-center mb-5 border ${isDark ? "border-gold/30 text-gold" : "border-gold text-gold"}`}>
-                    <Icon size={26} strokeWidth={1.5} />
+                  <div className={`size-16 grid place-items-center mb-6 border ${isDark ? "border-gold/30 text-gold" : "border-gold text-gold"}`}>
+                    <Icon size={31} strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-display text-2xl xl:text-3xl mb-2.5">{t(s.titleKey)}</h3>
-                  <p className={`text-base xl:text-lg leading-snug line-clamp-3 ${isDark ? "text-white/65" : "text-muted-foreground"}`}>
+                  <h3 className="font-display text-3xl xl:text-4xl mb-3">{t(s.titleKey)}</h3>
+                  <p className={`text-lg xl:text-xl leading-snug line-clamp-3 ${isDark ? "text-white/65" : "text-muted-foreground"}`}>
                     {t(s.textKey)}
                   </p>
                   <ArrowUpRight
-                    size={22}
-                    className="absolute top-6 right-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-gold"
+                    size={26}
+                    className="absolute top-7 right-7 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-gold"
                   />
                 </Link>
               );
