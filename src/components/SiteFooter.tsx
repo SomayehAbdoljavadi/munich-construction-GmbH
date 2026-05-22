@@ -23,7 +23,7 @@ export function SiteFooter() {
             <SocialLink href="https://youtube.com" label="YouTube">
               <Youtube size={16} />
             </SocialLink>
-            <SocialLink href="mailto:m.mardi@munichconstruction.de" label="Email">
+            <SocialLink href="mailto:info@munichconstruction.de" label="Email">
               <Mail size={16} />
             </SocialLink>
           </div>
@@ -58,8 +58,8 @@ export function SiteFooter() {
             </li>
             <li className="flex gap-3">
               <Mail size={16} className="mt-0.5 text-gold shrink-0" />
-              <a href="mailto:m.mardi@munichconstruction.de" className="hover:text-gold break-all">
-                m.mardi@munichconstruction.de
+              <a href="mailto:info@munichconstruction.de" className="hover:text-gold break-all">
+                info@munichconstruction.de
               </a>
             </li>
           </ul>

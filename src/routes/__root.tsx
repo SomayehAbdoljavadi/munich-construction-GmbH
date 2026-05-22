@@ -102,7 +102,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           name: "Munich Construction GmbH",
           url: "https://www.munichconstruction.de",
           telephone: "+49 89 57843675",
-          email: "m.mardi@munichconstruction.de",
+          email: "info@munichconstruction.de",
           address: {
             "@type": "PostalAddress",
             streetAddress: "Theresienstraße 93",

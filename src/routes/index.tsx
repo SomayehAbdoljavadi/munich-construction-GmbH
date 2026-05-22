@@ -194,8 +194,8 @@ function HomePage() {
                 </span>
               </ContactRow>
               <ContactRow icon={<Mail size={18} />} label={t("contact.email")}>
-                <a href="mailto:m.mardi@munichconstruction.de" className="hover:text-gold break-all">
-                  m.mardi@munichconstruction.de
+                <a href="mailto:info@munichconstruction.de" className="hover:text-gold break-all">
+                  info@munichconstruction.de
                 </a>
               </ContactRow>
             </div>
@@ -204,7 +204,7 @@ function HomePage() {
               <a href="https://wa.me/4917632354815" target="_blank" rel="noreferrer" className="px-6 py-3 bg-gold text-ink text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors">
                 WhatsApp
               </a>
-              <a href="mailto:m.mardi@munichconstruction.de" className="px-6 py-3 border border-white/30 text-xs font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-ink transition-colors">
+              <a href="mailto:info@munichconstruction.de" className="px-6 py-3 border border-white/30 text-xs font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-ink transition-colors">
                 Email
               </a>
             </div>
