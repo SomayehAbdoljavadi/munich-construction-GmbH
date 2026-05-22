@@ -128,7 +128,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <HeadContent />
         <style
           dangerouslySetInnerHTML={{
-            __html: `body.loading-active{margin:0;overflow:hidden;background:#000}body.loading-active .mc-app-root{opacity:0!important;visibility:hidden!important;pointer-events:none!important}#mc-initial-loader{position:fixed;inset:0;z-index:2147483647;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;color:#fff}body:not(.loading-active) #mc-initial-loader{display:none}.mc-initial-gif{display:block;width:auto;height:auto;max-width:min(80vw,720px);max-height:60vh;object-fit:contain;user-select:none}.mc-initial-copy{margin-top:2rem;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 1.5rem;opacity:0;transform:translateY(12px);animation:mcInitialTextIn .6s cubic-bezier(.16,1,.3,1) 2.4s forwards}.mc-initial-name{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.5rem,4vw,2.5rem);line-height:1.1;letter-spacing:0}.mc-initial-gold{color:#d4af37}.mc-initial-rule{margin-top:1rem;height:1px;width:4rem;background:#d4af37;transform:scaleX(0);animation:mcInitialRuleIn .6s cubic-bezier(.16,1,.3,1) 2.55s forwards}.mc-initial-tagline{margin-top:1rem;font-family:'JetBrains Mono',monospace;font-size:clamp(.625rem,1.6vw,.7rem);line-height:1.6;text-transform:uppercase;letter-spacing:.35em;color:rgba(255,255,255,.7)}body.loading-leaving #mc-initial-loader{animation:mcInitialLoaderOut .5s ease-in-out forwards}@keyframes mcInitialTextIn{to{opacity:1;transform:translateY(0)}}@keyframes mcInitialRuleIn{to{transform:scaleX(1)}}@keyframes mcInitialLoaderOut{to{opacity:0}}@media(max-width:640px){.mc-initial-gif{max-width:88vw;max-height:52vh}.mc-initial-copy{margin-top:1.5rem}.mc-initial-tagline{letter-spacing:.24em}}`,
+            __html: `body.loading-active{margin:0;overflow:hidden;background:#000}body.loading-active .mc-app-root{opacity:0!important;visibility:hidden!important;pointer-events:none!important}#mc-initial-loader{position:fixed;inset:0;z-index:2147483647;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;color:#fff}body:not(.loading-active) #mc-initial-loader{display:none}.mc-initial-gif{display:block;width:auto;height:auto;max-width:min(80vw,720px);max-height:60vh;object-fit:contain;user-select:none}.mc-initial-copy{margin-top:2rem;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 1.5rem;opacity:0;transform:translateY(12px);animation:mcInitialTextIn .6s cubic-bezier(.16,1,.3,1) 1.8s forwards}.mc-initial-name{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.5rem,4vw,2.5rem);line-height:1.1;letter-spacing:0}.mc-initial-gold{color:#d4af37}.mc-initial-rule{margin-top:1rem;height:1px;width:4rem;background:#d4af37;transform:scaleX(0);animation:mcInitialRuleIn .6s cubic-bezier(.16,1,.3,1) 1.95s forwards}.mc-initial-tagline{margin-top:1rem;font-family:'JetBrains Mono',monospace;font-size:clamp(.625rem,1.6vw,.7rem);line-height:1.6;text-transform:uppercase;letter-spacing:.35em;color:rgba(255,255,255,.7)}body.loading-leaving #mc-initial-loader{animation:mcInitialLoaderOut .4s ease-in-out forwards}@keyframes mcInitialTextIn{to{opacity:1;transform:translateY(0)}}@keyframes mcInitialRuleIn{to{transform:scaleX(1)}}@keyframes mcInitialLoaderOut{to{opacity:0}}@media(max-width:640px){.mc-initial-gif{max-width:88vw;max-height:52vh}.mc-initial-copy{margin-top:1.5rem}.mc-initial-tagline{letter-spacing:.24em}}`,
           }}
         />
         <script
@@ -140,7 +140,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <body className="loading-active">
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(sessionStorage.getItem('mc-intro-played')){document.body.classList.remove('loading-active');}}catch(e){}})();`,
+            __html: `(function(){try{window.__mcLoaderStart=(performance&&performance.now)?performance.now():Date.now();if(sessionStorage.getItem('mc-intro-played')){document.body.classList.remove('loading-active');}}catch(e){}})();`,
           }}
         />
         <div id="mc-initial-loader" aria-hidden="true">
@@ -151,8 +151,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
             </div>
             <div className="mc-initial-rule" />
             <div className="mc-initial-tagline">
-              Precision <span className="mc-initial-gold">•</span> Structure{" "}
-              <span className="mc-initial-gold">•</span> Trust
+              Präzision <span className="mc-initial-gold">•</span> Struktur{" "}
+              <span className="mc-initial-gold">•</span> Vertrauen
             </div>
           </div>
         </div>
