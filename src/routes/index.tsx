@@ -17,7 +17,7 @@ import { useT, type TranslationKey } from "@/lib/i18n";
 import { HeroSkylineArt } from "@/components/HeroSkylineArt";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LocationMap } from "@/components/LocationMap";
-import { HEITERWANGER_MAPS_URL, openMapInNewTab, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
+import { HEITERWANGER_MAPS_URL, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
 import heroBg from "@/assets/mc-hero-bg.jpg";
 
 export const Route = createFileRoute("/")({
@@ -208,7 +208,6 @@ function HomePage() {
               <ContactRow icon={<MapPin size={18} />} label={t("contact.office")}>
                 <a
                   href={THERESIENSTRASSE_MAPS_URL}
-                  onClick={(event) => openMapInNewTab(event, THERESIENSTRASSE_MAPS_URL)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:text-gold hover:underline transition-colors"
@@ -217,7 +216,6 @@ function HomePage() {
                 </a>
                 <a
                   href={HEITERWANGER_MAPS_URL}
-                  onClick={(event) => openMapInNewTab(event, HEITERWANGER_MAPS_URL)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:text-gold hover:underline transition-colors mt-1"
