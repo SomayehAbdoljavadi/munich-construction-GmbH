@@ -6,7 +6,7 @@ import { useEffect } from "react";
  * hydrates, so this component only times the exit and reveals the app.
  */
 // GIF is 3.74s — play it exactly once, text fades in over the tail, then fade out.
-const GIF_MS = 3750;       // single GIF playthrough
+const GIF_MS = 3800;       // single GIF playthrough (~3.74s)
 const TEXT_MS = 0;         // text overlaps with the GIF tail (CSS animation)
 const FADE_MS = 500;       // quick fade-out
 
