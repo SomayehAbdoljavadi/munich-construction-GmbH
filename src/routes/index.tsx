@@ -248,7 +248,9 @@ function HomePage() {
           </div>
         </div>
         </div>
-        <SiteFooter />
+        <div className="relative z-20">
+          <SiteFooter />
+        </div>
       </section>
     </>
   );
