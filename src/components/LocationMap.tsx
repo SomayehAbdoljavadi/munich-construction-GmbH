@@ -85,7 +85,7 @@ export function LocationMap({ className = "" }: { className?: string }) {
 
   return (
     <div className={`relative w-full h-full overflow-hidden ${className}`}>
-      <div ref={mapNodeRef} aria-label={`${ADDRESS} map`} className="h-full w-full grayscale" />
+      <div ref={mapNodeRef} aria-label={`${ADDRESS} map`} className="h-full w-full mc-map-grayscale" />
     </div>
   );
 }

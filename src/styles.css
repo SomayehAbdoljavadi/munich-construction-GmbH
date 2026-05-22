@@ -237,6 +237,8 @@
   place-items: center;
 }
 
+.mc-map-grayscale .leaflet-tile-pane { filter: grayscale(1); }
+
 .mc-map-marker-img {
   width: 4rem;
   height: 5rem;
