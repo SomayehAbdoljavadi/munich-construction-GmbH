@@ -136,8 +136,9 @@ function HomePage() {
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
               {t("services.eyebrow")}
             </p>
-            <h2 className="font-display text-[clamp(1rem,1.6vw,1.75rem)] leading-tight whitespace-nowrap">
-              {t("services.title")}
+            <h2 className="font-display text-[clamp(1rem,1.6vw,1.75rem)] leading-tight">
+              {t("services.title.line1")}<br />
+              {t("services.title.line2")}
             </h2>
             <div className="gold-divider w-24 mt-8" />
             <p className="text-fluid-lead text-muted-foreground mt-8">

@@ -47,7 +47,9 @@ const translations: Dict = {
 
   // services index
   "services.eyebrow": { de: "Unsere Leistungen", en: "Our Services" },
-  "services.title": { de: "Transparente und faire Preise. Kostenlose Erstberatung vor Ort oder telefonisch.", en: "Transparent and fair prices. Free initial consultation on-site or by phone." },
+  "services.title": { de: "Transparente und faire Preise.", en: "Transparent and fair prices." },
+  "services.title.line1": { de: "Transparente und faire Preise.", en: "Transparent and fair prices." },
+  "services.title.line2": { de: "Kostenlose Erstberatung vor Ort oder telefonisch.", en: "Free initial consultation on-site or by phone." },
   "services.lede": {
     de: "Von der ersten Skizze bis zur Übergabe — wir verantworten den gesamten Bauprozess.",
     en: "From the first sketch to handover — we own the entire construction process.",
