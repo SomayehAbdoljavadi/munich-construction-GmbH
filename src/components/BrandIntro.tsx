@@ -5,9 +5,10 @@ import { useEffect } from "react";
  * The visual loader must already exist in the initial HTML/CSS before React
  * hydrates, so this component only times the exit and reveals the app.
  */
-const GIF_MS = 2600;       // GIF on its own
-const TEXT_MS = 1400;      // GIF + text together
-const FADE_MS = 800;       // fade-out duration
+// GIF is 3.74s — play it exactly once, text fades in over the tail, then fade out.
+const GIF_MS = 3750;       // single GIF playthrough
+const TEXT_MS = 0;         // text overlaps with the GIF tail (CSS animation)
+const FADE_MS = 500;       // quick fade-out
 
 export function BrandIntro() {
   useEffect(() => {
