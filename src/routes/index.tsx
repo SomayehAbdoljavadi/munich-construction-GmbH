@@ -132,11 +132,11 @@ function HomePage() {
       {/* SLIDE 2: SERVICES */}
       <section className="homepage-section bg-background py-[clamp(5rem,8vh,9rem)] min-h-screen flex items-center [scroll-snap-align:start]">
         <div className="homepage-wide w-full">
-          <div className="max-w-[min(56rem,92vw)] mb-[clamp(3rem,5vw,6rem)]">
+          <div className="max-w-none mb-[clamp(3rem,5vw,6rem)]">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
               {t("services.eyebrow")}
             </p>
-            <h2 className="font-display h-fluid-section">
+            <h2 className="font-display text-[clamp(1rem,1.6vw,1.75rem)] leading-tight whitespace-nowrap">
               {t("services.title")}
             </h2>
             <div className="gold-divider w-24 mt-8" />
