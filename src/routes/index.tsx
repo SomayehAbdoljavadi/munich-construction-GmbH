@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect } from "react";
 import {
   Building2,
   Hammer,
@@ -14,6 +13,7 @@ import {
 } from "lucide-react";
 import { useT, type TranslationKey } from "@/lib/i18n";
 import { HeroSkylineArt } from "@/components/HeroSkylineArt";
+import { SiteFooter } from "@/components/SiteFooter";
 import heroBg from "@/assets/mc-hero-bg.jpg";
 
 export const Route = createFileRoute("/")({
