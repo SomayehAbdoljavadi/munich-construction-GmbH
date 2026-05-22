@@ -40,8 +40,13 @@ export function LocationMap({ className = "" }: { className?: string }) {
       });
 
       const marker = L.marker(MAP_CENTER, { icon: logoIcon, title: ADDRESS, riseOnHover: true }).addTo(map);
-      marker.on("click", () => {
-        window.open(THERESIENSTRASSE_MAPS_URL, "_blank", "noopener,noreferrer");
+      marker.on("add", () => {
+        const markerLink = marker.getElement()?.querySelector<HTMLAnchorElement>(".mc-map-marker-shell");
+        markerLink?.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          window.open(THERESIENSTRASSE_MAPS_URL, "_blank", "noopener,noreferrer");
+        });
       });
 
       // Reset control styled like native zoom controls
