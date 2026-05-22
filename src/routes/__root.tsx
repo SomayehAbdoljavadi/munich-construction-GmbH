@@ -151,8 +151,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
             </div>
             <div className="mc-initial-rule" />
             <div className="mc-initial-tagline">
-              Precision <span className="mc-initial-gold">•</span> Structure{" "}
-              <span className="mc-initial-gold">•</span> Trust
+              Präzision <span className="mc-initial-gold">•</span> Struktur{" "}
+              <span className="mc-initial-gold">•</span> Vertrauen
             </div>
           </div>
         </div>
