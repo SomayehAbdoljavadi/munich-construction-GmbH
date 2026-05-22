@@ -130,23 +130,23 @@ function HomePage() {
       </section>
 
       {/* SLIDE 2: SERVICES */}
-      <section className="homepage-section bg-background py-[clamp(5rem,8vh,9rem)] min-h-screen flex items-center [scroll-snap-align:start]">
-        <div className="homepage-wide w-full">
-          <div className="max-w-none mb-[clamp(3rem,5vw,6rem)]">
-            <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
+      <section className="homepage-section bg-background py-[clamp(2rem,4vh,4rem)] min-h-screen flex items-center [scroll-snap-align:start]">
+        <div className="homepage-wide w-full flex flex-col justify-center">
+          <div className="max-w-none mb-[clamp(1rem,2.5vh,2rem)]">
+            <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-2">
               {t("services.eyebrow")}
             </p>
-            <h2 className="font-display text-[clamp(1.5rem,2.4vw,2.625rem)] leading-tight">
+            <h2 className="font-display text-[clamp(1.25rem,2vw,2.25rem)] leading-tight">
               {t("services.title.line1")}<br />
               {t("services.title.line2")}
             </h2>
-            <div className="gold-divider w-24 mt-8" />
-            <p className="text-fluid-lead text-muted-foreground mt-8">
+            <div className="gold-divider w-20 mt-3" />
+            <p className="text-sm md:text-base text-muted-foreground mt-3 max-w-[70ch]">
               {t("services.lede")}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-px bg-border border border-border">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
             {services.map((s, i) => {
               const Icon = s.icon;
               const isDark = i % 2 === 1;
@@ -154,20 +154,20 @@ function HomePage() {
                 <Link
                   key={s.titleKey}
                   to="/services"
-                  className={`group relative p-[clamp(2rem,3vw,4rem)] min-h-[clamp(15rem,18vw,23rem)] transition-all hover:shadow-premium ${
+                  className={`group relative p-[clamp(1rem,1.6vw,1.75rem)] min-h-[clamp(9rem,17vh,14rem)] transition-all hover:shadow-premium ${
                     isDark ? "bg-ink text-white hover:bg-ink-soft" : "bg-card text-foreground hover:bg-secondary"
                   }`}
                 >
-                  <div className={`size-12 grid place-items-center mb-8 border ${isDark ? "border-gold/30 text-gold" : "border-gold text-gold"}`}>
-                    <Icon size={22} strokeWidth={1.5} />
+                  <div className={`size-9 grid place-items-center mb-3 border ${isDark ? "border-gold/30 text-gold" : "border-gold text-gold"}`}>
+                    <Icon size={18} strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-display text-2xl xl:text-3xl mb-3">{t(s.titleKey)}</h3>
-                  <p className={`text-sm xl:text-base leading-relaxed ${isDark ? "text-white/65" : "text-muted-foreground"}`}>
+                  <h3 className="font-display text-lg xl:text-xl mb-1.5">{t(s.titleKey)}</h3>
+                  <p className={`text-xs xl:text-sm leading-snug line-clamp-3 ${isDark ? "text-white/65" : "text-muted-foreground"}`}>
                     {t(s.textKey)}
                   </p>
                   <ArrowUpRight
-                    size={18}
-                    className={`absolute top-8 right-8 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 ${isDark ? "text-gold" : "text-gold"}`}
+                    size={16}
+                    className="absolute top-4 right-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-gold"
                   />
                 </Link>
               );
