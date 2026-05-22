@@ -78,7 +78,7 @@ function HomePage() {
         />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/80 to-ink" />
 
-        <div className="relative homepage-wide pt-16 md:pt-24 pb-24 md:pb-32 grid grid-cols-1 lg:[grid-template-columns:minmax(0,1.04fr)_minmax(560px,0.96fr)] gap-10 xl:gap-[clamp(4rem,6vw,9rem)] items-center">
+        <div className="relative homepage-wide pt-16 md:pt-24 pb-24 md:pb-32 grid grid-cols-1 lg:[grid-template-columns:minmax(0,1.04fr)_minmax(min(44vw,760px),0.96fr)] gap-10 xl:gap-[clamp(4rem,6vw,9rem)] items-center">
           <div className="relative z-10 min-w-0 space-y-8">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold animate-fade-up">
               {t("hero.eyebrow")}
