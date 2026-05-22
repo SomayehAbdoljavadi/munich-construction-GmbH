@@ -519,36 +519,3 @@
   animation: mcCrossIn 0.9s ease-out 8.8s forwards;
 }
 
-
-/* Cinematic section transitions on the homepage */
-html {
-  scroll-behavior: smooth;
-}
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-}
-
-.homepage-section {
-  scroll-snap-stop: normal;
-}
-
-.homepage-section-reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition:
-    opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-.homepage-section-reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-@media (prefers-reduced-motion: reduce) {
-  .homepage-section-reveal,
-  .homepage-section-reveal.is-visible {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
