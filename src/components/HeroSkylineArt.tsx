@@ -69,7 +69,7 @@ function Windows({ b }: { b: Building }) {
   const innerH = GROUND_Y - b.top - 38;
   const gapY = innerH / rows;
   const wH = Math.max(3, gapY * 0.55);
-  const rects: JSX.Element[] = [];
+  const rects: ReactElement[] = [];
   let i = 0;
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
