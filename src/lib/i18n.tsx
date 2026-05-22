@@ -21,7 +21,7 @@ const translations: Dict = {
   "nav.cta": { de: "Kontakt aufnehmen", en: "Get in Touch" },
 
   // hero
-  "hero.eyebrow": { de: "Bauen mit Anspruch · München", en: "Building with Standards · Munich" },
+  "hero.eyebrow": { de: "Bester Preis und Qualität", en: "Best Price and Standards" },
   "hero.title": {
     de: "Munich Construction GmbH — Ihr Partner für hochwertiges Bauen in München",
     en: "Munich Construction GmbH — Your Partner for High-Quality Construction in Munich",
