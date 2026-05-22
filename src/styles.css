@@ -217,6 +217,61 @@
   color: transparent;
 }
 
+.mc-map-marker {
+  background: transparent;
+  border: 0;
+}
+
+.mc-map-marker-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.mc-map-marker-glow {
+  position: absolute;
+  inset: -0.5rem;
+  z-index: -1;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--gold) 30%, transparent);
+  filter: blur(18px);
+  transform: scale(1.5);
+}
+
+.mc-map-marker-logo {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--ink);
+  border: 2px solid var(--gold);
+  box-shadow: 0 8px 24px oklch(0 0 0 / 0.45);
+  transition: transform 180ms ease;
+}
+
+.mc-map-marker-shell:hover .mc-map-marker-logo {
+  transform: scale(1.1);
+}
+
+.mc-map-marker-logo img {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+}
+
+.mc-map-marker-tip {
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-top: -0.375rem;
+  transform: rotate(45deg);
+  background: var(--gold);
+  border: 2px solid color-mix(in oklab, var(--ink) 80%, transparent);
+}
+
 /* ===== Responsive layout containers ===== */
 .container-wide {
   width: 100%;
