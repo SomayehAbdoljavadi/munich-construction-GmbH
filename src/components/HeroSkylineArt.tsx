@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 
+/**
  * HeroSkylineArt — premium cinematic city scene for Munich Construction GmbH.
  *
  * A layered nighttime skyline drawn line-by-line in gold, with three depth
