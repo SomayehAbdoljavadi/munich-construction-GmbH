@@ -1,14 +1,14 @@
 import { useEffect } from "react";
+import introGif from "@/assets/mc-intro.gif";
+import { getGifDurationMs } from "@/lib/gif-duration";
 
 /**
  * Controls the server-rendered initial loader from __root.tsx.
  * The visual loader must already exist in the initial HTML/CSS before React
  * hydrates, so this component only times the exit and reveals the app.
  */
-// GIF is 3.74s — play it exactly once, text fades in over the tail, then fade out.
-const GIF_MS = 3750;       // single GIF playthrough
-const TEXT_MS = 0;         // text overlaps with the GIF tail (CSS animation)
-const FADE_MS = 500;       // quick fade-out
+const FALLBACK_GIF_MS = 3750; // used if duration can't be parsed
+const FADE_MS = 500;          // quick fade-out
 
 export function BrandIntro() {
   useEffect(() => {
@@ -24,22 +24,39 @@ export function BrandIntro() {
     document.body.classList.add("loading-active");
     document.body.classList.remove("loading-leaving");
 
-    const leaveT = window.setTimeout(() => {
-      document.body.classList.add("loading-leaving");
-    }, GIF_MS + TEXT_MS);
+    let leaveT: number | undefined;
+    let doneT: number | undefined;
+    let cancelled = false;
+    const start = performance.now();
 
-    const doneT = window.setTimeout(() => {
-      try {
-        sessionStorage.setItem("mc-intro-played", "1");
-      } catch {
-        // ignore
-      }
-      document.body.classList.remove("loading-active", "loading-leaving");
-    }, GIF_MS + TEXT_MS + FADE_MS);
+    const schedule = (gifMs: number) => {
+      if (cancelled) return;
+      const elapsed = performance.now() - start;
+      const remaining = Math.max(0, gifMs - elapsed);
+
+      leaveT = window.setTimeout(() => {
+        document.body.classList.add("loading-leaving");
+      }, remaining);
+
+      doneT = window.setTimeout(() => {
+        try {
+          sessionStorage.setItem("mc-intro-played", "1");
+        } catch {
+          // ignore
+        }
+        document.body.classList.remove("loading-active", "loading-leaving");
+      }, remaining + FADE_MS);
+    };
+
+    // Detect the GIF's real duration, fall back if parsing fails.
+    getGifDurationMs(introGif)
+      .then((ms) => schedule(ms && ms > 0 ? ms : FALLBACK_GIF_MS))
+      .catch(() => schedule(FALLBACK_GIF_MS));
 
     return () => {
-      window.clearTimeout(leaveT);
-      window.clearTimeout(doneT);
+      cancelled = true;
+      if (leaveT) window.clearTimeout(leaveT);
+      if (doneT) window.clearTimeout(doneT);
       document.body.classList.remove("loading-leaving");
     };
   }, []);
