@@ -4,7 +4,7 @@ import { z } from "zod";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { useT } from "@/lib/i18n";
 import { LocationMap } from "@/components/LocationMap";
-import { HEITERWANGER_MAPS_URL, openMapInNewTab, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
+import { HEITERWANGER_MAPS_URL, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -65,7 +65,6 @@ function ContactPage() {
             <Block icon={<MapPin size={18} />} label={t("contact.office")}>
               <a
                 href={THERESIENSTRASSE_MAPS_URL}
-                onClick={(event) => openMapInNewTab(event, THERESIENSTRASSE_MAPS_URL)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block hover:text-gold hover:underline transition-colors"
@@ -74,7 +73,6 @@ function ContactPage() {
               </a>
               <a
                 href={HEITERWANGER_MAPS_URL}
-                onClick={(event) => openMapInNewTab(event, HEITERWANGER_MAPS_URL)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block mt-3 hover:text-gold hover:underline transition-colors"
