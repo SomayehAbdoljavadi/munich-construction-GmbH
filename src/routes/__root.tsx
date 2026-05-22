@@ -140,7 +140,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <body className="loading-active">
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(sessionStorage.getItem('mc-intro-played')){document.body.classList.remove('loading-active');}}catch(e){}})();`,
+            __html: `(function(){try{window.__mcLoaderStart=(performance&&performance.now)?performance.now():Date.now();if(sessionStorage.getItem('mc-intro-played')){document.body.classList.remove('loading-active');}}catch(e){}})();`,
           }}
         />
         <div id="mc-initial-loader" aria-hidden="true">
@@ -151,8 +151,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
             </div>
             <div className="mc-initial-rule" />
             <div className="mc-initial-tagline">
-              Precision <span className="mc-initial-gold">•</span> Structure{" "}
-              <span className="mc-initial-gold">•</span> Trust
+              Präzision <span className="mc-initial-gold">•</span> Struktur{" "}
+              <span className="mc-initial-gold">•</span> Vertrauen
             </div>
           </div>
         </div>
