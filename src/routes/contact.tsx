@@ -130,12 +130,9 @@ function ContactPage() {
       </section>
 
       <section className="border-t border-border">
-        <iframe
-          title="Munich Construction GmbH location map"
-          src="https://www.openstreetmap.org/export/embed.html?bbox=11.5640%2C48.1455%2C11.5760%2C48.1525&amp;layer=mapnik&amp;marker=48.1490%2C11.5700"
-          className="w-full h-[420px] grayscale"
-          loading="lazy"
-        />
+        <div className="w-full h-[420px]">
+          <LocationMap />
+        </div>
       </section>
     </>
   );
