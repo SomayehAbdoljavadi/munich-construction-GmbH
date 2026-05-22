@@ -38,7 +38,7 @@ function ImprintPage() {
           <Section title={t("imprint.contact")}>
             <p>Telefon: +49 (0) 89 57 84 3675</p>
             <p>Mobil: +49 (176) 3235 4815</p>
-            <p>E-Mail: m.mardi@munichconstruction.de</p>
+            <p>E-Mail: info@munichconstruction.de</p>
             <p>Web: www.munichconstruction.de</p>
           </Section>
 

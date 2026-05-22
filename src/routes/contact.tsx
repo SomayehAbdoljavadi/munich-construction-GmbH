@@ -56,8 +56,8 @@ function ContactPage() {
               </p>
             </Block>
             <Block icon={<Mail size={18} />} label={t("contact.email")}>
-              <a href="mailto:m.mardi@munichconstruction.de" className="hover:text-gold break-all">
-                m.mardi@munichconstruction.de
+              <a href="mailto:info@munichconstruction.de" className="hover:text-gold break-all">
+                info@munichconstruction.de
               </a>
             </Block>
             <Block icon={<MapPin size={18} />} label={t("contact.office")}>
