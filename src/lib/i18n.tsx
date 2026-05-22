@@ -47,7 +47,7 @@ const translations: Dict = {
 
   // services index
   "services.eyebrow": { de: "Unsere Leistungen", en: "Our Services" },
-  "services.title": { de: "Sechs Disziplinen, ein Anspruch.", en: "Six disciplines, one standard." },
+  "services.title": { de: "Transparente und faire Preise. Kostenlose Erstberatung vor Ort oder telefonisch.", en: "Transparent and fair prices. Free initial consultation on-site or by phone." },
   "services.lede": {
     de: "Von der ersten Skizze bis zur Übergabe — wir verantworten den gesamten Bauprozess.",
     en: "From the first sketch to handover — we own the entire construction process.",
