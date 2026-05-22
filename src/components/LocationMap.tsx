@@ -1,4 +1,4 @@
-import { MapPin } from "lucide-react";
+import logoImg from "@/assets/munich-logo.jpg";
 
 const ADDRESS = "Theresienstraße 93, 80333 München";
 const GOOGLE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
@@ -17,14 +17,19 @@ export function LocationMap({ className = "" }: { className?: string }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`Open ${ADDRESS} in Google Maps`}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full group pointer-events-auto"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full group"
       >
-        <span className="relative flex items-center justify-center">
-          <span className="absolute inset-0 -z-10 rounded-full bg-gold/30 blur-xl scale-150 group-hover:bg-gold/50 transition-colors" />
-          <span className="size-12 rounded-full bg-gold text-ink grid place-items-center shadow-[0_8px_24px_rgba(0,0,0,0.35)] ring-2 ring-ink/80 group-hover:scale-110 transition-transform">
-            <MapPin size={22} strokeWidth={2.25} fill="currentColor" />
+        <span className="relative flex flex-col items-center">
+          <span className="absolute -inset-2 -z-10 rounded-full bg-gold/30 blur-xl scale-150 group-hover:bg-gold/50 transition-colors" />
+          <span className="size-14 rounded-full bg-ink ring-2 ring-gold grid place-items-center shadow-[0_8px_24px_rgba(0,0,0,0.45)] overflow-hidden group-hover:scale-110 transition-transform">
+            <img
+              src={logoImg}
+              alt="Munich Construction GmbH"
+              className="size-10 object-contain"
+              draggable={false}
+            />
           </span>
-          <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gold rotate-45 ring-2 ring-ink/80" />
+          <span className="w-3 h-3 bg-gold rotate-45 -mt-1.5 ring-2 ring-ink/80" />
         </span>
       </a>
     </div>
