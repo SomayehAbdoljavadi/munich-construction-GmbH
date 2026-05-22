@@ -2,13 +2,17 @@ import { useEffect } from "react";
 
 /**
  * Controls the server-rendered initial loader from __root.tsx.
- * The visual loader must already exist in the initial HTML/CSS before React
- * hydrates, so this component only times the exit and reveals the app.
+ * Timing is anchored to window.__mcLoaderStart (set inline before hydration)
+ * so the GIF plays exactly one cycle regardless of hydration delay.
  */
-// GIF is 3.74s — play it exactly once, text fades in over the tail, then fade out.
-const GIF_MS = 3750;       // single GIF playthrough
-const TEXT_MS = 0;         // text overlaps with the GIF tail (CSS animation)
-const FADE_MS = 500;       // quick fade-out
+const GIF_CYCLE_MS = 3700; // one full GIF cycle (~3.74s) — fade out before second loop
+const FADE_MS = 400;
+
+declare global {
+  interface Window {
+    __mcLoaderStart?: number;
+  }
+}
 
 export function BrandIntro() {
   useEffect(() => {
@@ -24,9 +28,18 @@ export function BrandIntro() {
     document.body.classList.add("loading-active");
     document.body.classList.remove("loading-leaving");
 
+    const now =
+      typeof performance !== "undefined" && performance.now
+        ? performance.now()
+        : Date.now();
+    const start = window.__mcLoaderStart ?? now;
+    const elapsed = Math.max(0, now - start);
+    const leaveIn = Math.max(0, GIF_CYCLE_MS - FADE_MS - elapsed);
+    const doneIn = Math.max(FADE_MS, GIF_CYCLE_MS - elapsed);
+
     const leaveT = window.setTimeout(() => {
       document.body.classList.add("loading-leaving");
-    }, GIF_MS + TEXT_MS);
+    }, leaveIn);
 
     const doneT = window.setTimeout(() => {
       try {
@@ -35,7 +48,7 @@ export function BrandIntro() {
         // ignore
       }
       document.body.classList.remove("loading-active", "loading-leaving");
-    }, GIF_MS + TEXT_MS + FADE_MS);
+    }, doneIn);
 
     return () => {
       window.clearTimeout(leaveT);
