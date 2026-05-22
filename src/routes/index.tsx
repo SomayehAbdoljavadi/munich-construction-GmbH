@@ -49,10 +49,16 @@ const services: Array<{
 function HomePage() {
   const { t } = useT();
 
+  useEffect(() => {
+    const html = document.documentElement;
+    html.classList.add("snap-y", "snap-mandatory", "scroll-smooth");
+    return () => html.classList.remove("snap-y", "snap-mandatory", "scroll-smooth");
+  }, []);
+
   return (
     <>
       {/* SLIDE 1: HERO */}
-      <section className="relative bg-ink text-white overflow-hidden">
+      <section id="hero" className="relative bg-ink text-white overflow-hidden min-h-screen snap-start flex items-center">
         <div
           aria-hidden
           className="absolute inset-0 opacity-30"
