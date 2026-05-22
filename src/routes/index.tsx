@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect } from "react";
 import {
   Building2,
   Hammer,
@@ -48,10 +49,16 @@ const services: Array<{
 function HomePage() {
   const { t } = useT();
 
+  useEffect(() => {
+    const html = document.documentElement;
+    html.classList.add("snap-y", "snap-mandatory", "scroll-smooth");
+    return () => html.classList.remove("snap-y", "snap-mandatory", "scroll-smooth");
+  }, []);
+
   return (
     <>
       {/* SLIDE 1: HERO */}
-      <section className="relative bg-ink text-white overflow-hidden">
+      <section id="hero" className="relative bg-ink text-white overflow-hidden min-h-screen snap-start flex items-center">
         <div
           aria-hidden
           className="absolute inset-0 opacity-30"
@@ -114,7 +121,7 @@ function HomePage() {
       </section>
 
       {/* SLIDE 2: SERVICES */}
-      <section className="bg-background py-24 md:py-32">
+      <section id="services" className="bg-background py-24 md:py-32 min-h-screen snap-start flex items-center">
         <div className="max-w-7xl mx-auto px-5 md:px-8">
           <div className="max-w-3xl mb-16">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
@@ -160,7 +167,7 @@ function HomePage() {
       </section>
 
       {/* SLIDE 3: CONTACT + LOCATION */}
-      <section className="bg-ink text-white py-24 md:py-32 relative overflow-hidden">
+      <section id="contact" className="bg-ink text-white py-24 md:py-32 relative overflow-hidden min-h-screen snap-start flex items-center">
         <div aria-hidden className="absolute inset-0 opacity-[0.04]" style={{
           backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
           backgroundSize: "32px 32px",
