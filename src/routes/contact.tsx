@@ -48,12 +48,12 @@ function ContactPage() {
         <div className="container-wide grid grid-cols-1 lg:grid-cols-12 gap-12">
           <aside className="lg:col-span-4 space-y-8">
             <Block icon={<Phone size={18} />} label={t("contact.phone")}>
-              <a href="tel:+498957843675" className="font-display text-2xl hover:text-gold transition-colors">
+              <a href="tel:+498957843675" className="block font-display text-2xl hover:text-gold transition-colors">
                 +49 (0) 89 57 84 3675
               </a>
-              <p className="text-sm text-muted-foreground mt-1">
-                Mobil: <a href="tel:+4917632354815" className="hover:text-gold">+49 (176) 3235 4815</a>
-              </p>
+              <a href="tel:+4917632354815" className="block font-display text-2xl hover:text-gold transition-colors mt-1">
+                +49 (176) 3235 4815
+              </a>
             </Block>
             <Block icon={<Mail size={18} />} label={t("contact.email")}>
               <a href="mailto:info@munichconstruction.de" className="hover:text-gold break-all">
