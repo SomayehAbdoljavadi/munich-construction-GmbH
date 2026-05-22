@@ -117,8 +117,9 @@ function HomePage() {
             </ul>
           </div>
 
-          <div className="lg:col-span-5 xl:col-span-5 relative animate-fade-in [animation-delay:300ms] mt-12 md:mt-20 lg:mt-0">
-            <div className="mx-auto w-full max-w-[1600px] aspect-[8/5] flex items-center justify-center scale-105 sm:scale-115 lg:scale-125 xl:scale-[1.35] 2xl:scale-[1.5] origin-center transition-transform">
+          <div className="min-w-0 relative z-0 animate-fade-in [animation-delay:300ms] mt-12 md:mt-20 lg:mt-0">
+            <div className="mx-auto w-full max-w-[1600px] aspect-[8/5] flex items-center justify-center scale-100 sm:scale-105 lg:scale-110 xl:scale-115 2xl:scale-125 origin-center transition-transform">
+
               <HeroSkylineArt />
             </div>
           </div>
