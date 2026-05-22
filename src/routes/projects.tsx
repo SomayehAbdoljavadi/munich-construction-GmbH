@@ -48,11 +48,11 @@ function ProjectsPage() {
   return (
     <>
       <section className="bg-ink text-white py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-5 md:px-8">
+        <div className="container-wide">
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
             {t("projects.eyebrow")}
           </p>
-          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-balance max-w-4xl">
+          <h1 className="font-display h-fluid-page text-balance max-w-4xl">
             {t("projects.title")}
           </h1>
           <div className="gold-divider w-24 mt-8" />
@@ -61,7 +61,7 @@ function ProjectsPage() {
       </section>
 
       <section className="py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-5 md:px-8">
+        <div className="container-wide">
           <div className="flex flex-wrap gap-2 mb-12">
             {cats.map((c) => (
               <button

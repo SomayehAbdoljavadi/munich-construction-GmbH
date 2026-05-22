@@ -27,11 +27,11 @@ function AboutPage() {
   return (
     <>
       <section className="bg-ink text-white py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-5 md:px-8">
+        <div className="container-wide">
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
             {t("about.eyebrow")}
           </p>
-          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-balance max-w-4xl">
+          <h1 className="font-display h-fluid-page text-balance max-w-4xl">
             {t("about.title")}
           </h1>
           <div className="gold-divider w-24 mt-8" />
@@ -39,7 +39,7 @@ function AboutPage() {
       </section>
 
       <section className="py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-5 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="container-wide grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-5">
             <img
               src={aboutImg}
@@ -65,7 +65,7 @@ function AboutPage() {
       </section>
 
       <section className="bg-secondary py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-5 md:px-8">
+        <div className="container-wide">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
             {values.map((v) => (
               <div key={v.tKey} className="bg-background p-10">

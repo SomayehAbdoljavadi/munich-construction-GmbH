@@ -93,11 +93,11 @@ function ServicesPage() {
   return (
     <>
       <section className="bg-ink text-white py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-5 md:px-8">
+        <div className="container-wide">
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
             {t("services.eyebrow")}
           </p>
-          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-balance max-w-4xl">
+          <h1 className="font-display h-fluid-page text-balance max-w-4xl">
             {t("services.title")}
           </h1>
           <div className="gold-divider w-24 mt-8" />
@@ -106,7 +106,7 @@ function ServicesPage() {
       </section>
 
       <section className="py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-5 md:px-8 space-y-24">
+        <div className="container-wide space-y-24">
           {SERVICES.map((s, i) => {
             const Icon = s.icon;
             return (
