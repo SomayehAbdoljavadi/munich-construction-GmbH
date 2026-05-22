@@ -1,6 +1,6 @@
 export function HeroSkylineArt() {
   return (
-    <div className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden rounded-sm">
+    <div className="relative w-full h-full bg-transparent flex items-center justify-center overflow-hidden">
       <BlueprintScene />
     </div>
   );
