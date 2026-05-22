@@ -102,7 +102,7 @@ function HomePage() {
           </div>
 
           <div className="lg:col-span-5 relative animate-fade-in [animation-delay:300ms]">
-            <div className="mx-auto w-full max-w-[640px] aspect-[8/5] flex items-center justify-center">
+            <div className="mx-auto w-full max-w-[800px] aspect-[8/5] flex items-center justify-center scale-100 sm:scale-110 lg:scale-125 origin-center transition-transform">
               <HeroSkylineArt />
             </div>
           </div>
