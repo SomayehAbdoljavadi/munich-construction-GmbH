@@ -181,17 +181,17 @@ function HomePage() {
           backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
           backgroundSize: "32px 32px",
         }} />
-        <div className="relative max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="relative container-wide grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20">
           <div className="space-y-10">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
                 {t("contact.eyebrow")}
               </p>
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-tight">
+              <h2 className="font-display h-fluid-section">
                 {t("contact.title")}
               </h2>
               <div className="gold-divider w-24 mt-8" />
-              <p className="text-white/70 text-lg mt-8 leading-relaxed max-w-md">
+              <p className="text-fluid-lead text-white/70 mt-8 max-w-[55ch]">
                 {t("contact.lede")}
               </p>
             </div>
