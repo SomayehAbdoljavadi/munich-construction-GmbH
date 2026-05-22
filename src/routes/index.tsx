@@ -63,14 +63,14 @@ function HomePage() {
         />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/80 to-ink" />
 
-        <div className="relative max-w-7xl mx-auto px-5 md:px-8 pt-16 md:pt-24 pb-24 md:pb-32 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 space-y-8">
+        <div className="relative max-w-7xl mx-auto px-5 md:px-8 pt-16 md:pt-24 pb-24 md:pb-32 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-8 space-y-8">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold animate-fade-up">
               {t("hero.eyebrow")}
             </p>
             <h1 className="font-display leading-[1.1] text-balance animate-fade-up [animation-delay:100ms]">
               <span className="block gold-text whitespace-nowrap text-2xl sm:text-3xl md:text-4xl lg:text-5xl">{t("hero.titleBrand")}</span>
-              <span className="block mt-2 text-white whitespace-nowrap text-lg sm:text-xl md:text-2xl lg:text-3xl">{t("hero.titleRest")}</span>
+              <span className="block mt-3 text-white whitespace-nowrap text-base sm:text-lg md:text-xl lg:text-2xl">{t("hero.titleRest")}</span>
             </h1>
             <div className="gold-divider w-32 animate-scale-line [animation-delay:300ms]" />
             <p className="text-base md:text-lg text-white/70 max-w-2xl leading-relaxed animate-fade-up [animation-delay:400ms]">
@@ -102,7 +102,7 @@ function HomePage() {
             </ul>
           </div>
 
-          <div className="lg:col-span-5 relative animate-fade-in [animation-delay:300ms] mt-12 md:mt-20 lg:mt-32">
+          <div className="lg:col-span-4 relative animate-fade-in [animation-delay:300ms] mt-12 md:mt-20 lg:mt-32">
             <div className="mx-auto w-full max-w-[1250px] aspect-[8/5] flex items-center justify-center scale-105 sm:scale-115 lg:scale-125 origin-center transition-transform">
               <HeroSkylineArt />
             </div>
