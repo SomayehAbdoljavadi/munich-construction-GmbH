@@ -236,6 +236,7 @@ function HomePage() {
             />
           </div>
         </div>
+        </div>
         <SiteFooter />
       </section>
     </>
