@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import introGif from "@/assets/mc-intro.gif";
 
 /**
- * Full-screen premium loader. Renders synchronously on first paint so the
- * homepage is never visible behind it. Sequence:
- *   1) GIF plays centered on black
- *   2) Brand name + tagline fade in
- *   3) Whole overlay fades out into the site
- * Shows once per session.
+ * Controls the server-rendered initial loader from __root.tsx.
+ * The visual loader must already exist in the initial HTML/CSS before React
+ * hydrates, so this component only times the exit and reveals the app.
  */
 const GIF_MS = 2600;       // GIF on its own
 const TEXT_MS = 1400;      // GIF + text together
@@ -26,6 +22,55 @@ export function BrandIntro() {
   const [showText, setShowText] = useState(false);
   const [leaving, setLeaving] = useState(false);
 
+  useEffect(() => {
+    if (!active) {
+      document.body.classList.remove("loading-active", "loading-leaving");
+      return;
+    }
+
+    document.body.classList.add("loading-active");
+    document.body.classList.remove("loading-leaving");
+
+    const leaveT = window.setTimeout(() => {
+      setLeaving(true);
+      document.body.classList.add("loading-leaving");
+    }, GIF_MS + TEXT_MS);
+
+    const doneT = window.setTimeout(() => {
+      try {
+        sessionStorage.setItem("mc-intro-played", "1");
+      } catch {
+        // ignore
+      }
+      document.body.classList.remove("loading-active", "loading-leaving");
+      setActive(false);
+    }, GIF_MS + TEXT_MS + FADE_MS);
+
+    return () => {
+      window.clearTimeout(leaveT);
+      window.clearTimeout(doneT);
+      document.body.classList.remove("loading-leaving");
+    };
+  }, [active]);
+
+  useEffect(() => {
+    if (!active) return;
+    const textT = window.setTimeout(() => setShowText(true), GIF_MS);
+
+    return () => window.clearTimeout(textT);
+  }, [active]);
+
+  useEffect(() => {
+    if (!active || !leaving) return;
+    document.body.classList.add("loading-leaving");
+
+    return () => document.body.classList.remove("loading-leaving");
+  }, [active, leaving]);
+
+  return null;
+}
+
+export function OldBrandIntroMarkup() {
   useEffect(() => {
     if (!active) return;
     try {
