@@ -51,8 +51,8 @@ function HomePage() {
 
   useEffect(() => {
     const html = document.documentElement;
-    html.classList.add("snap-y", "snap-mandatory", "scroll-smooth");
-    return () => html.classList.remove("snap-y", "snap-mandatory", "scroll-smooth");
+    html.classList.add("snap-y", "snap-proximity", "scroll-smooth");
+    return () => html.classList.remove("snap-y", "snap-proximity", "scroll-smooth");
   }, []);
 
   return (
