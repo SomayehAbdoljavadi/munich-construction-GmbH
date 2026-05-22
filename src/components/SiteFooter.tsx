@@ -7,7 +7,7 @@ export function SiteFooter() {
   const { t } = useT();
   return (
     <footer className="bg-surface-inverse text-surface-inverse-foreground/80">
-      <div className="max-w-7xl mx-auto px-5 md:px-8 py-16 grid grid-cols-1 md:grid-cols-12 gap-12">
+      <div className="container-wide py-16 grid grid-cols-1 md:grid-cols-12 gap-12">
         <div className="md:col-span-5 space-y-6">
           <Logo />
           <p className="text-sm leading-relaxed text-white/60 max-w-sm">
