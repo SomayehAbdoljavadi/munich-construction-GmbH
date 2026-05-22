@@ -207,10 +207,8 @@ function HomePage() {
                 Heiterwanger Straße 30, 81373 München
               </ContactRow>
               <ContactRow icon={<Phone size={18} />} label={t("contact.phone")}>
-                <a href="tel:+498957843675" className="hover:text-gold">+49 (0) 89 57 84 3675</a>
-                <span className="block text-white/50 text-sm mt-0.5">
-                  Mobil: <a href="tel:+4917632354815" className="hover:text-gold">+49 (176) 3235 4815</a>
-                </span>
+                <a href="tel:+498957843675" className="block hover:text-gold">+49 (0) 89 57 84 3675</a>
+                <a href="tel:+4917632354815" className="block hover:text-gold mt-1">+49 (176) 3235 4815</a>
               </ContactRow>
               <ContactRow icon={<Mail size={18} />} label={t("contact.email")}>
                 <a href="mailto:info@munichconstruction.de" className="hover:text-gold break-all">
