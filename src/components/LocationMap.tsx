@@ -4,20 +4,23 @@ const ADDRESS = "Theresienstraße 93, 80333 München";
 const GOOGLE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
 
 export function LocationMap({ className = "" }: { className?: string }) {
+  const openMaps = () => {
+    window.open(GOOGLE_MAPS_URL, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <div className={`relative w-full h-full ${className}`}>
       <iframe
         title="Munich Construction GmbH location map"
         src="https://www.openstreetmap.org/export/embed.html?bbox=11.5640%2C48.1455%2C11.5760%2C48.1525&amp;layer=mapnik"
-        className="w-full h-full grayscale"
+        className="w-full h-full grayscale pointer-events-none"
         loading="lazy"
       />
-      <a
-        href={GOOGLE_MAPS_URL}
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
+        type="button"
+        onClick={openMaps}
         aria-label={`Open ${ADDRESS} in Google Maps`}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full group"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full z-10 cursor-pointer group bg-transparent border-0 p-0"
       >
         <span className="relative flex flex-col items-center">
           <span className="absolute -inset-2 -z-10 rounded-full bg-gold/30 blur-xl scale-150 group-hover:bg-gold/50 transition-colors" />
@@ -31,7 +34,7 @@ export function LocationMap({ className = "" }: { className?: string }) {
           </span>
           <span className="w-3 h-3 bg-gold rotate-45 -mt-1.5 ring-2 ring-ink/80" />
         </span>
-      </a>
+      </button>
     </div>
   );
 }
