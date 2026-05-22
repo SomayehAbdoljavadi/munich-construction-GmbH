@@ -130,16 +130,16 @@ function HomePage() {
 
       {/* SLIDE 2: SERVICES */}
       <section className="bg-background py-24 md:py-32 min-h-screen flex items-center [scroll-snap-align:start]">
-        <div className="max-w-7xl mx-auto px-5 md:px-8 w-full">
+        <div className="container-wide w-full">
           <div className="max-w-3xl mb-16">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
               {t("services.eyebrow")}
             </p>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-tight">
+            <h2 className="font-display h-fluid-section">
               {t("services.title")}
             </h2>
             <div className="gold-divider w-24 mt-8" />
-            <p className="text-muted-foreground text-lg mt-8 leading-relaxed">
+            <p className="text-fluid-lead text-muted-foreground mt-8">
               {t("services.lede")}
             </p>
           </div>
