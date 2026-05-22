@@ -2,13 +2,14 @@ import logoImg from "@/assets/munich-logo.jpg";
 import { openMapInNewTab, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
 
 const ADDRESS = "Theresienstraße 93, 80333 München";
+const MAP_EMBED_URL = "https://www.openstreetmap.org/export/embed.html?bbox=11.5547%2C48.1485%2C11.5667%2C48.1555&layer=mapnik";
 
 export function LocationMap({ className = "" }: { className?: string }) {
   return (
     <div className={`relative w-full h-full overflow-hidden ${className}`}>
       <iframe
         title="Munich Construction GmbH location map"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=11.5640%2C48.1455%2C11.5760%2C48.1525&amp;layer=mapnik"
+        src={MAP_EMBED_URL}
         className="w-full h-full grayscale"
         style={{ pointerEvents: "auto" }}
         loading="lazy"
