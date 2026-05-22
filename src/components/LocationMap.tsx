@@ -1,13 +1,9 @@
 import logoImg from "@/assets/munich-logo.jpg";
 
 const ADDRESS = "Theresienstraße 93, 80333 München";
-const GOOGLE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
+const GOOGLE_MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Theresienstra%C3%9Fe%2093%2C%2080333%20M%C3%BCnchen";
 
 export function LocationMap({ className = "" }: { className?: string }) {
-  const openMaps = () => {
-    window.open(GOOGLE_MAPS_URL, "_blank", "noopener,noreferrer");
-  };
-
   return (
     <div className={`relative w-full h-full ${className}`}>
       <iframe
@@ -16,9 +12,10 @@ export function LocationMap({ className = "" }: { className?: string }) {
         className="w-full h-full grayscale pointer-events-none"
         loading="lazy"
       />
-      <button
-        type="button"
-        onClick={openMaps}
+      <a
+        href={GOOGLE_MAPS_URL}
+        target="_blank"
+        rel="noopener noreferrer"
         aria-label={`Open ${ADDRESS} in Google Maps`}
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full z-10 cursor-pointer group bg-transparent border-0 p-0"
       >
@@ -34,7 +31,7 @@ export function LocationMap({ className = "" }: { className?: string }) {
           </span>
           <span className="w-3 h-3 bg-gold rotate-45 -mt-1.5 ring-2 ring-ink/80" />
         </span>
-      </button>
+      </a>
     </div>
   );
 }
