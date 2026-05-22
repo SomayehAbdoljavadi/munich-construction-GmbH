@@ -1,43 +1,76 @@
 import logoImg from "@/assets/munich-logo.jpg";
 import { openMapInNewTab, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { RotateCcw } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const ADDRESS = "Theresienstraße 93, 80333 München";
-const MAP_EMBED_URL = "https://www.openstreetmap.org/export/embed.html?bbox=11.5547%2C48.1485%2C11.5667%2C48.1555&layer=mapnik";
+const MAP_CENTER: L.LatLngExpression = [48.1519814, 11.5606717];
+const MAP_ZOOM = 16;
 
 export function LocationMap({ className = "" }: { className?: string }) {
+  const mapNodeRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<L.Map | null>(null);
+
+  useEffect(() => {
+    if (!mapNodeRef.current || mapRef.current) return;
+
+    const map = L.map(mapNodeRef.current, {
+      center: MAP_CENTER,
+      zoom: MAP_ZOOM,
+      scrollWheelZoom: true,
+      zoomControl: true,
+    });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    const logoIcon = L.divIcon({
+      className: "mc-map-marker",
+      html: `<span class="mc-map-marker-shell"><span class="mc-map-marker-glow"></span><span class="mc-map-marker-logo"><img src="${logoImg}" alt="Munich Construction GmbH" draggable="false" /></span><span class="mc-map-marker-tip"></span></span>`,
+      iconSize: [56, 70],
+      iconAnchor: [28, 70],
+    });
+
+    L.marker(MAP_CENTER, { icon: logoIcon, title: ADDRESS })
+      .addTo(map)
+      .on("click", () => window.open(THERESIENSTRASSE_MAPS_URL, "_blank", "noopener,noreferrer"));
+
+    mapRef.current = map;
+
+    return () => {
+      map.remove();
+      mapRef.current = null;
+    };
+  }, []);
+
+  const resetMap = () => {
+    mapRef.current?.setView(MAP_CENTER, MAP_ZOOM, { animate: true });
+  };
+
   return (
     <div className={`relative w-full h-full overflow-hidden ${className}`}>
-      <iframe
-        title="Munich Construction GmbH location map"
-        src={MAP_EMBED_URL}
-        className="w-full h-full grayscale"
-        style={{ pointerEvents: "auto" }}
-        loading="lazy"
-      />
-      {/* Marker overlay — wrapper ignores pointer events; only the marker itself is clickable */}
-      <div className="pointer-events-none absolute inset-0 z-10">
-        <a
-          href={THERESIENSTRASSE_MAPS_URL}
-          onClick={(event) => openMapInNewTab(event, THERESIENSTRASSE_MAPS_URL)}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Open ${ADDRESS} in Google Maps`}
-          className="pointer-events-auto absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full cursor-pointer group bg-transparent border-0 p-0 inline-block"
-        >
-          <span className="relative flex flex-col items-center">
-            <span className="absolute -inset-2 -z-10 rounded-full bg-gold/30 blur-xl scale-150 group-hover:bg-gold/50 transition-colors pointer-events-none" />
-            <span className="size-14 rounded-full bg-ink ring-2 ring-gold grid place-items-center shadow-[0_8px_24px_rgba(0,0,0,0.45)] overflow-hidden group-hover:scale-110 transition-transform">
-              <img
-                src={logoImg}
-                alt="Munich Construction GmbH"
-                className="size-10 object-contain"
-                draggable={false}
-              />
-            </span>
-            <span className="w-3 h-3 bg-gold rotate-45 -mt-1.5 ring-2 ring-ink/80" />
-          </span>
-        </a>
-      </div>
+      <div ref={mapNodeRef} aria-label={`${ADDRESS} map`} className="h-full w-full grayscale" />
+      <button
+        type="button"
+        onClick={resetMap}
+        aria-label="Reset map"
+        title="Reset map"
+        className="absolute right-4 top-4 z-[500] size-10 grid place-items-center border border-gold bg-ink text-gold shadow-premium hover:bg-gold hover:text-ink transition-colors"
+      >
+        <RotateCcw size={17} strokeWidth={1.8} />
+      </button>
+      <a
+        href={THERESIENSTRASSE_MAPS_URL}
+        onClick={(event) => openMapInNewTab(event, THERESIENSTRASSE_MAPS_URL)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="sr-only"
+      >
+        Open {ADDRESS} in Google Maps
+      </a>
     </div>
   );
 }
