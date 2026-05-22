@@ -166,6 +166,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isHome = pathname === "/";
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
@@ -176,7 +178,7 @@ function RootComponent() {
             <main className="flex-1">
               <Outlet />
             </main>
-            <SiteFooter />
+            {!isHome && <SiteFooter />}
             <WhatsAppFloat />
           </div>
         </LanguageProvider>
