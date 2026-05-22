@@ -56,13 +56,39 @@ function HomePage() {
   useEffect(() => {
     const html = document.documentElement;
     const body = document.body;
-    const prevHtml = html.style.scrollSnapType;
-    const prevBody = body.style.scrollSnapType;
-    html.style.scrollSnapType = "y mandatory";
-    body.style.scrollSnapType = "y mandatory";
+    const prevHtmlSnap = html.style.scrollSnapType;
+    const prevBodySnap = body.style.scrollSnapType;
+    const prevHtmlBehavior = html.style.scrollBehavior;
+    // Proximity (not mandatory) + smooth scroll = gentle, cinematic transitions
+    html.style.scrollSnapType = "y proximity";
+    body.style.scrollSnapType = "y proximity";
+    html.style.scrollBehavior = "smooth";
+
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>(".homepage-section"),
+    );
+    sections.forEach((s) => s.classList.add("homepage-section-reveal"));
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting && e.intersectionRatio > 0.15) {
+            e.target.classList.add("is-visible");
+          }
+        }
+      },
+      { threshold: [0, 0.15, 0.4] },
+    );
+    sections.forEach((s) => io.observe(s));
+
     return () => {
-      html.style.scrollSnapType = prevHtml;
-      body.style.scrollSnapType = prevBody;
+      io.disconnect();
+      sections.forEach((s) =>
+        s.classList.remove("homepage-section-reveal", "is-visible"),
+      );
+      html.style.scrollSnapType = prevHtmlSnap;
+      body.style.scrollSnapType = prevBodySnap;
+      html.style.scrollBehavior = prevHtmlBehavior;
     };
   }, []);
 
