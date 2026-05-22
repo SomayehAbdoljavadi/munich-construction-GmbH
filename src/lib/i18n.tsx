@@ -47,6 +47,7 @@ const translations: Dict = {
 
   // services index
   "services.eyebrow": { de: "Unsere Leistungen", en: "Our Services" },
+  "services.title": { de: "Transparente und faire Preise.", en: "Transparent and fair prices." },
   "services.title.line1": { de: "Transparente und faire Preise.", en: "Transparent and fair prices." },
   "services.title.line2": { de: "Kostenlose Erstberatung vor Ort oder telefonisch.", en: "Free initial consultation on-site or by phone." },
   "services.lede": {
