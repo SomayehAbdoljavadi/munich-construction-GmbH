@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin, Instagram, Youtube } from "lucide-react";
 import { Logo } from "./Logo";
 import { useT } from "@/lib/i18n";
-import { HEITERWANGER_MAPS_URL, openMapInNewTab, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
+import { HEITERWANGER_MAPS_URL, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
 
 export function SiteFooter() {
   const { t } = useT();
@@ -54,7 +54,6 @@ export function SiteFooter() {
               <span className="space-y-2">
                 <a
                   href={THERESIENSTRASSE_MAPS_URL}
-                  onClick={(event) => openMapInNewTab(event, THERESIENSTRASSE_MAPS_URL)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:text-gold hover:underline transition-colors"
@@ -63,7 +62,6 @@ export function SiteFooter() {
                 </a>
                 <a
                   href={HEITERWANGER_MAPS_URL}
-                  onClick={(event) => openMapInNewTab(event, HEITERWANGER_MAPS_URL)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:text-gold hover:underline transition-colors"
