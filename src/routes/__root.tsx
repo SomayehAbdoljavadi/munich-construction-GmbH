@@ -166,17 +166,29 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isHome = pathname === "/";
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <LanguageProvider>
           <BrandIntro />
-          <div className="mc-app-root min-h-screen flex flex-col bg-background text-foreground">
+          <div
+            className={`mc-app-root flex flex-col bg-background text-foreground ${
+              isHome ? "h-screen overflow-hidden" : "min-h-screen"
+            }`}
+          >
             <SiteHeader />
-            <main className="flex-1">
+            <main
+              className={
+                isHome
+                  ? "flex-1 overflow-y-auto snap-y snap-mandatory scroll-smooth"
+                  : "flex-1"
+              }
+            >
               <Outlet />
             </main>
-            <SiteFooter />
+            {!isHome && <SiteFooter />}
             <WhatsAppFloat />
           </div>
         </LanguageProvider>
