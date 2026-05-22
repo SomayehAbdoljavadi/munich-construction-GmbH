@@ -50,10 +50,23 @@ const services: Array<{
 function HomePage() {
   const { t } = useT();
 
+  useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
+    const prevHtml = html.style.scrollSnapType;
+    const prevBody = body.style.scrollSnapType;
+    html.style.scrollSnapType = "y mandatory";
+    body.style.scrollSnapType = "y mandatory";
+    return () => {
+      html.style.scrollSnapType = prevHtml;
+      body.style.scrollSnapType = prevBody;
+    };
+  }, []);
+
   return (
     <>
       {/* SLIDE 1: HERO */}
-      <section className="relative bg-ink text-white overflow-hidden">
+      <section className="relative bg-ink text-white overflow-hidden min-h-screen flex items-center [scroll-snap-align:start]">
         <div
           aria-hidden
           className="absolute inset-0 opacity-30"
