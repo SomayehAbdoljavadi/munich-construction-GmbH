@@ -15,6 +15,7 @@ import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { BrandIntro } from "@/components/BrandIntro";
 import { LanguageProvider } from "@/lib/i18n";
 import { ThemeProvider } from "@/lib/theme";
+import introGif from "@/assets/mc-intro.gif";
 
 function NotFoundComponent() {
   return (
@@ -125,13 +126,36 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="de">
       <head>
         <HeadContent />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `body.loading-active{margin:0;overflow:hidden;background:#000}body.loading-active .mc-app-root{opacity:0!important;visibility:hidden!important;pointer-events:none!important}#mc-initial-loader{position:fixed;inset:0;z-index:2147483647;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;color:#fff}body:not(.loading-active) #mc-initial-loader{display:none}.mc-initial-gif{display:block;width:auto;height:auto;max-width:min(80vw,720px);max-height:60vh;object-fit:contain;user-select:none}.mc-initial-copy{margin-top:2rem;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 1.5rem;opacity:0;transform:translateY(12px);animation:mcInitialTextIn .7s cubic-bezier(.16,1,.3,1) 2.6s forwards}.mc-initial-name{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.5rem,4vw,2.5rem);line-height:1.1;letter-spacing:0}.mc-initial-gold{color:#d4af37}.mc-initial-rule{margin-top:1rem;height:1px;width:4rem;background:#d4af37;transform:scaleX(0);animation:mcInitialRuleIn .7s cubic-bezier(.16,1,.3,1) 2.75s forwards}.mc-initial-tagline{margin-top:1rem;font-family:'JetBrains Mono',monospace;font-size:clamp(.625rem,1.6vw,.7rem);line-height:1.6;text-transform:uppercase;letter-spacing:.35em;color:rgba(255,255,255,.7)}body.loading-leaving #mc-initial-loader{animation:mcInitialLoaderOut .8s ease-in-out forwards}@keyframes mcInitialTextIn{to{opacity:1;transform:translateY(0)}}@keyframes mcInitialRuleIn{to{transform:scaleX(1)}}@keyframes mcInitialLoaderOut{to{opacity:0}}@media(max-width:640px){.mc-initial-gif{max-width:88vw;max-height:52vh}.mc-initial-copy{margin-top:1.5rem}.mc-initial-tagline{letter-spacing:.24em}}`,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('mc-theme');if(!t){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}if(t==='dark'){document.documentElement.classList.add('dark');}document.documentElement.style.colorScheme=t;}catch(e){document.documentElement.classList.add('dark');}})();`,
           }}
         />
       </head>
-      <body>
+      <body className="loading-active">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{if(sessionStorage.getItem('mc-intro-played')){document.body.classList.remove('loading-active');}}catch(e){}})();`,
+          }}
+        />
+        <div id="mc-initial-loader" aria-hidden="true">
+          <img className="mc-initial-gif" src={introGif} alt="" draggable={false} />
+          <div className="mc-initial-copy">
+            <div className="mc-initial-name">
+              Munich Construction <span className="mc-initial-gold">GmbH</span>
+            </div>
+            <div className="mc-initial-rule" />
+            <div className="mc-initial-tagline">
+              Precision <span className="mc-initial-gold">•</span> Structure{" "}
+              <span className="mc-initial-gold">•</span> Trust
+            </div>
+          </div>
+        </div>
         {children}
         <Scripts />
       </body>
@@ -145,8 +169,8 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <LanguageProvider>
-          <div className="min-h-screen flex flex-col bg-background text-foreground">
-            <BrandIntro />
+          <BrandIntro />
+          <div className="mc-app-root min-h-screen flex flex-col bg-background text-foreground">
             <SiteHeader />
             <main className="flex-1">
               <Outlet />
