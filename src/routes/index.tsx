@@ -180,8 +180,8 @@ function HomePage() {
 
       {/* SLIDE 3: CONTACT + FOOTER */}
       <section className="homepage-section bg-ink text-white relative overflow-hidden min-h-screen flex flex-col [scroll-snap-align:start]">
-        <div className="flex-1 py-[clamp(5rem,7vh,8rem)] flex items-center">
-        <div aria-hidden className="absolute inset-0 opacity-[0.04]" style={{
+        <div className="flex-1 py-[clamp(5rem,7vh,8rem)] flex items-center relative">
+        <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.04]" style={{
           backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
           backgroundSize: "32px 32px",
         }} />
