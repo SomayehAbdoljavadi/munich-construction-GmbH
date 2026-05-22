@@ -78,14 +78,14 @@ function HomePage() {
         />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/80 to-ink" />
 
-        <div className="relative container-wide pt-16 md:pt-24 pb-24 md:pb-32 grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
-          <div className="lg:col-span-7 xl:col-span-7 space-y-8">
+        <div className="relative container-wide pt-16 md:pt-24 pb-24 md:pb-32 grid grid-cols-1 lg:[grid-template-columns:minmax(0,1.15fr)_minmax(0,0.85fr)] gap-10 xl:gap-16 items-center">
+          <div className="relative z-10 min-w-0 space-y-8">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold animate-fade-up">
               {t("hero.eyebrow")}
             </p>
-            <h1 className="font-display leading-[1.05] text-balance animate-fade-up [animation-delay:100ms]">
-              <span className="block gold-text whitespace-nowrap text-[clamp(1.75rem,4.2vw,4.5rem)]">{t("hero.titleBrand")}</span>
-              <span className="block mt-3 text-white whitespace-nowrap text-[clamp(0.95rem,1.5vw,1.875rem)]">{t("hero.titleRest")}</span>
+            <h1 className="font-display leading-[1.02] text-balance animate-fade-up [animation-delay:100ms] min-w-0">
+              <span className="block gold-text text-[clamp(2rem,4.6vw,5.25rem)] leading-[1.02]">{t("hero.titleBrand")}</span>
+              <span className="block mt-3 text-white text-[clamp(1rem,1.6vw,2rem)] leading-[1.15]">{t("hero.titleRest")}</span>
             </h1>
             <div className="gold-divider w-32 animate-scale-line [animation-delay:300ms]" />
             <p className="text-fluid-lead text-white/70 max-w-[60ch] animate-fade-up [animation-delay:400ms]">
