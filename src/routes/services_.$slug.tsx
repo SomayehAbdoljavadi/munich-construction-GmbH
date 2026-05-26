@@ -5,7 +5,7 @@ import {
   localizeService,
   HOME_SERVICES_I18N,
 } from "@/lib/services-data";
-import { SiteFooter } from "@/components/SiteFooter";
+
 import { ServiceGallery } from "@/components/ServiceGallery";
 import { useT } from "@/lib/i18n";
 
@@ -195,8 +195,6 @@ function ServiceDetailPage() {
           </Link>
         </div>
       </section>
-
-      <SiteFooter />
     </>
   );
 }
