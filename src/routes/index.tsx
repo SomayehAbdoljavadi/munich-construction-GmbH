@@ -34,7 +34,7 @@ export const Route = createFileRoute("/")({
 
 
 function HomePage() {
-  const { t } = useT();
+  const { t, lang } = useT();
 
   useEffect(() => {
     const html = document.documentElement;
