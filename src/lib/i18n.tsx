@@ -90,6 +90,36 @@ const translations: Dict = {
   "service.included": { de: "Inklusive Leistungen", en: "What's included" },
   "service.cta": { de: "Projekt anfragen", en: "Request a quote" },
 
+  // service detail page
+  "sd.eyebrow": { de: "Leistung", en: "Service" },
+  "sd.cta": { de: "Kontakt aufnehmen", en: "Get in touch" },
+  "sd.gallery.eyebrow": { de: "Referenzprojekte", en: "Reference projects" },
+  "sd.gallery.title": { de: "Ausgewählte Arbeiten", en: "Selected work" },
+  "sd.about.eyebrow": { de: "Über diese Leistung", en: "About this service" },
+  "sd.about.titlePrefix": { de: "Unser Ansatz für", en: "Our approach to" },
+  "sd.signature": {
+    de: "Munich Construction GmbH · Qualität nach deutschen Standards",
+    en: "Munich Construction GmbH · Quality to German standards",
+  },
+  "sd.includes": { de: "Was wir leisten", en: "What we deliver" },
+  "sd.benefits": { de: "Ihre Vorteile", en: "Your benefits" },
+  "sd.why.eyebrow": { de: "Warum wir", en: "Why us" },
+  "sd.why.title": { de: "Warum Munich Construction GmbH?", en: "Why Munich Construction GmbH?" },
+  "sd.cta.eyebrow": { de: "Kontakt", en: "Contact" },
+  "sd.cta.title": {
+    de: "Sie planen ein Bauprojekt oder benötigen Unterstützung bei diesem Service?",
+    en: "Are you planning a construction project or need support with this service?",
+  },
+  "sd.cta.lede": {
+    de: "Sprechen Sie uns an – wir beraten Sie persönlich und erstellen ein individuelles Angebot.",
+    en: "Get in touch – we advise you personally and prepare an individual offer.",
+  },
+  "sd.notFound": { de: "Service nicht gefunden", en: "Service not found" },
+  "sd.toOverview": { de: "Zur Leistungsübersicht", en: "Back to services overview" },
+  "sd.error": { de: "Etwas ist schiefgelaufen", en: "Something went wrong" },
+  "sg.prev": { de: "Vorheriges Projekt", en: "Previous project" },
+  "sg.next": { de: "Nächstes Projekt", en: "Next project" },
+
   // about
   "about.eyebrow": { de: "Über uns", en: "About Us" },
   "about.title": { de: "Bauen mit Ingenieurskunst und Haltung.", en: "Building with engineering and attitude." },
