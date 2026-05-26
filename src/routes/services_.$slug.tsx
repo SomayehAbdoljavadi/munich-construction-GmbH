@@ -195,8 +195,6 @@ function ServiceDetailPage() {
           </Link>
         </div>
       </section>
-
-      <SiteFooter />
     </>
   );
 }
