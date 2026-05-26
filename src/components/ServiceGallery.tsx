@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import type { GallerySlide } from "@/lib/services-data";
+import { useT } from "@/lib/i18n";
 
 interface Props {
   slides: GallerySlide[];
