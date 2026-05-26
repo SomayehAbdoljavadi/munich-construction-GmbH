@@ -1,14 +1,21 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Check, Star } from "lucide-react";
-import { getServiceBySlug, HOME_SERVICES } from "@/lib/services-data";
+import {
+  getServiceI18nBySlug,
+  localizeService,
+  HOME_SERVICES_I18N,
+} from "@/lib/services-data";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ServiceGallery } from "@/components/ServiceGallery";
+import { useT } from "@/lib/i18n";
 
 export const Route = createFileRoute("/services_/$slug")({
   head: ({ params }) => {
-    const s = getServiceBySlug(params.slug);
-    const title = s ? `${s.title} — Munich Construction GmbH` : "Service — Munich Construction GmbH";
-    const description = s?.intro ?? "Bauleistungen von Munich Construction GmbH.";
+    const s = getServiceI18nBySlug(params.slug);
+    const title = s
+      ? `${s.title.de} — Munich Construction GmbH`
+      : "Service — Munich Construction GmbH";
+    const description = s?.intro.de ?? "Bauleistungen von Munich Construction GmbH.";
     return {
       meta: [
         { title },
@@ -18,12 +25,7 @@ export const Route = createFileRoute("/services_/$slug")({
       ],
     };
   },
-  notFoundComponent: () => (
-    <div className="container-wide py-32 text-center">
-      <h1 className="font-display text-4xl mb-4">Service nicht gefunden</h1>
-      <Link to="/services" className="text-gold underline">Zur Leistungsübersicht</Link>
-    </div>
-  ),
+  notFoundComponent: NotFound,
   errorComponent: ({ error }) => (
     <div className="container-wide py-32 text-center">
       <h1 className="font-display text-4xl mb-4">Etwas ist schiefgelaufen</h1>
@@ -33,19 +35,23 @@ export const Route = createFileRoute("/services_/$slug")({
   component: ServiceDetailPage,
 });
 
+function NotFound() {
+  const { t } = useT();
+  return (
+    <div className="container-wide py-32 text-center">
+      <h1 className="font-display text-4xl mb-4">{t("sd.notFound")}</h1>
+      <Link to="/services" className="text-gold underline">{t("sd.toOverview")}</Link>
+    </div>
+  );
+}
+
 function ServiceDetailPage() {
   const { slug } = Route.useParams();
-  const service = getServiceBySlug(slug);
-  if (!service) {
-    return (
-      <div className="container-wide py-32 text-center">
-        <h1 className="font-display text-4xl mb-4">Service nicht gefunden</h1>
-        <Link to="/services" className="text-gold underline">Zur Leistungsübersicht</Link>
-      </div>
-    );
-  }
+  const { t, lang } = useT();
+  const i18n = getServiceI18nBySlug(slug);
+  if (!i18n) return <NotFound />;
+  const service = localizeService(i18n, lang);
   const Icon = service.icon;
-
 
   return (
     <>
@@ -61,7 +67,7 @@ function ServiceDetailPage() {
         />
         <div className="container-wide relative">
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
-            Leistung
+            {t("sd.eyebrow")}
           </p>
           <div className="flex items-start gap-6 flex-wrap">
             <div className="size-16 grid place-items-center border border-gold/40 text-gold shrink-0">
@@ -77,7 +83,7 @@ function ServiceDetailPage() {
                 to="/contact"
                 className="group inline-flex items-center gap-3 mt-10 bg-gold text-ink px-8 py-4 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors"
               >
-                Kontakt aufnehmen
+                {t("sd.cta")}
                 <ArrowUpRight
                   size={16}
                   className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
@@ -88,15 +94,15 @@ function ServiceDetailPage() {
         </div>
       </section>
 
-      {/* GALLERY — directly under hero */}
+      {/* GALLERY */}
       <section className="bg-background pt-16 md:pt-20 pb-20 md:pb-28">
         <div className="container-wide">
           <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-3">
-                Referenzprojekte
+                {t("sd.gallery.eyebrow")}
               </p>
-              <h2 className="font-display text-3xl md:text-4xl">Ausgewählte Arbeiten</h2>
+              <h2 className="font-display text-3xl md:text-4xl">{t("sd.gallery.title")}</h2>
             </div>
           </div>
           <ServiceGallery slides={service.gallery} />
@@ -110,11 +116,10 @@ function ServiceDetailPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             <div className="lg:col-span-4">
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold mb-5">
-                Über diese Leistung
+                {t("sd.about.eyebrow")}
               </p>
               <h2 className="font-display text-3xl md:text-4xl leading-[1.1] text-balance">
-                Unser Ansatz für{" "}
-                <span className="text-gold">{service.title}</span>
+                {t("sd.about.titlePrefix")} <span className="text-gold">{service.title}</span>
               </h2>
               <div className="gold-divider w-16 mt-6" />
             </div>
@@ -127,7 +132,7 @@ function ServiceDetailPage() {
                 <div className="mt-10 pt-6 border-t border-border flex items-center gap-3">
                   <span className="h-px w-10 bg-gold" />
                   <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
-                    Munich Construction GmbH · Qualität nach deutschen Standards
+                    {t("sd.signature")}
                   </p>
                 </div>
               </div>
@@ -136,29 +141,28 @@ function ServiceDetailPage() {
         </div>
       </section>
 
-
       {/* WAS WIR LEISTEN + IHRE VORTEILE */}
       <section className="bg-secondary py-20 md:py-28">
         <div className="container-wide grid grid-cols-1 lg:grid-cols-2 gap-px bg-border border border-border">
-          <DetailBlock title="Was wir leisten" items={service.includes} variant="light" />
-          <DetailBlock title="Ihre Vorteile" items={service.benefits} variant="dark" />
+          <DetailBlock title={t("sd.includes")} items={service.includes} variant="light" />
+          <DetailBlock title={t("sd.benefits")} items={service.benefits} variant="dark" />
         </div>
       </section>
 
-      {/* WARUM MUNICH CONSTRUCTION */}
+      {/* WARUM */}
       <section className="bg-background py-20 md:py-28">
         <div className="container-wide">
           <div className="max-w-2xl mb-12">
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-4">
-              Warum wir
+              {t("sd.why.eyebrow")}
             </p>
             <h2 className="font-display text-3xl md:text-5xl text-balance">
-              Warum Munich Construction GmbH?
+              {t("sd.why.title")}
             </h2>
             <div className="gold-divider w-24 mt-6" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
-            {service.whyUs.map((point: string) => (
+            {service.whyUs.map((point) => (
               <div key={point} className="bg-background p-8 group hover:bg-card transition-colors">
                 <Star size={20} className="text-gold mb-5" strokeWidth={1.5} />
                 <p className="text-foreground leading-relaxed">{point}</p>
@@ -172,20 +176,18 @@ function ServiceDetailPage() {
       <section className="bg-ink text-white py-20 md:py-24">
         <div className="container-wide max-w-4xl text-center">
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
-            Kontakt
+            {t("sd.cta.eyebrow")}
           </p>
           <h2 className="font-display text-3xl md:text-5xl text-balance">
-            Sie planen ein Bauprojekt oder benötigen Unterstützung bei diesem Service?
+            {t("sd.cta.title")}
           </h2>
           <div className="gold-divider w-24 mx-auto mt-8" />
-          <p className="text-white/70 mt-8 max-w-2xl mx-auto">
-            Sprechen Sie uns an – wir beraten Sie persönlich und erstellen ein individuelles Angebot.
-          </p>
+          <p className="text-white/70 mt-8 max-w-2xl mx-auto">{t("sd.cta.lede")}</p>
           <Link
             to="/contact"
             className="group inline-flex items-center gap-3 mt-10 bg-gold text-ink px-8 py-4 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors"
           >
-            Kontakt aufnehmen
+            {t("sd.cta")}
             <ArrowUpRight
               size={16}
               className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
@@ -226,4 +228,4 @@ function DetailBlock({
   );
 }
 
-export const _allSlugs = HOME_SERVICES.map((s) => s.slug);
+export const _allSlugs = HOME_SERVICES_I18N.map((s) => s.slug);
