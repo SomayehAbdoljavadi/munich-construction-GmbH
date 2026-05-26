@@ -4,7 +4,7 @@ import { getServiceBySlug, HOME_SERVICES } from "@/lib/services-data";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ServiceGallery } from "@/components/ServiceGallery";
 
-export const Route = createFileRoute("/services/$slug")({
+export const Route = createFileRoute("/services_/$slug")({
   head: ({ params }) => {
     const s = getServiceBySlug(params.slug);
     const title = s ? `${s.title} — Munich Construction GmbH` : "Service — Munich Construction GmbH";
