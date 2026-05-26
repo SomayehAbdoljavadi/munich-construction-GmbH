@@ -12,7 +12,7 @@ import { HeroSkylineArt } from "@/components/HeroSkylineArt";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LocationMap } from "@/components/LocationMap";
 import { HEITERWANGER_MAPS_URL, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
-import { HOME_SERVICES } from "@/lib/services-data";
+import { HOME_SERVICES_I18N, localizeService } from "@/lib/services-data";
 import heroBg from "@/assets/mc-hero-bg.jpg";
 
 export const Route = createFileRoute("/")({
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/")({
 
 
 function HomePage() {
-  const { t } = useT();
+  const { t, lang } = useT();
 
   useEffect(() => {
     const html = document.documentElement;
@@ -133,7 +133,8 @@ function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-px bg-border border border-border">
-            {HOME_SERVICES.map((s, i) => {
+            {HOME_SERVICES_I18N.map((raw, i) => {
+              const s = localizeService(raw, lang);
               const Icon = s.icon;
               const isDark = i % 2 === 1;
               return (
@@ -168,17 +169,19 @@ function HomePage() {
               }} />
               <div className="relative">
                 <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold mb-4">
-                  Individuelle Anfrage
+                  {lang === "de" ? "Individuelle Anfrage" : "Custom inquiry"}
                 </p>
                 <p className="font-display text-xl xl:text-2xl leading-snug text-white text-balance">
-                  Für weitere Bauleistungen und individuelle Anfragen kontaktieren Sie uns gerne.
+                  {lang === "de"
+                    ? "Für weitere Bauleistungen und individuelle Anfragen kontaktieren Sie uns gerne."
+                    : "For further construction services and individual inquiries, feel free to contact us."}
                 </p>
               </div>
               <Link
                 to="/contact"
                 className="group relative inline-flex items-center gap-3 mt-6 bg-gold text-ink px-6 py-3 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors w-fit"
               >
-                Kontakt aufnehmen
+                {t("nav.cta")}
                 <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
             </div>

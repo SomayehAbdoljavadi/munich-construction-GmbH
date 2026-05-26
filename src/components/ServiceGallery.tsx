@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import type { GallerySlide } from "@/lib/services-data";
+import { useT } from "@/lib/i18n";
 
 interface Props {
   slides: GallerySlide[];
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export function ServiceGallery({ slides, autoPlayMs = 6000 }: Props) {
+  const { t } = useT();
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
   const total = slides.length;
@@ -63,7 +65,7 @@ export function ServiceGallery({ slides, autoPlayMs = 6000 }: Props) {
         <>
           <button
             type="button"
-            aria-label="Vorheriges Projekt"
+            aria-label={t("sg.prev")}
             onClick={prev}
             className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 size-11 grid place-items-center border border-gold/40 bg-ink/60 backdrop-blur text-gold hover:bg-gold hover:text-ink transition-colors"
           >
@@ -71,7 +73,7 @@ export function ServiceGallery({ slides, autoPlayMs = 6000 }: Props) {
           </button>
           <button
             type="button"
-            aria-label="Nächstes Projekt"
+            aria-label={t("sg.next")}
             onClick={next}
             className="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 size-11 grid place-items-center border border-gold/40 bg-ink/60 backdrop-blur text-gold hover:bg-gold hover:text-ink transition-colors"
           >
