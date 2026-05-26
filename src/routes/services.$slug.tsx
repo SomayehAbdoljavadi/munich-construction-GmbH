@@ -131,7 +131,7 @@ function ServiceDetailPage() {
             <div className="gold-divider w-24 mt-6" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
-            {service.whyUs.map((point) => (
+            {service.whyUs.map((point: string) => (
               <div key={point} className="bg-background p-8 group hover:bg-card transition-colors">
                 <Star size={20} className="text-gold mb-5" strokeWidth={1.5} />
                 <p className="text-foreground leading-relaxed">{point}</p>
