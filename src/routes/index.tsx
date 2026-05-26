@@ -32,18 +32,6 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-const services: Array<{
-  icon: typeof Building2;
-  titleKey: TranslationKey;
-  textKey: TranslationKey;
-}> = [
-  { icon: Building2, titleKey: "service.neubau.title", textKey: "service.neubau.text" },
-  { icon: Hammer, titleKey: "service.renovierung.title", textKey: "service.renovierung.text" },
-  { icon: Wrench, titleKey: "service.sanierung.title", textKey: "service.sanierung.text" },
-  { icon: Flame, titleKey: "service.brandschutz.title", textKey: "service.brandschutz.text" },
-  { icon: FileCheck2, titleKey: "service.genehmigung.title", textKey: "service.genehmigung.text" },
-  { icon: Ruler, titleKey: "service.werkplanung.title", textKey: "service.werkplanung.text" },
-];
 
 function HomePage() {
   const { t } = useT();
