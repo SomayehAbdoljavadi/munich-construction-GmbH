@@ -132,32 +132,56 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
-            {services.map((s, i) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-px bg-border border border-border">
+            {HOME_SERVICES.map((s, i) => {
               const Icon = s.icon;
               const isDark = i % 2 === 1;
               return (
                 <Link
-                  key={s.titleKey}
-                  to="/services"
-                  className={`group relative p-[clamp(1.7rem,2.8vw,3rem)] min-h-[clamp(15.5rem,29vh,24rem)] transition-all hover:shadow-premium ${
+                  key={s.slug}
+                  to="/services/$slug"
+                  params={{ slug: s.slug }}
+                  className={`group relative p-[clamp(1.7rem,2.4vw,2.6rem)] min-h-[clamp(15.5rem,29vh,24rem)] transition-all hover:shadow-premium ${
                     isDark ? "bg-ink text-white hover:bg-ink-soft" : "bg-card text-foreground hover:bg-secondary"
                   }`}
                 >
-                  <div className={`size-16 grid place-items-center mb-6 border ${isDark ? "border-gold/30 text-gold" : "border-gold text-gold"}`}>
-                    <Icon size={31} strokeWidth={1.5} />
+                  <div className={`size-14 grid place-items-center mb-6 border ${isDark ? "border-gold/30 text-gold" : "border-gold text-gold"}`}>
+                    <Icon size={28} strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-display text-3xl xl:text-4xl mb-3">{t(s.titleKey)}</h3>
-                  <p className={`text-lg xl:text-xl leading-snug line-clamp-3 ${isDark ? "text-white/65" : "text-muted-foreground"}`}>
-                    {t(s.textKey)}
+                  <h3 className="font-display text-2xl xl:text-3xl mb-3 leading-tight">{s.title}</h3>
+                  <p className={`text-base xl:text-lg leading-snug line-clamp-4 ${isDark ? "text-white/65" : "text-muted-foreground"}`}>
+                    {s.intro}
                   </p>
                   <ArrowUpRight
-                    size={26}
-                    className="absolute top-7 right-7 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-gold"
+                    size={24}
+                    className="absolute top-6 right-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-gold"
                   />
                 </Link>
               );
             })}
+
+            {/* Final CTA card */}
+            <div className="bg-ink text-white p-[clamp(1.7rem,2.4vw,2.6rem)] min-h-[clamp(15.5rem,29vh,24rem)] flex flex-col justify-between relative overflow-hidden">
+              <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.06]" style={{
+                backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+                backgroundSize: "24px 24px",
+              }} />
+              <div className="relative">
+                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold mb-4">
+                  Individuelle Anfrage
+                </p>
+                <p className="font-display text-xl xl:text-2xl leading-snug text-white text-balance">
+                  Für weitere Bauleistungen und individuelle Anfragen kontaktieren Sie uns gerne.
+                </p>
+              </div>
+              <Link
+                to="/contact"
+                className="group relative inline-flex items-center gap-3 mt-6 bg-gold text-ink px-6 py-3 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors w-fit"
+              >
+                Kontakt aufnehmen
+                <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
