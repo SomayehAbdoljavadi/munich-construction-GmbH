@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Check, Star } from "lucide-react";
 import { getServiceBySlug, HOME_SERVICES } from "@/lib/services-data";
 import { SiteFooter } from "@/components/SiteFooter";
