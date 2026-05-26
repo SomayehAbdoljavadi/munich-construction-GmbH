@@ -169,17 +169,19 @@ function HomePage() {
               }} />
               <div className="relative">
                 <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold mb-4">
-                  Individuelle Anfrage
+                  {lang === "de" ? "Individuelle Anfrage" : "Custom inquiry"}
                 </p>
                 <p className="font-display text-xl xl:text-2xl leading-snug text-white text-balance">
-                  Für weitere Bauleistungen und individuelle Anfragen kontaktieren Sie uns gerne.
+                  {lang === "de"
+                    ? "Für weitere Bauleistungen und individuelle Anfragen kontaktieren Sie uns gerne."
+                    : "For further construction services and individual inquiries, feel free to contact us."}
                 </p>
               </div>
               <Link
                 to="/contact"
                 className="group relative inline-flex items-center gap-3 mt-6 bg-gold text-ink px-6 py-3 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors w-fit"
               >
-                Kontakt aufnehmen
+                {t("nav.cta")}
                 <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
             </div>
