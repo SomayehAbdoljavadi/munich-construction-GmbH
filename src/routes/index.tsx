@@ -1,23 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import {
-  Building2,
-  Hammer,
-  Wrench,
-  Flame,
-  FileCheck2,
-  Ruler,
   ArrowUpRight,
   Phone,
   Mail,
   MapPin,
   HardHat,
 } from "lucide-react";
-import { useT, type TranslationKey } from "@/lib/i18n";
+import { useT } from "@/lib/i18n";
 import { HeroSkylineArt } from "@/components/HeroSkylineArt";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LocationMap } from "@/components/LocationMap";
 import { HEITERWANGER_MAPS_URL, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
+import { HOME_SERVICES } from "@/lib/services-data";
 import heroBg from "@/assets/mc-hero-bg.jpg";
 
 export const Route = createFileRoute("/")({
