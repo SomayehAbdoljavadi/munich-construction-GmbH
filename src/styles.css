@@ -238,6 +238,31 @@
 }
 
 .mc-map-grayscale .leaflet-tile-pane { filter: grayscale(1); }
+.mc-map-grayscale .leaflet-marker-pane,
+.mc-map-grayscale .leaflet-marker-pane *,
+.mc-map-grayscale .leaflet-overlay-pane,
+.mc-map-grayscale .leaflet-overlay-pane *,
+.mc-map-grayscale .leaflet-popup-pane,
+.mc-map-grayscale .leaflet-popup-pane *,
+.mc-map-grayscale .leaflet-tooltip-pane,
+.mc-map-grayscale .leaflet-tooltip-pane * {
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+}
+.mc-map-marker,
+.mc-map-marker *,
+.mc-map-marker-shell,
+.mc-map-marker-img {
+  filter: none;
+  -webkit-filter: none;
+  mix-blend-mode: normal;
+}
+.mc-map-marker-img {
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.45)) drop-shadow(0 0 14px rgba(232,196,65,0.35)) !important;
+  -webkit-filter: drop-shadow(0 6px 12px rgba(0,0,0,0.45)) drop-shadow(0 0 14px rgba(232,196,65,0.35)) !important;
+}
 
 .mc-map-marker-img {
   width: 4rem;
