@@ -9,6 +9,7 @@ interface Props {
 }
 
 export function ServiceGallery({ slides, autoPlayMs = 6000 }: Props) {
+  const { t } = useT();
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
   const total = slides.length;
