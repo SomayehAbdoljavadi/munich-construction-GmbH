@@ -47,7 +47,7 @@ export const HOME_SERVICES: ServiceDetail[] = [
     intro:
       "Normgerechte Brandschutzlösungen für Neubau und Bestand – geplant, umgesetzt und dokumentiert nach geltenden Bauvorschriften.",
     paragraph:
-      "Für den Brandschutz begleitet Sie Munich Construction GmbH von der ersten Objektbegehung bis zur fachgerechten Umsetzung auf der Baustelle. Wir analysieren die brandschutztechnischen Anforderungen Ihres Gebäudes, erarbeiten ein passendes technisches Konzept, koordinieren die notwendigen Materialien und Fachkräfte und liefern saubere, behördenkonforme Bauleistungen nach geltenden deutschen Normen und der Bayerischen Bauordnung.",
+      "Bei Munich Construction GmbH unterstützen wir unsere Kunden bei professionellen Brandschutzmaßnahmen im Bau- und Sanierungsbereich. Unser Fokus liegt auf einer sauberen, normgerechten und zuverlässigen Ausführung von Brandschutzarbeiten, angepasst an die Anforderungen des jeweiligen Gebäudes. Von der ersten Einschätzung der baulichen Situation bis zur fachgerechten Umsetzung auf der Baustelle achten wir auf Qualität, Präzision und eine klare Koordination aller Arbeitsschritte. Ziel ist es, Gebäude sicherer zu machen und gleichzeitig eine langlebige, hochwertige Lösung zu schaffen.",
     gallery: [
       {
         title: "Fire Protection Upgrade",
@@ -94,7 +94,7 @@ export const HOME_SERVICES: ServiceDetail[] = [
     intro:
       "Präziser Trockenbau für Büro, Gewerbe und Wohnbau – von der Raum­aufteilung bis zur schallschutzoptimierten Spezialwand.",
     paragraph:
-      "Im Trockenbau übernimmt Munich Construction GmbH die komplette Ausführung – von der Aufmaßaufnahme über die statisch und bauphysikalisch korrekte Planung bis zur sauberen Montage. Wir koordinieren Material, Schnittstellen und Folgegewerke und liefern maßgenaue Wände, Decken und Vorsatzschalen, die optisch wie funktional höchsten Ansprüchen genügen.",
+      "Munich Construction GmbH bietet professionelle Trockenbauarbeiten für Neubau-, Umbau- und Sanierungsprojekte an. Wir übernehmen die Umsetzung von Innenwänden, Decken, Verkleidungen und weiteren Ausbauarbeiten mit hoher Genauigkeit und sauberer Ausführung. Dabei achten wir auf eine effiziente Planung, hochwertige Materialien und ein präzises Finish, damit jeder Raum funktional, modern und optisch ansprechend gestaltet wird. Unser Anspruch ist es, flexible Innenausbaulösungen zu schaffen, die perfekt zu den Anforderungen des Projekts passen.",
     gallery: [
       {
         title: "Interior Drywall Construction",
@@ -141,7 +141,7 @@ export const HOME_SERVICES: ServiceDetail[] = [
     intro:
       "Bauwerksabdichtung und Rissverpressung mit professionellen Injektionsverfahren – nachhaltige Lösungen gegen Feuchte, Wasser­eintritt und strukturelle Schäden.",
     paragraph:
-      "Bei Injektions- und Risssperrarbeiten unterstützt Munich Construction GmbH von der schadensbildbezogenen Voruntersuchung bis zur fachgerechten Ausführung. Wir bestimmen das passende Verfahren, wählen geprüfte Materialien und führen die Arbeiten mit minimalem Eingriff in die Bausubstanz aus – nachhaltig, dokumentiert und nach den gültigen deutschen Regelwerken.",
+      "Im Bereich Injektion und Risssperrung bietet Munich Construction GmbH zuverlässige Lösungen zur Abdichtung, Stabilisierung und Instandsetzung von Bauwerken. Wir analysieren Risse, Undichtigkeiten und betroffene Bauteile sorgfältig und wählen eine passende Methode, um Feuchtigkeitseintritt zu verhindern und die Bausubstanz langfristig zu schützen. Durch präzise Ausführung und fachgerechte Verarbeitung sorgen wir dafür, dass Schäden nachhaltig behandelt werden und die Stabilität sowie der Werterhalt des Gebäudes unterstützt werden.",
     gallery: [
       {
         title: "Crack Injection and Sealing",
@@ -188,7 +188,7 @@ export const HOME_SERVICES: ServiceDetail[] = [
     intro:
       "Hochwertige Fenster- und Türenmontage für Neubau und Sanierung – energieeffizient, einbruchhemmend und ästhetisch auf Ihr Gebäude abgestimmt.",
     paragraph:
-      "Bei Fenstern und Türen begleitet Sie Munich Construction GmbH von der Produktberatung über das Aufmaß bis zur fachgerechten RAL-Montage. Wir koordinieren Hersteller, Demontage, Entsorgung und Anschlussarbeiten und sorgen für eine präzise, dichte und ästhetisch saubere Einbausituation – pünktlich und mit minimaler Beeinträchtigung der Nutzung.",
+      "Munich Construction GmbH übernimmt die fachgerechte Montage, den Austausch und die Anpassung von Fenstern und Türen für private, gewerbliche und bauliche Projekte. Wir achten auf präzises Aufmaß, saubere Installation, gute Abdichtung und ein hochwertiges Erscheinungsbild. Ob im Neubau, bei der Renovierung oder im Rahmen einer Modernisierung – unser Ziel ist es, funktionale, langlebige und optisch passende Lösungen umzusetzen, die Komfort, Sicherheit und Energieeffizienz des Gebäudes verbessern.",
     gallery: [
       {
         title: "Window and Door Installation",

@@ -84,14 +84,35 @@ function ServiceDetailPage() {
       </section>
 
       {/* INTRO PARAGRAPH */}
-      <section className="bg-background py-16 md:py-20">
-        <div className="container-wide max-w-4xl">
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-5">
-            Über diese Leistung
-          </p>
-          <p className="text-lg md:text-xl text-foreground leading-relaxed">
-            {service.paragraph}
-          </p>
+      <section className="bg-background py-20 md:py-28 relative overflow-hidden">
+        <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 size-[420px] rounded-full bg-gold/[0.04] blur-3xl" />
+        <div className="container-wide relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+            <div className="lg:col-span-4">
+              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold mb-5">
+                Über diese Leistung
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl leading-[1.1] text-balance">
+                Unser Ansatz für{" "}
+                <span className="text-gold">{service.title}</span>
+              </h2>
+              <div className="gold-divider w-16 mt-6" />
+            </div>
+            <div className="lg:col-span-8">
+              <div className="relative pl-6 md:pl-10 border-l border-gold/40">
+                <span aria-hidden className="absolute -left-[7px] top-0 size-3 bg-gold rotate-45" />
+                <p className="font-serif text-xl md:text-[1.6rem] leading-[1.55] text-foreground first-letter:font-display first-letter:text-5xl md:first-letter:text-6xl first-letter:text-gold first-letter:float-left first-letter:mr-3 first-letter:leading-[0.9] first-letter:mt-1">
+                  {service.paragraph}
+                </p>
+                <div className="mt-10 pt-6 border-t border-border flex items-center gap-3">
+                  <span className="h-px w-10 bg-gold" />
+                  <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+                    Munich Construction GmbH · Qualität nach deutschen Standards
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
