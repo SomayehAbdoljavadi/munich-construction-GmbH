@@ -133,7 +133,8 @@ function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-px bg-border border border-border">
-            {HOME_SERVICES.map((s, i) => {
+            {HOME_SERVICES_I18N.map((raw, i) => {
+              const s = localizeService(raw, lang);
               const Icon = s.icon;
               const isDark = i % 2 === 1;
               return (
