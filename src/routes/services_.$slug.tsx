@@ -1,17 +1,12 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Check, Star } from "lucide-react";
 import { getServiceBySlug, HOME_SERVICES } from "@/lib/services-data";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ServiceGallery } from "@/components/ServiceGallery";
 
-export const Route = createFileRoute("/services/$slug")({
-  loader: ({ params }) => {
-    const service = getServiceBySlug(params.slug);
-    if (!service) throw notFound();
-    return { service };
-  },
-  head: ({ loaderData }) => {
-    const s = loaderData?.service;
+export const Route = createFileRoute("/services_/$slug")({
+  head: ({ params }) => {
+    const s = getServiceBySlug(params.slug);
     const title = s ? `${s.title} — Munich Construction GmbH` : "Service — Munich Construction GmbH";
     const description = s?.intro ?? "Bauleistungen von Munich Construction GmbH.";
     return {
@@ -39,8 +34,18 @@ export const Route = createFileRoute("/services/$slug")({
 });
 
 function ServiceDetailPage() {
-  const { service } = Route.useLoaderData();
+  const { slug } = Route.useParams();
+  const service = getServiceBySlug(slug);
+  if (!service) {
+    return (
+      <div className="container-wide py-32 text-center">
+        <h1 className="font-display text-4xl mb-4">Service nicht gefunden</h1>
+        <Link to="/services" className="text-gold underline">Zur Leistungsübersicht</Link>
+      </div>
+    );
+  }
   const Icon = service.icon;
+
 
   return (
     <>
@@ -83,8 +88,23 @@ function ServiceDetailPage() {
         </div>
       </section>
 
+      {/* GALLERY — directly under hero */}
+      <section className="bg-background pt-16 md:pt-20 pb-20 md:pb-28">
+        <div className="container-wide">
+          <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-3">
+                Referenzprojekte
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl">Ausgewählte Arbeiten</h2>
+            </div>
+          </div>
+          <ServiceGallery slides={service.gallery} />
+        </div>
+      </section>
+
       {/* INTRO PARAGRAPH */}
-      <section className="bg-background py-20 md:py-28 relative overflow-hidden">
+      <section className="bg-background pb-20 md:pb-28 relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 size-[420px] rounded-full bg-gold/[0.04] blur-3xl" />
         <div className="container-wide relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
@@ -116,20 +136,6 @@ function ServiceDetailPage() {
         </div>
       </section>
 
-      {/* GALLERY */}
-      <section className="bg-background pb-20 md:pb-28">
-        <div className="container-wide">
-          <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-3">
-                Referenzprojekte
-              </p>
-              <h2 className="font-display text-3xl md:text-4xl">Ausgewählte Arbeiten</h2>
-            </div>
-          </div>
-          <ServiceGallery slides={service.gallery} />
-        </div>
-      </section>
 
       {/* WAS WIR LEISTEN + IHRE VORTEILE */}
       <section className="bg-secondary py-20 md:py-28">
