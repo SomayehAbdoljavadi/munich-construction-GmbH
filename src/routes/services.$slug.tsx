@@ -5,13 +5,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ServiceGallery } from "@/components/ServiceGallery";
 
 export const Route = createFileRoute("/services/$slug")({
-  loader: ({ params }) => {
-    const service = getServiceBySlug(params.slug);
-    if (!service) throw notFound();
-    return { service };
-  },
-  head: ({ loaderData }) => {
-    const s = loaderData?.service;
+  head: ({ params }) => {
+    const s = getServiceBySlug(params.slug);
     const title = s ? `${s.title} — Munich Construction GmbH` : "Service — Munich Construction GmbH";
     const description = s?.intro ?? "Bauleistungen von Munich Construction GmbH.";
     return {
@@ -39,8 +34,18 @@ export const Route = createFileRoute("/services/$slug")({
 });
 
 function ServiceDetailPage() {
-  const { service } = Route.useLoaderData();
+  const { slug } = Route.useParams();
+  const service = getServiceBySlug(slug);
+  if (!service) {
+    return (
+      <div className="container-wide py-32 text-center">
+        <h1 className="font-display text-4xl mb-4">Service nicht gefunden</h1>
+        <Link to="/services" className="text-gold underline">Zur Leistungsübersicht</Link>
+      </div>
+    );
+  }
   const Icon = service.icon;
+
 
   return (
     <>
