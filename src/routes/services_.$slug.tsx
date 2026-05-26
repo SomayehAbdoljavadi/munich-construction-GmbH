@@ -88,8 +88,23 @@ function ServiceDetailPage() {
         </div>
       </section>
 
+      {/* GALLERY — directly under hero */}
+      <section className="bg-background pt-16 md:pt-20 pb-20 md:pb-28">
+        <div className="container-wide">
+          <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-3">
+                Referenzprojekte
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl">Ausgewählte Arbeiten</h2>
+            </div>
+          </div>
+          <ServiceGallery slides={service.gallery} />
+        </div>
+      </section>
+
       {/* INTRO PARAGRAPH */}
-      <section className="bg-background py-20 md:py-28 relative overflow-hidden">
+      <section className="bg-background pb-20 md:pb-28 relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 size-[420px] rounded-full bg-gold/[0.04] blur-3xl" />
         <div className="container-wide relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
@@ -121,20 +136,6 @@ function ServiceDetailPage() {
         </div>
       </section>
 
-      {/* GALLERY */}
-      <section className="bg-background pb-20 md:pb-28">
-        <div className="container-wide">
-          <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-3">
-                Referenzprojekte
-              </p>
-              <h2 className="font-display text-3xl md:text-4xl">Ausgewählte Arbeiten</h2>
-            </div>
-          </div>
-          <ServiceGallery slides={service.gallery} />
-        </div>
-      </section>
 
       {/* WAS WIR LEISTEN + IHRE VORTEILE */}
       <section className="bg-secondary py-20 md:py-28">
