@@ -34,7 +34,7 @@ export function LocationMap({ className = "" }: { className?: string }) {
 
       const logoIcon = L.divIcon({
         className: "mc-map-marker",
-        html: `<a href="${THERESIENSTRASSE_MAPS_URL}" target="_blank" rel="noopener noreferrer" class="mc-map-marker-shell" aria-label="Open ${ADDRESS} in Google Maps"><img src="${markerImg}" alt="Munich Construction" draggable="false" class="mc-map-marker-img" /></a>`,
+        html: `<a href="${THERESIENSTRASSE_MAPS_URL}" target="_blank" rel="noopener noreferrer" class="mc-map-marker-shell" aria-label="Open ${ADDRESS} in Google Maps" title="${ADDRESS}"><img src="${markerImg}" alt="Munich Construction" draggable="false" class="mc-map-marker-img" /><span class="mc-map-marker-tooltip" role="tooltip">${ADDRESS}</span></a>`,
         iconSize: [48, 60],
         iconAnchor: [24, 58],
       });
