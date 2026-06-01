@@ -354,6 +354,3 @@ function ProjectSlideshow({ project }: { project: Project }) {
     </div>
   );
 }
-
-// Silence unused-warning when PROJECTS is empty.
-void PROJECTS_LENGTH;
