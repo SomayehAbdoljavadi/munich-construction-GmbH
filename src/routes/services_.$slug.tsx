@@ -9,21 +9,75 @@ import {
 import { getProjectSlidesForService } from "@/lib/service-projects";
 import { ServiceGallery } from "@/components/ServiceGallery";
 import { useT } from "@/lib/i18n";
+import { breadcrumb, ldScript, url, ORG_ID, SITE_NAME } from "@/lib/seo";
+import { getFaqs, getFaqsBilingual } from "@/lib/faqs";
 
 export const Route = createFileRoute("/services_/$slug")({
   head: ({ params }) => {
     const s = getServiceI18nBySlug(params.slug);
     const title = s
-      ? `${s.title.de} — Munich Construction GmbH`
+      ? `${s.title.de} in München — Munich Construction GmbH`
       : "Service — Munich Construction GmbH";
     const description = s?.intro.de ?? "Bauleistungen von Munich Construction GmbH.";
+    const pageUrl = url(`/services/${params.slug}`);
+    const scripts: Array<{ type: string; children: string }> = [];
+    if (s) {
+      scripts.push(
+        ldScript({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          serviceType: s.title.en,
+          name: `${s.title.de} — ${SITE_NAME}`,
+          description: s.intro.de,
+          provider: { "@id": ORG_ID },
+          areaServed: [
+            { "@type": "City", name: "Munich" },
+            { "@type": "AdministrativeArea", name: "Bavaria" },
+          ],
+          url: pageUrl,
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: s.title.de,
+            itemListElement: s.includes.map((inc) => ({
+              "@type": "Offer",
+              itemOffered: { "@type": "Service", name: inc.de },
+            })),
+          },
+        }),
+      );
+      const faqs = getFaqsBilingual(params.slug);
+      scripts.push(
+        ldScript({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q.de,
+            acceptedAnswer: { "@type": "Answer", text: f.a.de },
+          })),
+        }),
+      );
+      scripts.push(
+        ldScript(breadcrumb([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: s.title.de, path: `/services/${params.slug}` },
+        ])),
+      );
+    }
     return {
       meta: [
         { title },
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        { property: "og:url", content: pageUrl },
+        { property: "og:type", content: "article" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
       ],
+      links: [{ rel: "canonical", href: pageUrl }],
+      scripts,
     };
   },
   notFoundComponent: NotFound,
