@@ -4,7 +4,7 @@
 // Images are listed in filename order, so the "cover" (renamed to 00.*)
 // always appears first.
 
-type Meta = { name: string; location: string; count?: number };
+type Meta = { name: string; location: string; count?: number; priority?: number };
 
 const metaModules = import.meta.glob("/src/assets/services/*/*/meta.json", {
   eager: true,
