@@ -1,15 +1,27 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useT, type TranslationKey } from "@/lib/i18n";
 import aboutImg from "@/assets/mc-about.jpg";
+import { breadcrumb, ldScript, url } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Munich Construction GmbH" },
-      { name: "description", content: "Munich Construction GmbH — engineering-led construction in Munich. Quality, reliability, and end-to-end service from a Munich-based team." },
+      { title: "About Munich Construction GmbH — Munich-based General Contractor" },
+      { name: "description", content: "Munich Construction GmbH — an engineering-led construction company in Munich, Germany. End-to-end service from planning to handover, led by Dipl.-Ing. Mehdi Mardi." },
       { property: "og:title", content: "About Munich Construction GmbH" },
-      { property: "og:description", content: "Engineering-led construction in Munich." },
+      { property: "og:description", content: "Engineering-led construction in Munich, Germany." },
+      { property: "og:url", content: url("/about") },
       { property: "og:image", content: aboutImg },
+      { property: "og:type", content: "website" },
+      { name: "twitter:title", content: "About Munich Construction GmbH" },
+      { name: "twitter:description", content: "Engineering-led construction in Munich, Germany." },
+    ],
+    links: [{ rel: "canonical", href: url("/about") }],
+    scripts: [
+      ldScript(breadcrumb([
+        { name: "Home", path: "/" },
+        { name: "About", path: "/about" },
+      ])),
     ],
   }),
   component: AboutPage,

@@ -3,24 +3,51 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { useT } from "@/lib/i18n";
 import { PROJECTS, type Project } from "@/lib/projects-data";
+import { BASE_URL, breadcrumb, ldScript, url } from "@/lib/seo";
 
 const ogImage = PROJECTS[0]?.images[0] ?? "";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Projects — Munich Construction GmbH" },
+      { title: "Projects in Munich & Bavaria — Munich Construction GmbH" },
       {
         name: "description",
         content:
-          "Selected new construction, refurbishment and renovation projects by Munich Construction GmbH in Munich and surroundings.",
+          "Construction, refurbishment and renovation projects by Munich Construction GmbH in Munich, Bavaria and beyond — residential, hotel, commercial and heritage buildings.",
       },
       { property: "og:title", content: "Projects — Munich Construction GmbH" },
       {
         property: "og:description",
-        content: "Selected work in new construction, refurbishment and renovation.",
+        content: "Selected work in new construction, refurbishment and renovation across Munich and Bavaria.",
       },
+      { property: "og:url", content: url("/projects") },
+      { property: "og:type", content: "website" },
+      { name: "twitter:title", content: "Projects — Munich Construction GmbH" },
+      { name: "twitter:description", content: "Construction projects in Munich and Bavaria." },
       ...(ogImage ? [{ property: "og:image", content: ogImage }] : []),
+    ],
+    links: [{ rel: "canonical", href: url("/projects") }],
+    scripts: [
+      ldScript({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Construction Projects — Munich Construction GmbH",
+        itemListElement: PROJECTS.map((p, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          item: {
+            "@type": "Place",
+            name: p.name,
+            address: p.location,
+            url: `${BASE_URL}/projects#${p.slug}`,
+          },
+        })),
+      }),
+      ldScript(breadcrumb([
+        { name: "Home", path: "/" },
+        { name: "Projects", path: "/projects" },
+      ])),
     ],
   }),
   component: ProjectsPage,

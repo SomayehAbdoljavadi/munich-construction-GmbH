@@ -14,20 +14,27 @@ import { LocationMap } from "@/components/LocationMap";
 import { HEITERWANGER_MAPS_URL, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
 import { HOME_SERVICES_I18N, localizeService } from "@/lib/services-data";
 import heroBg from "@/assets/mc-hero-bg.jpg";
+import { url } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Munich Construction GmbH — Hochwertiges Bauen in München" },
+      { title: "Munich Construction GmbH — Construction & Renovation in Munich, Bavaria" },
       {
         name: "description",
         content:
-          "Munich Construction GmbH — Ihr Partner für Neubau, Sanierung, Brandschutz und Werkplanung in München. Alles aus einer Hand.",
+          "Munich Construction GmbH — Munich-based general contractor for fire protection, drywall, injection & crack sealing, windows & doors, renovation, refurbishment and modernisation. Serving Munich and Bavaria.",
       },
-      { property: "og:title", content: "Munich Construction GmbH" },
-      { property: "og:description", content: "Hochwertiges Bauen in München — alles aus einer Hand." },
+      { property: "og:title", content: "Munich Construction GmbH — Construction in Munich" },
+      { property: "og:description", content: "Construction, renovation and refurbishment in Munich and Bavaria — all from one source." },
+      { property: "og:url", content: url("/") },
+      { property: "og:type", content: "website" },
       { property: "og:image", content: heroBg },
+      { name: "twitter:title", content: "Munich Construction GmbH" },
+      { name: "twitter:description", content: "Construction, renovation and refurbishment in Munich and Bavaria." },
+      { name: "twitter:image", content: heroBg },
     ],
+    links: [{ rel: "canonical", href: url("/") }],
   }),
   component: HomePage,
 });
