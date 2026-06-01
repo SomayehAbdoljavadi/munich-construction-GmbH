@@ -6,6 +6,7 @@ import {
   HOME_SERVICES_I18N,
 } from "@/lib/services-data";
 
+import { getProjectSlidesForService } from "@/lib/service-projects";
 import { ServiceGallery } from "@/components/ServiceGallery";
 import { useT } from "@/lib/i18n";
 
