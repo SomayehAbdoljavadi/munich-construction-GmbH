@@ -6,13 +6,32 @@ import { useT } from "@/lib/i18n";
 import { LocationMap } from "@/components/LocationMap";
 import { HEITERWANGER_MAPS_URL, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
 
+import { breadcrumb, ldScript, ORG_ID, url } from "@/lib/seo";
+
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Munich Construction GmbH" },
-      { name: "description", content: "Contact Munich Construction GmbH — phone, email, WhatsApp, and offices in Munich. We look forward to your inquiry." },
+      { title: "Contact Munich Construction GmbH — Munich Office" },
+      { name: "description", content: "Contact Munich Construction GmbH — phone, email, WhatsApp, and two offices in Munich. Free initial consultation for construction, renovation and refurbishment projects." },
       { property: "og:title", content: "Contact — Munich Construction GmbH" },
       { property: "og:description", content: "Phone, email, WhatsApp, and offices in Munich." },
+      { property: "og:url", content: url("/contact") },
+      { property: "og:type", content: "website" },
+      { name: "twitter:title", content: "Contact — Munich Construction GmbH" },
+      { name: "twitter:description", content: "Get in touch with our Munich office." },
+    ],
+    links: [{ rel: "canonical", href: url("/contact") }],
+    scripts: [
+      ldScript({
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        url: url("/contact"),
+        about: { "@id": ORG_ID },
+      }),
+      ldScript(breadcrumb([
+        { name: "Home", path: "/" },
+        { name: "Contact", path: "/contact" },
+      ])),
     ],
   }),
   component: ContactPage,

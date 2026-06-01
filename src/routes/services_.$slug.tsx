@@ -9,21 +9,75 @@ import {
 import { getProjectSlidesForService } from "@/lib/service-projects";
 import { ServiceGallery } from "@/components/ServiceGallery";
 import { useT } from "@/lib/i18n";
+import { breadcrumb, ldScript, url, ORG_ID, SITE_NAME } from "@/lib/seo";
+import { getFaqs, getFaqsBilingual } from "@/lib/faqs";
 
 export const Route = createFileRoute("/services_/$slug")({
   head: ({ params }) => {
     const s = getServiceI18nBySlug(params.slug);
     const title = s
-      ? `${s.title.de} — Munich Construction GmbH`
+      ? `${s.title.de} in München — Munich Construction GmbH`
       : "Service — Munich Construction GmbH";
     const description = s?.intro.de ?? "Bauleistungen von Munich Construction GmbH.";
+    const pageUrl = url(`/services/${params.slug}`);
+    const scripts: Array<{ type: string; children: string }> = [];
+    if (s) {
+      scripts.push(
+        ldScript({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          serviceType: s.title.en,
+          name: `${s.title.de} — ${SITE_NAME}`,
+          description: s.intro.de,
+          provider: { "@id": ORG_ID },
+          areaServed: [
+            { "@type": "City", name: "Munich" },
+            { "@type": "AdministrativeArea", name: "Bavaria" },
+          ],
+          url: pageUrl,
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: s.title.de,
+            itemListElement: s.includes.map((inc) => ({
+              "@type": "Offer",
+              itemOffered: { "@type": "Service", name: inc.de },
+            })),
+          },
+        }),
+      );
+      const faqs = getFaqsBilingual(params.slug);
+      scripts.push(
+        ldScript({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q.de,
+            acceptedAnswer: { "@type": "Answer", text: f.a.de },
+          })),
+        }),
+      );
+      scripts.push(
+        ldScript(breadcrumb([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: s.title.de, path: `/services/${params.slug}` },
+        ])),
+      );
+    }
     return {
       meta: [
         { title },
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        { property: "og:url", content: pageUrl },
+        { property: "og:type", content: "article" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
       ],
+      links: [{ rel: "canonical", href: pageUrl }],
+      scripts,
     };
   },
   notFoundComponent: NotFound,
@@ -181,6 +235,32 @@ function ServiceDetailPage() {
                 <Star size={20} className="text-gold mb-5" strokeWidth={1.5} />
                 <p className="text-foreground leading-relaxed">{point}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-secondary py-20 md:py-28">
+        <div className="container-wide max-w-4xl">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-4">
+            FAQ
+          </p>
+          <h2 className="font-display text-3xl md:text-5xl text-balance mb-10">
+            {lang === "de" ? "Häufig gestellte Fragen" : "Frequently asked questions"}
+          </h2>
+          <div className="gold-divider w-24 mb-10" />
+          <div className="divide-y divide-border border-y border-border">
+            {getFaqs(slug, lang).map((f) => (
+              <details key={f.q} className="group py-6">
+                <summary className="flex items-start justify-between gap-6 cursor-pointer list-none">
+                  <h3 className="font-display text-xl md:text-2xl leading-tight">{f.q}</h3>
+                  <span className="mt-1 text-gold font-mono text-xl shrink-0 transition-transform group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-4 text-muted-foreground leading-relaxed">{f.a}</p>
+              </details>
             ))}
           </div>
         </div>

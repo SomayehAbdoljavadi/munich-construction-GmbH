@@ -1,14 +1,38 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Building2, Hammer, Wrench, Flame, FileCheck2, Ruler, Check } from "lucide-react";
 import { useT, type TranslationKey } from "@/lib/i18n";
+import { breadcrumb, ldScript, url, BASE_URL } from "@/lib/seo";
+import { HOME_SERVICES_I18N } from "@/lib/services-data";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
       { title: "Services — Munich Construction GmbH" },
-      { name: "description", content: "Six services from one source: new construction, renovation, refurbishment, fire protection, permitting, and execution planning in Munich." },
+      { name: "description", content: "Construction services by Munich Construction GmbH in Munich and Bavaria: fire protection, drywall, injection & crack sealing, windows & doors, renovation, refurbishment and building modernisation — all from one source." },
       { property: "og:title", content: "Services — Munich Construction GmbH" },
-      { property: "og:description", content: "New construction, renovation, refurbishment, fire protection, permitting, execution planning." },
+      { property: "og:description", content: "Fire protection, drywall, injection & crack sealing, windows & doors, renovation, refurbishment, modernisation." },
+      { property: "og:url", content: url("/services") },
+      { property: "og:type", content: "website" },
+      { name: "twitter:title", content: "Services — Munich Construction GmbH" },
+      { name: "twitter:description", content: "Construction services in Munich and Bavaria, all from one source." },
+    ],
+    links: [{ rel: "canonical", href: url("/services") }],
+    scripts: [
+      ldScript({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Services — Munich Construction GmbH",
+        itemListElement: HOME_SERVICES_I18N.map((s, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: `${BASE_URL}/services/${s.slug}`,
+          name: s.title.de,
+        })),
+      }),
+      ldScript(breadcrumb([
+        { name: "Home", path: "/" },
+        { name: "Services", path: "/services" },
+      ])),
     ],
   }),
   component: ServicesPage,
