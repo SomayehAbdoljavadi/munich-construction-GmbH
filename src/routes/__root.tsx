@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { ORG_JSONLD, WEBSITE_JSONLD, ldScript } from "@/lib/seo";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
@@ -80,7 +81,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Hochwertiges Bauen in München — Neubau, Sanierung, Brandschutz und Werkplanung." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@munichconstruction" },
+      { property: "og:site_name", content: "Munich Construction GmbH" },
+      { property: "og:locale", content: "de_DE" },
+      { property: "og:locale:alternate", content: "en_US" },
       { name: "theme-color", content: "#0d0d0d" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -95,25 +101,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "GeneralContractor",
-          name: "Munich Construction GmbH",
-          url: "https://www.munichconstruction.de",
-          telephone: "+49 89 57843675",
-          email: "info@munichconstruction.de",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "Theresienstraße 93",
-            postalCode: "80333",
-            addressLocality: "München",
-            addressCountry: "DE",
-          },
-          areaServed: "München",
-        }),
-      },
+      ldScript(ORG_JSONLD),
+      ldScript(WEBSITE_JSONLD),
     ],
   }),
   shellComponent: RootShell,
