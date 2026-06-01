@@ -238,8 +238,6 @@ function ProjectSection({ project, index, sectionRef }: ProjectSectionProps) {
   );
 }
 
-const PROJECTS_LENGTH = PROJECTS.length;
-
 function ProjectSlideshow({ project }: { project: Project }) {
   const slides = project.images;
   const total = slides.length;
