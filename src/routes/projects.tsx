@@ -112,7 +112,9 @@ function ProjectsPage() {
                 return (
                   <li key={p.slug} className="shrink-0">
                     <a
-                      ref={(el) => (navItemRefs.current[p.slug] = el)}
+                      ref={(el) => {
+                        navItemRefs.current[p.slug] = el;
+                      }}
                       href={`#project-${p.slug}`}
                       onClick={(e) => handleNavClick(e, p.slug)}
                       className={`block px-4 md:px-5 py-2 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] whitespace-nowrap border-b-2 transition-colors ${
