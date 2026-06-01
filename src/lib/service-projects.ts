@@ -76,7 +76,12 @@ function buildIndex(): Record<string, ProjectEntry[]> {
 
   // Sort projects per service by projectSlug for deterministic order
   for (const list of Object.values(byService)) {
-    list.sort((a, b) => a.projectSlug.localeCompare(b.projectSlug));
+    list.sort((a, b) => {
+      const pa = a.meta.priority ?? 100;
+      const pb = b.meta.priority ?? 100;
+      if (pa !== pb) return pa - pb;
+      return a.projectSlug.localeCompare(b.projectSlug);
+    });
   }
 
   return byService;
