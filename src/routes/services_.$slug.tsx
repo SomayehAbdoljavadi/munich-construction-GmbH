@@ -6,6 +6,7 @@ import {
   HOME_SERVICES_I18N,
 } from "@/lib/services-data";
 
+import { getProjectSlidesForService } from "@/lib/service-projects";
 import { ServiceGallery } from "@/components/ServiceGallery";
 import { useT } from "@/lib/i18n";
 
@@ -51,6 +52,19 @@ function ServiceDetailPage() {
   const i18n = getServiceI18nBySlug(slug);
   if (!i18n) return <NotFound />;
   const service = localizeService(i18n, lang);
+  const dynamicSlides = getProjectSlidesForService(slug);
+  if (dynamicSlides.length > 0) {
+    service.gallery = dynamicSlides.map((p) => ({
+      title: p.projectName,
+      location: p.projectLocation,
+      description: "",
+      image: p.image,
+      projectName: p.projectName,
+      projectLocation: p.projectLocation,
+      index: p.index,
+      total: p.total,
+    }));
+  }
   const Icon = service.icon;
 
   return (

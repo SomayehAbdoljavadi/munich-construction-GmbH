@@ -38,6 +38,11 @@ export interface GallerySlide {
   location: string;
   description: string;
   image: string;
+  // Optional dynamic project metadata (used by ServiceGallery overlay)
+  projectName?: string;
+  projectLocation?: string;
+  index?: number;
+  total?: number;
 }
 
 export interface ServiceDetail {
