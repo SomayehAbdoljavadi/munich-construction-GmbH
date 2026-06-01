@@ -240,6 +240,32 @@ function ServiceDetailPage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section className="bg-secondary py-20 md:py-28">
+        <div className="container-wide max-w-4xl">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-4">
+            FAQ
+          </p>
+          <h2 className="font-display text-3xl md:text-5xl text-balance mb-10">
+            {lang === "de" ? "Häufig gestellte Fragen" : "Frequently asked questions"}
+          </h2>
+          <div className="gold-divider w-24 mb-10" />
+          <div className="divide-y divide-border border-y border-border">
+            {getFaqs(slug, lang).map((f) => (
+              <details key={f.q} className="group py-6">
+                <summary className="flex items-start justify-between gap-6 cursor-pointer list-none">
+                  <h3 className="font-display text-xl md:text-2xl leading-tight">{f.q}</h3>
+                  <span className="mt-1 text-gold font-mono text-xl shrink-0 transition-transform group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-4 text-muted-foreground leading-relaxed">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="bg-ink text-white py-20 md:py-24">
         <div className="container-wide max-w-4xl text-center">
