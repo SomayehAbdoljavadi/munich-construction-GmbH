@@ -4,7 +4,6 @@
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
   "main": "dist/server/index.mjs",
-  "base_dir": "dist/server",
   "assets": {
     "binding": "ASSETS",
     "directory": "dist/client"
