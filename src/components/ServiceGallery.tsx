@@ -43,7 +43,7 @@ export function ServiceGallery({ slides, autoPlayMs = 6000 }: Props) {
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      <div className="relative aspect-[16/9] md:aspect-[21/9] w-full">
+      <div className="relative aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] w-full bg-ink">
         {slides.map((s, idx) => {
           const hasProject = !!s.projectName;
           return (
@@ -59,7 +59,7 @@ export function ServiceGallery({ slides, autoPlayMs = 6000 }: Props) {
                 src={s.image}
                 alt={s.projectName ? `${s.projectName} — ${s.projectLocation ?? ""}` : s.title}
                 loading={idx === 0 ? "eager" : "lazy"}
-                className="absolute inset-0 w-full h-full object-contain"
+                className="absolute inset-0 w-full h-full object-contain object-center"
               />
 
               {/* Readability gradients */}
