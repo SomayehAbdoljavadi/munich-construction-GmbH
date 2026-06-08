@@ -54,11 +54,12 @@ export function ServiceGallery({ slides, autoPlayMs = 6000 }: Props) {
                 idx === i ? "opacity-100" : "opacity-0 pointer-events-none"
               }`}
             >
+              <div className="absolute inset-0 bg-ink" />
               <img
                 src={s.image}
                 alt={s.projectName ? `${s.projectName} — ${s.projectLocation ?? ""}` : s.title}
                 loading={idx === 0 ? "eager" : "lazy"}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-contain"
               />
 
               {/* Readability gradients */}
