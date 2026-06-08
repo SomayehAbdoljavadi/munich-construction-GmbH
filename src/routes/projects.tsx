@@ -58,7 +58,31 @@ function ProjectsPage() {
   const [activeSlug, setActiveSlug] = useState<string>(PROJECTS[0]?.slug ?? "");
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const navRef = useRef<HTMLDivElement | null>(null);
+  const projectNavRef = useRef<HTMLElement | null>(null);
   const navItemRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+
+  useEffect(() => {
+    const nav = projectNavRef.current;
+    if (!nav) return;
+
+    const root = document.documentElement;
+    const updateProjectNavHeight = () => {
+      root.style.setProperty("--project-nav-height", `${Math.ceil(nav.getBoundingClientRect().height)}px`);
+    };
+
+    updateProjectNavHeight();
+    const animationFrame = window.requestAnimationFrame(updateProjectNavHeight);
+    const resizeObserver = new ResizeObserver(updateProjectNavHeight);
+    resizeObserver.observe(nav);
+    window.addEventListener("resize", updateProjectNavHeight);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateProjectNavHeight);
+      root.style.removeProperty("--project-nav-height");
+    };
+  }, []);
 
   // Scroll-spy
   useEffect(() => {
@@ -100,7 +124,10 @@ function ProjectsPage() {
     e.preventDefault();
     const el = sectionRefs.current[slug];
     if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - 80;
+      const styles = getComputedStyle(document.documentElement);
+      const headerHeight = parseFloat(styles.getPropertyValue("--header-height")) || 0;
+      const projectNavHeight = parseFloat(styles.getPropertyValue("--project-nav-height")) || 0;
+      const top = el.getBoundingClientRect().top + window.scrollY - headerHeight - projectNavHeight;
       window.scrollTo({ top, behavior: "smooth" });
     }
   };
@@ -126,8 +153,9 @@ function ProjectsPage() {
       {/* Sticky project nav */}
       {PROJECTS.length > 0 && (
         <nav
+          ref={projectNavRef}
           aria-label="Project navigation"
-          className="sticky top-[73px] z-30 bg-ink/95 backdrop-blur border-y border-gold/20"
+          className="sticky top-[var(--header-height)] z-40 bg-ink/95 backdrop-blur border-y border-gold/20"
         >
           <div
             ref={navRef}
@@ -212,7 +240,7 @@ function ProjectSection({ project, index, sectionRef }: ProjectSectionProps) {
         localRef.current = el;
         sectionRef(el);
       }}
-      className={`min-h-[90vh] flex flex-col justify-center py-12 md:py-20 scroll-mt-32 ${
+      className={`min-h-[90vh] flex flex-col justify-center py-12 md:py-20 scroll-mt-[calc(var(--header-height)+var(--project-nav-height)+1rem)] ${
         index % 2 === 0 ? "bg-background" : "bg-secondary/40"
       }`}
     >
