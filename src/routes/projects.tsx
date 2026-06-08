@@ -309,11 +309,12 @@ function ProjectSlideshow({ project }: { project: Project }) {
               idx === i ? "opacity-100" : "opacity-0 pointer-events-none"
             }`}
           >
+            <div className="absolute inset-0 bg-ink" />
             <img
               src={src}
               alt={`${project.name} — ${idx + 1}`}
               loading={idx === 0 ? "eager" : "lazy"}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-contain"
             />
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent pointer-events-none" />
 
