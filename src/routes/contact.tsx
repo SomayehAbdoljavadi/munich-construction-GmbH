@@ -69,10 +69,10 @@ function ContactPage() {
         <div className="container-wide grid grid-cols-1 lg:grid-cols-12 gap-12">
           <aside className="lg:col-span-4 space-y-8">
             <Block icon={<Phone size={18} />} label={t("contact.phone")}>
-              <a href="tel:+498957843675" className="block font-display text-2xl hover:text-gold transition-colors">
+              <a href="tel:+498957843675" className="block font-sans text-xl md:text-2xl font-medium tracking-tight tabular-nums hover:text-gold transition-colors">
                 +49 (0) 89 57 84 3675
               </a>
-              <a href="tel:+4917632354815" className="block font-display text-2xl hover:text-gold transition-colors mt-1">
+              <a href="tel:+4917632354815" className="block font-sans text-xl md:text-2xl font-medium tracking-tight tabular-nums hover:text-gold transition-colors mt-2">
                 +49 (176) 3235 4815
               </a>
             </Block>
