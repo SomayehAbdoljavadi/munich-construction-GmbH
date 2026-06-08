@@ -50,6 +50,8 @@
 
 :root {
   --radius: 0.25rem;
+  --header-height: 0px;
+  --project-nav-height: 0px;
 
   /* Light mode — clean white with black text and gold accents */
   --background: oklch(0.99 0 0);

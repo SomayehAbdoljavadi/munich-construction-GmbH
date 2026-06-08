@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X, Sun, Moon, ChevronDown } from "lucide-react";
 import { Logo } from "./Logo";
 import { useT, type Lang } from "@/lib/i18n";
@@ -19,9 +19,33 @@ export function SiteHeader() {
   const { t, lang, setLang } = useT();
   const [open, setOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+
+    const root = document.documentElement;
+    const updateHeaderHeight = () => {
+      root.style.setProperty("--header-height", `${Math.ceil(header.getBoundingClientRect().height)}px`);
+    };
+
+    updateHeaderHeight();
+    const animationFrame = window.requestAnimationFrame(updateHeaderHeight);
+    const resizeObserver = new ResizeObserver(updateHeaderHeight);
+    resizeObserver.observe(header);
+    window.addEventListener("resize", updateHeaderHeight);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateHeaderHeight);
+      root.style.removeProperty("--header-height");
+    };
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 text-foreground border-b border-border backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
+    <header ref={headerRef} className="sticky top-0 z-50 bg-background/95 text-foreground border-b border-border backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
       <div className="container-wide flex items-center justify-between gap-6 py-4">
         <Link to="/" className="text-foreground">
           <Logo />
