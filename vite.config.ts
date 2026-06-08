@@ -17,5 +17,5 @@ export default defineConfig({
     inlineDynamicImports: true,
     output: { dir: "dist", serverDir: "dist/server", publicDir: "dist/client" },
     cloudflare: { nodeCompat: true, deployConfig: true },
-  },
+  } as any,
 });
