@@ -143,7 +143,7 @@ function HomePage() {
             {HOME_SERVICES_I18N.map((raw, i) => {
               const s = localizeService(raw, lang);
               const Icon = s.icon;
-              const isDark = i % 2 === 1;
+              const isDark = i % 2 === 0;
               return (
                 <Link
                   key={s.slug}
