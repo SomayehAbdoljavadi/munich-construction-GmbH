@@ -127,7 +127,7 @@ function ProjectsPage() {
       {PROJECTS.length > 0 && (
         <nav
           aria-label="Project navigation"
-          className="sticky top-16 md:top-20 z-30 bg-ink/95 backdrop-blur border-y border-gold/20"
+          className="sticky top-[73px] z-30 bg-ink/95 backdrop-blur border-y border-gold/20"
         >
           <div
             ref={navRef}
