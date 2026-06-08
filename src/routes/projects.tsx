@@ -300,7 +300,7 @@ function ProjectSlideshow({ project }: { project: Project }) {
         touchX.current = null;
       }}
     >
-      <div className="relative aspect-[4/3] sm:aspect-[16/10] md:aspect-[21/9] w-full">
+      <div className="relative aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] w-full bg-ink">
         {slides.map((src, idx) => (
           <div
             key={`${src}-${idx}`}
@@ -314,7 +314,7 @@ function ProjectSlideshow({ project }: { project: Project }) {
               src={src}
               alt={`${project.name} — ${idx + 1}`}
               loading={idx === 0 ? "eager" : "lazy"}
-              className="absolute inset-0 w-full h-full object-contain"
+              className="absolute inset-0 w-full h-full object-contain object-center"
             />
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent pointer-events-none" />
 
