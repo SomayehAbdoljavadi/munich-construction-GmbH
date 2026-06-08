@@ -240,7 +240,7 @@ function ProjectSection({ project, index, sectionRef }: ProjectSectionProps) {
         localRef.current = el;
         sectionRef(el);
       }}
-      className={`min-h-[90vh] flex flex-col justify-center py-12 md:py-20 scroll-mt-[calc(var(--header-height)+var(--project-nav-height)+1rem)] ${
+      className={`min-h-[90vh] flex flex-col justify-center py-12 md:py-20 scroll-mt-[calc(var(--header-height)_+_var(--project-nav-height)_+_1rem)] ${
         index % 2 === 0 ? "bg-background" : "bg-secondary/40"
       }`}
     >
