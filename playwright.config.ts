@@ -15,10 +15,12 @@ export default defineConfig({
     trace: "off",
   },
   webServer: {
-    command: `bun run build && bun run preview --port ${PORT} --strictPort`,
+    command: `bun run dev --port ${PORT} --strictPort`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
+    stdout: "ignore",
+    stderr: "pipe",
   },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } },
