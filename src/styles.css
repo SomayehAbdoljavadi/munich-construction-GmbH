@@ -245,6 +245,7 @@
   place-items: center;
 }
 
+.mc-map-grayscale { position: relative; isolation: isolate; z-index: 0; }
 .mc-map-grayscale .leaflet-tile-pane { filter: grayscale(1); }
 .mc-map-grayscale .leaflet-marker-pane,
 .mc-map-grayscale .leaflet-marker-pane *,
