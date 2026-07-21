@@ -188,9 +188,9 @@ const translations: Dict = {
   "imprint.contact": { de: "Kontakt", en: "Contact" },
   "imprint.represented": { de: "Vertretungsberechtigter Geschäftsführer", en: "Authorized Managing Director" },
   "imprint.register": { de: "Registereintrag", en: "Register Entry" },
-  "imprint.register.body": { de: "Eintragung im Handelsregister · Registergericht: München · [HRB-Nummer einfügen]", en: "Commercial register entry · Register court: Munich · [insert HRB number]" },
-  "imprint.vat": { de: "Umsatzsteuer-ID", en: "VAT ID" },
-  "imprint.vat.body": { de: "USt-IdNr. gemäß § 27a UStG: [USt-IdNr. einfügen]", en: "VAT ID per § 27a UStG: [insert VAT ID]" },
+  "imprint.register.body": { de: "Handelsregister: HRB 264907", en: "Commercial register: HRB 264907" },
+  "imprint.vat": { de: "Steuernummer", en: "Tax number" },
+  "imprint.vat.body": { de: "143/165/30681", en: "143/165/30681" },
   "imprint.responsible.content": { de: "Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV", en: "Responsible for content per § 55 (2) RStV" },
   "imprint.disclaimer": { de: "Haftungsausschluss", en: "Disclaimer" },
   "imprint.disclaimer.body": {
