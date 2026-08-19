@@ -401,7 +401,7 @@ function Wrap({
 }) {
   return (
     <div>
-      <label htmlFor={htmlFor} className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground block mb-3">
+      <label htmlFor={htmlFor} className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground block mb-3">
         {label} <span className="text-gold">·</span>
       </label>
       {children}
