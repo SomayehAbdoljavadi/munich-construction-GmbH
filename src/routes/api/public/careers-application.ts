@@ -175,8 +175,6 @@ export const Route = createFileRoute("/api/public/careers-application")({
           if (coverError) return json({ error: `cover_${coverError}` }, 400);
         }
 
-        if (isDuplicate(`${email}|${positionId}`)) return json({ ok: true, duplicate: true }, 200);
-
         const apiKey = process.env["RESEND_API_KEY"];
         const to = process.env["CAREERS_TO_EMAIL"] || "info@munichconstruction.de";
         const from = process.env["CAREERS_FROM_EMAIL"] || "Munich Construction GmbH <info@munichconstruction.de>";
@@ -185,6 +183,8 @@ export const Route = createFileRoute("/api/public/careers-application")({
           console.error("[careers] email service not configured: RESEND_API_KEY missing");
           return json({ error: "email_not_configured" }, 503);
         }
+
+        if (isDuplicate(`${email}|${positionId}`)) return json({ ok: true, duplicate: true }, 200);
 
         const category = mapping.de;
         const positionTitle = mapping.title[lang as "de" | "en"];
@@ -226,13 +226,25 @@ export const Route = createFileRoute("/api/public/careers-application")({
             </table>
           </div>`;
 
+        // Prefer the Lovable connector gateway when available, otherwise call Resend directly.
+        const gatewayKey = process.env["LOVABLE_API_KEY"];
+        const endpoint = gatewayKey
+          ? "https://connector-gateway.lovable.dev/resend/emails"
+          : "https://api.resend.com/emails";
+
         const send = async (payload: Record<string, unknown>) => {
-          const res = await fetch("https://api.resend.com/emails", {
+          const res = await fetch(endpoint, {
             method: "POST",
-            headers: {
-              authorization: `Bearer ${apiKey}`,
-              "content-type": "application/json",
-            },
+            headers: gatewayKey
+              ? {
+                  authorization: `Bearer ${gatewayKey}`,
+                  "X-Connection-Api-Key": apiKey,
+                  "content-type": "application/json",
+                }
+              : {
+                  authorization: `Bearer ${apiKey}`,
+                  "content-type": "application/json",
+                },
             body: JSON.stringify(payload),
           });
           if (!res.ok) {

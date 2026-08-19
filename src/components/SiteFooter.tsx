@@ -39,6 +39,7 @@ export function SiteFooter() {
             <li><Link to="/about" className="hover:text-gold">{t("nav.about")}</Link></li>
             <li><Link to="/services" className="hover:text-gold">{t("nav.services")}</Link></li>
             <li><Link to="/projects" className="hover:text-gold">{t("nav.projects")}</Link></li>
+            <li><Link to="/careers" className="hover:text-gold">{t("nav.careers")}</Link></li>
             <li><Link to="/contact" className="hover:text-gold">{t("nav.contact")}</Link></li>
             <li><Link to="/imprint" className="hover:text-gold">{t("nav.imprint")}</Link></li>
           </ul>

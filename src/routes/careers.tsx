@@ -7,7 +7,6 @@ import {
   CAREER_CATEGORIES,
   GENERAL_POSITION,
   ALL_POSITIONS,
-  findPosition,
 } from "@/lib/careers-data";
 import { breadcrumb, ldScript, ORG_ID, url } from "@/lib/seo";
 
@@ -499,5 +498,3 @@ function FileField({
     </div>
   );
 }
-
-export { findPosition };
