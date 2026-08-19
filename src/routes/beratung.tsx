@@ -26,6 +26,7 @@ import {
   CONSULTATION_TOPICS,
   CONTACT,
   HOW_STEPS,
+  MANAGE,
   PREQUAL_QUESTIONS,
   PROJECT_PHASES,
   PROJECT_TYPES,
@@ -353,6 +354,7 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
+  const [manageUrl, setManageUrl] = useState("");
   const sectionRef = useRef<HTMLElement | null>(null);
 
   const days = useMemo(() => {
@@ -451,7 +453,7 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
       files.forEach((f) => fd.append("files", f));
 
       const res = await fetch("/api/public/consultation-booking", { method: "POST", body: fd });
-      const payload = (await res.json().catch(() => ({}))) as { error?: string };
+      const payload = (await res.json().catch(() => ({}))) as { error?: string; manageUrl?: string };
       if (res.status === 409 || payload.error === "slot_taken") {
         setError(l(BERATUNG.slotTaken));
         setSlot("");
@@ -460,6 +462,7 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
         return;
       }
       if (!res.ok) throw new Error(payload.error ?? "failed");
+      setManageUrl(payload.manageUrl ?? "");
       setDone(true);
       scrollTop();
     } catch {
@@ -501,6 +504,14 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
                 <dd>{l(BERATUNG.summaryContactValue)}</dd>
               </div>
             </dl>
+            {manageUrl && (
+              <a
+                href={manageUrl}
+                className="mt-8 inline-block border border-border px-6 py-3 text-sm hover:border-gold transition"
+              >
+                {l(MANAGE.manageLink)}
+              </a>
+            )}
           </div>
         ) : (
           <div className="mt-10 border border-border bg-background">
