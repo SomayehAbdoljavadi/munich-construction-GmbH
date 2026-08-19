@@ -226,13 +226,25 @@ export const Route = createFileRoute("/api/public/careers-application")({
             </table>
           </div>`;
 
+        // Prefer the Lovable connector gateway when available, otherwise call Resend directly.
+        const gatewayKey = process.env["LOVABLE_API_KEY"];
+        const endpoint = gatewayKey
+          ? "https://connector-gateway.lovable.dev/resend/emails"
+          : "https://api.resend.com/emails";
+
         const send = async (payload: Record<string, unknown>) => {
-          const res = await fetch("https://api.resend.com/emails", {
+          const res = await fetch(endpoint, {
             method: "POST",
-            headers: {
-              authorization: `Bearer ${apiKey}`,
-              "content-type": "application/json",
-            },
+            headers: gatewayKey
+              ? {
+                  authorization: `Bearer ${gatewayKey}`,
+                  "X-Connection-Api-Key": apiKey,
+                  "content-type": "application/json",
+                }
+              : {
+                  authorization: `Bearer ${apiKey}`,
+                  "content-type": "application/json",
+                },
             body: JSON.stringify(payload),
           });
           if (!res.ok) {
