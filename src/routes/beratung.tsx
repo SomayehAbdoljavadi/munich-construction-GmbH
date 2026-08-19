@@ -290,7 +290,23 @@ function BeratungPage() {
               <Mail className="h-4 w-4" />
               {CONTACT.email}
             </a>
+            {(() => {
+              const photo = photoLink(lang);
+              const isWa = photo.channel === "whatsapp";
+              return (
+                <a
+                  href={photo.href}
+                  {...(photo.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="inline-flex items-center gap-2 border border-white/25 px-7 py-3.5 text-sm font-medium hover:border-gold hover:text-gold transition"
+                >
+                  {isWa ? <MessageCircle className="h-4 w-4" /> : <Mail className="h-4 w-4" />}
+                  {l(BERATUNG.ctaPhotos)}
+                </a>
+              );
+            })()}
           </div>
+          <p className="mt-4 text-sm text-white/50">{l(BERATUNG.ctaPhotosHint)}</p>
+
 
           <div className="mt-14 border-t border-white/10 pt-8">
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/40">{l(BERATUNG.linksTitle)}</p>
