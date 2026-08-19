@@ -15,9 +15,12 @@ import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ImprintRouteImport } from './routes/imprint'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CareersRouteImport } from './routes/careers'
+import { Route as BeratungRouteImport } from './routes/beratung'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesSlugRouteImport } from './routes/services_.$slug'
+import { Route as ApiPublicConsultationCallbackRouteImport } from './routes/api/public/consultation-callback'
+import { Route as ApiPublicConsultationBookingRouteImport } from './routes/api/public/consultation-booking'
 import { Route as ApiPublicCareersApplicationRouteImport } from './routes/api/public/careers-application'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -50,6 +53,11 @@ const CareersRoute = CareersRouteImport.update({
   path: '/careers',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BeratungRoute = BeratungRouteImport.update({
+  id: '/beratung',
+  path: '/beratung',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -65,6 +73,18 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicConsultationCallbackRoute =
+  ApiPublicConsultationCallbackRouteImport.update({
+    id: '/api/public/consultation-callback',
+    path: '/api/public/consultation-callback',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicConsultationBookingRoute =
+  ApiPublicConsultationBookingRouteImport.update({
+    id: '/api/public/consultation-booking',
+    path: '/api/public/consultation-booking',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicCareersApplicationRoute =
   ApiPublicCareersApplicationRouteImport.update({
     id: '/api/public/careers-application',
@@ -75,6 +95,7 @@ const ApiPublicCareersApplicationRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/beratung': typeof BeratungRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/imprint': typeof ImprintRoute
@@ -83,10 +104,13 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
+  '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
+  '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/beratung': typeof BeratungRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/imprint': typeof ImprintRoute
@@ -95,11 +119,14 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
+  '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
+  '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/beratung': typeof BeratungRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/imprint': typeof ImprintRoute
@@ -108,12 +135,15 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/services_/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
+  '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
+  '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/beratung'
     | '/careers'
     | '/contact'
     | '/imprint'
@@ -122,10 +152,13 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/services/$slug'
     | '/api/public/careers-application'
+    | '/api/public/consultation-booking'
+    | '/api/public/consultation-callback'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/beratung'
     | '/careers'
     | '/contact'
     | '/imprint'
@@ -134,10 +167,13 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/services/$slug'
     | '/api/public/careers-application'
+    | '/api/public/consultation-booking'
+    | '/api/public/consultation-callback'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/beratung'
     | '/careers'
     | '/contact'
     | '/imprint'
@@ -146,11 +182,14 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/services_/$slug'
     | '/api/public/careers-application'
+    | '/api/public/consultation-booking'
+    | '/api/public/consultation-callback'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BeratungRoute: typeof BeratungRoute
   CareersRoute: typeof CareersRoute
   ContactRoute: typeof ContactRoute
   ImprintRoute: typeof ImprintRoute
@@ -159,6 +198,8 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ApiPublicCareersApplicationRoute: typeof ApiPublicCareersApplicationRoute
+  ApiPublicConsultationBookingRoute: typeof ApiPublicConsultationBookingRoute
+  ApiPublicConsultationCallbackRoute: typeof ApiPublicConsultationCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -205,6 +246,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CareersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/beratung': {
+      id: '/beratung'
+      path: '/beratung'
+      fullPath: '/beratung'
+      preLoaderRoute: typeof BeratungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -226,6 +274,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/consultation-callback': {
+      id: '/api/public/consultation-callback'
+      path: '/api/public/consultation-callback'
+      fullPath: '/api/public/consultation-callback'
+      preLoaderRoute: typeof ApiPublicConsultationCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/consultation-booking': {
+      id: '/api/public/consultation-booking'
+      path: '/api/public/consultation-booking'
+      fullPath: '/api/public/consultation-booking'
+      preLoaderRoute: typeof ApiPublicConsultationBookingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/careers-application': {
       id: '/api/public/careers-application'
       path: '/api/public/careers-application'
@@ -239,6 +301,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BeratungRoute: BeratungRoute,
   CareersRoute: CareersRoute,
   ContactRoute: ContactRoute,
   ImprintRoute: ImprintRoute,
@@ -247,6 +310,8 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ApiPublicCareersApplicationRoute: ApiPublicCareersApplicationRoute,
+  ApiPublicConsultationBookingRoute: ApiPublicConsultationBookingRoute,
+  ApiPublicConsultationCallbackRoute: ApiPublicConsultationCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
