@@ -194,19 +194,16 @@ function CareersPage() {
           <div className="gold-divider w-16 mt-6" />
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {CAREER_CATEGORIES.map((cat, i) => {
-              const dark = i % 2 === 0;
+            {CAREER_CATEGORIES.map((cat) => {
               return (
                 <article
                   key={cat.id}
-                  className={`border p-8 md:p-10 flex flex-col ${
-                    dark ? "bg-ink text-white border-white/10" : "bg-background border-border"
-                  }`}
+                  className="border p-8 md:p-10 flex flex-col bg-ink text-white border-white/10"
                 >
                   <h3 className="font-display text-2xl">{cat.title[lang]}</h3>
                   <div className="gold-divider w-12 mt-4" />
                   {cat.note && (
-                    <p className={`mt-6 text-sm leading-relaxed ${dark ? "text-white/70" : "text-muted-foreground"}`}>
+                    <p className="mt-6 text-sm leading-relaxed text-white/70">
                       {cat.note[lang]}
                     </p>
                   )}
@@ -214,22 +211,20 @@ function CareersPage() {
                     {cat.positions.map((p) => (
                       <li
                         key={p.id}
-                        className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-t pt-4 ${
-                          dark ? "border-white/10" : "border-border"
-                        }`}
+                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-t pt-4 border-white/10"
                       >
                         <span className="font-sans text-base">{p.title[lang]}</span>
                         <button
                           type="button"
                           onClick={() => applyTo(p.id)}
-                          className={`shrink-0 inline-flex items-center gap-2 px-5 py-2.5 font-sans text-[11px] font-bold uppercase tracking-[0.18em] transition-colors ${
-                            dark
-                              ? "bg-gold text-ink hover:bg-white"
-                              : "bg-ink text-white hover:bg-gold hover:text-ink"
-                          }`}
+                          className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 font-sans text-[11px] font-bold uppercase tracking-[0.18em] transition-colors bg-gold text-ink hover:bg-white"
                         >
                           {C.apply[lang]}
                         </button>
+                      </li>
+                    ))}
+                  </ul>
+
                       </li>
                     ))}
                   </ul>
