@@ -20,6 +20,7 @@ import { Route as BeratungRouteImport } from './routes/beratung'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesSlugRouteImport } from './routes/services_.$slug'
+import { Route as ApiPublicConsultationRemindersRouteImport } from './routes/api/public/consultation-reminders'
 import { Route as ApiPublicConsultationManageRouteImport } from './routes/api/public/consultation-manage'
 import { Route as ApiPublicConsultationCallbackRouteImport } from './routes/api/public/consultation-callback'
 import { Route as ApiPublicConsultationBookingRouteImport } from './routes/api/public/consultation-booking'
@@ -80,6 +81,12 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicConsultationRemindersRoute =
+  ApiPublicConsultationRemindersRouteImport.update({
+    id: '/api/public/consultation-reminders',
+    path: '/api/public/consultation-reminders',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicConsultationManageRoute =
   ApiPublicConsultationManageRouteImport.update({
     id: '/api/public/consultation-manage',
@@ -121,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
   '/api/public/consultation-manage': typeof ApiPublicConsultationManageRoute
+  '/api/public/consultation-reminders': typeof ApiPublicConsultationRemindersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -138,6 +146,7 @@ export interface FileRoutesByTo {
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
   '/api/public/consultation-manage': typeof ApiPublicConsultationManageRoute
+  '/api/public/consultation-reminders': typeof ApiPublicConsultationRemindersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -156,6 +165,7 @@ export interface FileRoutesById {
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
   '/api/public/consultation-manage': typeof ApiPublicConsultationManageRoute
+  '/api/public/consultation-reminders': typeof ApiPublicConsultationRemindersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -175,6 +185,7 @@ export interface FileRouteTypes {
     | '/api/public/consultation-booking'
     | '/api/public/consultation-callback'
     | '/api/public/consultation-manage'
+    | '/api/public/consultation-reminders'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -192,6 +203,7 @@ export interface FileRouteTypes {
     | '/api/public/consultation-booking'
     | '/api/public/consultation-callback'
     | '/api/public/consultation-manage'
+    | '/api/public/consultation-reminders'
   id:
     | '__root__'
     | '/'
@@ -209,6 +221,7 @@ export interface FileRouteTypes {
     | '/api/public/consultation-booking'
     | '/api/public/consultation-callback'
     | '/api/public/consultation-manage'
+    | '/api/public/consultation-reminders'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -227,6 +240,7 @@ export interface RootRouteChildren {
   ApiPublicConsultationBookingRoute: typeof ApiPublicConsultationBookingRoute
   ApiPublicConsultationCallbackRoute: typeof ApiPublicConsultationCallbackRoute
   ApiPublicConsultationManageRoute: typeof ApiPublicConsultationManageRoute
+  ApiPublicConsultationRemindersRoute: typeof ApiPublicConsultationRemindersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -308,6 +322,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/consultation-reminders': {
+      id: '/api/public/consultation-reminders'
+      path: '/api/public/consultation-reminders'
+      fullPath: '/api/public/consultation-reminders'
+      preLoaderRoute: typeof ApiPublicConsultationRemindersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/consultation-manage': {
       id: '/api/public/consultation-manage'
       path: '/api/public/consultation-manage'
@@ -355,6 +376,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicConsultationBookingRoute: ApiPublicConsultationBookingRoute,
   ApiPublicConsultationCallbackRoute: ApiPublicConsultationCallbackRoute,
   ApiPublicConsultationManageRoute: ApiPublicConsultationManageRoute,
+  ApiPublicConsultationRemindersRoute: ApiPublicConsultationRemindersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
