@@ -161,16 +161,20 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <LanguageProvider>
-          <BrandIntro />
-          <div className="mc-app-root min-h-screen flex flex-col bg-background text-foreground">
-            <SiteHeader />
-            <main className="flex-1">
-              <Outlet />
-            </main>
-            {!isHome && <SiteFooter />}
-            <WhatsAppFloat />
-          </div>
+          <ConsentProvider>
+            <BrandIntro />
+            <div className="mc-app-root min-h-screen flex flex-col bg-background text-foreground">
+              <SiteHeader />
+              <main className="flex-1">
+                <Outlet />
+              </main>
+              {!isHome && <SiteFooter />}
+              <WhatsAppFloat />
+              <CookieConsent />
+            </div>
+          </ConsentProvider>
         </LanguageProvider>
+
       </ThemeProvider>
     </QueryClientProvider>
   );
