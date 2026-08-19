@@ -16,6 +16,7 @@ const translations: Dict = {
   "nav.about": { de: "Über uns", en: "About" },
   "nav.services": { de: "Leistungen", en: "Services" },
   "nav.projects": { de: "Projekte", en: "Projects" },
+  "nav.beratung": { de: "Beratung", en: "Consultation" },
   "nav.careers": { de: "Karriere", en: "Careers" },
   "nav.contact": { de: "Kontakt", en: "Contact" },
   "nav.imprint": { de: "Impressum", en: "Imprint" },

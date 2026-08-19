@@ -11,6 +11,7 @@ const links = [
   { to: "/about", key: "nav.about" },
   { to: "/services", key: "nav.services", hasDropdown: true },
   { to: "/projects", key: "nav.projects" },
+  { to: "/beratung", key: "nav.beratung" },
   { to: "/careers", key: "nav.careers" },
   { to: "/contact", key: "nav.contact" },
   { to: "/imprint", key: "nav.imprint" },
