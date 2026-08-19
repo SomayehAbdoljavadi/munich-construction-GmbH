@@ -468,3 +468,48 @@ export const BERATUNG_FAQ: Array<{ q: L; a: L }> = [
     },
   },
 ];
+
+// Copy for the /termin self-service page (reschedule / cancel a booking).
+export const MANAGE = {
+  eyebrow: { de: "Terminverwaltung", en: "Manage appointment" },
+  title: { de: "Ihren Beratungstermin verwalten", en: "Manage your consultation" },
+  intro: {
+    de: "Hier können Sie Ihren gebuchten Termin verschieben oder stornieren. Den Link dazu finden Sie in Ihrer Bestätigungs-E-Mail.",
+    en: "Here you can reschedule or cancel your booked appointment. You will find the link in your confirmation email.",
+  },
+  loading: { de: "Termin wird geladen …", en: "Loading appointment …" },
+  notFound: {
+    de: "Dieser Termin konnte nicht gefunden werden. Bitte öffnen Sie den Link aus Ihrer Bestätigungs-E-Mail erneut.",
+    en: "This appointment could not be found. Please reopen the link from your confirmation email.",
+  },
+  current: { de: "Ihr aktueller Termin", en: "Your current appointment" },
+  statusConfirmed: { de: "Bestätigt", en: "Confirmed" },
+  statusCancelled: { de: "Storniert", en: "Cancelled" },
+  rescheduleTitle: { de: "Termin verschieben", en: "Reschedule appointment" },
+  rescheduleCta: { de: "Neuen Termin bestätigen", en: "Confirm new time" },
+  rescheduling: { de: "Wird verschoben …", en: "Rescheduling …" },
+  rescheduled: { de: "Ihr Termin wurde erfolgreich verschoben.", en: "Your appointment has been rescheduled." },
+  cancelTitle: { de: "Termin stornieren", en: "Cancel appointment" },
+  cancelIntro: {
+    de: "Sie können den Termin jederzeit kostenlos stornieren. Wir freuen uns, wenn Sie später einen neuen Termin buchen.",
+    en: "You can cancel free of charge at any time. We would be glad to welcome you at a new appointment later.",
+  },
+  cancelConfirm: { de: "Wirklich stornieren?", en: "Really cancel?" },
+  cancelling: { de: "Wird storniert …", en: "Cancelling …" },
+  cancelledTitle: { de: "Termin storniert", en: "Appointment cancelled" },
+  cancelledText: {
+    de: "Ihr Beratungstermin wurde storniert. Sie können jederzeit einen neuen Termin buchen.",
+    en: "Your consultation has been cancelled. You can book a new appointment at any time.",
+  },
+  bookNew: { de: "Neuen Termin buchen", en: "Book a new appointment" },
+  tooLate: {
+    de: "Dieser Termin liegt in der Vergangenheit und kann nicht mehr geändert werden. Bitte rufen Sie uns an.",
+    en: "This appointment is in the past and can no longer be changed. Please give us a call.",
+  },
+  keepAppointment: { de: "Termin behalten", en: "Keep appointment" },
+  failure: {
+    de: "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder rufen Sie uns an.",
+    en: "Something went wrong. Please try again or give us a call.",
+  },
+  manageLink: { de: "Termin verschieben oder stornieren", en: "Reschedule or cancel your appointment" },
+} as const;

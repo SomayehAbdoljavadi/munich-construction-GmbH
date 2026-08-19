@@ -116,6 +116,14 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
         }
 
         const fmt = formatSlot(slotDate.toISOString(), lang);
+        const origin = (() => {
+          try {
+            return new URL(request.url).origin;
+          } catch {
+            return "https://www.munichconstruction.de";
+          }
+        })();
+        const manageUrl = `${origin}/termin?id=${booking.id}&token=${booking.cancel_token}`;
         const mail = mailer();
         const name = `${firstName} ${lastName}`;
 
@@ -142,6 +150,7 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
                   ["Budget", budget],
                   ["Beschreibung", description],
                   ["Sprache", lang.toUpperCase()],
+                  ["Verwaltungslink", manageUrl],
                 ])}
               </div>`,
               attachments: files.attachments,
@@ -158,7 +167,7 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
                      <p>thank you for booking a free initial consultation with Munich Construction GmbH.</p>
                      <p><strong>${escapeHtml(fmt.day)}, ${escapeHtml(fmt.time)}</strong> (approx. ${slotMinutes} minutes)<br/>
                      We will call you on ${escapeHtml(phone)}.</p>
-                     <p>If the appointment no longer suits you, simply reply to this email.</p>
+                     <p>Need a different time? You can <a href="${escapeHtml(manageUrl)}">reschedule or cancel your appointment here</a>.</p>
                      <p>Kind regards,<br/>Munich Construction GmbH<br/>+49 89 57843675<br/>info@munichconstruction.de</p>
                    </div>`
                 : `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6">
@@ -166,7 +175,7 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
                      <p>vielen Dank für die Buchung Ihres kostenlosen Erstgesprächs bei der Munich Construction GmbH.</p>
                      <p><strong>${escapeHtml(fmt.day)}, ${escapeHtml(fmt.time)} Uhr</strong> (ca. ${slotMinutes} Minuten)<br/>
                      Wir rufen Sie unter ${escapeHtml(phone)} an.</p>
-                     <p>Sollte Ihnen der Termin nicht mehr passen, antworten Sie einfach auf diese E-Mail.</p>
+                     <p>Sollte Ihnen der Termin nicht mehr passen, können Sie ihn <a href="${escapeHtml(manageUrl)}">hier verschieben oder stornieren</a>.</p>
                      <p>Mit freundlichen Grüßen<br/>Munich Construction GmbH<br/>+49 89 57843675<br/>info@munichconstruction.de</p>
                    </div>`;
             await mail.send({
@@ -186,7 +195,7 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
           console.error("[consultation] email service not configured: RESEND_API_KEY missing");
         }
 
-        return json({ ok: true, id: booking.id, cancelToken: booking.cancel_token }, 200);
+        return json({ ok: true, id: booking.id, cancelToken: booking.cancel_token, manageUrl }, 200);
       },
     },
   },
