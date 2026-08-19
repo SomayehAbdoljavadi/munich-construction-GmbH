@@ -43,7 +43,18 @@ export function SiteFooter() {
             <li><Link to="/careers" className="hover:text-gold">{t("nav.careers")}</Link></li>
             <li><Link to="/contact" className="hover:text-gold">{t("nav.contact")}</Link></li>
             <li><Link to="/imprint" className="hover:text-gold">{t("nav.imprint")}</Link></li>
+            <li><Link to="/datenschutz" className="hover:text-gold">{t("nav.privacy")}</Link></li>
+            <li>
+              <button
+                type="button"
+                onClick={openSettings}
+                className="hover:text-gold underline-offset-4 hover:underline text-left"
+              >
+                {t("nav.cookieSettings")}
+              </button>
+            </li>
           </ul>
+
         </div>
 
         <div className="md:col-span-4 space-y-4">
