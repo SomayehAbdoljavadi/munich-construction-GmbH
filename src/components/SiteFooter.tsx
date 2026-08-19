@@ -2,10 +2,13 @@ import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin, Instagram, Youtube } from "lucide-react";
 import { Logo } from "./Logo";
 import { useT } from "@/lib/i18n";
+import { useConsent } from "@/lib/consent";
 import { HEITERWANGER_MAPS_URL, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
 
 export function SiteFooter() {
   const { t } = useT();
+  const { openSettings } = useConsent();
+
   return (
     <footer className="bg-surface-inverse text-surface-inverse-foreground/80">
       <div className="container-wide py-16 grid grid-cols-1 md:grid-cols-12 gap-12">
