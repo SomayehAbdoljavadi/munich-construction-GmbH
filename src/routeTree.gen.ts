@@ -18,6 +18,7 @@ import { Route as CareersRouteImport } from './routes/careers'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesSlugRouteImport } from './routes/services_.$slug'
+import { Route as ApiPublicConsultationBookingRouteImport } from './routes/api/public/consultation-booking'
 import { Route as ApiPublicCareersApplicationRouteImport } from './routes/api/public/careers-application'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -65,6 +66,12 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicConsultationBookingRoute =
+  ApiPublicConsultationBookingRouteImport.update({
+    id: '/api/public/consultation-booking',
+    path: '/api/public/consultation-booking',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicCareersApplicationRoute =
   ApiPublicCareersApplicationRouteImport.update({
     id: '/api/public/careers-application',
@@ -83,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
+  '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -95,6 +103,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
+  '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -108,6 +117,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/services_/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
+  '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/services/$slug'
     | '/api/public/careers-application'
+    | '/api/public/consultation-booking'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -134,6 +145,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/services/$slug'
     | '/api/public/careers-application'
+    | '/api/public/consultation-booking'
   id:
     | '__root__'
     | '/'
@@ -146,6 +158,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/services_/$slug'
     | '/api/public/careers-application'
+    | '/api/public/consultation-booking'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -159,6 +172,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ApiPublicCareersApplicationRoute: typeof ApiPublicCareersApplicationRoute
+  ApiPublicConsultationBookingRoute: typeof ApiPublicConsultationBookingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -226,6 +240,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/consultation-booking': {
+      id: '/api/public/consultation-booking'
+      path: '/api/public/consultation-booking'
+      fullPath: '/api/public/consultation-booking'
+      preLoaderRoute: typeof ApiPublicConsultationBookingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/careers-application': {
       id: '/api/public/careers-application'
       path: '/api/public/careers-application'
@@ -247,6 +268,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ApiPublicCareersApplicationRoute: ApiPublicCareersApplicationRoute,
+  ApiPublicConsultationBookingRoute: ApiPublicConsultationBookingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
