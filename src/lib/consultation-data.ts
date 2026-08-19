@@ -49,6 +49,10 @@ export const BERATUNG = {
   ctaCallProject: { de: "Jetzt Projekt besprechen", en: "Discuss your project now" },
   ctaCallback: { de: "Rückruf anfordern", en: "Request a callback" },
   ctaPhotos: { de: "Projektfotos senden", en: "Send project photos" },
+  ctaPhotosHint: {
+    de: "Fotos per WhatsApp senden – oder alternativ per E-Mail.",
+    en: "Send photos via WhatsApp – or by email instead.",
+  },
   ctaMobileBook: { de: "📅 Termin buchen", en: "📅 Book a slot" },
   ctaMobileCall: { de: "📞 Jetzt anrufen", en: "📞 Call now" },
 
@@ -513,3 +517,33 @@ export const MANAGE = {
   },
   manageLink: { de: "Termin verschieben oder stornieren", en: "Reschedule or cancel your appointment" },
 } as const;
+
+/**
+ * "Projektfotos senden" target: WhatsApp when a WhatsApp number is configured,
+ * otherwise the existing email contact route.
+ */
+export const PHOTO_MESSAGE: L = {
+  de: "Hallo Munich Construction, ich möchte Ihnen Fotos zu meinem Projekt senden.",
+  en: "Hello Munich Construction, I would like to send you photos of my project.",
+};
+
+export const PHOTO_SUBJECT: L = {
+  de: "Projektfotos – Anfrage",
+  en: "Project photos – enquiry",
+};
+
+export function photoLink(lang: "de" | "en") {
+  const whatsapp = CONTACT.whatsapp?.trim();
+  if (whatsapp) {
+    return {
+      channel: "whatsapp" as const,
+      href: `${whatsapp}?text=${encodeURIComponent(PHOTO_MESSAGE[lang])}`,
+      external: true,
+    };
+  }
+  return {
+    channel: "email" as const,
+    href: `mailto:${CONTACT.email}?subject=${encodeURIComponent(PHOTO_SUBJECT[lang])}&body=${encodeURIComponent(PHOTO_MESSAGE[lang])}`,
+    external: false,
+  };
+}
