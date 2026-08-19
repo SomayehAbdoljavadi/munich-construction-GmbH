@@ -105,11 +105,52 @@ export function LocationMap({ className = "" }: { className?: string }) {
       activeMap?.remove();
       mapRef.current = null;
     };
-  }, []);
+  }, [mapAllowed]);
+
+  const l = (v: { de: string; en: string }) => v[lang];
+
+  if (!mapAllowed) {
+    return (
+      <div
+        className={`relative w-full h-full overflow-hidden bg-ink text-white grid place-items-center ${className}`}
+      >
+        <div className="max-w-md text-center px-6 py-10">
+          <MapPin className="h-7 w-7 text-gold mx-auto" aria-hidden />
+          <h3 className="font-display text-xl mt-4">{l(PLACEHOLDER.title)}</h3>
+          <p className="mt-3 text-sm leading-relaxed text-white/65">{l(PLACEHOLDER.body)}</p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => save({ ...(consent?.categories ?? {}), externalMedia: true } as never)}
+              className="bg-gold text-ink px-6 py-3 text-sm font-semibold hover:opacity-90 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            >
+              {l(PLACEHOLDER.enable)}
+            </button>
+            <button
+              type="button"
+              onClick={openSettings}
+              className="border border-white/40 px-6 py-3 text-sm font-semibold hover:border-gold hover:text-gold transition"
+            >
+              {l(PLACEHOLDER.settings)}
+            </button>
+          </div>
+          <a
+            href={THERESIENSTRASSE_MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-block text-xs text-white/50 underline underline-offset-4 hover:text-gold"
+          >
+            {l(PLACEHOLDER.open)}
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`relative w-full h-full overflow-hidden ${className}`}>
       <div ref={mapNodeRef} aria-label={`${ADDRESS} map`} className="h-full w-full mc-map-grayscale" />
     </div>
+
   );
 }
