@@ -175,8 +175,6 @@ export const Route = createFileRoute("/api/public/careers-application")({
           if (coverError) return json({ error: `cover_${coverError}` }, 400);
         }
 
-        if (isDuplicate(`${email}|${positionId}`)) return json({ ok: true, duplicate: true }, 200);
-
         const apiKey = process.env["RESEND_API_KEY"];
         const to = process.env["CAREERS_TO_EMAIL"] || "info@munichconstruction.de";
         const from = process.env["CAREERS_FROM_EMAIL"] || "Munich Construction GmbH <info@munichconstruction.de>";
@@ -185,6 +183,8 @@ export const Route = createFileRoute("/api/public/careers-application")({
           console.error("[careers] email service not configured: RESEND_API_KEY missing");
           return json({ error: "email_not_configured" }, 503);
         }
+
+        if (isDuplicate(`${email}|${positionId}`)) return json({ ok: true, duplicate: true }, 200);
 
         const category = mapping.de;
         const positionTitle = mapping.title[lang as "de" | "en"];
