@@ -86,6 +86,7 @@ export type Database = {
           project_description: string | null
           project_start: string | null
           project_type: string
+          reminder_sent_at: string | null
           slot_end: string
           slot_start: string
           status: string
@@ -108,6 +109,7 @@ export type Database = {
           project_description?: string | null
           project_start?: string | null
           project_type: string
+          reminder_sent_at?: string | null
           slot_end: string
           slot_start: string
           status?: string
@@ -130,6 +132,7 @@ export type Database = {
           project_description?: string | null
           project_start?: string | null
           project_type?: string
+          reminder_sent_at?: string | null
           slot_end?: string
           slot_start?: string
           status?: string
