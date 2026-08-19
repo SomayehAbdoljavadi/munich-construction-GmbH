@@ -198,12 +198,12 @@ function CareersPage() {
               return (
                 <article
                   key={cat.id}
-                  className="border p-8 md:p-10 flex flex-col bg-ink text-white border-white/10"
+                  className="border p-8 md:p-10 flex flex-col bg-card text-card-foreground border-border"
                 >
                   <h3 className="font-display text-2xl">{cat.title[lang]}</h3>
                   <div className="gold-divider w-12 mt-4" />
                   {cat.note && (
-                    <p className="mt-6 text-sm leading-relaxed text-white/70">
+                    <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
                       {cat.note[lang]}
                     </p>
                   )}
@@ -211,7 +211,7 @@ function CareersPage() {
                     {cat.positions.map((p) => (
                       <li
                         key={p.id}
-                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-t pt-4 border-white/10"
+                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-t pt-4 border-border"
                       >
                         <span className="font-sans text-base">{p.title[lang]}</span>
                         <button
