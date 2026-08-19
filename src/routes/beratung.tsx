@@ -30,6 +30,7 @@ import {
   PREQUAL_QUESTIONS,
   PROJECT_PHASES,
   PROJECT_TYPES,
+  photoLink,
   type L,
 } from "@/lib/consultation-data";
 
