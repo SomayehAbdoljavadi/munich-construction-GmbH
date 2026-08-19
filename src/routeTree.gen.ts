@@ -18,6 +18,7 @@ import { Route as CareersRouteImport } from './routes/careers'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesSlugRouteImport } from './routes/services_.$slug'
+import { Route as ApiPublicConsultationCallbackRouteImport } from './routes/api/public/consultation-callback'
 import { Route as ApiPublicConsultationBookingRouteImport } from './routes/api/public/consultation-booking'
 import { Route as ApiPublicCareersApplicationRouteImport } from './routes/api/public/careers-application'
 
@@ -66,6 +67,12 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicConsultationCallbackRoute =
+  ApiPublicConsultationCallbackRouteImport.update({
+    id: '/api/public/consultation-callback',
+    path: '/api/public/consultation-callback',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicConsultationBookingRoute =
   ApiPublicConsultationBookingRouteImport.update({
     id: '/api/public/consultation-booking',
@@ -91,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/services/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
+  '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -104,6 +112,7 @@ export interface FileRoutesByTo {
   '/services/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
+  '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -118,6 +127,7 @@ export interface FileRoutesById {
   '/services_/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
+  '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
+    | '/api/public/consultation-callback'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -146,6 +157,7 @@ export interface FileRouteTypes {
     | '/services/$slug'
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
+    | '/api/public/consultation-callback'
   id:
     | '__root__'
     | '/'
@@ -159,6 +171,7 @@ export interface FileRouteTypes {
     | '/services_/$slug'
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
+    | '/api/public/consultation-callback'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -173,6 +186,7 @@ export interface RootRouteChildren {
   ServicesSlugRoute: typeof ServicesSlugRoute
   ApiPublicCareersApplicationRoute: typeof ApiPublicCareersApplicationRoute
   ApiPublicConsultationBookingRoute: typeof ApiPublicConsultationBookingRoute
+  ApiPublicConsultationCallbackRoute: typeof ApiPublicConsultationCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -240,6 +254,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/consultation-callback': {
+      id: '/api/public/consultation-callback'
+      path: '/api/public/consultation-callback'
+      fullPath: '/api/public/consultation-callback'
+      preLoaderRoute: typeof ApiPublicConsultationCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/consultation-booking': {
       id: '/api/public/consultation-booking'
       path: '/api/public/consultation-booking'
@@ -269,6 +290,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesSlugRoute: ServicesSlugRoute,
   ApiPublicCareersApplicationRoute: ApiPublicCareersApplicationRoute,
   ApiPublicConsultationBookingRoute: ApiPublicConsultationBookingRoute,
+  ApiPublicConsultationCallbackRoute: ApiPublicConsultationCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
