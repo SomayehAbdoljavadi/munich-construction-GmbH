@@ -19,6 +19,7 @@ import { Route as BeratungRouteImport } from './routes/beratung'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesSlugRouteImport } from './routes/services_.$slug'
+import { Route as ApiPublicConsultationManageRouteImport } from './routes/api/public/consultation-manage'
 import { Route as ApiPublicConsultationCallbackRouteImport } from './routes/api/public/consultation-callback'
 import { Route as ApiPublicConsultationBookingRouteImport } from './routes/api/public/consultation-booking'
 import { Route as ApiPublicCareersApplicationRouteImport } from './routes/api/public/careers-application'
@@ -73,6 +74,12 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicConsultationManageRoute =
+  ApiPublicConsultationManageRouteImport.update({
+    id: '/api/public/consultation-manage',
+    path: '/api/public/consultation-manage',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicConsultationCallbackRoute =
   ApiPublicConsultationCallbackRouteImport.update({
     id: '/api/public/consultation-callback',
@@ -106,6 +113,7 @@ export interface FileRoutesByFullPath {
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
+  '/api/public/consultation-manage': typeof ApiPublicConsultationManageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -121,6 +129,7 @@ export interface FileRoutesByTo {
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
+  '/api/public/consultation-manage': typeof ApiPublicConsultationManageRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -137,6 +146,7 @@ export interface FileRoutesById {
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
+  '/api/public/consultation-manage': typeof ApiPublicConsultationManageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
     | '/api/public/consultation-callback'
+    | '/api/public/consultation-manage'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
     | '/api/public/consultation-callback'
+    | '/api/public/consultation-manage'
   id:
     | '__root__'
     | '/'
@@ -184,6 +196,7 @@ export interface FileRouteTypes {
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
     | '/api/public/consultation-callback'
+    | '/api/public/consultation-manage'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -200,6 +213,7 @@ export interface RootRouteChildren {
   ApiPublicCareersApplicationRoute: typeof ApiPublicCareersApplicationRoute
   ApiPublicConsultationBookingRoute: typeof ApiPublicConsultationBookingRoute
   ApiPublicConsultationCallbackRoute: typeof ApiPublicConsultationCallbackRoute
+  ApiPublicConsultationManageRoute: typeof ApiPublicConsultationManageRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -274,6 +288,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/consultation-manage': {
+      id: '/api/public/consultation-manage'
+      path: '/api/public/consultation-manage'
+      fullPath: '/api/public/consultation-manage'
+      preLoaderRoute: typeof ApiPublicConsultationManageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/consultation-callback': {
       id: '/api/public/consultation-callback'
       path: '/api/public/consultation-callback'
@@ -312,6 +333,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicCareersApplicationRoute: ApiPublicCareersApplicationRoute,
   ApiPublicConsultationBookingRoute: ApiPublicConsultationBookingRoute,
   ApiPublicConsultationCallbackRoute: ApiPublicConsultationCallbackRoute,
+  ApiPublicConsultationManageRoute: ApiPublicConsultationManageRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
