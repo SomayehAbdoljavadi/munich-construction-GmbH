@@ -3,17 +3,41 @@ import { THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
 import "leaflet/dist/leaflet.css";
 import type { LatLngExpression, Map as LeafletMap } from "leaflet";
 import { useEffect, useRef } from "react";
+import { MapPin } from "lucide-react";
+import { useConsent } from "@/lib/consent";
+import { useT } from "@/lib/i18n";
 
 const ADDRESS = "Theresienstraße 93, 80333 München";
 const MAP_CENTER: LatLngExpression = [48.1519814, 11.5606717];
 const MAP_ZOOM = 16;
 
+const PLACEHOLDER = {
+  title: { de: "Karte ist deaktiviert", en: "Map is disabled" },
+  body: {
+    de: "Um die interaktive Karte zu sehen, benötigen wir Ihre Einwilligung für externe Medien. Dabei wird Ihre IP-Adresse an OpenStreetMap übertragen.",
+    en: "To display the interactive map we need your consent for external media. Your IP address will be transmitted to OpenStreetMap.",
+  },
+  enable: { de: "Karte aktivieren", en: "Enable map" },
+  settings: { de: "Cookie-Einstellungen", en: "Cookie settings" },
+  open: { de: "Adresse in Google Maps öffnen", en: "Open address in Google Maps" },
+} as const;
+
+/**
+ * The Leaflet map loads tiles from OpenStreetMap (a third party), so it is
+ * gated behind the "External Media" consent category. Before consent only a
+ * privacy-friendly placeholder is rendered — no external request is made.
+ */
 export function LocationMap({ className = "" }: { className?: string }) {
   const mapNodeRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<LeafletMap | null>(null);
+  const { lang } = useT();
+  const { ready, allows, save, consent, openSettings } = useConsent();
+  const mapAllowed = ready && allows("externalMedia");
 
   useEffect(() => {
+    if (!mapAllowed) return;
     if (!mapNodeRef.current || mapRef.current) return;
+
 
     let cancelled = false;
     let activeMap: LeafletMap | null = null;
