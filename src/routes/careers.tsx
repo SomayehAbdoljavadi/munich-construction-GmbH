@@ -262,7 +262,7 @@ function CareersPage() {
                 <p className="font-display text-xl md:text-2xl">{C.success[lang]}</p>
               </div>
             ) : (
-              <form onSubmit={onSubmit} noValidate className="space-y-8">
+              <form onSubmit={onSubmit} noValidate className="space-y-8" suppressHydrationWarning>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Wrap label={C.firstName[lang]} htmlFor="firstName" error={errors.firstName}>
                     <input {...field("firstName", "text")} maxLength={80} autoComplete="given-name" />
@@ -402,7 +402,7 @@ function Wrap({
   return (
     <div>
       <label htmlFor={htmlFor} className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground block mb-3">
-        {label} <span className="text-gold">·</span>
+        {label} <span className="text-gold text-lg align-middle" aria-hidden="true">*</span>
       </label>
       {children}
       {error && <FieldError id={`${htmlFor}-error`}>{error}</FieldError>}
@@ -445,7 +445,7 @@ function FileField({
   return (
     <div>
       <label htmlFor={id} className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground block mb-3">
-        {label} {required && <span className="text-gold">·</span>}
+        {label} {required && <span className="text-gold text-lg align-middle" aria-hidden="true">*</span>}
       </label>
       <div className="border border-dashed border-border p-4 flex flex-wrap items-center gap-3">
         <input
