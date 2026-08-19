@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TerminRouteImport } from './routes/termin'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProjectsRouteImport } from './routes/projects'
@@ -24,6 +25,11 @@ import { Route as ApiPublicConsultationCallbackRouteImport } from './routes/api/
 import { Route as ApiPublicConsultationBookingRouteImport } from './routes/api/public/consultation-booking'
 import { Route as ApiPublicCareersApplicationRouteImport } from './routes/api/public/careers-application'
 
+const TerminRoute = TerminRouteImport.update({
+  id: '/termin',
+  path: '/termin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/termin': typeof TerminRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/termin': typeof TerminRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
@@ -142,6 +150,7 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/termin': typeof TerminRoute
   '/services_/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
@@ -160,6 +169,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/services'
     | '/sitemap.xml'
+    | '/termin'
     | '/services/$slug'
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
@@ -176,6 +186,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/services'
     | '/sitemap.xml'
+    | '/termin'
     | '/services/$slug'
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
@@ -192,6 +203,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/services'
     | '/sitemap.xml'
+    | '/termin'
     | '/services_/$slug'
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
@@ -209,6 +221,7 @@ export interface RootRouteChildren {
   ProjectsRoute: typeof ProjectsRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TerminRoute: typeof TerminRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ApiPublicCareersApplicationRoute: typeof ApiPublicCareersApplicationRoute
   ApiPublicConsultationBookingRoute: typeof ApiPublicConsultationBookingRoute
@@ -218,6 +231,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/termin': {
+      id: '/termin'
+      path: '/termin'
+      fullPath: '/termin'
+      preLoaderRoute: typeof TerminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -329,6 +349,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsRoute: ProjectsRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TerminRoute: TerminRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ApiPublicCareersApplicationRoute: ApiPublicCareersApplicationRoute,
   ApiPublicConsultationBookingRoute: ApiPublicConsultationBookingRoute,
