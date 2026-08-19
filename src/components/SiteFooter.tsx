@@ -2,10 +2,13 @@ import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin, Instagram, Youtube } from "lucide-react";
 import { Logo } from "./Logo";
 import { useT } from "@/lib/i18n";
+import { useConsent } from "@/lib/consent";
 import { HEITERWANGER_MAPS_URL, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
 
 export function SiteFooter() {
   const { t } = useT();
+  const { openSettings } = useConsent();
+
   return (
     <footer className="bg-surface-inverse text-surface-inverse-foreground/80">
       <div className="container-wide py-16 grid grid-cols-1 md:grid-cols-12 gap-12">
@@ -43,7 +46,18 @@ export function SiteFooter() {
             <li><Link to="/careers" className="hover:text-gold">{t("nav.careers")}</Link></li>
             <li><Link to="/contact" className="hover:text-gold">{t("nav.contact")}</Link></li>
             <li><Link to="/imprint" className="hover:text-gold">{t("nav.imprint")}</Link></li>
+            <li><Link to="/datenschutz" className="hover:text-gold">{t("nav.privacy")}</Link></li>
+            <li>
+              <button
+                type="button"
+                onClick={openSettings}
+                className="hover:text-gold underline-offset-4 hover:underline text-left"
+              >
+                {t("nav.cookieSettings")}
+              </button>
+            </li>
           </ul>
+
         </div>
 
         <div className="md:col-span-4 space-y-4">

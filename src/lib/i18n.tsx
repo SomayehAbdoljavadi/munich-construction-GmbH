@@ -20,6 +20,8 @@ const translations: Dict = {
   "nav.careers": { de: "Karriere", en: "Careers" },
   "nav.contact": { de: "Kontakt", en: "Contact" },
   "nav.imprint": { de: "Impressum", en: "Imprint" },
+  "nav.privacy": { de: "Datenschutzerklärung", en: "Privacy Policy" },
+  "nav.cookieSettings": { de: "Cookie-Einstellungen", en: "Cookie Settings" },
   "nav.cta": { de: "Kontakt aufnehmen", en: "Get in Touch" },
 
   // hero

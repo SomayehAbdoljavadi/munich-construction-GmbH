@@ -14,6 +14,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ImprintRouteImport } from './routes/imprint'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as BeratungRouteImport } from './routes/beratung'
@@ -49,6 +50,11 @@ const ProjectsRoute = ProjectsRouteImport.update({
 const ImprintRoute = ImprintRouteImport.update({
   id: '/imprint',
   path: '/imprint',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/beratung': typeof BeratungRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/datenschutz': typeof DatenschutzRoute
   '/imprint': typeof ImprintRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
@@ -136,6 +143,7 @@ export interface FileRoutesByTo {
   '/beratung': typeof BeratungRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/datenschutz': typeof DatenschutzRoute
   '/imprint': typeof ImprintRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
@@ -155,6 +163,7 @@ export interface FileRoutesById {
   '/beratung': typeof BeratungRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/datenschutz': typeof DatenschutzRoute
   '/imprint': typeof ImprintRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
@@ -175,6 +184,7 @@ export interface FileRouteTypes {
     | '/beratung'
     | '/careers'
     | '/contact'
+    | '/datenschutz'
     | '/imprint'
     | '/projects'
     | '/services'
@@ -193,6 +203,7 @@ export interface FileRouteTypes {
     | '/beratung'
     | '/careers'
     | '/contact'
+    | '/datenschutz'
     | '/imprint'
     | '/projects'
     | '/services'
@@ -211,6 +222,7 @@ export interface FileRouteTypes {
     | '/beratung'
     | '/careers'
     | '/contact'
+    | '/datenschutz'
     | '/imprint'
     | '/projects'
     | '/services'
@@ -230,6 +242,7 @@ export interface RootRouteChildren {
   BeratungRoute: typeof BeratungRoute
   CareersRoute: typeof CareersRoute
   ContactRoute: typeof ContactRoute
+  DatenschutzRoute: typeof DatenschutzRoute
   ImprintRoute: typeof ImprintRoute
   ProjectsRoute: typeof ProjectsRoute
   ServicesRoute: typeof ServicesRoute
@@ -278,6 +291,13 @@ declare module '@tanstack/react-router' {
       path: '/imprint'
       fullPath: '/imprint'
       preLoaderRoute: typeof ImprintRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -366,6 +386,7 @@ const rootRouteChildren: RootRouteChildren = {
   BeratungRoute: BeratungRoute,
   CareersRoute: CareersRoute,
   ContactRoute: ContactRoute,
+  DatenschutzRoute: DatenschutzRoute,
   ImprintRoute: ImprintRoute,
   ProjectsRoute: ProjectsRoute,
   ServicesRoute: ServicesRoute,
