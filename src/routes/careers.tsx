@@ -375,7 +375,7 @@ function CareersPage() {
                 <button
                   type="submit"
                   disabled={status === "sending"}
-                  className="px-10 py-4 bg-ink text-white font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-gold hover:text-ink transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="px-10 py-4 bg-gold text-ink font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {status === "sending" ? C.submitting[lang] : C.submit[lang]}
                 </button>
