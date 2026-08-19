@@ -254,7 +254,7 @@ function CareersPage() {
             }`}
           >
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-4">{C.formEyebrow[lang]}</p>
-            <h2 className="font-display text-3xl">{C.formTitle[lang]}</h2>
+            <h2 className="font-display text-4xl md:text-5xl">{C.formTitle[lang]}</h2>
             <div className="gold-divider w-16 mt-6 mb-10" />
 
             {status === "success" ? (
