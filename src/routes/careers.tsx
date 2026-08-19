@@ -237,7 +237,7 @@ function CareersPage() {
             <button
               type="button"
               onClick={() => applyTo(GENERAL_POSITION.id)}
-              className="shrink-0 inline-flex items-center gap-2 bg-ink text-white px-8 py-4 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-gold hover:text-ink transition-colors"
+              className="shrink-0 inline-flex items-center gap-2 bg-gold text-ink px-8 py-4 font-sans text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors"
             >
               {C.apply[lang]}
             </button>
