@@ -224,10 +224,6 @@ function CareersPage() {
                       </li>
                     ))}
                   </ul>
-
-                      </li>
-                    ))}
-                  </ul>
                 </article>
               );
             })}
