@@ -16,6 +16,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { BrandIntro } from "@/components/BrandIntro";
 import { LanguageProvider } from "@/lib/i18n";
+import { ConsentProvider } from "@/lib/consent";
+import { CookieConsent } from "@/components/CookieConsent";
 import { ThemeProvider } from "@/lib/theme";
 import introGif from "@/assets/mc-intro.gif";
 
