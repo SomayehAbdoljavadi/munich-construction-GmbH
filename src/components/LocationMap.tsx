@@ -4,7 +4,7 @@ import "leaflet/dist/leaflet.css";
 import type { LatLngExpression, Map as LeafletMap } from "leaflet";
 import { useEffect, useRef } from "react";
 import { MapPin } from "lucide-react";
-import { useConsent } from "@/lib/consent";
+import { NONE, useConsent } from "@/lib/consent";
 import { useT } from "@/lib/i18n";
 
 const ADDRESS = "Theresienstraße 93, 80333 München";
@@ -121,7 +121,7 @@ export function LocationMap({ className = "" }: { className?: string }) {
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <button
               type="button"
-              onClick={() => save({ ...(consent?.categories ?? {}), externalMedia: true } as never)}
+              onClick={() => save({ ...NONE, ...(consent?.categories ?? {}), externalMedia: true })}
               className="bg-gold text-ink px-6 py-3 text-sm font-semibold hover:opacity-90 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
             >
               {l(PLACEHOLDER.enable)}
