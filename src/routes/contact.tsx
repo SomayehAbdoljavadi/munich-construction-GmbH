@@ -46,9 +46,11 @@ const schema = z.object({
 });
 
 function ContactPage() {
-  const { t } = useT();
+  const { t, lang } = useT();
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
 
   return (
     <>
@@ -120,16 +122,35 @@ function ContactPage() {
               </div>
             ) : (
               <form
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
-                  const fd = new FormData(e.currentTarget);
-                  const result = schema.safeParse(Object.fromEntries(fd));
+                  if (sending) return;
+                  const formEl = e.currentTarget;
+                  const fd = new FormData(formEl);
+                  const result = schema.safeParse({
+                    name: fd.get("name"),
+                    email: fd.get("email"),
+                    phone: fd.get("phone") ?? "",
+                    subject: fd.get("subject"),
+                    message: fd.get("message"),
+                  });
                   if (!result.success) {
-                    setError(result.error.issues[0]?.message ?? "Invalid input");
+                    setError(t("contact.form.invalid"));
                     return;
                   }
                   setError(null);
-                  setSubmitted(true);
+                  setSending(true);
+                  fd.set("lang", lang);
+                  fd.set("pageUrl", typeof window !== "undefined" ? window.location.href : "");
+                  try {
+                    const res = await fetch("/api/public/contact-request", { method: "POST", body: fd });
+                    if (!res.ok) throw new Error("failed");
+                    setSubmitted(true);
+                  } catch {
+                    setError(t("contact.form.error"));
+                  } finally {
+                    setSending(false);
+                  }
                 }}
                 className="space-y-6"
                 noValidate
@@ -153,15 +174,25 @@ function ContactPage() {
                     className="w-full bg-transparent border border-border focus:border-gold p-4 font-sans text-base focus:outline-none transition-colors resize-none"
                   />
                 </div>
+                <input
+                  type="text"
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="hidden"
+                />
                 {error && <p className="text-sm text-destructive">{error}</p>}
                 <button
                   type="submit"
-                  className="px-10 py-4 bg-ink text-white font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-gold hover:text-ink transition-colors"
+                  disabled={sending}
+                  className="px-10 py-4 bg-ink text-white font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-gold hover:text-ink transition-colors disabled:opacity-60 disabled:pointer-events-none"
                 >
-                  {t("contact.form.submit")}
+                  {sending ? t("contact.form.sending") : t("contact.form.submit")}
                 </button>
               </form>
             )}
+
           </div>
         </div>
       </section>

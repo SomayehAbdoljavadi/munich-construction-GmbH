@@ -210,6 +210,7 @@ export const Route = createFileRoute("/api/public/careers-application")({
           ["Email", email],
           ["Phone", phone],
           ["Submitted at", submittedAt],
+          ["Page URL", clean(request.headers.get("referer"), 300)],
           ["Website language", lang.toUpperCase()],
         ];
 
@@ -259,7 +260,7 @@ export const Route = createFileRoute("/api/public/careers-application")({
             from,
             to: [to],
             reply_to: email,
-            subject: `Career – ${category} – ${mapping.title.de} – ${firstName} ${lastName}`,
+            subject: `Career Application – ${mapping.title.de} – ${firstName} ${lastName}`,
             html: notificationHtml,
             attachments,
           });

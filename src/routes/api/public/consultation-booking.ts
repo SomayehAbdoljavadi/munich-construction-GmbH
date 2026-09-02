@@ -133,7 +133,7 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
               from: mail.from,
               to: [mail.to],
               reply_to: email,
-              subject: `Beratungstermin – ${fmt.day} ${fmt.time} – ${name}`,
+              subject: `New Consultation Request – ${name} – ${fmt.day} ${fmt.time}`,
               html: `<div style="font-family:Arial,sans-serif;color:#111">
                 <h2 style="margin:0 0 16px">Neuer Beratungstermin</h2>
                 ${table([
@@ -151,6 +151,8 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
                   ["Beschreibung", description],
                   ["Sprache", lang.toUpperCase()],
                   ["Verwaltungslink", manageUrl],
+                  ["Eingegangen am", new Date().toLocaleString("de-DE", { timeZone: "Europe/Berlin" })],
+                  ["Seite", clean(request.headers.get("referer"), 300)],
                 ])}
               </div>`,
               attachments: files.attachments,
