@@ -170,7 +170,11 @@ const translations: Dict = {
   "contact.form.subject": { de: "Betreff", en: "Subject" },
   "contact.form.message": { de: "Nachricht", en: "Message" },
   "contact.form.submit": { de: "Anfrage senden", en: "Send inquiry" },
-  "contact.form.thanks": { de: "Vielen Dank — wir melden uns innerhalb von 24 Stunden.", en: "Thank you — we'll get back to you within 24 hours." },
+  "contact.form.sending": { de: "Wird gesendet …", en: "Sending …" },
+  "contact.form.error": { de: "Ihre Anfrage konnte leider nicht gesendet werden. Bitte versuchen Sie es erneut oder rufen Sie uns an.", en: "Unfortunately your request could not be sent. Please try again or call us." },
+  "contact.form.invalid": { de: "Bitte prüfen Sie Ihre Eingaben.", en: "Please check your entries." },
+  "contact.form.thanks": { de: "Vielen Dank! Ihre Anfrage wurde erfolgreich übermittelt. Wir werden uns schnellstmöglich bei Ihnen melden.", en: "Thank you! Your request has been submitted successfully. We will contact you as soon as possible." },
+
   "contact.office": { de: "Büro", en: "Office" },
   "contact.companyAddress": { de: "Unternehmensanschrift", en: "Company Address" },
   "contact.phone": { de: "Telefon", en: "Phone" },
