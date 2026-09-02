@@ -43,8 +43,9 @@ function ImprintPage() {
           </Section>
 
           <Section title={t("imprint.represented")}>
-            <p>Mehdi Mardi, Dipl.-Ing. (Bauingenieurwesen)</p>
-            <p className="text-muted-foreground text-sm">Geschäftsführer | Hochbau</p>
+            <p>Dipl.-Ing. Mehdi Mardi</p>
+            <p className="text-muted-foreground text-sm">Bau-Sachverständiger | Fachplaner für vorbeugenden Brandschutz</p>
+            <p className="text-muted-foreground text-sm">Geschäftsführer – Munich Construction GmbH</p>
           </Section>
 
           <Section title={t("imprint.register")}>
