@@ -231,11 +231,13 @@ function HomePage() {
                 >
                   Blütenstraße 21, 80799 München-Maxvorstadt
                 </a>
+              </ContactRow>
+              <ContactRow icon={<MapPin size={18} />} label={t("contact.companyAddress")}>
                 <a
                   href={COMPANY_MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block hover:text-gold hover:underline transition-colors mt-1"
+                  className="block hover:text-gold hover:underline transition-colors"
                 >
                   Heiterwanger Straße 30, 81373 München
                 </a>
