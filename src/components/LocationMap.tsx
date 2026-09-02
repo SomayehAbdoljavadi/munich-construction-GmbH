@@ -1,5 +1,5 @@
 import markerImg from "@/assets/map-marker.png";
-import { THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
+import { OFFICE_ADDRESS, OFFICE_MAPS_URL } from "@/lib/mapLinks";
 import "leaflet/dist/leaflet.css";
 import type { LatLngExpression, Map as LeafletMap } from "leaflet";
 import { useEffect, useRef } from "react";
@@ -7,8 +7,8 @@ import { MapPin } from "lucide-react";
 import { NONE, useConsent } from "@/lib/consent";
 import { useT } from "@/lib/i18n";
 
-const ADDRESS = "Theresienstraße 93, 80333 München";
-const MAP_CENTER: LatLngExpression = [48.1519814, 11.5606717];
+const ADDRESS = OFFICE_ADDRESS;
+const MAP_CENTER: LatLngExpression = [48.1524, 11.5748];
 const MAP_ZOOM = 16;
 
 const PLACEHOLDER = {
@@ -58,7 +58,7 @@ export function LocationMap({ className = "" }: { className?: string }) {
 
       const logoIcon = L.divIcon({
         className: "mc-map-marker",
-        html: `<a href="${THERESIENSTRASSE_MAPS_URL}" target="_blank" rel="noopener noreferrer" class="mc-map-marker-shell" aria-label="Open ${ADDRESS} in Google Maps" title="${ADDRESS}"><img src="${markerImg}" alt="Munich Construction" draggable="false" class="mc-map-marker-img" /><span class="mc-map-marker-tooltip" role="tooltip">${ADDRESS}</span></a>`,
+        html: `<a href="${OFFICE_MAPS_URL}" target="_blank" rel="noopener noreferrer" class="mc-map-marker-shell" aria-label="Open ${ADDRESS} in Google Maps" title="${ADDRESS}"><img src="${markerImg}" alt="Munich Construction" draggable="false" class="mc-map-marker-img" /><span class="mc-map-marker-tooltip" role="tooltip">${ADDRESS}</span></a>`,
         iconSize: [48, 60],
         iconAnchor: [24, 58],
       });
@@ -69,7 +69,7 @@ export function LocationMap({ className = "" }: { className?: string }) {
         markerLink?.addEventListener("click", (event) => {
           event.preventDefault();
           event.stopPropagation();
-          window.open(THERESIENSTRASSE_MAPS_URL, "_blank", "noopener,noreferrer");
+          window.open(OFFICE_MAPS_URL, "_blank", "noopener,noreferrer");
         });
       });
       marker.addTo(map);
@@ -135,7 +135,7 @@ export function LocationMap({ className = "" }: { className?: string }) {
             </button>
           </div>
           <a
-            href={THERESIENSTRASSE_MAPS_URL}
+            href={OFFICE_MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-5 inline-block text-xs text-white/50 underline underline-offset-4 hover:text-gold"

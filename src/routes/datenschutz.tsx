@@ -31,8 +31,8 @@ const T = {
   },
   controllerTitle: { de: "1. Verantwortlicher", en: "1. Controller" },
   controller: {
-    de: "Munich Construction GmbH, Theresienstraße 93, 80333 München, Deutschland · Telefon: +49 (0) 89 57 84 3675 · E-Mail: info@munichconstruction.de · Vertreten durch: Mehdi Mardi.",
-    en: "Munich Construction GmbH, Theresienstraße 93, 80333 Munich, Germany · Phone: +49 (0) 89 57 84 3675 · Email: info@munichconstruction.de · Represented by: Mehdi Mardi.",
+    de: "Munich Construction GmbH, Heiterwanger Straße 30, 81373 München, Deutschland · Telefon: +49 (0) 89 57 84 3675 · E-Mail: info@munichconstruction.de · Vertreten durch: Mehdi Mardi.",
+    en: "Munich Construction GmbH, Heiterwanger Straße 30, 81373 Munich, Germany · Phone: +49 (0) 89 57 84 3675 · Email: info@munichconstruction.de · Represented by: Mehdi Mardi.",
   },
   hostingTitle: { de: "2. Hosting und Server-Logs", en: "2. Hosting and server logs" },
   hosting: {

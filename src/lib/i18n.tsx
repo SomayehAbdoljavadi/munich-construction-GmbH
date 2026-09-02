@@ -172,6 +172,7 @@ const translations: Dict = {
   "contact.form.submit": { de: "Anfrage senden", en: "Send inquiry" },
   "contact.form.thanks": { de: "Vielen Dank — wir melden uns innerhalb von 24 Stunden.", en: "Thank you — we'll get back to you within 24 hours." },
   "contact.office": { de: "Büro", en: "Office" },
+  "contact.companyAddress": { de: "Unternehmensanschrift", en: "Company Address" },
   "contact.phone": { de: "Telefon", en: "Phone" },
   "contact.mobile": { de: "Mobil", en: "Mobile" },
   "contact.email": { de: "E-Mail", en: "Email" },

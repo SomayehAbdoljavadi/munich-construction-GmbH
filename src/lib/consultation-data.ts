@@ -467,8 +467,8 @@ export const BERATUNG_FAQ: Array<{ q: L; a: L }> = [
       en: "In which area does Munich Construction work?",
     },
     a: {
-      de: "Wir arbeiten in München und Bayern – von unseren Standorten in der Theresienstraße 93 und der Heiterwanger Straße 30 in München.",
-      en: "We work in Munich and Bavaria — from our locations at Theresienstraße 93 and Heiterwanger Straße 30 in Munich.",
+      de: "Wir arbeiten in München und Bayern – von unseren Standorten in der Blütenstraße 21 und der Heiterwanger Straße 30 in München.",
+      en: "We work in Munich and Bavaria — from our locations at Blütenstraße 21 and Heiterwanger Straße 30 in Munich.",
     },
   },
 ];

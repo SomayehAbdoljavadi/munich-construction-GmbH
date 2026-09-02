@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin, Instagram, Youtube } from "lucide-react";
 import { Logo } from "./Logo";
 import { useT } from "@/lib/i18n";
 import { useConsent } from "@/lib/consent";
-import { HEITERWANGER_MAPS_URL, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
+import { COMPANY_MAPS_URL, OFFICE_MAPS_URL } from "@/lib/mapLinks";
 
 export function SiteFooter() {
   const { t } = useT();
@@ -67,23 +67,33 @@ export function SiteFooter() {
           <ul className="space-y-3 text-sm">
             <li className="flex gap-3">
               <MapPin size={16} className="mt-0.5 text-gold shrink-0" />
-              <span className="space-y-2">
-                <a
-                  href={THERESIENSTRASSE_MAPS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block hover:text-gold hover:underline transition-colors"
-                >
-                  Theresienstraße 93<br />80333 München
-                </a>
-                <a
-                  href={HEITERWANGER_MAPS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block hover:text-gold hover:underline transition-colors"
-                >
-                  Heiterwanger Straße 30<br />81373 München
-                </a>
+              <span className="space-y-3 block">
+                <span className="block">
+                  <span className="block font-mono text-[10px] uppercase tracking-[0.2em] opacity-60">
+                    {t("contact.office")}
+                  </span>
+                  <a
+                    href={OFFICE_MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block hover:text-gold hover:underline transition-colors"
+                  >
+                    Blütenstraße 21<br />80799 München-Maxvorstadt
+                  </a>
+                </span>
+                <span className="block">
+                  <span className="block font-mono text-[10px] uppercase tracking-[0.2em] opacity-60">
+                    {t("contact.companyAddress")}
+                  </span>
+                  <a
+                    href={COMPANY_MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block hover:text-gold hover:underline transition-colors"
+                  >
+                    Heiterwanger Straße 30<br />81373 München
+                  </a>
+                </span>
               </span>
             </li>
             <li className="flex gap-3">
