@@ -73,7 +73,7 @@ export const Route = createFileRoute("/api/public/consultation-callback")({
               from: mail.from,
               to: [mail.to],
               reply_to: email,
-              subject: `Rückrufanfrage – ${name}`,
+              subject: `New Website Request – Callback – ${name}`,
               html: `<div style="font-family:Arial,sans-serif;color:#111">
                 <h2 style="margin:0 0 16px">Neue Rückrufanfrage</h2>
                 ${table([
@@ -85,6 +85,8 @@ export const Route = createFileRoute("/api/public/consultation-callback")({
                   ["Projektstart", projectStart],
                   ["Beschreibung", description],
                   ["Sprache", lang.toUpperCase()],
+                  ["Eingegangen am", new Date().toLocaleString("de-DE", { timeZone: "Europe/Berlin" })],
+                  ["Seite", clean(request.headers.get("referer"), 300)],
                 ])}
               </div>`,
               attachments: files.attachments,
