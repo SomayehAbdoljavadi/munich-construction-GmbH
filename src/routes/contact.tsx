@@ -46,9 +46,11 @@ const schema = z.object({
 });
 
 function ContactPage() {
-  const { t } = useT();
+  const { t, lang } = useT();
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
 
   return (
     <>
