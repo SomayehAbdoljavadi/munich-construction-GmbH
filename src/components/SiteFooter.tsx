@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin, Instagram, Youtube } from "lucide-react";
 import { Logo } from "./Logo";
 import { useT } from "@/lib/i18n";
 import { useConsent } from "@/lib/consent";
-import { HEITERWANGER_MAPS_URL, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
+import { COMPANY_MAPS_URL, OFFICE_MAPS_URL } from "@/lib/mapLinks";
 
 export function SiteFooter() {
   const { t } = useT();
@@ -69,15 +69,15 @@ export function SiteFooter() {
               <MapPin size={16} className="mt-0.5 text-gold shrink-0" />
               <span className="space-y-2">
                 <a
-                  href={THERESIENSTRASSE_MAPS_URL}
+                  href={OFFICE_MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:text-gold hover:underline transition-colors"
                 >
-                  Theresienstraße 93<br />80333 München
+                  Blütenstraße 21<br />80799 München-Maxvorstadt
                 </a>
                 <a
-                  href={HEITERWANGER_MAPS_URL}
+                  href={COMPANY_MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:text-gold hover:underline transition-colors"

@@ -30,8 +30,8 @@ export const ORG_JSONLD = {
   address: [
     {
       "@type": "PostalAddress",
-      streetAddress: "Theresienstraße 93",
-      postalCode: "80333",
+      streetAddress: "Blütenstraße 21",
+      postalCode: "80799",
       addressLocality: "München",
       addressRegion: "Bayern",
       addressCountry: "DE",

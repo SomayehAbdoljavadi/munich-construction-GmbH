@@ -11,7 +11,7 @@ import { useT } from "@/lib/i18n";
 import { HeroSkylineArt } from "@/components/HeroSkylineArt";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LocationMap } from "@/components/LocationMap";
-import { HEITERWANGER_MAPS_URL, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
+import { COMPANY_MAPS_URL, OFFICE_MAPS_URL } from "@/lib/mapLinks";
 import { HOME_SERVICES_I18N, localizeService } from "@/lib/services-data";
 import heroBg from "@/assets/mc-hero-bg.jpg";
 import { url } from "@/lib/seo";
@@ -224,15 +224,15 @@ function HomePage() {
               </ContactRow>
               <ContactRow icon={<MapPin size={18} />} label={t("contact.office")}>
                 <a
-                  href={THERESIENSTRASSE_MAPS_URL}
+                  href={OFFICE_MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:text-gold hover:underline transition-colors"
                 >
-                  Theresienstraße 93, 80333 München
+                  Blütenstraße 21, 80799 München-Maxvorstadt
                 </a>
                 <a
-                  href={HEITERWANGER_MAPS_URL}
+                  href={COMPANY_MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:text-gold hover:underline transition-colors mt-1"

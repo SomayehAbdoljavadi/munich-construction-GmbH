@@ -4,7 +4,7 @@ import { z } from "zod";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { useT } from "@/lib/i18n";
 import { LocationMap } from "@/components/LocationMap";
-import { HEITERWANGER_MAPS_URL, THERESIENSTRASSE_MAPS_URL } from "@/lib/mapLinks";
+import { COMPANY_MAPS_URL, OFFICE_MAPS_URL } from "@/lib/mapLinks";
 
 import { breadcrumb, ldScript, ORG_ID, url } from "@/lib/seo";
 
@@ -83,15 +83,15 @@ function ContactPage() {
             </Block>
             <Block icon={<MapPin size={18} />} label={t("contact.office")}>
               <a
-                href={THERESIENSTRASSE_MAPS_URL}
+                href={OFFICE_MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block hover:text-gold hover:underline transition-colors"
               >
-                Theresienstraße 93<br />80333 München
+                Blütenstraße 21<br />80799 München-Maxvorstadt
               </a>
               <a
-                href={HEITERWANGER_MAPS_URL}
+                href={COMPANY_MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block mt-3 hover:text-gold hover:underline transition-colors"

@@ -5,7 +5,7 @@ export const Route = createFileRoute("/imprint")({
   head: () => ({
     meta: [
       { title: "Impressum — Munich Construction GmbH" },
-      { name: "description", content: "Impressum / Imprint — Munich Construction GmbH, Theresienstraße 93, 80333 München. Geschäftsführer: Mehdi Mardi." },
+      { name: "description", content: "Impressum / Imprint — Munich Construction GmbH, Heiterwanger Straße 30, 81373 München. Geschäftsführer: Mehdi Mardi." },
       { property: "og:title", content: "Impressum — Munich Construction GmbH" },
       { property: "og:description", content: "Legal information for Munich Construction GmbH." },
     ],
@@ -32,7 +32,7 @@ function ImprintPage() {
         <div className="max-w-3xl mx-auto px-5 md:px-8 space-y-12">
           <Section title={t("imprint.responsible")}>
             <p>Munich Construction GmbH</p>
-            <p>Theresienstraße 93<br />80333 München<br />Deutschland</p>
+            <p>Heiterwanger Straße 30<br />81373 München<br />Deutschland</p>
           </Section>
 
           <Section title={t("imprint.contact")}>
@@ -56,7 +56,7 @@ function ImprintPage() {
           </Section>
 
           <Section title={t("imprint.responsible.content")}>
-            <p>Mehdi Mardi · Theresienstraße 93 · 80333 München</p>
+            <p>Mehdi Mardi · Heiterwanger Straße 30 · 81373 München</p>
           </Section>
 
           <Section title={t("imprint.disclaimer")}>
