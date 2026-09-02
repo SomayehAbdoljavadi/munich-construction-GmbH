@@ -69,8 +69,9 @@ function AboutPage() {
 
             <div className="pt-6 border-t border-border">
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-2">Geschäftsführer</p>
-              <p className="font-display text-2xl">Mehdi Mardi</p>
-              <p className="text-sm text-muted-foreground">Dipl.-Ing. (Bauingenieurwesen) · Hochbau</p>
+              <p className="font-display text-2xl">Dipl.-Ing. Mehdi Mardi</p>
+              <p className="text-sm text-muted-foreground">Bau-Sachverständiger | Fachplaner für vorbeugenden Brandschutz</p>
+              <p className="text-sm text-muted-foreground">Geschäftsführer – Munich Construction GmbH</p>
             </div>
           </div>
         </div>

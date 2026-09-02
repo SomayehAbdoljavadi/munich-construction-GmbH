@@ -219,8 +219,9 @@ function HomePage() {
             </div>
 
             <div className="space-y-6">
-              <ContactRow icon={<HardHat size={18} />} label="Mehdi Mardi · Dipl.-Ing.">
-                Geschäftsführer | Hochbau
+              <ContactRow icon={<HardHat size={18} />} label="Dipl.-Ing. Mehdi Mardi">
+                <span className="block">Bau-Sachverständiger | Fachplaner für vorbeugenden Brandschutz</span>
+                <span className="block mt-1">Geschäftsführer – Munich Construction GmbH</span>
               </ContactRow>
               <ContactRow icon={<MapPin size={18} />} label={t("contact.office")}>
                 <a
