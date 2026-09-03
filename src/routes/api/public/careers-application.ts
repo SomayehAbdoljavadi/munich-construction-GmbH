@@ -228,36 +228,9 @@ export const Route = createFileRoute("/api/public/careers-application")({
             </table>
           </div>`;
 
-        // Prefer the Lovable connector gateway when available, otherwise call Resend directly.
-        const gatewayKey = process.env["LOVABLE_API_KEY"];
-        const endpoint = gatewayKey
-          ? "https://connector-gateway.lovable.dev/resend/emails"
-          : "https://api.resend.com/emails";
-
-        const send = async (payload: Record<string, unknown>) => {
-          const res = await fetch(endpoint, {
-            method: "POST",
-            headers: gatewayKey
-              ? {
-                  authorization: `Bearer ${gatewayKey}`,
-                  "X-Connection-Api-Key": apiKey,
-                  "content-type": "application/json",
-                }
-              : {
-                  authorization: `Bearer ${apiKey}`,
-                  "content-type": "application/json",
-                },
-            body: JSON.stringify(payload),
-          });
-          if (!res.ok) {
-            const status = res.status;
-            console.error(`[careers] email delivery failed with status ${status}`);
-            throw new Error(`email_failed_${status}`);
-          }
-        };
-
+        let messageId: string | null = null;
         try {
-          await send({
+          messageId = await mail.send({
             from,
             to: [to],
             reply_to: email,
@@ -271,35 +244,11 @@ export const Route = createFileRoute("/api/public/careers-application")({
         }
 
         // Confirmation to the applicant — never blocks the accepted application.
-        try {
-          const name = `${firstName} ${lastName}`;
-          const confirmation =
-            lang === "en"
-              ? {
-                  subject: "Thank you for your application – Munich Construction GmbH",
-                  html: `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6">
-                    <p>Dear ${escapeHtml(name)},</p>
-                    <p>Thank you for applying to Munich Construction GmbH for the position “${escapeHtml(positionTitle)}”.</p>
-                    <p>We have successfully received your application and documents. Our team will review them carefully and get back to you after the review process.</p>
-                    <p>Kind regards,<br/>Munich Construction GmbH<br/>info@munichconstruction.de<br/>www.munichconstruction.de</p>
-                  </div>`,
-                }
-              : {
-                  subject: "Vielen Dank für Ihre Bewerbung – Munich Construction GmbH",
-                  html: `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6">
-                    <p>Guten Tag ${escapeHtml(name)},</p>
-                    <p>vielen Dank für Ihre Bewerbung bei Munich Construction GmbH für die Position „${escapeHtml(positionTitle)}“.</p>
-                    <p>Wir haben Ihre Bewerbung und Ihre Unterlagen erfolgreich erhalten. Unser Team wird diese sorgfältig prüfen und sich anschließend bei Ihnen melden.</p>
-                    <p>Mit freundlichen Grüßen<br/>Munich Construction GmbH<br/>info@munichconstruction.de<br/>www.munichconstruction.de</p>
-                  </div>`,
-                };
+        void positionTitle;
+        await mail.sendConfirmation(email, lang as "de" | "en");
 
-          await send({ from, to: [email], reply_to: to, ...confirmation });
-        } catch {
-          console.error("[careers] confirmation email could not be delivered");
-        }
+        return json({ ok: true, id: messageId }, 200);
 
-        return json({ ok: true }, 200);
       },
     },
   },
