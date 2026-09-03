@@ -4,7 +4,6 @@ import {
   clientIp,
   collectAttachments,
   emailValid,
-  escapeHtml,
   json,
   mailer,
   phoneValid,

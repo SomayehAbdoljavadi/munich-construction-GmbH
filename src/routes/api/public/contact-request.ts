@@ -3,7 +3,6 @@ import {
   clean,
   clientIp,
   emailValid,
-  escapeHtml,
   json,
   mailer,
   rateLimited,
