@@ -71,33 +71,57 @@ export async function collectAttachments(form: FormData) {
   return { attachments };
 }
 
+export const NOTIFY_TO = process.env["CAREERS_TO_EMAIL"] || "info@munichconstruction.de";
+export const NOTIFY_FROM = "Munich Construction Website <website@send.munichconstruction.de>";
+export const CONFIRM_FROM = "Munich Construction GmbH <website@send.munichconstruction.de>";
+
+export const confirmation = (lang: "de" | "en") =>
+  lang === "en"
+    ? {
+        subject: "Thank you for your request – Munich Construction GmbH",
+        html: `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6"><p>Thank you for your request. We have successfully received your message or application and will contact you as soon as possible.</p><p>Kind regards,<br/>Munich Construction GmbH<br/>+49 89 57843675<br/>info@munichconstruction.de</p></div>`,
+      }
+    : {
+        subject: "Vielen Dank für Ihre Anfrage – Munich Construction GmbH",
+        html: `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6"><p>Vielen Dank für Ihre Anfrage. Wir haben Ihre Unterlagen bzw. Nachricht erfolgreich erhalten und werden uns schnellstmöglich bei Ihnen melden.</p><p>Mit freundlichen Grüßen<br/>Munich Construction GmbH<br/>+49 89 57843675<br/>info@munichconstruction.de</p></div>`,
+      };
+
 export function mailer() {
   const apiKey = process.env["RESEND_API_KEY"];
-  const to = process.env["CAREERS_TO_EMAIL"] || "info@munichconstruction.de";
-  const from = process.env["CAREERS_FROM_EMAIL"] || "Munich Construction GmbH <info@munichconstruction.de>";
   if (!apiKey) return null;
 
-  const gatewayKey = process.env["LOVABLE_API_KEY"];
-  const endpoint = gatewayKey
-    ? "https://connector-gateway.lovable.dev/resend/emails"
-    : "https://api.resend.com/emails";
-
   const send = async (payload: Record<string, unknown>) => {
-    const res = await fetch(endpoint, {
+    const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
-      headers: gatewayKey
-        ? { authorization: `Bearer ${gatewayKey}`, "X-Connection-Api-Key": apiKey, "content-type": "application/json" }
-        : { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
+      headers: { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
       body: JSON.stringify(payload),
     });
     if (!res.ok) {
-      console.error(`[consultation] email delivery failed with status ${res.status}`);
+      console.error(`[email] delivery failed with status ${res.status}`);
       throw new Error(`email_failed_${res.status}`);
+    }
+    const body = (await res.json().catch(() => ({}))) as { id?: string };
+    return body.id ?? null;
+  };
+
+  /** Bilingual confirmation to the submitter. Never throws. */
+  const sendConfirmation = async (recipient: string, lang: "de" | "en") => {
+    try {
+      return await send({
+        from: CONFIRM_FROM,
+        to: [recipient],
+        reply_to: NOTIFY_TO,
+        ...confirmation(lang),
+      });
+    } catch {
+      console.error("[email] confirmation could not be delivered");
+      return null;
     }
   };
 
-  return { to, from, send };
+  return { to: NOTIFY_TO, from: NOTIFY_FROM, send, sendConfirmation };
 }
+
 
 export function table(rows: Array<[string, string]>) {
   return `<table cellpadding="6" style="border-collapse:collapse">${rows
