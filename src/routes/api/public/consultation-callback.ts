@@ -95,31 +95,7 @@ export const Route = createFileRoute("/api/public/consultation-callback")({
             console.error("[consultation] callback notification failed");
           }
 
-          try {
-            await mail.send({
-              from: mail.from,
-              to: [email],
-              reply_to: mail.to,
-              subject:
-                lang === "en"
-                  ? "We have received your request – Munich Construction GmbH"
-                  : "Ihre Anfrage ist bei uns eingegangen – Munich Construction GmbH",
-              html:
-                lang === "en"
-                  ? `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6">
-                       <p>Dear ${escapeHtml(name)},</p>
-                       <p>thank you for your enquiry. Our team will call you back as soon as possible on ${escapeHtml(phone)}.</p>
-                       <p>Kind regards,<br/>Munich Construction GmbH<br/>+49 89 57843675<br/>info@munichconstruction.de</p>
-                     </div>`
-                  : `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6">
-                       <p>Guten Tag ${escapeHtml(name)},</p>
-                       <p>vielen Dank für Ihre Anfrage. Unser Team meldet sich schnellstmöglich telefonisch unter ${escapeHtml(phone)} bei Ihnen.</p>
-                       <p>Mit freundlichen Grüßen<br/>Munich Construction GmbH<br/>+49 89 57843675<br/>info@munichconstruction.de</p>
-                     </div>`,
-            });
-          } catch {
-            console.error("[consultation] callback confirmation failed");
-          }
+          await mail.sendConfirmation(email, lang as "de" | "en");
         } else {
           console.error("[consultation] email service not configured: RESEND_API_KEY missing");
         }

@@ -51,8 +51,9 @@ export const Route = createFileRoute("/api/public/contact-request")({
           timeStyle: "short",
         }).format(new Date());
 
+        let messageId: string | null = null;
         try {
-          await mail.send({
+          messageId = await mail.send({
             from: mail.from,
             to: [mail.to],
             reply_to: email,
@@ -76,33 +77,9 @@ export const Route = createFileRoute("/api/public/contact-request")({
           return json({ error: "delivery_failed" }, 502);
         }
 
-        try {
-          await mail.send({
-            from: mail.from,
-            to: [email],
-            reply_to: mail.to,
-            subject:
-              lang === "en"
-                ? "We have received your request – Munich Construction GmbH"
-                : "Ihre Anfrage ist bei uns eingegangen – Munich Construction GmbH",
-            html:
-              lang === "en"
-                ? `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6">
-                     <p>Dear ${escapeHtml(name)},</p>
-                     <p>thank you for your request. Our team will contact you as soon as possible.</p>
-                     <p>Kind regards,<br/>Munich Construction GmbH<br/>+49 89 57843675<br/>info@munichconstruction.de</p>
-                   </div>`
-                : `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6">
-                     <p>Guten Tag ${escapeHtml(name)},</p>
-                     <p>vielen Dank für Ihre Anfrage. Unser Team meldet sich schnellstmöglich bei Ihnen.</p>
-                     <p>Mit freundlichen Grüßen<br/>Munich Construction GmbH<br/>+49 89 57843675<br/>info@munichconstruction.de</p>
-                   </div>`,
-          });
-        } catch {
-          console.error("[contact] customer confirmation failed");
-        }
+        await mail.sendConfirmation(email, lang as "de" | "en");
 
-        return json({ ok: true }, 200);
+        return json({ ok: true, id: messageId }, 200);
       },
     },
   },
