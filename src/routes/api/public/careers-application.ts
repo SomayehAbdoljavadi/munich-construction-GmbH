@@ -175,14 +175,15 @@ export const Route = createFileRoute("/api/public/careers-application")({
           if (coverError) return json({ error: `cover_${coverError}` }, 400);
         }
 
-        const apiKey = process.env["RESEND_API_KEY"];
-        const to = process.env["CAREERS_TO_EMAIL"] || "info@munichconstruction.de";
-        const from = process.env["CAREERS_FROM_EMAIL"] || "Munich Construction GmbH <info@munichconstruction.de>";
+        const mail = mailer();
+        const to = NOTIFY_TO;
+        const from = NOTIFY_FROM;
 
-        if (!apiKey) {
+        if (!mail) {
           console.error("[careers] email service not configured: RESEND_API_KEY missing");
           return json({ error: "email_not_configured" }, 503);
         }
+
 
         if (isDuplicate(`${email}|${positionId}`)) return json({ ok: true, duplicate: true }, 200);
 
