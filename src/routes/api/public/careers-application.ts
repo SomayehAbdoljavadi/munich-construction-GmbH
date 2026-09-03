@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { mailer, NOTIFY_FROM, NOTIFY_TO } from "@/lib/consultation.server";
 
 // Public endpoint: receives career applications (multipart/form-data with PDF
 // attachments) and delivers them by email. All credentials are server-side.
@@ -188,7 +189,6 @@ export const Route = createFileRoute("/api/public/careers-application")({
         if (isDuplicate(`${email}|${positionId}`)) return json({ ok: true, duplicate: true }, 200);
 
         const category = mapping.de;
-        const positionTitle = mapping.title[lang as "de" | "en"];
         const submittedAt = new Date().toISOString();
         const fileBase = `${safeName(firstName)}_${safeName(lastName)}`;
 
@@ -244,7 +244,6 @@ export const Route = createFileRoute("/api/public/careers-application")({
         }
 
         // Confirmation to the applicant — never blocks the accepted application.
-        void positionTitle;
         await mail.sendConfirmation(email, lang as "de" | "en");
 
         return json({ ok: true, id: messageId }, 200);
