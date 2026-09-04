@@ -155,9 +155,25 @@ function CareersPage() {
 
       const res = await fetch(CAREERS_API_URL, { method: "POST", body: fd });
       if (!res.ok) {
-        const body = (await res.json().catch(() => ({}))) as { error?: string };
+        const body = (await res.json().catch(() => ({}))) as { error?: string; fields?: Record<string, string> };
         const code = body.error ?? `status_${res.status}`;
         if (import.meta.env.DEV) console.warn(`[careers] submission rejected: ${code}`);
+        if (body.fields && Object.keys(body.fields).length > 0) {
+          const mapped: Errors = {};
+          for (const [key, reason] of Object.entries(body.fields)) {
+            if (key === "email") mapped.email = reason === "invalid" ? C.invalidEmail[lang] : C.required[lang];
+            else if (key === "phone") mapped.phone = reason === "invalid" ? C.invalidPhone[lang] : C.required[lang];
+            else if (key in ({ firstName: 1, lastName: 1, positionId: 1, consent: 1 } as Record<string, number>))
+              (mapped as Record<string, string>)[key] = C.required[lang];
+          }
+          if (Object.keys(mapped).length > 0) {
+            setErrors(mapped);
+            setStatus("idle");
+            const firstKey = Object.keys(mapped)[0];
+            (document.getElementById(firstKey) as HTMLElement | null)?.focus();
+            return;
+          }
+        }
         if (code === "cv_size" || code === "cover_size") setFailure(C.failureFileSize[lang]);
         else if (code === "cv_type" || code === "cover_type" || code === "cv_empty" || code === "cover_empty")
           setFailure(C.failureFileType[lang]);
