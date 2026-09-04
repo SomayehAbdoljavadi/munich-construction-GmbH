@@ -104,17 +104,23 @@ function CareersPage() {
     return undefined;
   };
 
+  const fieldError = (name: "firstName" | "lastName" | "email" | "phone", raw: string): string | undefined => {
+    const value = raw.trim();
+    if (!value) return C.required[lang];
+    if (name === "email" && !isValidEmail(value)) return C.invalidEmail[lang];
+    if (name === "phone" && !isValidPhone(value)) return C.invalidPhone[lang];
+    return undefined;
+  };
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (status === "sending") return;
 
     const next: Errors = {};
-    if (!values.firstName.trim()) next.firstName = C.required[lang];
-    if (!values.lastName.trim()) next.lastName = C.required[lang];
-    if (!values.email.trim()) next.email = C.required[lang];
-    else if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(values.email.trim())) next.email = C.invalidEmail[lang];
-    if (!values.phone.trim()) next.phone = C.required[lang];
-    else if (!/^[+]?[\d\s()./-]{6,25}$/.test(values.phone.trim())) next.phone = C.invalidPhone[lang];
+    next.firstName = fieldError("firstName", values.firstName);
+    next.lastName = fieldError("lastName", values.lastName);
+    next.email = fieldError("email", values.email);
+    next.phone = fieldError("phone", values.phone);
     if (!positionId) next.positionId = C.required[lang];
     next.cv = validateFile(cv, true);
     next.coverLetter = validateFile(coverLetter, false);
@@ -124,6 +130,12 @@ function CareersPage() {
     setErrors(cleaned);
     if (Object.keys(cleaned).length > 0) {
       setStatus("idle");
+      const order = ["firstName", "lastName", "email", "phone", "positionId", "cv", "coverLetter", "consent"] as const;
+      const first = order.find((k) => cleaned[k]);
+      if (first) {
+        const el = document.getElementById(first) as HTMLElement | null;
+        el?.focus({ preventScroll: false });
+      }
       return;
     }
 
