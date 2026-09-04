@@ -9,6 +9,8 @@ import {
   ALL_POSITIONS,
 } from "@/lib/careers-data";
 import { breadcrumb, ldScript, ORG_ID, url } from "@/lib/seo";
+import { PositionSelect, type SelectOption } from "@/components/PositionSelect";
+import { isValidEmail, isValidPhone, normalizeEmail, normalizePhone } from "@/lib/validation";
 
 export const Route = createFileRoute("/careers")({
   head: () => ({
@@ -74,6 +76,10 @@ function CareersPage() {
   const [failure, setFailure] = useState<string | null>(null);
 
   const [highlight, setHighlight] = useState(false);
+
+  const positionOptions: SelectOption[] = ALL_POSITIONS.filter(
+    (p, i, arr) => arr.findIndex((o) => o.id === p.id) === i,
+  ).map((p) => ({ value: p.id, label: p.title[lang], hint: p.category[lang] }));
 
   const formRef = useRef<HTMLDivElement | null>(null);
   const positionRef = useRef<HTMLButtonElement | null>(null);
@@ -454,7 +460,7 @@ function Wrap({
 }) {
   return (
     <div>
-      <label htmlFor={htmlFor} className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground block mb-3">
+      <label id={`${htmlFor}-label`} htmlFor={htmlFor} className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground block mb-3">
         {label} <span className="text-gold text-lg align-middle" aria-hidden="true">*</span>
       </label>
       {children}
