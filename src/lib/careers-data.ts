@@ -168,7 +168,7 @@ export const CAREERS_COPY = {
 
   required: { de: "Dieses Feld ist erforderlich.", en: "This field is required." },
   invalidEmail: { de: "Bitte geben Sie eine gültige E-Mail-Adresse ein.", en: "Please enter a valid email address." },
-  invalidPhone: { de: "Bitte geben Sie eine gültige Telefonnummer ein.", en: "Please enter a valid phone number." },
+  invalidPhone: { de: "Bitte geben Sie eine gültige Telefonnummer ein.", en: "Please enter a valid telephone number." },
   cvRequired: { de: "Bitte laden Sie Ihren Lebenslauf als PDF-Datei hoch.", en: "Please upload your CV as a PDF file." },
   fileType: { de: "Bitte laden Sie Ihren Lebenslauf als PDF-Datei hoch.", en: "Please upload your CV as a PDF file." },
   fileSize: { de: "Die Datei darf maximal 10 MB groß sein.", en: "The file must not exceed 10 MB." },
