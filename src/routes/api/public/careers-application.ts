@@ -253,13 +253,21 @@ export const Route = createFileRoute("/api/public/careers-application")({
         const submittedAt = new Date().toISOString();
         const fileBase = `${safeName(firstName)}_${safeName(lastName)}`;
 
-        const attachments: Array<{ filename: string; content: string }> = [
-          { filename: `CV_${fileBase}.pdf`, content: toBase64(await cv.arrayBuffer()) },
+        const hasCover = cover instanceof File && cover.size > 0;
+
+        // Resend requires base64 string content + explicit type.
+        const attachments: Array<{ filename: string; content: string; content_type: string }> = [
+          {
+            filename: `CV_${fileBase}.pdf`,
+            content: toBase64(await cv.arrayBuffer()),
+            content_type: "application/pdf",
+          },
         ];
-        if (cover instanceof File && cover.size > 0) {
+        if (hasCover) {
           attachments.push({
             filename: `CoverLetter_${fileBase}.pdf`,
-            content: toBase64(await cover.arrayBuffer()),
+            content: toBase64(await (cover as File).arrayBuffer()),
+            content_type: "application/pdf",
           });
         }
 
@@ -269,18 +277,33 @@ export const Route = createFileRoute("/api/public/careers-application")({
           ["Position (EN)", mapping.title.en],
           ["First name", firstName],
           ["Last name", lastName],
-          ["Email", email],
           ["Phone", phone],
           ["Submitted at", submittedAt],
           ["Page URL", clean(request.headers.get("referer"), 300)],
           ["Website language", lang.toUpperCase()],
+          ["CV received", `Yes – ${attachments[0].filename} (${Math.round(cv.size / 1024)} KB)`],
+          [
+            "Cover letter received",
+            hasCover ? `Yes – ${attachments[1].filename} (${Math.round((cover as File).size / 1024)} KB)` : "No",
+          ],
         ];
+
+        const emailRow = `<tr><td style="border:1px solid #ddd"><strong>Email</strong></td><td style="border:1px solid #ddd"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>`;
 
         const notificationHtml = `
           <div style="font-family:Arial,sans-serif;color:#111">
             <h2 style="margin:0 0 16px">Neue Bewerbung / New application</h2>
             <table cellpadding="6" style="border-collapse:collapse">
               ${rows
+                .slice(0, 5)
+                .map(
+                  ([k, v]) =>
+                    `<tr><td style="border:1px solid #ddd"><strong>${escapeHtml(k)}</strong></td><td style="border:1px solid #ddd">${escapeHtml(v)}</td></tr>`,
+                )
+                .join("")}
+              ${emailRow}
+              ${rows
+                .slice(5)
                 .map(
                   ([k, v]) =>
                     `<tr><td style="border:1px solid #ddd"><strong>${escapeHtml(k)}</strong></td><td style="border:1px solid #ddd">${escapeHtml(v)}</td></tr>`,
