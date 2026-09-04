@@ -56,6 +56,9 @@ export const Route = createFileRoute("/careers")({
 });
 
 const MAX_FILE_BYTES = 10 * 1024 * 1024;
+const CAREERS_API_URL = import.meta.env.PROD
+  ? "https://munich-builds-happily.lovable.app/api/public/careers-application"
+  : "/api/public/careers-application";
 
 type Errors = Partial<Record<"firstName" | "lastName" | "email" | "phone" | "positionId" | "cv" | "coverLetter" | "consent", string>>;
 
@@ -138,7 +141,7 @@ function CareersPage() {
       if (cv) fd.append("cv", cv);
       if (coverLetter) fd.append("coverLetter", coverLetter);
 
-      const res = await fetch("/api/public/careers-application", { method: "POST", body: fd });
+      const res = await fetch(CAREERS_API_URL, { method: "POST", body: fd });
       if (!res.ok) {
         const body = (await res.json().catch(() => ({}))) as { error?: string };
         const code = body.error ?? `status_${res.status}`;

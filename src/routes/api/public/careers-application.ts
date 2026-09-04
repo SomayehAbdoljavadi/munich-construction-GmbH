@@ -134,26 +134,74 @@ function json(body: unknown, status: number) {
   });
 }
 
+const CAREERS_ENDPOINT = "/api/public/careers-application";
+const ALLOWED_ORIGINS = new Set([
+  "https://munichconstruction.de",
+  "https://www.munichconstruction.de",
+  "https://munich-builds-happily.lovable.app",
+]);
+
+function requestId() {
+  return crypto.randomUUID();
+}
+
+function corsHeaders(request: Request, id: string) {
+  const origin = request.headers.get("origin");
+  const headers: Record<string, string> = {
+    "content-type": "application/json",
+    "x-request-id": id,
+    vary: "Origin",
+  };
+  if (origin && ALLOWED_ORIGINS.has(origin)) headers["access-control-allow-origin"] = origin;
+  return headers;
+}
+
+function result(request: Request, id: string, body: unknown, status: number, category: string) {
+  console.info(`[careers-request] id=${id} endpoint=${CAREERS_ENDPOINT} status=${status} category=${category}`);
+  return new Response(JSON.stringify(body), { status, headers: corsHeaders(request, id) });
+}
+
 export const Route = createFileRoute("/api/public/careers-application")({
   server: {
     handlers: {
+      OPTIONS: async ({ request }) => {
+        const id = requestId();
+        const origin = request.headers.get("origin");
+        if (!origin || !ALLOWED_ORIGINS.has(origin)) {
+          return result(request, id, { error: "origin_not_allowed" }, 403, "origin_rejected");
+        }
+        return new Response(null, {
+          status: 204,
+          headers: {
+            ...corsHeaders(request, id),
+            "access-control-allow-methods": "POST, OPTIONS",
+            "access-control-allow-headers": "content-type",
+            "access-control-max-age": "86400",
+          },
+        });
+      },
       POST: async ({ request }) => {
+        const id = requestId();
+        const origin = request.headers.get("origin");
+        if (origin && !ALLOWED_ORIGINS.has(origin)) {
+          return result(request, id, { error: "origin_not_allowed" }, 403, "origin_rejected");
+        }
         const ip =
           request.headers.get("cf-connecting-ip") ??
           request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
           "unknown";
 
-        if (rateLimited(ip)) return json({ error: "rate_limited" }, 429);
+        if (rateLimited(ip)) return result(request, id, { error: "rate_limited" }, 429, "rate_limited");
 
         let form: FormData;
         try {
           form = await request.formData();
         } catch {
-          return json({ error: "invalid_request" }, 400);
+          return result(request, id, { error: "invalid_request" }, 400, "multipart_parse_failed");
         }
 
         // Honeypot — bots fill hidden fields.
-        if (clean(form.get("company"), 100)) return json({ ok: true }, 200);
+        if (clean(form.get("company"), 100)) return result(request, id, { ok: true }, 200, "honeypot");
 
         const firstName = clean(form.get("firstName"), 80);
         const lastName = clean(form.get("lastName"), 80);
@@ -168,23 +216,23 @@ export const Route = createFileRoute("/api/public/careers-application")({
         const phoneOk = /^[+]?[\d\s()./-]{6,25}$/.test(phone);
 
         if (!firstName || !lastName || !emailOk || !phoneOk || !mapping || !consent) {
-          return json({ error: "invalid_input" }, 400);
+          return result(request, id, { error: "invalid_input" }, 400, "invalid_input");
         }
 
         const cv = form.get("cv");
         const cover = form.get("coverLetter");
-        if (!(cv instanceof File)) return json({ error: "cv_required" }, 400);
+        if (!(cv instanceof File)) return result(request, id, { error: "cv_required" }, 400, "cv_required");
 
         const cvError = await validatePdf(cv);
         if (cvError) {
           console.warn(`[careers] rejected cv: ${cvError}`);
-          return json({ error: `cv_${cvError}` }, 400);
+          return result(request, id, { error: `cv_${cvError}` }, 400, `cv_${cvError}`);
         }
         if (cover instanceof File && cover.size > 0) {
           const coverError = await validatePdf(cover);
           if (coverError) {
             console.warn(`[careers] rejected cover letter: ${coverError}`);
-            return json({ error: `cover_${coverError}` }, 400);
+            return result(request, id, { error: `cover_${coverError}` }, 400, `cover_${coverError}`);
           }
         }
 
@@ -195,11 +243,11 @@ export const Route = createFileRoute("/api/public/careers-application")({
 
         if (!mail) {
           console.error("[careers] email service not configured: RESEND_API_KEY missing");
-          return json({ error: "email_not_configured" }, 503);
+          return result(request, id, { error: "email_not_configured" }, 503, "email_not_configured");
         }
 
 
-        if (isDuplicate(`${email}|${positionId}`)) return json({ ok: true, duplicate: true }, 200);
+        if (isDuplicate(`${email}|${positionId}`)) return result(request, id, { ok: true, duplicate: true }, 200, "duplicate_accepted");
 
         const category = mapping.de;
         const submittedAt = new Date().toISOString();
@@ -255,14 +303,14 @@ export const Route = createFileRoute("/api/public/careers-application")({
           // Category only — never the payload, applicant data or credentials.
           console.error(`[careers] delivery failed: ${error instanceof Error ? error.message : "unknown"}`);
           recentSubmissions.delete(`${email}|${positionId}`);
-          return json({ error: "delivery_failed" }, 502);
+          return result(request, id, { error: "delivery_failed" }, 502, "internal_delivery_failed");
         }
 
 
         // Confirmation to the applicant — never blocks the accepted application.
         await mail.sendConfirmation(email, lang as "de" | "en");
 
-        return json({ ok: true, id: messageId }, 200);
+        return result(request, id, { ok: true, id: messageId }, 200, "accepted");
 
       },
     },

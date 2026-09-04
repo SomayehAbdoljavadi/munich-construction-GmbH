@@ -163,7 +163,7 @@ export const CAREERS_COPY = {
   },
   failureTemporary: {
     de: "Der Versand ist vorübergehend nicht möglich. Bitte versuchen Sie es in Kürze erneut oder schreiben Sie an info@munichconstruction.de.",
-    en: "Sending is temporarily unavailable. Please try again shortly or email info@munichconstruction.de.",
+    en: "Application submission is temporarily unavailable. Please try again shortly or email us at info@munichconstruction.de.",
   },
 
   required: { de: "Dieses Feld ist erforderlich.", en: "This field is required." },
