@@ -9,6 +9,8 @@ import {
   ALL_POSITIONS,
 } from "@/lib/careers-data";
 import { breadcrumb, ldScript, ORG_ID, url } from "@/lib/seo";
+import { PositionSelect, type SelectOption } from "@/components/PositionSelect";
+import { isValidEmail, isValidPhone, normalizeEmail, normalizePhone } from "@/lib/validation";
 
 export const Route = createFileRoute("/careers")({
   head: () => ({
@@ -75,8 +77,12 @@ function CareersPage() {
 
   const [highlight, setHighlight] = useState(false);
 
+  const positionOptions: SelectOption[] = ALL_POSITIONS.filter(
+    (p, i, arr) => arr.findIndex((o) => o.id === p.id) === i,
+  ).map((p) => ({ value: p.id, label: p.title[lang], hint: p.category[lang] }));
+
   const formRef = useRef<HTMLDivElement | null>(null);
-  const positionRef = useRef<HTMLSelectElement | null>(null);
+  const positionRef = useRef<HTMLButtonElement | null>(null);
   const cvInputRef = useRef<HTMLInputElement | null>(null);
   const coverInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -104,17 +110,23 @@ function CareersPage() {
     return undefined;
   };
 
+  const fieldError = (name: "firstName" | "lastName" | "email" | "phone", raw: string): string | undefined => {
+    const value = raw.trim();
+    if (!value) return C.required[lang];
+    if (name === "email" && !isValidEmail(value)) return C.invalidEmail[lang];
+    if (name === "phone" && !isValidPhone(value)) return C.invalidPhone[lang];
+    return undefined;
+  };
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (status === "sending") return;
 
     const next: Errors = {};
-    if (!values.firstName.trim()) next.firstName = C.required[lang];
-    if (!values.lastName.trim()) next.lastName = C.required[lang];
-    if (!values.email.trim()) next.email = C.required[lang];
-    else if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(values.email.trim())) next.email = C.invalidEmail[lang];
-    if (!values.phone.trim()) next.phone = C.required[lang];
-    else if (!/^[+]?[\d\s()./-]{6,25}$/.test(values.phone.trim())) next.phone = C.invalidPhone[lang];
+    next.firstName = fieldError("firstName", values.firstName);
+    next.lastName = fieldError("lastName", values.lastName);
+    next.email = fieldError("email", values.email);
+    next.phone = fieldError("phone", values.phone);
     if (!positionId) next.positionId = C.required[lang];
     next.cv = validateFile(cv, true);
     next.coverLetter = validateFile(coverLetter, false);
@@ -124,6 +136,12 @@ function CareersPage() {
     setErrors(cleaned);
     if (Object.keys(cleaned).length > 0) {
       setStatus("idle");
+      const order = ["firstName", "lastName", "email", "phone", "positionId", "cv", "coverLetter", "consent"] as const;
+      const first = order.find((k) => cleaned[k]);
+      if (first) {
+        const el = document.getElementById(first) as HTMLElement | null;
+        el?.focus({ preventScroll: false });
+      }
       return;
     }
 
@@ -132,8 +150,8 @@ function CareersPage() {
       const fd = new FormData();
       fd.append("firstName", values.firstName.trim());
       fd.append("lastName", values.lastName.trim());
-      fd.append("email", values.email.trim());
-      fd.append("phone", values.phone.trim());
+      fd.append("email", normalizeEmail(values.email) ?? values.email.trim());
+      fd.append("phone", normalizePhone(values.phone) ?? values.phone.trim());
       fd.append("positionId", positionId);
       fd.append("lang", lang);
       fd.append("consent", "true");
@@ -143,9 +161,25 @@ function CareersPage() {
 
       const res = await fetch(CAREERS_API_URL, { method: "POST", body: fd });
       if (!res.ok) {
-        const body = (await res.json().catch(() => ({}))) as { error?: string };
+        const body = (await res.json().catch(() => ({}))) as { error?: string; fields?: Record<string, string> };
         const code = body.error ?? `status_${res.status}`;
         if (import.meta.env.DEV) console.warn(`[careers] submission rejected: ${code}`);
+        if (body.fields && Object.keys(body.fields).length > 0) {
+          const mapped: Errors = {};
+          for (const [key, reason] of Object.entries(body.fields)) {
+            if (key === "email") mapped.email = reason === "invalid" ? C.invalidEmail[lang] : C.required[lang];
+            else if (key === "phone") mapped.phone = reason === "invalid" ? C.invalidPhone[lang] : C.required[lang];
+            else if (key in ({ firstName: 1, lastName: 1, positionId: 1, consent: 1 } as Record<string, number>))
+              (mapped as Record<string, string>)[key] = C.required[lang];
+          }
+          if (Object.keys(mapped).length > 0) {
+            setErrors(mapped);
+            setStatus("idle");
+            const firstKey = Object.keys(mapped)[0];
+            (document.getElementById(firstKey) as HTMLElement | null)?.focus();
+            return;
+          }
+        }
         if (code === "cv_size" || code === "cover_size") setFailure(C.failureFileSize[lang]);
         else if (code === "cv_type" || code === "cover_type" || code === "cv_empty" || code === "cover_empty")
           setFailure(C.failureFileType[lang]);
@@ -181,11 +215,18 @@ function CareersPage() {
     "aria-invalid": Boolean(errors[name]),
     "aria-describedby": errors[name] ? `${name}-error` : undefined,
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      setValues((v) => ({ ...v, [name]: e.target.value }));
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
+      const value = e.target.value;
+      setValues((v) => ({ ...v, [name]: value }));
+      // Clear an existing error as soon as the value becomes valid again.
+      setErrors((prev) => (prev[name] && !fieldError(name, value) ? { ...prev, [name]: undefined } : prev));
     },
-    className:
-      "w-full bg-transparent border border-border focus:border-gold focus-visible:outline-2 focus-visible:outline-gold px-4 py-3 font-sans text-base transition-colors",
+    onBlur: (e: React.FocusEvent<HTMLInputElement>) => {
+      if (!e.target.value.trim() && !errors[name]) return;
+      setErrors((prev) => ({ ...prev, [name]: fieldError(name, e.target.value) }));
+    },
+    className: `w-full bg-transparent border ${
+      errors[name] ? "border-destructive" : "border-border focus:border-gold"
+    } focus-visible:outline-2 focus-visible:outline-gold px-4 py-3 font-sans text-base transition-colors`,
   });
 
   return (
@@ -299,27 +340,24 @@ function CareersPage() {
                 </div>
 
                 <Wrap label={C.position[lang]} htmlFor="positionId" error={errors.positionId}>
-                  <select
+                  <PositionSelect
                     id="positionId"
-                    name="positionId"
-                    ref={positionRef}
-                    required
+                    labelId="positionId-label"
                     value={positionId}
-                    aria-invalid={Boolean(errors.positionId)}
-                    aria-describedby={errors.positionId ? "positionId-error" : undefined}
-                    onChange={(e) => {
-                      setPositionId(e.target.value);
+                    placeholder={C.positionPlaceholder[lang]}
+                    invalid={Boolean(errors.positionId)}
+                    describedBy={errors.positionId ? "positionId-error" : undefined}
+                    buttonRef={positionRef}
+                    options={positionOptions}
+                    onChange={(v) => {
+                      setPositionId(v);
                       setErrors((prev) => ({ ...prev, positionId: undefined }));
                     }}
-                    className="w-full bg-transparent border border-border focus:border-gold focus-visible:outline-2 focus-visible:outline-gold px-4 py-3 font-sans text-base transition-colors"
-                  >
-                    <option value="">{C.positionPlaceholder[lang]}</option>
-                    {ALL_POSITIONS.map((p) => (
-                      <option key={p.id} value={p.id}>
-                        {p.title[lang]} — {p.category[lang]}
-                      </option>
-                    ))}
-                  </select>
+                    onBlur={() => {
+                      if (!positionId) setErrors((prev) => ({ ...prev, positionId: prev.positionId }));
+                    }}
+                  />
+                  <input type="hidden" name="positionId" value={positionId} />
                 </Wrap>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -422,7 +460,7 @@ function Wrap({
 }) {
   return (
     <div>
-      <label htmlFor={htmlFor} className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground block mb-3">
+      <label id={`${htmlFor}-label`} htmlFor={htmlFor} className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground block mb-3">
         {label} <span className="text-gold text-lg align-middle" aria-hidden="true">*</span>
       </label>
       {children}
