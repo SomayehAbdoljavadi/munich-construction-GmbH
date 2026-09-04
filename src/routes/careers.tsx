@@ -334,27 +334,24 @@ function CareersPage() {
                 </div>
 
                 <Wrap label={C.position[lang]} htmlFor="positionId" error={errors.positionId}>
-                  <select
+                  <PositionSelect
                     id="positionId"
-                    name="positionId"
-                    ref={positionRef}
-                    required
+                    labelId="positionId-label"
                     value={positionId}
-                    aria-invalid={Boolean(errors.positionId)}
-                    aria-describedby={errors.positionId ? "positionId-error" : undefined}
-                    onChange={(e) => {
-                      setPositionId(e.target.value);
+                    placeholder={C.positionPlaceholder[lang]}
+                    invalid={Boolean(errors.positionId)}
+                    describedBy={errors.positionId ? "positionId-error" : undefined}
+                    buttonRef={positionRef}
+                    options={positionOptions}
+                    onChange={(v) => {
+                      setPositionId(v);
                       setErrors((prev) => ({ ...prev, positionId: undefined }));
                     }}
-                    className="w-full bg-transparent border border-border focus:border-gold focus-visible:outline-2 focus-visible:outline-gold px-4 py-3 font-sans text-base transition-colors"
-                  >
-                    <option value="">{C.positionPlaceholder[lang]}</option>
-                    {ALL_POSITIONS.map((p) => (
-                      <option key={p.id} value={p.id}>
-                        {p.title[lang]} — {p.category[lang]}
-                      </option>
-                    ))}
-                  </select>
+                    onBlur={() => {
+                      if (!positionId) setErrors((prev) => ({ ...prev, positionId: prev.positionId }));
+                    }}
+                  />
+                  <input type="hidden" name="positionId" value={positionId} />
                 </Wrap>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
