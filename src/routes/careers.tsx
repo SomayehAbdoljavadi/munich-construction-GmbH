@@ -68,6 +68,8 @@ function CareersPage() {
   const [coverLetter, setCoverLetter] = useState<File | null>(null);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [failure, setFailure] = useState<string | null>(null);
+
   const [highlight, setHighlight] = useState(false);
 
   const formRef = useRef<HTMLDivElement | null>(null);
