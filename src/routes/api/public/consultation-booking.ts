@@ -66,6 +66,19 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
 
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
+        // Idempotency: a retry by the same person for the same slot must never
+        // create a second appointment.
+        const existingOwn = async () => {
+          const { data } = await supabaseAdmin
+            .from("consultation_bookings")
+            .select("id, cancel_token, customer_email_status")
+            .eq("slot_start", slotDate.toISOString())
+            .eq("email", email)
+            .in("status", ["confirmed", "rescheduled"])
+            .maybeSingle();
+          return data;
+        };
+
         // The slot must still be offered by the availability engine.
         const day = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Berlin" }).format(slotDate);
         const { data: freeSlots, error: slotError } = await supabaseAdmin.rpc("consultation_free_slots", {
@@ -78,7 +91,6 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
         const isFree = (freeSlots ?? []).some(
           (s: { slot_start: string }) => new Date(s.slot_start).getTime() === slotDate.getTime(),
         );
-        if (!isFree) return json({ error: "slot_taken" }, 409);
 
         const { data: settings } = await supabaseAdmin
           .from("consultation_settings")
@@ -87,11 +99,39 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
         const slotMinutes = settings?.slot_minutes ?? 15;
         const slotEnd = new Date(slotDate.getTime() + slotMinutes * 60_000);
 
+        const origin = (() => {
+          try {
+            return new URL(request.url).origin;
+          } catch {
+            return "https://www.munichconstruction.de";
+          }
+        })();
+        const reservedResponse = (b: { id: string; cancel_token: string; customer_email_status?: string }) =>
+          json(
+            {
+              ok: true,
+              id: b.id,
+              cancelToken: b.cancel_token,
+              manageUrl: `${origin}/termin?id=${b.id}&token=${b.cancel_token}`,
+              emailPending: b.customer_email_status !== "sent",
+              duplicate: true,
+            },
+            200,
+          );
+
+        if (!isFree) {
+          const mine = await existingOwn();
+          if (mine) return reservedResponse(mine);
+          return json({ error: "slot_unavailable" }, 409);
+        }
+
         const { data: booking, error: insertError } = await supabaseAdmin
           .from("consultation_bookings")
           .insert({
             slot_start: slotDate.toISOString(),
             slot_end: slotEnd.toISOString(),
+            timezone: "Europe/Berlin",
+            duration_minutes: slotMinutes,
             first_name: firstName,
             last_name: lastName,
             phone,
@@ -110,22 +150,23 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
           .single();
 
         if (insertError) {
-          if (insertError.code === "23505") return json({ error: "slot_taken" }, 409);
+          // Unique index on active slot_start -> exactly one booking can win.
+          if (insertError.code === "23505") {
+            const mine = await existingOwn();
+            if (mine) return reservedResponse(mine);
+            return json({ error: "slot_unavailable" }, 409);
+          }
           console.error("[consultation] booking insert failed");
           return json({ error: "booking_failed" }, 500);
         }
 
         const fmt = formatSlot(slotDate.toISOString(), lang);
-        const origin = (() => {
-          try {
-            return new URL(request.url).origin;
-          } catch {
-            return "https://www.munichconstruction.de";
-          }
-        })();
         const manageUrl = `${origin}/termin?id=${booking.id}&token=${booking.cancel_token}`;
         const mail = mailer();
         const name = `${firstName} ${lastName}`;
+        let internalStatus = "failed";
+        let customerStatus = "failed";
+        let emailError: string | null = mail ? null : "resend_not_configured";
 
         if (mail) {
           try {
@@ -157,8 +198,10 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
               </div>`,
               attachments: files.attachments,
             });
+            internalStatus = "sent";
           } catch {
             console.error("[consultation] internal notification failed");
+            emailError = "internal_notification_failed";
           }
 
           try {
@@ -190,14 +233,35 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
                   : `Ihr Beratungstermin am ${fmt.day} um ${fmt.time} Uhr`,
               html,
             });
+            customerStatus = "sent";
           } catch {
             console.error("[consultation] customer confirmation failed");
+            emailError = emailError ? `${emailError},confirmation_failed` : "confirmation_failed";
           }
         } else {
           console.error("[consultation] email service not configured: RESEND_API_KEY missing");
         }
 
-        return json({ ok: true, id: booking.id, cancelToken: booking.cancel_token, manageUrl }, 200);
+        await supabaseAdmin
+          .from("consultation_bookings")
+          .update({
+            internal_email_status: internalStatus,
+            customer_email_status: customerStatus,
+            email_error: emailError,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", booking.id);
+
+        return json(
+          {
+            ok: true,
+            id: booking.id,
+            cancelToken: booking.cancel_token,
+            manageUrl,
+            emailPending: customerStatus !== "sent",
+          },
+          200,
+        );
       },
     },
   },

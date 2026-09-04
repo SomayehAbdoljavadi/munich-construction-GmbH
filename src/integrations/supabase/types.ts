@@ -76,9 +76,13 @@ export type Database = {
           consent: boolean
           contact_method: string
           created_at: string
+          customer_email_status: string
+          duration_minutes: number
           email: string
+          email_error: string | null
           first_name: string
           id: string
+          internal_email_status: string
           lang: string
           last_name: string
           phone: string
@@ -90,6 +94,7 @@ export type Database = {
           slot_end: string
           slot_start: string
           status: string
+          timezone: string
           updated_at: string
         }
         Insert: {
@@ -99,9 +104,13 @@ export type Database = {
           consent?: boolean
           contact_method?: string
           created_at?: string
+          customer_email_status?: string
+          duration_minutes?: number
           email: string
+          email_error?: string | null
           first_name: string
           id?: string
+          internal_email_status?: string
           lang?: string
           last_name: string
           phone: string
@@ -113,6 +122,7 @@ export type Database = {
           slot_end: string
           slot_start: string
           status?: string
+          timezone?: string
           updated_at?: string
         }
         Update: {
@@ -122,9 +132,13 @@ export type Database = {
           consent?: boolean
           contact_method?: string
           created_at?: string
+          customer_email_status?: string
+          duration_minutes?: number
           email?: string
+          email_error?: string | null
           first_name?: string
           id?: string
+          internal_email_status?: string
           lang?: string
           last_name?: string
           phone?: string
@@ -136,6 +150,7 @@ export type Database = {
           slot_end?: string
           slot_start?: string
           status?: string
+          timezone?: string
           updated_at?: string
         }
         Relationships: []

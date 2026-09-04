@@ -58,7 +58,7 @@ export const Route = createFileRoute("/api/public/consultation-manage")({
 
         if (action === "load") return json({ ok: true, booking: view(booking) }, 200);
 
-        if (booking.status !== "confirmed") return json({ error: "already_cancelled" }, 409);
+        if (!["confirmed", "rescheduled"].includes(booking.status)) return json({ error: "already_cancelled" }, 409);
         // Past appointments can no longer be changed by the customer.
         if (new Date(booking.slot_start).getTime() < Date.now()) return json({ error: "too_late" }, 409);
 
@@ -68,7 +68,7 @@ export const Route = createFileRoute("/api/public/consultation-manage")({
             .update({ status: "cancelled", updated_at: new Date().toISOString() })
             .eq("id", id)
             .eq("cancel_token", token)
-            .eq("status", "confirmed");
+            .in("status", ["confirmed", "rescheduled"]);
           if (cancelError) {
             console.error("[consultation] cancel failed");
             return json({ error: "cancel_failed" }, 500);
@@ -131,7 +131,7 @@ export const Route = createFileRoute("/api/public/consultation-manage")({
         const isFree = (freeSlots ?? []).some(
           (s: { slot_start: string }) => new Date(s.slot_start).getTime() === slotDate.getTime(),
         );
-        if (!isFree) return json({ error: "slot_taken" }, 409);
+        if (!isFree) return json({ error: "slot_unavailable" }, 409);
 
         const durationMs = new Date(booking.slot_end).getTime() - new Date(booking.slot_start).getTime();
         const slotEnd = new Date(slotDate.getTime() + (durationMs > 0 ? durationMs : 15 * 60_000));
@@ -141,16 +141,18 @@ export const Route = createFileRoute("/api/public/consultation-manage")({
           .update({
             slot_start: slotDate.toISOString(),
             slot_end: slotEnd.toISOString(),
+            status: "rescheduled",
+            duration_minutes: Math.max(1, Math.round((durationMs > 0 ? durationMs : 15 * 60_000) / 60_000)),
             updated_at: new Date().toISOString(),
           })
           .eq("id", id)
           .eq("cancel_token", token)
-          .eq("status", "confirmed")
+          .in("status", ["confirmed", "rescheduled"])
           .select("slot_start, status, project_type")
           .single();
 
         if (updateError || !updated) {
-          if (updateError?.code === "23505") return json({ error: "slot_taken" }, 409);
+          if (updateError?.code === "23505") return json({ error: "slot_unavailable" }, 409);
           console.error("[consultation] reschedule failed");
           return json({ error: "reschedule_failed" }, 500);
         }

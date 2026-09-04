@@ -17,7 +17,7 @@ import {
   Phone,
   Rocket,
 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { fetchFreeSlots } from "@/lib/slots";
 import { useT, type Lang } from "@/lib/i18n";
 import { breadcrumb, ldScript, ORG_ID, url } from "@/lib/seo";
 import {
@@ -372,6 +372,7 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [manageUrl, setManageUrl] = useState("");
+  const [emailPending, setEmailPending] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
 
   const days = useMemo(() => {
@@ -389,12 +390,15 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
     let active = true;
     setLoadingSlots(true);
     setSlots([]);
-    supabase
-      .rpc("consultation_free_slots", { target_date: day })
-      .then(({ data, error: rpcError }) => {
+    fetchFreeSlots(day)
+      .then((list) => {
         if (!active) return;
-        if (rpcError) console.error("[beratung] slots", rpcError.message);
-        setSlots((data as Slot[] | null) ?? []);
+        setSlots(list.map((slot_start) => ({ slot_start })));
+        setLoadingSlots(false);
+      })
+      .catch(() => {
+        if (!active) return;
+        setSlots([]);
         setLoadingSlots(false);
       });
     return () => {
@@ -470,16 +474,23 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
       files.forEach((f) => fd.append("files", f));
 
       const res = await fetch("/api/public/consultation-booking", { method: "POST", body: fd });
-      const payload = (await res.json().catch(() => ({}))) as { error?: string; manageUrl?: string };
-      if (res.status === 409 || payload.error === "slot_taken") {
+      const payload = (await res.json().catch(() => ({}))) as { error?: string; manageUrl?: string; emailPending?: boolean };
+      if (res.status === 409 || payload.error === "slot_unavailable" || payload.error === "slot_taken") {
         setError(l(BERATUNG.slotTaken));
         setSlot("");
         setStep(1);
+        // Pull fresh availability so the taken slot disappears immediately.
+        setLoadingSlots(true);
+        fetchFreeSlots(day)
+          .then((list) => setSlots(list.map((slot_start) => ({ slot_start }))))
+          .catch(() => setSlots([]))
+          .finally(() => setLoadingSlots(false));
         scrollTop();
         return;
       }
       if (!res.ok) throw new Error(payload.error ?? "failed");
       setManageUrl(payload.manageUrl ?? "");
+      setEmailPending(Boolean(payload.emailPending));
       setDone(true);
       scrollTop();
     } catch {
@@ -503,6 +514,9 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
             <CheckCircle2 className="h-9 w-9 text-gold" strokeWidth={1.4} />
             <h3 className="mt-5 font-display text-2xl md:text-3xl">{l(BERATUNG.bookedTitle)}</h3>
             <p className="mt-3 text-muted-foreground leading-relaxed">{l(BERATUNG.bookedText)}</p>
+            {emailPending && (
+              <p className="mt-4 border border-gold/40 bg-gold/5 px-4 py-3 text-sm">{l(BERATUNG.emailPending)}</p>
+            )}
             <dl className="mt-8 grid gap-3 text-sm sm:grid-cols-2">
               <div>
                 <dt className={labelClass}>{l(BERATUNG.summaryDate)}</dt>

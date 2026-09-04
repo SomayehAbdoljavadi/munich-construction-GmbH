@@ -22,6 +22,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesSlugRouteImport } from './routes/services_.$slug'
 import { Route as ApiPublicContactRequestRouteImport } from './routes/api/public/contact-request'
+import { Route as ApiPublicConsultationSlotsRouteImport } from './routes/api/public/consultation-slots'
 import { Route as ApiPublicConsultationRemindersRouteImport } from './routes/api/public/consultation-reminders'
 import { Route as ApiPublicConsultationManageRouteImport } from './routes/api/public/consultation-manage'
 import { Route as ApiPublicConsultationCallbackRouteImport } from './routes/api/public/consultation-callback'
@@ -93,6 +94,12 @@ const ApiPublicContactRequestRoute = ApiPublicContactRequestRouteImport.update({
   path: '/api/public/contact-request',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicConsultationSlotsRoute =
+  ApiPublicConsultationSlotsRouteImport.update({
+    id: '/api/public/consultation-slots',
+    path: '/api/public/consultation-slots',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicConsultationRemindersRoute =
   ApiPublicConsultationRemindersRouteImport.update({
     id: '/api/public/consultation-reminders',
@@ -142,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
   '/api/public/consultation-manage': typeof ApiPublicConsultationManageRoute
   '/api/public/consultation-reminders': typeof ApiPublicConsultationRemindersRoute
+  '/api/public/consultation-slots': typeof ApiPublicConsultationSlotsRoute
   '/api/public/contact-request': typeof ApiPublicContactRequestRoute
 }
 export interface FileRoutesByTo {
@@ -162,6 +170,7 @@ export interface FileRoutesByTo {
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
   '/api/public/consultation-manage': typeof ApiPublicConsultationManageRoute
   '/api/public/consultation-reminders': typeof ApiPublicConsultationRemindersRoute
+  '/api/public/consultation-slots': typeof ApiPublicConsultationSlotsRoute
   '/api/public/contact-request': typeof ApiPublicContactRequestRoute
 }
 export interface FileRoutesById {
@@ -183,6 +192,7 @@ export interface FileRoutesById {
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
   '/api/public/consultation-manage': typeof ApiPublicConsultationManageRoute
   '/api/public/consultation-reminders': typeof ApiPublicConsultationRemindersRoute
+  '/api/public/consultation-slots': typeof ApiPublicConsultationSlotsRoute
   '/api/public/contact-request': typeof ApiPublicContactRequestRoute
 }
 export interface FileRouteTypes {
@@ -205,6 +215,7 @@ export interface FileRouteTypes {
     | '/api/public/consultation-callback'
     | '/api/public/consultation-manage'
     | '/api/public/consultation-reminders'
+    | '/api/public/consultation-slots'
     | '/api/public/contact-request'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -225,6 +236,7 @@ export interface FileRouteTypes {
     | '/api/public/consultation-callback'
     | '/api/public/consultation-manage'
     | '/api/public/consultation-reminders'
+    | '/api/public/consultation-slots'
     | '/api/public/contact-request'
   id:
     | '__root__'
@@ -245,6 +257,7 @@ export interface FileRouteTypes {
     | '/api/public/consultation-callback'
     | '/api/public/consultation-manage'
     | '/api/public/consultation-reminders'
+    | '/api/public/consultation-slots'
     | '/api/public/contact-request'
   fileRoutesById: FileRoutesById
 }
@@ -266,6 +279,7 @@ export interface RootRouteChildren {
   ApiPublicConsultationCallbackRoute: typeof ApiPublicConsultationCallbackRoute
   ApiPublicConsultationManageRoute: typeof ApiPublicConsultationManageRoute
   ApiPublicConsultationRemindersRoute: typeof ApiPublicConsultationRemindersRoute
+  ApiPublicConsultationSlotsRoute: typeof ApiPublicConsultationSlotsRoute
   ApiPublicContactRequestRoute: typeof ApiPublicContactRequestRoute
 }
 
@@ -362,6 +376,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicContactRequestRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/consultation-slots': {
+      id: '/api/public/consultation-slots'
+      path: '/api/public/consultation-slots'
+      fullPath: '/api/public/consultation-slots'
+      preLoaderRoute: typeof ApiPublicConsultationSlotsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/consultation-reminders': {
       id: '/api/public/consultation-reminders'
       path: '/api/public/consultation-reminders'
@@ -418,6 +439,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicConsultationCallbackRoute: ApiPublicConsultationCallbackRoute,
   ApiPublicConsultationManageRoute: ApiPublicConsultationManageRoute,
   ApiPublicConsultationRemindersRoute: ApiPublicConsultationRemindersRoute,
+  ApiPublicConsultationSlotsRoute: ApiPublicConsultationSlotsRoute,
   ApiPublicContactRequestRoute: ApiPublicContactRequestRoute,
 }
 export const routeTree = rootRouteImport

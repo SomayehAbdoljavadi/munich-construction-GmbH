@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CalendarClock, CheckCircle2, Loader2, Phone, XCircle } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { fetchFreeSlots } from "@/lib/slots";
 import { useT } from "@/lib/i18n";
 import { url } from "@/lib/seo";
 import { BERATUNG, CONTACT, MANAGE, type L } from "@/lib/consultation-data";
@@ -110,11 +110,17 @@ function ManageAppointmentPage() {
     let active = true;
     setLoadingSlots(true);
     setSlots([]);
-    supabase.rpc("consultation_free_slots", { target_date: day }).then(({ data }) => {
-      if (!active) return;
-      setSlots((data as Array<{ slot_start: string }> | null) ?? []);
-      setLoadingSlots(false);
-    });
+    fetchFreeSlots(day)
+      .then((list) => {
+        if (!active) return;
+        setSlots(list.map((slot_start) => ({ slot_start })));
+        setLoadingSlots(false);
+      })
+      .catch(() => {
+        if (!active) return;
+        setSlots([]);
+        setLoadingSlots(false);
+      });
     return () => {
       active = false;
     };
@@ -135,7 +141,7 @@ function ManageAppointmentPage() {
     );
 
   const handleError = (code?: string) => {
-    if (code === "slot_taken") setError(l(BERATUNG.slotTaken));
+    if (code === "slot_taken" || code === "slot_unavailable") setError(l(BERATUNG.slotTaken));
     else if (code === "too_late") setError(l(MANAGE.tooLate));
     else setError(l(MANAGE.failure));
   };
@@ -155,7 +161,7 @@ function ManageAppointmentPage() {
         setDay("");
       } else {
         handleError(r.error);
-        if (r.error === "slot_taken") setSlot("");
+        if (r.error === "slot_taken" || r.error === "slot_unavailable") setSlot("");
       }
     } catch {
       setError(l(MANAGE.failure));
