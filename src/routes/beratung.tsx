@@ -361,6 +361,8 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
   const [slot, setSlot] = useState<string>("");
   const [slots, setSlots] = useState<Slot[]>([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
+  const [slotsError, setSlotsError] = useState(false);
+  const [slotsReload, setSlotsReload] = useState(0);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
@@ -389,22 +391,30 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
     if (!day) return;
     let active = true;
     setLoadingSlots(true);
+    setSlotsError(false);
     setSlots([]);
     fetchFreeSlots(day)
-      .then((list) => {
+      .then((result) => {
         if (!active) return;
-        setSlots(list.map((slot_start) => ({ slot_start })));
+        if (result.ok) {
+          setSlots(result.slots.map((s) => ({ slot_start: s.start })));
+          setSlotsError(false);
+        } else {
+          setSlots([]);
+          setSlotsError(true);
+        }
         setLoadingSlots(false);
       })
       .catch(() => {
         if (!active) return;
         setSlots([]);
+        setSlotsError(true);
         setLoadingSlots(false);
       });
     return () => {
       active = false;
     };
-  }, [day]);
+  }, [day, slotsReload]);
 
   const typeLabel = PROJECT_TYPES.find((t) => t.id === projectType);
   const slotLabel = slot
@@ -482,8 +492,14 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
         // Pull fresh availability so the taken slot disappears immediately.
         setLoadingSlots(true);
         fetchFreeSlots(day)
-          .then((list) => setSlots(list.map((slot_start) => ({ slot_start }))))
-          .catch(() => setSlots([]))
+          .then((result) => {
+            setSlots(result.ok ? result.slots.map((s) => ({ slot_start: s.start })) : []);
+            setSlotsError(!result.ok);
+          })
+          .catch(() => {
+            setSlots([]);
+            setSlotsError(true);
+          })
           .finally(() => setLoadingSlots(false));
         scrollTop();
         return;
@@ -676,6 +692,17 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
                         <p className="flex items-center gap-2 text-sm text-muted-foreground">
                           <Loader2 className="h-4 w-4 animate-spin" /> {l(BERATUNG.loadingSlots)}
                         </p>
+                      ) : slotsError ? (
+                        <div className="border border-border p-4">
+                          <p className="text-sm text-muted-foreground">{l(BERATUNG.slotsError)}</p>
+                          <button
+                            type="button"
+                            onClick={() => setSlotsReload((n) => n + 1)}
+                            className="mt-4 border border-gold px-5 py-2.5 text-sm text-gold hover:bg-gold/10 transition"
+                          >
+                            {l(BERATUNG.retry)}
+                          </button>
+                        </div>
                       ) : slots.length === 0 ? (
                         <p className="text-sm text-muted-foreground">{l(BERATUNG.noSlots)}</p>
                       ) : (

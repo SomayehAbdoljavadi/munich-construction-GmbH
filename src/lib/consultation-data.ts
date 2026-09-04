@@ -129,6 +129,12 @@ export const BERATUNG = {
     en: "Your appointment is confirmed and reserved. The confirmation email may be delayed — you can reach us by phone at any time.",
   },
   loadingSlots: { de: "Termine werden geladen …", en: "Loading available times …" },
+  slotsError: {
+    de: "Die verfügbaren Zeiten konnten nicht geladen werden. Bitte versuchen Sie es erneut.",
+    en: "We couldn’t load the available times. Please try again.",
+  },
+  retry: { de: "Erneut versuchen", en: "Retry" },
+
 
   // Callback form
   callbackTitle: { de: "Lieber zurückgerufen werden?", en: "Prefer to be called back?" },
