@@ -144,8 +144,8 @@ function CareersPage() {
       const fd = new FormData();
       fd.append("firstName", values.firstName.trim());
       fd.append("lastName", values.lastName.trim());
-      fd.append("email", values.email.trim());
-      fd.append("phone", values.phone.trim());
+      fd.append("email", normalizeEmail(values.email) ?? values.email.trim());
+      fd.append("phone", normalizePhone(values.phone) ?? values.phone.trim());
       fd.append("positionId", positionId);
       fd.append("lang", lang);
       fd.append("consent", "true");
