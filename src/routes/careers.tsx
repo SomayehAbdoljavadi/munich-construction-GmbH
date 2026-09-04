@@ -137,9 +137,22 @@ function CareersPage() {
       if (coverLetter) fd.append("coverLetter", coverLetter);
 
       const res = await fetch("/api/public/careers-application", { method: "POST", body: fd });
-      if (!res.ok) throw new Error(`status_${res.status}`);
+      if (!res.ok) {
+        const body = (await res.json().catch(() => ({}))) as { error?: string };
+        const code = body.error ?? `status_${res.status}`;
+        if (import.meta.env.DEV) console.warn(`[careers] submission rejected: ${code}`);
+        if (code === "cv_size" || code === "cover_size") setFailure(C.failureFileSize[lang]);
+        else if (code === "cv_type" || code === "cover_type" || code === "cv_empty" || code === "cover_empty")
+          setFailure(C.failureFileType[lang]);
+        else if (res.status === 429) setFailure(C.failureRateLimit[lang]);
+        else if (res.status >= 500) setFailure(C.failureTemporary[lang]);
+        else setFailure(C.failure[lang]);
+        setStatus("error");
+        return;
+      }
 
       setStatus("success");
+      setFailure(null);
       setValues({ firstName: "", lastName: "", email: "", phone: "" });
       setPositionId("");
       setCv(null);
@@ -148,9 +161,11 @@ function CareersPage() {
       if (cvInputRef.current) cvInputRef.current.value = "";
       if (coverInputRef.current) coverInputRef.current.value = "";
     } catch {
+      setFailure(C.failureTemporary[lang]);
       setStatus("error");
     }
   };
+
 
   const field = (name: "firstName" | "lastName" | "email" | "phone", type: string) => ({
     id: name,
