@@ -76,7 +76,7 @@ function CareersPage() {
   const [highlight, setHighlight] = useState(false);
 
   const formRef = useRef<HTMLDivElement | null>(null);
-  const positionRef = useRef<HTMLSelectElement | null>(null);
+  const positionRef = useRef<HTMLButtonElement | null>(null);
   const cvInputRef = useRef<HTMLInputElement | null>(null);
   const coverInputRef = useRef<HTMLInputElement | null>(null);
 
