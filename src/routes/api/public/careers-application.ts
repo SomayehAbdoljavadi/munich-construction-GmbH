@@ -111,15 +111,21 @@ function toBase64(buffer: ArrayBuffer) {
   return btoa(binary);
 }
 
+// Browsers report inconsistent MIME types for PDFs (empty, octet-stream,
+// x-pdf) depending on OS/file associations. The magic bytes stay the
+// authoritative check; the declared type only rejects clearly wrong formats.
+const NEUTRAL_TYPES = new Set(["", "application/pdf", "application/x-pdf", "application/octet-stream", "binary/octet-stream"]);
+
 async function validatePdf(file: File) {
   if (file.size === 0) return "empty";
   if (file.size > MAX_FILE_BYTES) return "size";
-  if (file.type && file.type !== "application/pdf") return "type";
+  if (!NEUTRAL_TYPES.has((file.type || "").toLowerCase())) return "type";
   const head = new Uint8Array(await file.slice(0, 5).arrayBuffer());
   const magic = String.fromCharCode(...head);
   if (magic !== PDF_MAGIC) return "type";
   return null;
 }
+
 
 function json(body: unknown, status: number) {
   return new Response(JSON.stringify(body), {
@@ -170,11 +176,18 @@ export const Route = createFileRoute("/api/public/careers-application")({
         if (!(cv instanceof File)) return json({ error: "cv_required" }, 400);
 
         const cvError = await validatePdf(cv);
-        if (cvError) return json({ error: `cv_${cvError}` }, 400);
+        if (cvError) {
+          console.warn(`[careers] rejected cv: ${cvError}`);
+          return json({ error: `cv_${cvError}` }, 400);
+        }
         if (cover instanceof File && cover.size > 0) {
           const coverError = await validatePdf(cover);
-          if (coverError) return json({ error: `cover_${coverError}` }, 400);
+          if (coverError) {
+            console.warn(`[careers] rejected cover letter: ${coverError}`);
+            return json({ error: `cover_${coverError}` }, 400);
+          }
         }
+
 
         const mail = mailer();
         const to = NOTIFY_TO;
@@ -238,10 +251,13 @@ export const Route = createFileRoute("/api/public/careers-application")({
             html: notificationHtml,
             attachments,
           });
-        } catch {
+        } catch (error) {
+          // Category only — never the payload, applicant data or credentials.
+          console.error(`[careers] delivery failed: ${error instanceof Error ? error.message : "unknown"}`);
           recentSubmissions.delete(`${email}|${positionId}`);
           return json({ error: "delivery_failed" }, 502);
         }
+
 
         // Confirmation to the applicant — never blocks the accepted application.
         await mail.sendConfirmation(email, lang as "de" | "en");

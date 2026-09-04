@@ -149,6 +149,23 @@ export const CAREERS_COPY = {
     de: "Ihre Bewerbung konnte leider nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.",
     en: "Unfortunately, your application could not be submitted. Please try again or contact us directly.",
   },
+  failureFileType: {
+    de: "Die hochgeladene Datei konnte nicht als PDF gelesen werden. Bitte laden Sie ein gültiges PDF hoch.",
+    en: "The uploaded file could not be read as a PDF. Please upload a valid PDF file.",
+  },
+  failureFileSize: {
+    de: "Die Datei ist zu groß. Bitte laden Sie ein PDF mit maximal 10 MB hoch.",
+    en: "The file is too large. Please upload a PDF of no more than 10 MB.",
+  },
+  failureRateLimit: {
+    de: "Es wurden zu viele Bewerbungen in kurzer Zeit gesendet. Bitte versuchen Sie es in einer Stunde erneut.",
+    en: "Too many applications were sent in a short time. Please try again in an hour.",
+  },
+  failureTemporary: {
+    de: "Der Versand ist vorübergehend nicht möglich. Bitte versuchen Sie es in Kürze erneut oder schreiben Sie an info@munichconstruction.de.",
+    en: "Sending is temporarily unavailable. Please try again shortly or email info@munichconstruction.de.",
+  },
+
   required: { de: "Dieses Feld ist erforderlich.", en: "This field is required." },
   invalidEmail: { de: "Bitte geben Sie eine gültige E-Mail-Adresse ein.", en: "Please enter a valid email address." },
   invalidPhone: { de: "Bitte geben Sie eine gültige Telefonnummer ein.", en: "Please enter a valid phone number." },
