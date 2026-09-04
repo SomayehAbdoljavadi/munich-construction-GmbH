@@ -20,6 +20,12 @@ function noStore(body: unknown, status: number) {
   });
 }
 
+function fail(error: string, status: number) {
+  const requestId = crypto.randomUUID().slice(0, 8);
+  return noStore({ ok: false, error, requestId }, status);
+}
+
+
 export const Route = createFileRoute("/api/public/consultation-slots")({
   server: {
     handlers: {
