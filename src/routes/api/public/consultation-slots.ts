@@ -30,18 +30,18 @@ export const Route = createFileRoute("/api/public/consultation-slots")({
   server: {
     handlers: {
       GET: async ({ request }) => {
-        if (rateLimited(clientIp(request), 240)) return noStore({ error: "rate_limited" }, 429);
+        if (rateLimited(clientIp(request), 240)) return fail("rate_limited", 429);
 
         const date = new URL(request.url).searchParams.get("date") ?? "";
         if (!DATE_RE.test(date) || Number.isNaN(new Date(`${date}T12:00:00Z`).getTime())) {
-          return noStore({ error: "invalid_date" }, 400);
+          return fail("invalid_date", 400);
         }
 
-        const key = process.env["SUPABASE_PUBLISHABLE_KEY"];
-        const url = process.env["SUPABASE_URL"];
+        const key = process.env["SUPABASE_PUBLISHABLE_KEY"] ?? process.env["VITE_SUPABASE_PUBLISHABLE_KEY"];
+        const url = process.env["SUPABASE_URL"] ?? process.env["VITE_SUPABASE_URL"];
         if (!key || !url) {
           console.error("[consultation] availability: Supabase env missing");
-          return noStore({ error: "unavailable" }, 503);
+          return fail("availability_unavailable", 503);
         }
 
         const supabase = createClient<Database>(url, key, {
@@ -61,16 +61,33 @@ export const Route = createFileRoute("/api/public/consultation-slots")({
         const { data, error } = await supabase.rpc("consultation_free_slots", { target_date: date });
         if (error) {
           console.error("[consultation] availability lookup failed");
-          return noStore({ error: "unavailable" }, 503);
+          return fail("availability_unavailable", 503);
         }
 
         const now = Date.now();
-        const slots = (data ?? [])
+        const rows = Array.isArray(data) ? data : [];
+        const slots = rows
           .map((row: { slot_start: string }) => row.slot_start)
-          .filter((iso: string) => new Date(iso).getTime() > now)
+          .filter((iso: string) => typeof iso === "string" && new Date(iso).getTime() > now)
           .sort();
 
-        return noStore({ date, timezone: "Europe/Berlin", slots }, 200);
+        const fmt = new Intl.DateTimeFormat("de-DE", {
+          timeZone: "Europe/Berlin",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        return noStore(
+          {
+            ok: true,
+            date,
+            timezone: "Europe/Berlin",
+            availableSlots: slots.map((start) => ({ start, label: fmt.format(new Date(start)) })),
+            // Legacy field kept so older cached clients keep working.
+            slots,
+          },
+          200,
+        );
       },
     },
   },
