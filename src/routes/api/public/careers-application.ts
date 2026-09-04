@@ -111,15 +111,21 @@ function toBase64(buffer: ArrayBuffer) {
   return btoa(binary);
 }
 
+// Browsers report inconsistent MIME types for PDFs (empty, octet-stream,
+// x-pdf) depending on OS/file associations. The magic bytes stay the
+// authoritative check; the declared type only rejects clearly wrong formats.
+const NEUTRAL_TYPES = new Set(["", "application/pdf", "application/x-pdf", "application/octet-stream", "binary/octet-stream"]);
+
 async function validatePdf(file: File) {
   if (file.size === 0) return "empty";
   if (file.size > MAX_FILE_BYTES) return "size";
-  if (file.type && file.type !== "application/pdf") return "type";
+  if (!NEUTRAL_TYPES.has((file.type || "").toLowerCase())) return "type";
   const head = new Uint8Array(await file.slice(0, 5).arrayBuffer());
   const magic = String.fromCharCode(...head);
   if (magic !== PDF_MAGIC) return "type";
   return null;
 }
+
 
 function json(body: unknown, status: number) {
   return new Response(JSON.stringify(body), {
