@@ -251,10 +251,13 @@ export const Route = createFileRoute("/api/public/careers-application")({
             html: notificationHtml,
             attachments,
           });
-        } catch {
+        } catch (error) {
+          // Category only — never the payload, applicant data or credentials.
+          console.error(`[careers] delivery failed: ${error instanceof Error ? error.message : "unknown"}`);
           recentSubmissions.delete(`${email}|${positionId}`);
           return json({ error: "delivery_failed" }, 502);
         }
+
 
         // Confirmation to the applicant — never blocks the accepted application.
         await mail.sendConfirmation(email, lang as "de" | "en");
