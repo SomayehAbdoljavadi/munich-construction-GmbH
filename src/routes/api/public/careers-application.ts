@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { mailer, NOTIFY_FROM, NOTIFY_TO } from "@/lib/consultation.server";
+import { normalizeEmail, normalizePhone } from "@/lib/validation";
 
 // Public endpoint: receives career applications (multipart/form-data with PDF
 // attachments) and delivers them by email. All credentials are server-side.
@@ -212,11 +213,22 @@ export const Route = createFileRoute("/api/public/careers-application")({
         const consent = clean(form.get("consent"), 10) === "true";
 
         const mapping = CATEGORY_BY_POSITION[positionId];
-        const emailOk = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email);
-        const phoneOk = /^[+]?[\d\s()./-]{6,25}$/.test(phone);
+        const normalizedEmail = normalizeEmail(email);
+        const normalizedPhone = normalizePhone(phone);
 
-        if (!firstName || !lastName || !emailOk || !phoneOk || !mapping || !consent) {
-          return result(request, id, { error: "invalid_input" }, 400, "invalid_input");
+        // Structured, field-specific errors — same rules as the client.
+        const fields: Record<string, "required" | "invalid"> = {};
+        if (!firstName) fields.firstName = "required";
+        if (!lastName) fields.lastName = "required";
+        if (!email) fields.email = "required";
+        else if (!normalizedEmail) fields.email = "invalid";
+        if (!phone) fields.phone = "required";
+        else if (!normalizedPhone) fields.phone = "invalid";
+        if (!mapping) fields.positionId = "required";
+        if (!consent) fields.consent = "required";
+
+        if (Object.keys(fields).length > 0 || !mapping || !normalizedEmail || !normalizedPhone) {
+          return result(request, id, { error: "invalid_input", fields }, 400, "invalid_input");
         }
 
         const cv = form.get("cv");
@@ -247,7 +259,7 @@ export const Route = createFileRoute("/api/public/careers-application")({
         }
 
 
-        if (isDuplicate(`${email}|${positionId}`)) return result(request, id, { ok: true, duplicate: true }, 200, "duplicate_accepted");
+        if (isDuplicate(`${normalizedEmail}|${positionId}`)) return result(request, id, { ok: true, duplicate: true }, 200, "duplicate_accepted");
 
         const category = mapping.de;
         const submittedAt = new Date().toISOString();
@@ -277,7 +289,7 @@ export const Route = createFileRoute("/api/public/careers-application")({
           ["Position (EN)", mapping.title.en],
           ["First name", firstName],
           ["Last name", lastName],
-          ["Phone", phone],
+          ["Phone", normalizedPhone],
           ["Submitted at", submittedAt],
           ["Page URL", clean(request.headers.get("referer"), 300)],
           ["Website language", lang.toUpperCase()],
@@ -288,7 +300,7 @@ export const Route = createFileRoute("/api/public/careers-application")({
           ],
         ];
 
-        const emailRow = `<tr><td style="border:1px solid #ddd"><strong>Email</strong></td><td style="border:1px solid #ddd"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>`;
+        const emailRow = `<tr><td style="border:1px solid #ddd"><strong>Email</strong></td><td style="border:1px solid #ddd"><a href="mailto:${escapeHtml(normalizedEmail)}">${escapeHtml(normalizedEmail)}</a></td></tr>`;
 
         const notificationHtml = `
           <div style="font-family:Arial,sans-serif;color:#111">
@@ -317,7 +329,7 @@ export const Route = createFileRoute("/api/public/careers-application")({
           messageId = await mail.send({
             from,
             to: [to],
-            reply_to: email,
+            reply_to: normalizedEmail,
             subject: `Career Application – ${mapping.title.de} – ${firstName} ${lastName}`,
             html: notificationHtml,
             attachments,
@@ -325,13 +337,13 @@ export const Route = createFileRoute("/api/public/careers-application")({
         } catch (error) {
           // Category only — never the payload, applicant data or credentials.
           console.error(`[careers] delivery failed: ${error instanceof Error ? error.message : "unknown"}`);
-          recentSubmissions.delete(`${email}|${positionId}`);
+          recentSubmissions.delete(`${normalizedEmail}|${positionId}`);
           return result(request, id, { error: "delivery_failed" }, 502, "internal_delivery_failed");
         }
 
 
         // Confirmation to the applicant — never blocks the accepted application.
-        await mail.sendConfirmation(email, lang as "de" | "en");
+        await mail.sendConfirmation(normalizedEmail, lang as "de" | "en");
 
         return result(request, id, { ok: true, id: messageId }, 200, "accepted");
 
