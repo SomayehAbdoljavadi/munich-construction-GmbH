@@ -176,11 +176,18 @@ export const Route = createFileRoute("/api/public/careers-application")({
         if (!(cv instanceof File)) return json({ error: "cv_required" }, 400);
 
         const cvError = await validatePdf(cv);
-        if (cvError) return json({ error: `cv_${cvError}` }, 400);
+        if (cvError) {
+          console.warn(`[careers] rejected cv: ${cvError}`);
+          return json({ error: `cv_${cvError}` }, 400);
+        }
         if (cover instanceof File && cover.size > 0) {
           const coverError = await validatePdf(cover);
-          if (coverError) return json({ error: `cover_${coverError}` }, 400);
+          if (coverError) {
+            console.warn(`[careers] rejected cover letter: ${coverError}`);
+            return json({ error: `cover_${coverError}` }, 400);
+          }
         }
+
 
         const mail = mailer();
         const to = NOTIFY_TO;
