@@ -209,11 +209,18 @@ function CareersPage() {
     "aria-invalid": Boolean(errors[name]),
     "aria-describedby": errors[name] ? `${name}-error` : undefined,
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      setValues((v) => ({ ...v, [name]: e.target.value }));
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
+      const value = e.target.value;
+      setValues((v) => ({ ...v, [name]: value }));
+      // Clear an existing error as soon as the value becomes valid again.
+      setErrors((prev) => (prev[name] && !fieldError(name, value) ? { ...prev, [name]: undefined } : prev));
     },
-    className:
-      "w-full bg-transparent border border-border focus:border-gold focus-visible:outline-2 focus-visible:outline-gold px-4 py-3 font-sans text-base transition-colors",
+    onBlur: (e: React.FocusEvent<HTMLInputElement>) => {
+      if (!e.target.value.trim() && !errors[name]) return;
+      setErrors((prev) => ({ ...prev, [name]: fieldError(name, e.target.value) }));
+    },
+    className: `w-full bg-transparent border ${
+      errors[name] ? "border-destructive" : "border-border focus:border-gold"
+    } focus-visible:outline-2 focus-visible:outline-gold px-4 py-3 font-sans text-base transition-colors`,
   });
 
   return (
