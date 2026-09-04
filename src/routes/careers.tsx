@@ -383,9 +383,10 @@ function CareersPage() {
 
                 {status === "error" && (
                   <p role="alert" className="border border-destructive/50 bg-destructive/10 text-destructive p-4 text-sm">
-                    {C.failure[lang]}
+                    {failure ?? C.failure[lang]}
                   </p>
                 )}
+
 
                 <button
                   type="submit"
