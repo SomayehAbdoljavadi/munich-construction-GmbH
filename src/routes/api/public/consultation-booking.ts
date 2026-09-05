@@ -230,7 +230,7 @@ async function handleBooking(request: Request) {
             await mail.send({
               from: mail.from,
               to: [email],
-              reply_to: mail.to,
+              reply_to: INTERNAL_TO,
               subject:
                 lang === "en"
                   ? `Your consultation on ${fmt.day} at ${fmt.time}`

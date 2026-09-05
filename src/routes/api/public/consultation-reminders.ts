@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { escapeHtml, formatSlot, json, mailer } from "@/lib/consultation.server";
+import { escapeHtml, formatSlot, INTERNAL_TO, json, mailer } from "@/lib/consultation.server";
 import { calendarNote, icsAttachment } from "@/lib/consultation-ics.server";
 
 // Public cron endpoint: sends a reminder email ~24h before each confirmed
@@ -80,7 +80,7 @@ export const Route = createFileRoute("/api/public/consultation-reminders")({
             await mail.send({
               from: mail.from,
               to: [b.email],
-              reply_to: mail.to,
+              reply_to: INTERNAL_TO,
               subject:
                 lang === "en"
                   ? `Reminder: your consultation on ${fmt.day} at ${fmt.time}`

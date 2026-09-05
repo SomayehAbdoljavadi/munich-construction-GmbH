@@ -343,7 +343,7 @@ export const Route = createFileRoute("/api/public/careers-application")({
 
 
         // Confirmation to the applicant — never blocks the accepted application.
-        await mail.sendConfirmation(normalizedEmail, lang as "de" | "en");
+        await mail.sendConfirmation(normalizedEmail, lang as "de" | "en", INTERNAL_TO);
 
         return result(request, id, { ok: true, id: messageId }, 200, "accepted");
 
