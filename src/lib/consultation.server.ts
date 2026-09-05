@@ -72,6 +72,8 @@ export async function collectAttachments(form: FormData) {
 }
 
 export const NOTIFY_TO = process.env["CAREERS_TO_EMAIL"] || "info@munichconstruction.de";
+/** Internal recipient for careers applications and all consultation lifecycle emails. */
+export const INTERNAL_TO = process.env["INTERNAL_TO_EMAIL"] || "office@munichconstruction.de";
 export const NOTIFY_FROM = "Munich Construction Website <website@send.munichconstruction.de>";
 export const CONFIRM_FROM = "Munich Construction GmbH <website@send.munichconstruction.de>";
 
