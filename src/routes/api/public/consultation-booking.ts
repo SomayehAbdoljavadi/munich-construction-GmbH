@@ -188,6 +188,7 @@ async function handleBooking(request: Request) {
                   ["Eingegangen am", new Date().toLocaleString("de-DE", { timeZone: "Europe/Berlin" })],
                   ["Seite", clean(request.headers.get("referer"), 300)],
                 ])}
+                ${calendarNote(lang)}
               </div>`,
               attachments: [...files.attachments, invite],
             });
