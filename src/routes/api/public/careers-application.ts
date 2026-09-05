@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { mailer, NOTIFY_FROM, NOTIFY_TO } from "@/lib/consultation.server";
+import { mailer, NOTIFY_FROM, INTERNAL_TO } from "@/lib/consultation.server";
 import { normalizeEmail, normalizePhone } from "@/lib/validation";
 
 // Public endpoint: receives career applications (multipart/form-data with PDF
@@ -250,7 +250,7 @@ export const Route = createFileRoute("/api/public/careers-application")({
 
 
         const mail = mailer();
-        const to = NOTIFY_TO;
+        const to = INTERNAL_TO;
         const from = NOTIFY_FROM;
 
         if (!mail) {
