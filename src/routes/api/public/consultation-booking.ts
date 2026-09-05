@@ -34,8 +34,6 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
 });
 
 async function handleBooking(request: Request) {
-        if (rateLimited(clientIp(request))) return json({ error: "rate_limited" }, 429);
-
         let form: FormData;
         try {
           form = await request.formData();
@@ -77,6 +75,11 @@ async function handleBooking(request: Request) {
 
         const files = await collectAttachments(form);
         if ("error" in files) return json({ error: files.error }, 400);
+
+        // Abuse protection runs only on well-formed booking attempts so that
+        // ordinary visitors correcting a form field are never blocked.
+        if (rateLimited(clientIp(request), 20)) return json({ error: "rate_limited" }, 429);
+
 
         const db = await publicSupabase();
         if (!db) {
@@ -144,19 +147,25 @@ async function handleBooking(request: Request) {
         const mail = mailer();
         const name = `${firstName} ${lastName}`;
         // Calendar invitation built from the saved booking record only.
-        const invite = icsAttachment({
-          bookingId: booking.id,
-          start: slotDate,
-          durationMinutes: slotMinutes,
-          sequence: 0,
-          method: "REQUEST",
-          lang,
-          name,
-          email,
-          phone,
-          projectType: projectTypeLabel,
-          manageUrl,
-        });
+        // A failure here must never discard the appointment that is already saved.
+        let invite: { filename: string; content: string; content_type?: string } | null = null;
+        try {
+          invite = icsAttachment({
+            bookingId: booking.id,
+            start: slotDate,
+            durationMinutes: slotMinutes,
+            sequence: 0,
+            method: "REQUEST",
+            lang,
+            name,
+            email,
+            phone,
+            projectType: projectTypeLabel,
+            manageUrl,
+          });
+        } catch {
+          console.error("[consultation] calendar invitation could not be generated");
+        }
         let internalStatus = "failed";
         let customerStatus = "failed";
         let emailError: string | null = mail ? null : "resend_not_configured";
@@ -190,7 +199,7 @@ async function handleBooking(request: Request) {
                 ])}
                 ${calendarNote(lang)}
               </div>`,
-              attachments: [...files.attachments, invite],
+              attachments: invite ? [...files.attachments, invite] : files.attachments,
             });
             internalStatus = "sent";
           } catch {
@@ -226,7 +235,7 @@ async function handleBooking(request: Request) {
                   ? `Your consultation on ${fmt.day} at ${fmt.time}`
                   : `Ihr Beratungstermin am ${fmt.day} um ${fmt.time} Uhr`,
               html: html + calendarNote(lang),
-              attachments: [invite],
+              attachments: invite ? [invite] : [],
             });
             customerStatus = "sent";
           } catch {
@@ -237,13 +246,17 @@ async function handleBooking(request: Request) {
           console.error("[consultation] email service not configured: RESEND_API_KEY missing");
         }
 
-        await db.rpc("consultation_mark_email_status", {
-          p_booking_id: booking.id,
-          p_cancel_token: booking.cancel_token,
-          p_internal_status: internalStatus,
-          p_customer_status: customerStatus,
-          p_email_error: emailError,
-        });
+        try {
+          await db.rpc("consultation_mark_email_status", {
+            p_booking_id: booking.id,
+            p_cancel_token: booking.cancel_token,
+            p_internal_status: internalStatus,
+            p_customer_status: customerStatus,
+            p_email_error: emailError,
+          });
+        } catch {
+          console.error("[consultation] email status could not be recorded");
+        }
 
         return json(
           {
