@@ -1,8 +1,12 @@
 // Server-only RFC 5545 calendar invitation builder for consultation appointments.
 // Generated in memory and attached directly to Resend emails — never stored.
 
-const ORGANIZER_EMAIL = "office@munichconstruction.de";
+// The organizer must match the verified sender domain so Outlook/Exchange
+// trusts the invitation and renders the Accept / Add-to-calendar actions.
+const ORGANIZER_EMAIL = "website@send.munichconstruction.de";
 const ORGANIZER_NAME = "Munich Construction GmbH";
+const OFFICE_EMAIL = "office@munichconstruction.de";
+const OFFICE_NAME = "Munich Construction Office";
 const DOMAIN = "munichconstruction.de";
 const TZID = "Europe/Berlin";
 
@@ -140,7 +144,8 @@ export function buildIcs(input: IcsInput) {
     `STATUS:${cancelled ? "CANCELLED" : "CONFIRMED"}`,
     "TRANSP:OPAQUE",
     `ORGANIZER;CN=${ORGANIZER_NAME}:mailto:${ORGANIZER_EMAIL}`,
-    `ATTENDEE;CN=${esc(input.name)};ROLE=REQ-PARTICIPANT;PARTSTAT=${cancelled ? "DECLINED" : "ACCEPTED"};RSVP=FALSE:mailto:${input.email}`,
+    `ATTENDEE;CN=${OFFICE_NAME};ROLE=REQ-PARTICIPANT;PARTSTAT=${cancelled ? "DECLINED" : "NEEDS-ACTION"};RSVP=${cancelled ? "FALSE" : "TRUE"}:mailto:${OFFICE_EMAIL}`,
+    `ATTENDEE;CN=${esc(input.name)};ROLE=REQ-PARTICIPANT;PARTSTAT=${cancelled ? "DECLINED" : "NEEDS-ACTION"};RSVP=${cancelled ? "FALSE" : "TRUE"}:mailto:${input.email}`,
   ];
 
   if (!cancelled) {
@@ -170,7 +175,20 @@ export function icsAttachment(input: IcsInput) {
   return {
     filename: input.method === "CANCEL" ? "termin-absage.ics" : "termin.ics",
     content: base64(buildIcs(input)),
-    content_type: `text/calendar; charset=utf-8; method=${input.method}`,
+    content_type: `text/calendar; method=${input.method}; charset=UTF-8`,
+  };
+}
+
+/**
+ * Visible, manually downloadable copy of the very same invitation for the
+ * company mailbox. Sent without a calendar `method` parameter so Outlook
+ * shows it as a normal file attachment in addition to the meeting request.
+ */
+export function icsFallbackAttachment(input: IcsInput) {
+  return {
+    filename: input.method === "CANCEL" ? "termin-absage-download.ics" : "termin-download.ics",
+    content: base64(buildIcs(input)),
+    content_type: "text/calendar; charset=UTF-8",
   };
 }
 
