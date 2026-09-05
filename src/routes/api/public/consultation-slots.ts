@@ -37,8 +37,17 @@ export const Route = createFileRoute("/api/public/consultation-slots")({
           return fail("invalid_date", 400);
         }
 
-        const key = process.env["SUPABASE_PUBLISHABLE_KEY"] ?? process.env["VITE_SUPABASE_PUBLISHABLE_KEY"];
-        const url = process.env["SUPABASE_URL"] ?? process.env["VITE_SUPABASE_URL"];
+        // Build-time public values are inlined, so availability still works on
+        // deployments where runtime env vars were not configured.
+        const key =
+          process.env["SUPABASE_PUBLISHABLE_KEY"] ??
+          process.env["VITE_SUPABASE_PUBLISHABLE_KEY"] ??
+          import.meta.env["VITE_SUPABASE_PUBLISHABLE_KEY"];
+        const url =
+          process.env["SUPABASE_URL"] ??
+          process.env["VITE_SUPABASE_URL"] ??
+          import.meta.env["VITE_SUPABASE_URL"];
+
         if (!key || !url) {
           console.error("[consultation] availability: Supabase env missing");
           return fail("availability_unavailable", 503);
