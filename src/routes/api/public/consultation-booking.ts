@@ -199,7 +199,7 @@ async function handleBooking(request: Request) {
                 ])}
                 ${calendarNote(lang)}
               </div>`,
-              attachments: [...files.attachments, invite],
+              attachments: invite ? [...files.attachments, invite] : files.attachments,
             });
             internalStatus = "sent";
           } catch {
@@ -235,7 +235,7 @@ async function handleBooking(request: Request) {
                   ? `Your consultation on ${fmt.day} at ${fmt.time}`
                   : `Ihr Beratungstermin am ${fmt.day} um ${fmt.time} Uhr`,
               html: html + calendarNote(lang),
-              attachments: [invite],
+              attachments: invite ? [invite] : [],
             });
             customerStatus = "sent";
           } catch {
@@ -246,13 +246,17 @@ async function handleBooking(request: Request) {
           console.error("[consultation] email service not configured: RESEND_API_KEY missing");
         }
 
-        await db.rpc("consultation_mark_email_status", {
-          p_booking_id: booking.id,
-          p_cancel_token: booking.cancel_token,
-          p_internal_status: internalStatus,
-          p_customer_status: customerStatus,
-          p_email_error: emailError,
-        });
+        try {
+          await db.rpc("consultation_mark_email_status", {
+            p_booking_id: booking.id,
+            p_cancel_token: booking.cancel_token,
+            p_internal_status: internalStatus,
+            p_customer_status: customerStatus,
+            p_email_error: emailError,
+          });
+        } catch {
+          console.error("[consultation] email status could not be recorded");
+        }
 
         return json(
           {
