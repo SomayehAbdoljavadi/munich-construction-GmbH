@@ -147,19 +147,25 @@ async function handleBooking(request: Request) {
         const mail = mailer();
         const name = `${firstName} ${lastName}`;
         // Calendar invitation built from the saved booking record only.
-        const invite = icsAttachment({
-          bookingId: booking.id,
-          start: slotDate,
-          durationMinutes: slotMinutes,
-          sequence: 0,
-          method: "REQUEST",
-          lang,
-          name,
-          email,
-          phone,
-          projectType: projectTypeLabel,
-          manageUrl,
-        });
+        // A failure here must never discard the appointment that is already saved.
+        let invite: { filename: string; content: string; content_type?: string } | null = null;
+        try {
+          invite = icsAttachment({
+            bookingId: booking.id,
+            start: slotDate,
+            durationMinutes: slotMinutes,
+            sequence: 0,
+            method: "REQUEST",
+            lang,
+            name,
+            email,
+            phone,
+            projectType: projectTypeLabel,
+            manageUrl,
+          });
+        } catch {
+          console.error("[consultation] calendar invitation could not be generated");
+        }
         let internalStatus = "failed";
         let customerStatus = "failed";
         let emailError: string | null = mail ? null : "resend_not_configured";
