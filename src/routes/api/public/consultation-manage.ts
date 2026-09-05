@@ -142,6 +142,17 @@ async function handleManage(request: Request) {
       phone: row.phone ?? "",
       projectType: row.project_type ?? "",
     });
+    const cancelFallback = icsFallbackAttachment({
+      bookingId: id,
+      start: new Date(oldIso),
+      sequence,
+      method: "CANCEL",
+      lang,
+      name,
+      email: row.email ?? "",
+      phone: row.phone ?? "",
+      projectType: row.project_type ?? "",
+    });
     if (mail) {
       try {
         await mail.send({
