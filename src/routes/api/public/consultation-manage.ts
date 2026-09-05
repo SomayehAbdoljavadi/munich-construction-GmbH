@@ -123,7 +123,7 @@ async function handleManage(request: Request) {
     try {
       return new URL(request.url).origin;
     } catch {
-      return "https://www.munichconstruction.de";
+      return "https://munichconstruction.de";
     }
   })();
   const manageUrl = `${origin}/termin?id=${id}&token=${token}`;

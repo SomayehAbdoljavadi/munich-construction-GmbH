@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useT } from "@/lib/i18n";
+import { url } from "@/lib/seo";
 
 export const Route = createFileRoute("/imprint")({
   head: () => ({
@@ -9,7 +10,7 @@ export const Route = createFileRoute("/imprint")({
       { property: "og:title", content: "Impressum — Munich Construction GmbH" },
       { property: "og:description", content: "Legal information for Munich Construction GmbH." },
     ],
-    links: [{ rel: "canonical", href: "/imprint" }],
+    links: [{ rel: "canonical", href: url("/imprint") }],
   }),
   component: ImprintPage,
 });

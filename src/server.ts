@@ -66,8 +66,26 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
   return brandedErrorResponse();
 }
 
+// Canonical host: permanently redirect www -> non-www, preserving path + query.
+function wwwRedirect(request: Request): Response | undefined {
+  let url: URL;
+  try {
+    url = new URL(request.url);
+  } catch {
+    return undefined;
+  }
+  if (url.hostname !== "www.munichconstruction.de") return undefined;
+  url.hostname = "munichconstruction.de";
+  return new Response(null, {
+    status: 301,
+    headers: { location: url.toString(), "cache-control": "public, max-age=3600" },
+  });
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    const redirect = wwwRedirect(request);
+    if (redirect) return redirect;
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);

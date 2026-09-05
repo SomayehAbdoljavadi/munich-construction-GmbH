@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useT } from "@/lib/i18n";
+import { url } from "@/lib/seo";
 import { useConsent } from "@/lib/consent";
 
 export const Route = createFileRoute("/datenschutz")({
@@ -16,7 +17,7 @@ export const Route = createFileRoute("/datenschutz")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/datenschutz" }],
+    links: [{ rel: "canonical", href: url("/datenschutz") }],
   }),
   component: PrivacyPage,
 });
