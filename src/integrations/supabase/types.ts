@@ -264,6 +264,26 @@ export type Database = {
           slot_start: string
         }[]
       }
+      consultation_manage_booking: {
+        Args: {
+          p_action: string
+          p_id: string
+          p_slot_start?: string
+          p_token: string
+        }
+        Returns: {
+          email: string
+          first_name: string
+          lang: string
+          last_name: string
+          old_slot_start: string
+          outcome: string
+          phone: string
+          project_type: string
+          slot_start: string
+          status: string
+        }[]
+      }
       consultation_mark_email_status: {
         Args: {
           p_booking_id: string

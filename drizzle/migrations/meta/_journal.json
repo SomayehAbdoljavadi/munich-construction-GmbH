@@ -15,6 +15,13 @@
       "when": 1788623575940,
       "tag": "0001_consultation_book_slot_rpc",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1788623646968,
+      "tag": "0002_consultation_manage_booking_rpc",
+      "breakpoints": true
     }
   ]
 }
