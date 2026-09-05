@@ -76,6 +76,11 @@ async function handleBooking(request: Request) {
         const files = await collectAttachments(form);
         if ("error" in files) return json({ error: files.error }, 400);
 
+        // Abuse protection runs only on well-formed booking attempts so that
+        // ordinary visitors correcting a form field are never blocked.
+        if (rateLimited(clientIp(request), 20)) return json({ error: "rate_limited" }, 429);
+
+
         const db = await publicSupabase();
         if (!db) {
           console.error("[consultation] booking: Supabase configuration missing");
