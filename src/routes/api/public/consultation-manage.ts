@@ -162,7 +162,7 @@ async function handleManage(request: Request) {
           await mail.send({
             from: mail.from,
             to: [row.email],
-            reply_to: mail.to,
+            reply_to: INTERNAL_TO,
             subject:
               lang === "en"
                 ? `Your consultation on ${old.day} has been cancelled`
@@ -216,7 +216,7 @@ async function handleManage(request: Request) {
         await mail.send({
           from: mail.from,
           to: [row.email],
-          reply_to: mail.to,
+          reply_to: INTERNAL_TO,
           subject:
             lang === "en"
               ? `Your consultation is now on ${to.day} at ${to.time}`

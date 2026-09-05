@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { escapeHtml, formatSlot, json, mailer } from "@/lib/consultation.server";
+import { escapeHtml, formatSlot, INTERNAL_TO, json, mailer } from "@/lib/consultation.server";
 import { calendarNote, icsAttachment } from "@/lib/consultation-ics.server";
 
 // Public cron endpoint: sends a reminder email ~24h before each confirmed
