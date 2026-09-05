@@ -158,7 +158,7 @@ async function handleBooking(request: Request) {
             durationMinutes: slotMinutes,
             sequence: 0,
             method: "REQUEST" as const,
-            lang,
+            lang: lang as "de" | "en",
             name,
             email,
             phone,
