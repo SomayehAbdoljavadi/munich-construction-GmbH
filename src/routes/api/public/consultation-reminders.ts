@@ -80,7 +80,7 @@ export const Route = createFileRoute("/api/public/consultation-reminders")({
             await mail.send({
               from: mail.from,
               to: [b.email],
-              reply_to: mail.to,
+              reply_to: INTERNAL_TO,
               subject:
                 lang === "en"
                   ? `Reminder: your consultation on ${fmt.day} at ${fmt.time}`
