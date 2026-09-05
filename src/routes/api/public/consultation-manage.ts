@@ -11,7 +11,7 @@ import {
   rateLimited,
   table,
 } from "@/lib/consultation.server";
-import { calendarNote, icsAttachment, icsFallbackAttachment } from "@/lib/consultation-ics.server";
+import { calendarNote, icsAttachment, icsDownloadButton, icsFallbackAttachment } from "@/lib/consultation-ics.server";
 
 // Public endpoint: lets a customer load, reschedule or cancel their own
 // consultation booking using the secret cancel_token issued at booking time.
@@ -127,6 +127,7 @@ async function handleManage(request: Request) {
     }
   })();
   const manageUrl = `${origin}/termin?id=${id}&token=${token}`;
+  const icsUrl = `${origin}/api/public/consultation-ics?id=${id}&token=${token}`;
 
   if (row.outcome === "cancelled") {
     const oldIso = row.old_slot_start ?? row.slot_start ?? "";
@@ -167,7 +168,7 @@ async function handleManage(request: Request) {
             ["Telefon", row.phone ?? ""],
             ["E-Mail", row.email ?? ""],
             ["Projektart", row.project_type ?? ""],
-          ])}${calendarNote("de", true)}</div>`,
+          ])}${icsDownloadButton(icsUrl, true)}${calendarNote("de", true)}</div>`,
           attachments: [cancelInvite, cancelFallback],
         });
         if (row.email) {
@@ -234,7 +235,7 @@ async function handleManage(request: Request) {
           ["Telefon", row.phone ?? ""],
           ["E-Mail", row.email ?? ""],
           ["Projektart", row.project_type ?? ""],
-        ])}${calendarNote("de")}</div>`,
+        ])}${icsDownloadButton(icsUrl)}${calendarNote("de")}</div>`,
         attachments: [updateInvite, updateFallback],
       });
       if (row.email) {

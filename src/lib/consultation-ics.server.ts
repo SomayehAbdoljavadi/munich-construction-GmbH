@@ -181,15 +181,28 @@ export function icsAttachment(input: IcsInput) {
 
 /**
  * Visible, manually downloadable copy of the very same invitation for the
- * company mailbox. Sent without a calendar `method` parameter so Outlook
- * shows it as a normal file attachment in addition to the meeting request.
+ * company mailbox. Sent as a forced-download `application/octet-stream` file:
+ * Outlook/IONOS consumes and hides `text/calendar` parts, but always renders
+ * an octet-stream attachment as a normal downloadable file.
  */
 export function icsFallbackAttachment(input: IcsInput) {
   return {
     filename: input.method === "CANCEL" ? "termin-absage-download.ics" : "termin-download.ics",
     content: base64(buildIcs(input)),
-    content_type: "text/calendar; charset=UTF-8",
+    content_type: "application/octet-stream",
   };
+}
+
+/**
+ * Prominent download button for the company mailbox. Links to the secure
+ * token-protected download endpoint and guarantees the office can save the
+ * appointment even when the mail client hides all ICS attachments.
+ */
+export function icsDownloadButton(url: string, cancelled = false) {
+  const label = cancelled ? "Termin-Absage herunterladen (.ics)" : "Zum Kalender hinzufügen (.ics)";
+  return `<div style="margin:20px 0">
+    <a href="${url}" style="display:inline-block;background:#c9a227;color:#111;font-family:Arial,sans-serif;font-size:15px;font-weight:bold;text-decoration:none;padding:12px 22px;border-radius:4px">${label}</a>
+  </div>`;
 }
 
 /** Bilingual note explaining the attached invitation. */
