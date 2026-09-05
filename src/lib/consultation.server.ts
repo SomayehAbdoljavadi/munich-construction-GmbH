@@ -97,7 +97,8 @@ export function mailer() {
       body: JSON.stringify(payload),
     });
     if (!res.ok) {
-      console.error(`[email] delivery failed with status ${res.status}`);
+      const detail = (await res.text().catch(() => "")).slice(0, 300);
+      console.error(`[email] delivery failed with status ${res.status}: ${detail}`);
       throw new Error(`email_failed_${res.status}`);
     }
     const body = (await res.json().catch(() => ({}))) as { id?: string };
@@ -149,4 +150,35 @@ export function formatSlot(iso: string, lang: "de" | "en") {
     minute: "2-digit",
   }).format(date);
   return { day, time };
+}
+
+/**
+ * Publishable-key Supabase client for the public consultation endpoints.
+ * Works in deployments where only the build-time public config is available
+ * (the service-role key is never inlined). All writes go through
+ * SECURITY DEFINER RPCs, so RLS still blocks direct table access.
+ */
+export async function publicSupabase() {
+  const key =
+    process.env["SUPABASE_PUBLISHABLE_KEY"] ??
+    process.env["VITE_SUPABASE_PUBLISHABLE_KEY"] ??
+    import.meta.env["VITE_SUPABASE_PUBLISHABLE_KEY"];
+  const url =
+    process.env["SUPABASE_URL"] ?? process.env["VITE_SUPABASE_URL"] ?? import.meta.env["VITE_SUPABASE_URL"];
+  if (!key || !url) return null;
+
+  const { createClient } = await import("@supabase/supabase-js");
+  return createClient(url, key, {
+    auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
+    global: {
+      fetch: (input: RequestInfo | URL, init?: RequestInit) => {
+        const headers = new Headers(init?.headers);
+        if (key.startsWith("sb_") && headers.get("Authorization") === `Bearer ${key}`) {
+          headers.delete("Authorization");
+        }
+        headers.set("apikey", key);
+        return fetch(input, { ...init, headers });
+      },
+    },
+  });
 }

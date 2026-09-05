@@ -235,11 +235,64 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      consultation_book_slot: {
+        Args: {
+          p_budget?: string
+          p_city?: string
+          p_contact_method: string
+          p_description?: string
+          p_email: string
+          p_first_name: string
+          p_lang?: string
+          p_last_name: string
+          p_phone: string
+          p_postal_code?: string
+          p_project_start?: string
+          p_project_type: string
+          p_slot_start: string
+        }
+        Returns: {
+          booking_id: string
+          cancel_token: string
+          customer_email_status: string
+          outcome: string
+        }[]
+      }
       consultation_free_slots: {
         Args: { target_date: string }
         Returns: {
           slot_start: string
         }[]
+      }
+      consultation_manage_booking: {
+        Args: {
+          p_action: string
+          p_id: string
+          p_slot_start?: string
+          p_token: string
+        }
+        Returns: {
+          email: string
+          first_name: string
+          lang: string
+          last_name: string
+          old_slot_start: string
+          outcome: string
+          phone: string
+          project_type: string
+          slot_start: string
+          status: string
+        }[]
+      }
+      consultation_mark_email_status: {
+        Args: {
+          p_booking_id: string
+          p_cancel_token: string
+          p_customer_status: string
+          p_email_error?: string
+          p_internal_status: string
+        }
+        Returns: undefined
       }
     }
     Enums: {

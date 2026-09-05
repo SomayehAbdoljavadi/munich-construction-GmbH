@@ -9,6 +9,7 @@ import {
   json,
   mailer,
   phoneValid,
+  publicSupabase,
   rateLimited,
   table,
 } from "@/lib/consultation.server";
@@ -76,40 +77,11 @@ async function handleBooking(request: Request) {
         const files = await collectAttachments(form);
         if ("error" in files) return json({ error: files.error }, 400);
 
-        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-
-        // Idempotency: a retry by the same person for the same slot must never
-        // create a second appointment.
-        const existingOwn = async () => {
-          const { data } = await supabaseAdmin
-            .from("consultation_bookings")
-            .select("id, cancel_token, customer_email_status")
-            .eq("slot_start", slotDate.toISOString())
-            .eq("email", email)
-            .in("status", ["confirmed", "rescheduled"])
-            .maybeSingle();
-          return data;
-        };
-
-        // The slot must still be offered by the availability engine.
-        const day = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Berlin" }).format(slotDate);
-        const { data: freeSlots, error: slotError } = await supabaseAdmin.rpc("consultation_free_slots", {
-          target_date: day,
-        });
-        if (slotError) {
-          console.error("[consultation] availability lookup failed");
-          return json({ error: "unavailable" }, 503);
+        const db = await publicSupabase();
+        if (!db) {
+          console.error("[consultation] booking: Supabase configuration missing");
+          return json({ error: "booking_failed" }, 500);
         }
-        const isFree = (freeSlots ?? []).some(
-          (s: { slot_start: string }) => new Date(s.slot_start).getTime() === slotDate.getTime(),
-        );
-
-        const { data: settings } = await supabaseAdmin
-          .from("consultation_settings")
-          .select("slot_minutes")
-          .maybeSingle();
-        const slotMinutes = settings?.slot_minutes ?? 15;
-        const slotEnd = new Date(slotDate.getTime() + slotMinutes * 60_000);
 
         const origin = (() => {
           try {
@@ -118,58 +90,52 @@ async function handleBooking(request: Request) {
             return "https://www.munichconstruction.de";
           }
         })();
-        const reservedResponse = (b: { id: string; cancel_token: string; customer_email_status?: string }) =>
-          json(
+
+        // Atomic, double-booking-safe reservation inside the database.
+        const { data: rows, error: bookError } = await db.rpc("consultation_book_slot", {
+          p_slot_start: slotDate.toISOString(),
+          p_first_name: firstName,
+          p_last_name: lastName,
+          p_phone: phone,
+          p_email: email,
+          p_contact_method: contactMethod,
+          p_project_type: projectTypeLabel,
+          p_postal_code: postalCode || null,
+          p_city: city || null,
+          p_project_start: projectStart || null,
+          p_budget: budget || null,
+          p_description: description || null,
+          p_lang: lang,
+        });
+
+        if (bookError) {
+          console.error("[consultation] booking rpc failed", bookError.message);
+          return json({ error: "booking_failed" }, 500);
+        }
+
+        const result = (rows ?? [])[0] as
+          | { booking_id: string | null; cancel_token: string | null; outcome: string; customer_email_status: string | null }
+          | undefined;
+
+        if (!result || result.outcome === "slot_unavailable" || !result.booking_id || !result.cancel_token) {
+          return json({ error: "slot_unavailable" }, 409);
+        }
+
+        const booking = { id: result.booking_id, cancel_token: result.cancel_token };
+        const slotMinutes = 15;
+
+        if (result.outcome === "duplicate") {
+          return json(
             {
               ok: true,
-              id: b.id,
-              cancelToken: b.cancel_token,
-              manageUrl: `${origin}/termin?id=${b.id}&token=${b.cancel_token}`,
-              emailPending: b.customer_email_status !== "sent",
+              id: booking.id,
+              cancelToken: booking.cancel_token,
+              manageUrl: `${origin}/termin?id=${booking.id}&token=${booking.cancel_token}`,
+              emailPending: result.customer_email_status !== "sent",
               duplicate: true,
             },
             200,
           );
-
-        if (!isFree) {
-          const mine = await existingOwn();
-          if (mine) return reservedResponse(mine);
-          return json({ error: "slot_unavailable" }, 409);
-        }
-
-        const { data: booking, error: insertError } = await supabaseAdmin
-          .from("consultation_bookings")
-          .insert({
-            slot_start: slotDate.toISOString(),
-            slot_end: slotEnd.toISOString(),
-            timezone: "Europe/Berlin",
-            duration_minutes: slotMinutes,
-            first_name: firstName,
-            last_name: lastName,
-            phone,
-            email,
-            contact_method: contactMethod,
-            project_type: projectTypeLabel,
-            postal_code: postalCode || null,
-            city: city || null,
-            project_start: projectStart || null,
-            budget: budget || null,
-            project_description: description || null,
-            lang,
-            consent,
-          })
-          .select("id, cancel_token")
-          .single();
-
-        if (insertError) {
-          // Unique index on active slot_start -> exactly one booking can win.
-          if (insertError.code === "23505") {
-            const mine = await existingOwn();
-            if (mine) return reservedResponse(mine);
-            return json({ error: "slot_unavailable" }, 409);
-          }
-          console.error("[consultation] booking insert failed");
-          return json({ error: "booking_failed" }, 500);
         }
 
         const fmt = formatSlot(slotDate.toISOString(), lang);
@@ -254,15 +220,13 @@ async function handleBooking(request: Request) {
           console.error("[consultation] email service not configured: RESEND_API_KEY missing");
         }
 
-        await supabaseAdmin
-          .from("consultation_bookings")
-          .update({
-            internal_email_status: internalStatus,
-            customer_email_status: customerStatus,
-            email_error: emailError,
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", booking.id);
+        await db.rpc("consultation_mark_email_status", {
+          p_booking_id: booking.id,
+          p_cancel_token: booking.cancel_token,
+          p_internal_status: internalStatus,
+          p_customer_status: customerStatus,
+          p_email_error: emailError,
+        });
 
         return json(
           {
