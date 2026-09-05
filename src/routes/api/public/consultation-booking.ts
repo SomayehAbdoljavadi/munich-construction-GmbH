@@ -13,6 +13,7 @@ import {
   rateLimited,
   table,
 } from "@/lib/consultation.server";
+import { calendarNote, icsAttachment } from "@/lib/consultation-ics.server";
 
 // Public endpoint: books a consultation slot (double-booking safe) and sends
 // confirmation emails. All credentials stay server-side.
@@ -142,6 +143,20 @@ async function handleBooking(request: Request) {
         const manageUrl = `${origin}/termin?id=${booking.id}&token=${booking.cancel_token}`;
         const mail = mailer();
         const name = `${firstName} ${lastName}`;
+        // Calendar invitation built from the saved booking record only.
+        const invite = icsAttachment({
+          bookingId: booking.id,
+          start: slotDate,
+          durationMinutes: slotMinutes,
+          sequence: 0,
+          method: "REQUEST",
+          lang,
+          name,
+          email,
+          phone,
+          projectType: projectTypeLabel,
+          manageUrl,
+        });
         let internalStatus = "failed";
         let customerStatus = "failed";
         let emailError: string | null = mail ? null : "resend_not_configured";
@@ -174,7 +189,7 @@ async function handleBooking(request: Request) {
                   ["Seite", clean(request.headers.get("referer"), 300)],
                 ])}
               </div>`,
-              attachments: files.attachments,
+              attachments: [...files.attachments, invite],
             });
             internalStatus = "sent";
           } catch {
@@ -209,7 +224,8 @@ async function handleBooking(request: Request) {
                 lang === "en"
                   ? `Your consultation on ${fmt.day} at ${fmt.time}`
                   : `Ihr Beratungstermin am ${fmt.day} um ${fmt.time} Uhr`,
-              html,
+              html: html + calendarNote(lang),
+              attachments: [invite],
             });
             customerStatus = "sent";
           } catch {
