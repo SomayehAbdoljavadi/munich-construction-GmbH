@@ -1,7 +1,7 @@
 // Server-only RFC 5545 calendar invitation builder for consultation appointments.
 // Generated in memory and attached directly to Resend emails — never stored.
 
-const ORGANIZER_EMAIL = "info@munichconstruction.de";
+const ORGANIZER_EMAIL = "office@munichconstruction.de";
 const ORGANIZER_NAME = "Munich Construction GmbH";
 const DOMAIN = "munichconstruction.de";
 const TZID = "Europe/Berlin";

@@ -108,12 +108,12 @@ export function mailer() {
   };
 
   /** Bilingual confirmation to the submitter. Never throws. */
-  const sendConfirmation = async (recipient: string, lang: "de" | "en") => {
+  const sendConfirmation = async (recipient: string, lang: "de" | "en", replyTo: string = NOTIFY_TO) => {
     try {
       return await send({
         from: CONFIRM_FROM,
         to: [recipient],
-        reply_to: NOTIFY_TO,
+        reply_to: replyTo,
         ...confirmation(lang),
       });
     } catch {
