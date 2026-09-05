@@ -145,7 +145,7 @@ async function handleManage(request: Request) {
       try {
         await mail.send({
           from: mail.from,
-          to: [mail.to],
+          to: [INTERNAL_TO],
           subject: `Beratungstermin storniert – ${old.day} ${old.time} – ${name}`,
           html: `<div style="font-family:Arial,sans-serif;color:#111"><h2 style="margin:0 0 16px">Termin storniert</h2>${table([
             ["Datum", old.day],
@@ -199,7 +199,7 @@ async function handleManage(request: Request) {
     try {
       await mail.send({
         from: mail.from,
-        to: [mail.to],
+        to: [INTERNAL_TO],
         subject: `Beratungstermin verschoben – ${to.day} ${to.time} – ${name}`,
         html: `<div style="font-family:Arial,sans-serif;color:#111"><h2 style="margin:0 0 16px">Termin verschoben</h2>${table([
           ["Alter Termin", `${from.day} ${from.time}`],

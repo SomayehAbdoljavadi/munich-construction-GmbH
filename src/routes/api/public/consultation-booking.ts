@@ -174,7 +174,7 @@ async function handleBooking(request: Request) {
           try {
             await mail.send({
               from: mail.from,
-              to: [mail.to],
+              to: [INTERNAL_TO],
               reply_to: email,
               subject: `New Consultation Request – ${name} – ${fmt.day} ${fmt.time}`,
               html: `<div style="font-family:Arial,sans-serif;color:#111">
