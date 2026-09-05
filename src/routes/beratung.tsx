@@ -504,6 +504,18 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
         scrollTop();
         return;
       }
+      if (res.status === 429 || payload.error === "rate_limited") {
+        setError(l(BERATUNG.bookingRateLimited));
+        return;
+      }
+      if (payload.error === "file_too_large" || payload.error === "too_many_files" || payload.error === "file_type") {
+        setError(l(BERATUNG.fileError));
+        return;
+      }
+      if (res.status === 400 || payload.error === "invalid_input" || payload.error === "invalid_request") {
+        setError(l(BERATUNG.bookingInvalidInput));
+        return;
+      }
       if (!res.ok || payload.error) throw new Error(payload.error ?? "failed");
       setManageUrl(payload.manageUrl ?? "");
       setEmailPending(Boolean(payload.emailPending));
