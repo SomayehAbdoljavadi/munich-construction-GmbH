@@ -167,8 +167,6 @@ export async function publicSupabase() {
   if (!key || !url) return null;
 
   const { createClient } = await import("@supabase/supabase-js");
-  const { default: _types } = { default: null };
-  void _types;
   return createClient(url, key, {
     auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
     global: {
