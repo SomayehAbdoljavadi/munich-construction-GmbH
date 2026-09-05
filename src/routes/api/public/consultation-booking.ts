@@ -14,7 +14,7 @@ import {
   rateLimited,
   table,
 } from "@/lib/consultation.server";
-import { calendarNote, icsAttachment, icsFallbackAttachment } from "@/lib/consultation-ics.server";
+import { calendarNote, icsAttachment, icsDownloadButton, icsFallbackAttachment } from "@/lib/consultation-ics.server";
 
 // Public endpoint: books a consultation slot (double-booking safe) and sends
 // confirmation emails. All credentials stay server-side.
@@ -202,6 +202,7 @@ async function handleBooking(request: Request) {
                   ["Eingegangen am", new Date().toLocaleString("de-DE", { timeZone: "Europe/Berlin" })],
                   ["Seite", clean(request.headers.get("referer"), 300)],
                 ])}
+                ${icsDownloadButton(`${origin}/api/public/consultation-ics?id=${booking.id}&token=${booking.cancel_token}`)}
                 ${calendarNote(lang)}
               </div>`,
               attachments: invite

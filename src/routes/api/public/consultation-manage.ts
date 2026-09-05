@@ -11,7 +11,7 @@ import {
   rateLimited,
   table,
 } from "@/lib/consultation.server";
-import { calendarNote, icsAttachment, icsFallbackAttachment } from "@/lib/consultation-ics.server";
+import { calendarNote, icsAttachment, icsDownloadButton, icsFallbackAttachment } from "@/lib/consultation-ics.server";
 
 // Public endpoint: lets a customer load, reschedule or cancel their own
 // consultation booking using the secret cancel_token issued at booking time.
