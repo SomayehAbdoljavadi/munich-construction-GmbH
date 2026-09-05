@@ -97,7 +97,8 @@ export function mailer() {
       body: JSON.stringify(payload),
     });
     if (!res.ok) {
-      console.error(`[email] delivery failed with status ${res.status}`);
+      const detail = (await res.text().catch(() => "")).slice(0, 300);
+      console.error(`[email] delivery failed with status ${res.status}: ${detail}`);
       throw new Error(`email_failed_${res.status}`);
     }
     const body = (await res.json().catch(() => ({}))) as { id?: string };
