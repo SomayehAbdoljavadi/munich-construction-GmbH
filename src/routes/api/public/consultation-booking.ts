@@ -20,6 +20,18 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        try {
+          return await handleBooking(request);
+        } catch (error) {
+          console.error("[consultation] booking crashed", error);
+          return json({ error: "booking_failed" }, 500);
+        }
+      },
+    },
+  },
+});
+
+async function handleBooking(request: Request) {
         if (rateLimited(clientIp(request))) return json({ error: "rate_limited" }, 429);
 
         let form: FormData;
@@ -262,7 +274,4 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
           },
           200,
         );
-      },
-    },
-  },
-});
+}
