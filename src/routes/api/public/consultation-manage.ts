@@ -11,7 +11,7 @@ import {
   rateLimited,
   table,
 } from "@/lib/consultation.server";
-import { calendarNote, icsAttachment } from "@/lib/consultation-ics.server";
+import { calendarNote, icsAttachment, icsFallbackAttachment } from "@/lib/consultation-ics.server";
 
 // Public endpoint: lets a customer load, reschedule or cancel their own
 // consultation booking using the secret cancel_token issued at booking time.
@@ -142,6 +142,17 @@ async function handleManage(request: Request) {
       phone: row.phone ?? "",
       projectType: row.project_type ?? "",
     });
+    const cancelFallback = icsFallbackAttachment({
+      bookingId: id,
+      start: new Date(oldIso),
+      sequence,
+      method: "CANCEL",
+      lang,
+      name,
+      email: row.email ?? "",
+      phone: row.phone ?? "",
+      projectType: row.project_type ?? "",
+    });
     if (mail) {
       try {
         await mail.send({
@@ -157,7 +168,7 @@ async function handleManage(request: Request) {
             ["E-Mail", row.email ?? ""],
             ["Projektart", row.project_type ?? ""],
           ])}${calendarNote("de", true)}</div>`,
-          attachments: [cancelInvite],
+          attachments: [cancelInvite, cancelFallback],
         });
         if (row.email) {
           await mail.send({
@@ -197,6 +208,18 @@ async function handleManage(request: Request) {
     projectType: row.project_type ?? "",
     manageUrl,
   });
+  const updateFallback = icsFallbackAttachment({
+    bookingId: id,
+    start: new Date(row.slot_start ?? ""),
+    sequence,
+    method: "REQUEST",
+    lang,
+    name,
+    email: row.email ?? "",
+    phone: row.phone ?? "",
+    projectType: row.project_type ?? "",
+    manageUrl,
+  });
   if (mail) {
     try {
       await mail.send({
@@ -212,7 +235,7 @@ async function handleManage(request: Request) {
           ["E-Mail", row.email ?? ""],
           ["Projektart", row.project_type ?? ""],
         ])}${calendarNote("de")}</div>`,
-        attachments: [updateInvite],
+        attachments: [updateInvite, updateFallback],
       });
       if (row.email) {
         await mail.send({

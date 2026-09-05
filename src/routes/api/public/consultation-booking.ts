@@ -14,7 +14,7 @@ import {
   rateLimited,
   table,
 } from "@/lib/consultation.server";
-import { calendarNote, icsAttachment } from "@/lib/consultation-ics.server";
+import { calendarNote, icsAttachment, icsFallbackAttachment } from "@/lib/consultation-ics.server";
 
 // Public endpoint: books a consultation slot (double-booking safe) and sends
 // confirmation emails. All credentials stay server-side.
@@ -150,20 +150,24 @@ async function handleBooking(request: Request) {
         // Calendar invitation built from the saved booking record only.
         // A failure here must never discard the appointment that is already saved.
         let invite: { filename: string; content: string; content_type?: string } | null = null;
+        let fallback: { filename: string; content: string; content_type?: string } | null = null;
         try {
-          invite = icsAttachment({
+          const icsInput = {
             bookingId: booking.id,
             start: slotDate,
             durationMinutes: slotMinutes,
             sequence: 0,
-            method: "REQUEST",
-            lang,
+            method: "REQUEST" as const,
+            lang: lang as "de" | "en",
             name,
             email,
             phone,
             projectType: projectTypeLabel,
             manageUrl,
-          });
+          };
+          invite = icsAttachment(icsInput);
+          // Visible, manually downloadable copy of the same invitation for the company mailbox.
+          fallback = icsFallbackAttachment(icsInput);
         } catch {
           console.error("[consultation] calendar invitation could not be generated");
         }
@@ -200,7 +204,9 @@ async function handleBooking(request: Request) {
                 ])}
                 ${calendarNote(lang)}
               </div>`,
-              attachments: invite ? [...files.attachments, invite] : files.attachments,
+              attachments: invite
+                ? [...files.attachments, invite, ...(fallback ? [fallback] : [])]
+                : files.attachments,
             });
             internalStatus = "sent";
           } catch {
