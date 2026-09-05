@@ -150,3 +150,36 @@ export function formatSlot(iso: string, lang: "de" | "en") {
   }).format(date);
   return { day, time };
 }
+
+/**
+ * Publishable-key Supabase client for the public consultation endpoints.
+ * Works in deployments where only the build-time public config is available
+ * (the service-role key is never inlined). All writes go through
+ * SECURITY DEFINER RPCs, so RLS still blocks direct table access.
+ */
+export async function publicSupabase() {
+  const key =
+    process.env["SUPABASE_PUBLISHABLE_KEY"] ??
+    process.env["VITE_SUPABASE_PUBLISHABLE_KEY"] ??
+    import.meta.env["VITE_SUPABASE_PUBLISHABLE_KEY"];
+  const url =
+    process.env["SUPABASE_URL"] ?? process.env["VITE_SUPABASE_URL"] ?? import.meta.env["VITE_SUPABASE_URL"];
+  if (!key || !url) return null;
+
+  const { createClient } = await import("@supabase/supabase-js");
+  const { default: _types } = { default: null };
+  void _types;
+  return createClient(url, key, {
+    auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
+    global: {
+      fetch: (input: RequestInfo | URL, init?: RequestInit) => {
+        const headers = new Headers(init?.headers);
+        if (key.startsWith("sb_") && headers.get("Authorization") === `Bearer ${key}`) {
+          headers.delete("Authorization");
+        }
+        headers.set("apikey", key);
+        return fetch(input, { ...init, headers });
+      },
+    },
+  });
+}
