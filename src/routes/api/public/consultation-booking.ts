@@ -34,8 +34,6 @@ export const Route = createFileRoute("/api/public/consultation-booking")({
 });
 
 async function handleBooking(request: Request) {
-        if (rateLimited(clientIp(request))) return json({ error: "rate_limited" }, 429);
-
         let form: FormData;
         try {
           form = await request.formData();
