@@ -25,6 +25,7 @@ import { Route as ApiPublicContactRequestRouteImport } from './routes/api/public
 import { Route as ApiPublicConsultationSlotsRouteImport } from './routes/api/public/consultation-slots'
 import { Route as ApiPublicConsultationRemindersRouteImport } from './routes/api/public/consultation-reminders'
 import { Route as ApiPublicConsultationManageRouteImport } from './routes/api/public/consultation-manage'
+import { Route as ApiPublicConsultationDiagRouteImport } from './routes/api/public/consultation-diag'
 import { Route as ApiPublicConsultationCallbackRouteImport } from './routes/api/public/consultation-callback'
 import { Route as ApiPublicConsultationBookingRouteImport } from './routes/api/public/consultation-booking'
 import { Route as ApiPublicCareersApplicationRouteImport } from './routes/api/public/careers-application'
@@ -112,6 +113,12 @@ const ApiPublicConsultationManageRoute =
     path: '/api/public/consultation-manage',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicConsultationDiagRoute =
+  ApiPublicConsultationDiagRouteImport.update({
+    id: '/api/public/consultation-diag',
+    path: '/api/public/consultation-diag',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicConsultationCallbackRoute =
   ApiPublicConsultationCallbackRouteImport.update({
     id: '/api/public/consultation-callback',
@@ -147,6 +154,7 @@ export interface FileRoutesByFullPath {
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
+  '/api/public/consultation-diag': typeof ApiPublicConsultationDiagRoute
   '/api/public/consultation-manage': typeof ApiPublicConsultationManageRoute
   '/api/public/consultation-reminders': typeof ApiPublicConsultationRemindersRoute
   '/api/public/consultation-slots': typeof ApiPublicConsultationSlotsRoute
@@ -168,6 +176,7 @@ export interface FileRoutesByTo {
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
+  '/api/public/consultation-diag': typeof ApiPublicConsultationDiagRoute
   '/api/public/consultation-manage': typeof ApiPublicConsultationManageRoute
   '/api/public/consultation-reminders': typeof ApiPublicConsultationRemindersRoute
   '/api/public/consultation-slots': typeof ApiPublicConsultationSlotsRoute
@@ -190,6 +199,7 @@ export interface FileRoutesById {
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
+  '/api/public/consultation-diag': typeof ApiPublicConsultationDiagRoute
   '/api/public/consultation-manage': typeof ApiPublicConsultationManageRoute
   '/api/public/consultation-reminders': typeof ApiPublicConsultationRemindersRoute
   '/api/public/consultation-slots': typeof ApiPublicConsultationSlotsRoute
@@ -213,6 +223,7 @@ export interface FileRouteTypes {
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
     | '/api/public/consultation-callback'
+    | '/api/public/consultation-diag'
     | '/api/public/consultation-manage'
     | '/api/public/consultation-reminders'
     | '/api/public/consultation-slots'
@@ -234,6 +245,7 @@ export interface FileRouteTypes {
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
     | '/api/public/consultation-callback'
+    | '/api/public/consultation-diag'
     | '/api/public/consultation-manage'
     | '/api/public/consultation-reminders'
     | '/api/public/consultation-slots'
@@ -255,6 +267,7 @@ export interface FileRouteTypes {
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
     | '/api/public/consultation-callback'
+    | '/api/public/consultation-diag'
     | '/api/public/consultation-manage'
     | '/api/public/consultation-reminders'
     | '/api/public/consultation-slots'
@@ -277,6 +290,7 @@ export interface RootRouteChildren {
   ApiPublicCareersApplicationRoute: typeof ApiPublicCareersApplicationRoute
   ApiPublicConsultationBookingRoute: typeof ApiPublicConsultationBookingRoute
   ApiPublicConsultationCallbackRoute: typeof ApiPublicConsultationCallbackRoute
+  ApiPublicConsultationDiagRoute: typeof ApiPublicConsultationDiagRoute
   ApiPublicConsultationManageRoute: typeof ApiPublicConsultationManageRoute
   ApiPublicConsultationRemindersRoute: typeof ApiPublicConsultationRemindersRoute
   ApiPublicConsultationSlotsRoute: typeof ApiPublicConsultationSlotsRoute
@@ -397,6 +411,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicConsultationManageRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/consultation-diag': {
+      id: '/api/public/consultation-diag'
+      path: '/api/public/consultation-diag'
+      fullPath: '/api/public/consultation-diag'
+      preLoaderRoute: typeof ApiPublicConsultationDiagRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/consultation-callback': {
       id: '/api/public/consultation-callback'
       path: '/api/public/consultation-callback'
@@ -437,6 +458,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicCareersApplicationRoute: ApiPublicCareersApplicationRoute,
   ApiPublicConsultationBookingRoute: ApiPublicConsultationBookingRoute,
   ApiPublicConsultationCallbackRoute: ApiPublicConsultationCallbackRoute,
+  ApiPublicConsultationDiagRoute: ApiPublicConsultationDiagRoute,
   ApiPublicConsultationManageRoute: ApiPublicConsultationManageRoute,
   ApiPublicConsultationRemindersRoute: ApiPublicConsultationRemindersRoute,
   ApiPublicConsultationSlotsRoute: ApiPublicConsultationSlotsRoute,
