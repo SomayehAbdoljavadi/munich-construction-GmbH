@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { escapeHtml, formatSlot, json, mailer } from "@/lib/consultation.server";
+import { calendarNote, icsAttachment } from "@/lib/consultation-ics.server";
 
 // Public cron endpoint: sends a reminder email ~24h before each confirmed
 // consultation. Idempotent — each booking is reminded at most once.
@@ -15,7 +16,7 @@ export const Route = createFileRoute("/api/public/consultation-reminders")({
 
         const { data: bookings, error } = await supabaseAdmin
           .from("consultation_bookings")
-          .select("id, slot_start, first_name, last_name, email, phone, lang, cancel_token")
+          .select("id, slot_start, first_name, last_name, email, phone, lang, cancel_token, calendar_sequence, project_type")
           .eq("status", "confirmed")
           .is("reminder_sent_at", null)
           .gt("slot_start", new Date(now).toISOString())
@@ -62,6 +63,19 @@ export const Route = createFileRoute("/api/public/consultation-reminders")({
                    <p>Mit freundlichen Grüßen<br/>Munich Construction GmbH<br/>+49 89 57843675<br/>info@munichconstruction.de</p>
                  </div>`;
 
+          const invite = icsAttachment({
+            bookingId: b.id,
+            start: new Date(b.slot_start),
+            sequence: b.calendar_sequence ?? 0,
+            method: "REQUEST",
+            lang,
+            name,
+            email: b.email,
+            phone: b.phone,
+            projectType: b.project_type ?? "",
+            manageUrl,
+          });
+
           try {
             await mail.send({
               from: mail.from,
@@ -71,7 +85,8 @@ export const Route = createFileRoute("/api/public/consultation-reminders")({
                 lang === "en"
                   ? `Reminder: your consultation on ${fmt.day} at ${fmt.time}`
                   : `Erinnerung: Ihr Beratungstermin am ${fmt.day} um ${fmt.time} Uhr`,
-              html,
+              html: html + calendarNote(lang),
+              attachments: [invite],
             });
             await supabaseAdmin
               .from("consultation_bookings")

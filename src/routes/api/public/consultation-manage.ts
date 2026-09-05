@@ -10,6 +10,7 @@ import {
   rateLimited,
   table,
 } from "@/lib/consultation.server";
+import { calendarNote, icsAttachment } from "@/lib/consultation-ics.server";
 
 // Public endpoint: lets a customer load, reschedule or cancel their own
 // consultation booking using the secret cancel_token issued at booking time.
@@ -114,8 +115,32 @@ async function handleManage(request: Request) {
 
   const mail = mailer();
 
+  // Same UID, incremented SEQUENCE so calendar clients update instead of duplicating.
+  const { data: seqData } = await db.rpc("consultation_bump_calendar_sequence", { p_id: id, p_token: token });
+  const sequence = typeof seqData === "number" ? seqData : 1;
+  const origin = (() => {
+    try {
+      return new URL(request.url).origin;
+    } catch {
+      return "https://www.munichconstruction.de";
+    }
+  })();
+  const manageUrl = `${origin}/termin?id=${id}&token=${token}`;
+
   if (row.outcome === "cancelled") {
-    const old = formatSlot(row.old_slot_start ?? row.slot_start ?? "", lang);
+    const oldIso = row.old_slot_start ?? row.slot_start ?? "";
+    const old = formatSlot(oldIso, lang);
+    const cancelInvite = icsAttachment({
+      bookingId: id,
+      start: new Date(oldIso),
+      sequence,
+      method: "CANCEL",
+      lang,
+      name,
+      email: row.email ?? "",
+      phone: row.phone ?? "",
+      projectType: row.project_type ?? "",
+    });
     if (mail) {
       try {
         await mail.send({
@@ -129,7 +154,8 @@ async function handleManage(request: Request) {
             ["Telefon", row.phone ?? ""],
             ["E-Mail", row.email ?? ""],
             ["Projektart", row.project_type ?? ""],
-          ])}</div>`,
+          ])}${calendarNote("de", true)}</div>`,
+          attachments: [cancelInvite],
         });
         if (row.email) {
           await mail.send({
@@ -143,7 +169,8 @@ async function handleManage(request: Request) {
             html:
               lang === "en"
                 ? `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6"><p>Dear ${escapeHtml(name)},</p><p>your consultation on <strong>${escapeHtml(old.day)}, ${escapeHtml(old.time)}</strong> has been cancelled.</p><p>You are welcome to book a new appointment at any time.</p><p>Kind regards,<br/>Munich Construction GmbH</p></div>`
-                : `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6"><p>Guten Tag ${escapeHtml(name)},</p><p>Ihr Beratungstermin am <strong>${escapeHtml(old.day)}, ${escapeHtml(old.time)} Uhr</strong> wurde storniert.</p><p>Gerne können Sie jederzeit einen neuen Termin buchen.</p><p>Mit freundlichen Grüßen<br/>Munich Construction GmbH</p></div>`,
+                : `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6"><p>Guten Tag ${escapeHtml(name)},</p><p>Ihr Beratungstermin am <strong>${escapeHtml(old.day)}, ${escapeHtml(old.time)} Uhr</strong> wurde storniert.</p><p>Gerne können Sie jederzeit einen neuen Termin buchen.</p><p>Mit freundlichen Grüßen<br/>Munich Construction GmbH</p>${calendarNote(lang, true)}</div>`,
+            attachments: [cancelInvite],
           });
         }
       } catch {
@@ -156,6 +183,18 @@ async function handleManage(request: Request) {
   // rescheduled
   const from = formatSlot(row.old_slot_start ?? "", lang);
   const to = formatSlot(row.slot_start ?? "", lang);
+  const updateInvite = icsAttachment({
+    bookingId: id,
+    start: new Date(row.slot_start ?? ""),
+    sequence,
+    method: "REQUEST",
+    lang,
+    name,
+    email: row.email ?? "",
+    phone: row.phone ?? "",
+    projectType: row.project_type ?? "",
+    manageUrl,
+  });
   if (mail) {
     try {
       await mail.send({
@@ -169,7 +208,8 @@ async function handleManage(request: Request) {
           ["Telefon", row.phone ?? ""],
           ["E-Mail", row.email ?? ""],
           ["Projektart", row.project_type ?? ""],
-        ])}</div>`,
+        ])}${calendarNote("de")}</div>`,
+        attachments: [updateInvite],
       });
       if (row.email) {
         await mail.send({
@@ -183,7 +223,8 @@ async function handleManage(request: Request) {
           html:
             lang === "en"
               ? `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6"><p>Dear ${escapeHtml(name)},</p><p>your consultation has been moved to <strong>${escapeHtml(to.day)}, ${escapeHtml(to.time)}</strong>.</p><p>We will call you on ${escapeHtml(row.phone ?? "")}.</p><p>Kind regards,<br/>Munich Construction GmbH</p></div>`
-              : `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6"><p>Guten Tag ${escapeHtml(name)},</p><p>Ihr Beratungstermin wurde auf <strong>${escapeHtml(to.day)}, ${escapeHtml(to.time)} Uhr</strong> verschoben.</p><p>Wir rufen Sie unter ${escapeHtml(row.phone ?? "")} an.</p><p>Mit freundlichen Grüßen<br/>Munich Construction GmbH</p></div>`,
+              : `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6"><p>Guten Tag ${escapeHtml(name)},</p><p>Ihr Beratungstermin wurde auf <strong>${escapeHtml(to.day)}, ${escapeHtml(to.time)} Uhr</strong> verschoben.</p><p>Wir rufen Sie unter ${escapeHtml(row.phone ?? "")} an.</p><p>Mit freundlichen Grüßen<br/>Munich Construction GmbH</p>${calendarNote(lang)}</div>`,
+          attachments: [updateInvite],
         });
       }
     } catch {

@@ -71,6 +71,7 @@ export type Database = {
       consultation_bookings: {
         Row: {
           budget: string | null
+          calendar_sequence: number
           cancel_token: string
           city: string | null
           consent: boolean
@@ -99,6 +100,7 @@ export type Database = {
         }
         Insert: {
           budget?: string | null
+          calendar_sequence?: number
           cancel_token?: string
           city?: string | null
           consent?: boolean
@@ -127,6 +129,7 @@ export type Database = {
         }
         Update: {
           budget?: string | null
+          calendar_sequence?: number
           cancel_token?: string
           city?: string | null
           consent?: boolean
@@ -257,6 +260,10 @@ export type Database = {
           customer_email_status: string
           outcome: string
         }[]
+      }
+      consultation_bump_calendar_sequence: {
+        Args: { p_id: string; p_token: string }
+        Returns: number
       }
       consultation_free_slots: {
         Args: { target_date: string }
