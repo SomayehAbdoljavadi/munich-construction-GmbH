@@ -504,13 +504,13 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
         scrollTop();
         return;
       }
-      if (!res.ok) throw new Error(payload.error ?? "failed");
+      if (!res.ok || payload.error) throw new Error(payload.error ?? "failed");
       setManageUrl(payload.manageUrl ?? "");
       setEmailPending(Boolean(payload.emailPending));
       setDone(true);
       scrollTop();
     } catch {
-      setError(l(BERATUNG.failure));
+      setError(l(BERATUNG.bookingFailure));
     } finally {
       setSubmitting(false);
     }

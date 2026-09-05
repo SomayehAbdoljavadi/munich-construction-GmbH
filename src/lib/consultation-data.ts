@@ -116,8 +116,8 @@ export const BERATUNG = {
   cancelCta: { de: "Termin stornieren", en: "Cancel appointment" },
   cancelled: { de: "Ihr Termin wurde storniert.", en: "Your appointment has been cancelled." },
   slotTaken: {
-    de: "Dieser Termin wurde gerade von einer anderen Person gebucht. Bitte wählen Sie eine andere verfügbare Uhrzeit.",
-    en: "This appointment has just been booked by someone else. Please choose another available time.",
+    de: "Dieser Termin ist nicht mehr verfügbar. Bitte wählen Sie eine andere Uhrzeit.",
+    en: "This appointment is no longer available. Please choose another time.",
   },
   noSlots: {
     de: "An diesem Tag sind keine Termine mehr verfügbar. Bitte wählen Sie ein anderes Datum.",
@@ -125,8 +125,12 @@ export const BERATUNG = {
   },
   slotUnavailable: { de: "Nicht verfügbar", en: "Unavailable" },
   emailPending: {
-    de: "Ihr Termin ist verbindlich reserviert. Die Bestätigungs-E-Mail kann sich etwas verzögern – bei Rückfragen erreichen Sie uns telefonisch.",
-    en: "Your appointment is confirmed and reserved. The confirmation email may be delayed — you can reach us by phone at any time.",
+    de: "Ihr Termin wurde reserviert. Die Bestätigungs-E-Mail kann sich verzögern.",
+    en: "Your appointment has been reserved. The confirmation email may arrive with a delay.",
+  },
+  bookingFailure: {
+    de: "Der Termin konnte aufgrund eines vorübergehenden technischen Problems nicht gebucht werden. Bitte versuchen Sie es erneut.",
+    en: "The appointment could not be booked due to a temporary technical problem. Please try again.",
   },
   loadingSlots: { de: "Termine werden geladen …", en: "Loading available times …" },
   slotsError: {
