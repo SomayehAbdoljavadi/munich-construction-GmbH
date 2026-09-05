@@ -92,7 +92,7 @@ async function handleBooking(request: Request) {
           try {
             return new URL(request.url).origin;
           } catch {
-            return "https://www.munichconstruction.de";
+            return "https://munichconstruction.de";
           }
         })();
 

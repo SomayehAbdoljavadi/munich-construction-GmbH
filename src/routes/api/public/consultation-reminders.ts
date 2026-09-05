@@ -35,7 +35,7 @@ export const Route = createFileRoute("/api/public/consultation-reminders")({
           return json({ error: "email_not_configured" }, 503);
         }
 
-        const origin = "https://www.munichconstruction.de";
+        const origin = "https://munichconstruction.de";
         let sent = 0;
 
         for (const b of bookings ?? []) {

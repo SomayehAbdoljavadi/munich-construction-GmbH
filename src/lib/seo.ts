@@ -1,5 +1,5 @@
 // Centralised SEO / GEO helpers — consistent canonical & OG URLs across routes.
-export const BASE_URL = "https://www.munichconstruction.de";
+export const BASE_URL = "https://munichconstruction.de";
 export const SITE_NAME = "Munich Construction GmbH";
 
 export const url = (path: string) => {
