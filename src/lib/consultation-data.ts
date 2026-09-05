@@ -132,6 +132,14 @@ export const BERATUNG = {
     de: "Der Termin konnte aufgrund eines vorübergehenden technischen Problems nicht gebucht werden. Bitte versuchen Sie es erneut.",
     en: "The appointment could not be booked due to a temporary technical problem. Please try again.",
   },
+  bookingRateLimited: {
+    de: "Es wurden zu viele Anfragen in kurzer Zeit gesendet. Bitte warten Sie einen Moment und versuchen Sie es erneut.",
+    en: "Too many requests were sent in a short time. Please wait a moment and try again.",
+  },
+  bookingInvalidInput: {
+    de: "Bitte prüfen Sie Ihre Angaben (Name, Telefonnummer, E-Mail-Adresse und Termin) und versuchen Sie es erneut.",
+    en: "Please check your details (name, phone number, email address and appointment) and try again.",
+  },
   loadingSlots: { de: "Termine werden geladen …", en: "Loading available times …" },
   slotsError: {
     de: "Die verfügbaren Zeiten konnten nicht geladen werden. Bitte versuchen Sie es erneut.",
