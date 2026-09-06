@@ -19,20 +19,18 @@ import { url } from "@/lib/seo";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Munich Construction GmbH — Construction & Renovation in Munich, Bavaria" },
+      { title: "Bauunternehmen in München | Munich Construction GmbH" },
       {
         name: "description",
         content:
-          "Munich Construction GmbH — Munich-based general contractor for fire protection, drywall, injection & crack sealing, windows & doors, renovation, refurbishment and modernisation. Serving Munich and Bavaria.",
+          "Bauunternehmen in München: Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau, Fenster und Türen sowie Genehmigungs- und Werkplanung in München und Bayern.",
       },
-      { property: "og:title", content: "Munich Construction GmbH — Construction in Munich" },
-      { property: "og:description", content: "Construction, renovation and refurbishment in Munich and Bavaria — all from one source." },
+      { property: "og:title", content: "Bauunternehmen in München | Munich Construction GmbH" },
+      { property: "og:description", content: "Neubau, Sanierung, Brandschutz und Planung in München und Bayern — aus einer Hand." },
       { property: "og:url", content: url("/") },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: heroBg },
-      { name: "twitter:title", content: "Munich Construction GmbH" },
-      { name: "twitter:description", content: "Construction, renovation and refurbishment in Munich and Bavaria." },
-      { name: "twitter:image", content: heroBg },
+      { name: "twitter:title", content: "Bauunternehmen in München | Munich Construction GmbH" },
+      { name: "twitter:description", content: "Bauen, Sanieren und Planen in München und Bayern." },
     ],
     links: [{ rel: "canonical", href: url("/") }],
   }),
