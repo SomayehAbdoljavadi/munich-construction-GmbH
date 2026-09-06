@@ -2,27 +2,27 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Building2, Hammer, Wrench, Flame, FileCheck2, Ruler, Check } from "lucide-react";
 import { useT, type TranslationKey } from "@/lib/i18n";
 import { breadcrumb, ldScript, url, BASE_URL } from "@/lib/seo";
-import { HOME_SERVICES_I18N } from "@/lib/services-data";
+import { ALL_SERVICES_I18N } from "@/lib/services-data";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services — Munich Construction GmbH" },
-      { name: "description", content: "Construction services by Munich Construction GmbH in Munich and Bavaria: fire protection, drywall, injection & crack sealing, windows & doors, renovation, refurbishment and building modernisation — all from one source." },
-      { property: "og:title", content: "Services — Munich Construction GmbH" },
-      { property: "og:description", content: "Fire protection, drywall, injection & crack sealing, windows & doors, renovation, refurbishment, modernisation." },
+      { title: "Bauleistungen in München | Munich Construction GmbH" },
+      { name: "description", content: "Bauleistungen in München und Bayern: Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau, Injektion, Fenster und Türen, Genehmigungs- und Werkplanung." },
+      { property: "og:title", content: "Bauleistungen in München | Munich Construction GmbH" },
+      { property: "og:description", content: "Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau, Fenster und Türen sowie Genehmigungs- und Werkplanung aus einer Hand." },
       { property: "og:url", content: url("/services") },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "Services — Munich Construction GmbH" },
-      { name: "twitter:description", content: "Construction services in Munich and Bavaria, all from one source." },
+      { name: "twitter:title", content: "Bauleistungen in München | Munich Construction GmbH" },
+      { name: "twitter:description", content: "Bauleistungen in München und Bayern aus einer Hand." },
     ],
     links: [{ rel: "canonical", href: url("/services") }],
     scripts: [
       ldScript({
         "@context": "https://schema.org",
         "@type": "ItemList",
-        name: "Services — Munich Construction GmbH",
-        itemListElement: HOME_SERVICES_I18N.map((s, i) => ({
+        name: "Bauleistungen — Munich Construction GmbH",
+        itemListElement: ALL_SERVICES_I18N.map((s, i) => ({
           "@type": "ListItem",
           position: i + 1,
           url: `${BASE_URL}/services/${s.slug}`,
@@ -30,8 +30,8 @@ export const Route = createFileRoute("/services")({
         })),
       }),
       ldScript(breadcrumb([
-        { name: "Home", path: "/" },
-        { name: "Services", path: "/services" },
+        { name: "Start", path: "/" },
+        { name: "Leistungen", path: "/services" },
       ])),
     ],
   }),
@@ -47,11 +47,14 @@ interface ServiceDef {
   benefitsEn: string[];
   includedDe: string[];
   includedEn: string[];
+  /** Slug of the dedicated detail page. */
+  detail: string;
 }
 
 const SERVICES: ServiceDef[] = [
   {
     id: "neubau",
+    detail: "neubau",
     icon: Building2,
     titleKey: "service.neubau.title",
     textKey: "service.neubau.text",
@@ -62,6 +65,7 @@ const SERVICES: ServiceDef[] = [
   },
   {
     id: "renovierung",
+    detail: "renovierung",
     icon: Hammer,
     titleKey: "service.renovierung.title",
     textKey: "service.renovierung.text",
@@ -72,6 +76,7 @@ const SERVICES: ServiceDef[] = [
   },
   {
     id: "sanierung",
+    detail: "sanierung",
     icon: Wrench,
     titleKey: "service.sanierung.title",
     textKey: "service.sanierung.text",
@@ -82,6 +87,7 @@ const SERVICES: ServiceDef[] = [
   },
   {
     id: "brandschutz",
+    detail: "brandschutz",
     icon: Flame,
     titleKey: "service.brandschutz.title",
     textKey: "service.brandschutz.text",
@@ -92,6 +98,7 @@ const SERVICES: ServiceDef[] = [
   },
   {
     id: "genehmigung",
+    detail: "genehmigungsplanung",
     icon: FileCheck2,
     titleKey: "service.genehmigung.title",
     textKey: "service.genehmigung.text",
@@ -102,6 +109,7 @@ const SERVICES: ServiceDef[] = [
   },
   {
     id: "werkplanung",
+    detail: "werkplanung",
     icon: Ruler,
     titleKey: "service.werkplanung.title",
     textKey: "service.werkplanung.text",
@@ -148,12 +156,21 @@ function ServicesPage() {
                   </p>
                   <h2 className="font-display text-3xl md:text-4xl mb-4">{t(s.titleKey)}</h2>
                   <p className="text-muted-foreground leading-relaxed">{t(s.textKey)}</p>
-                  <Link
-                    to="/contact"
-                    className="inline-block mt-8 px-7 py-3 bg-ink text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-gold hover:text-ink transition-colors"
-                  >
-                    {t("service.cta")}
-                  </Link>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <Link
+                      to="/services/$slug"
+                      params={{ slug: s.detail }}
+                      className="inline-block px-7 py-3 bg-ink text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-gold hover:text-ink transition-colors"
+                    >
+                      {lang === "de" ? "Mehr erfahren" : "Learn more"}
+                    </Link>
+                    <Link
+                      to="/contact"
+                      className="inline-block px-7 py-3 border border-border text-xs font-bold uppercase tracking-[0.2em] hover:bg-muted transition-colors"
+                    >
+                      {t("service.cta")}
+                    </Link>
+                  </div>
                 </div>
                 <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
                   <Block title={t("service.benefits")}>
@@ -170,6 +187,28 @@ function ServicesPage() {
               </article>
             );
           })}
+        </div>
+      </section>
+
+      <section className="bg-secondary py-16 md:py-20">
+        <div className="container-wide">
+          <h2 className="font-display text-2xl md:text-3xl">
+            {lang === "de" ? "Alle Leistungsseiten im Überblick" : "All service pages at a glance"}
+          </h2>
+          <div className="gold-divider w-16 mt-5 mb-8" />
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
+            {ALL_SERVICES_I18N.map((svc) => (
+              <li key={svc.slug}>
+                <Link
+                  to="/services/$slug"
+                  params={{ slug: svc.slug }}
+                  className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground hover:text-gold transition-colors"
+                >
+                  {svc.h1[lang]}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </>
