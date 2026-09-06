@@ -1,4 +1,4 @@
-import { Flame, Hammer, Droplet, DoorOpen } from "lucide-react";
+import { Flame, Hammer, Droplet, DoorOpen, Building2, Wrench, FileCheck2, Ruler } from "lucide-react";
 import brandschutzImg from "@/assets/service-brandschutz.jpg";
 import trockenbauImg from "@/assets/service-trockenbau.jpg";
 import injektionImg from "@/assets/service-injektion.jpg";
