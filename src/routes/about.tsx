@@ -6,21 +6,20 @@ import { breadcrumb, ldScript, url } from "@/lib/seo";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Munich Construction GmbH — Munich-based General Contractor" },
-      { name: "description", content: "Munich Construction GmbH — an engineering-led construction company in Munich, Germany. End-to-end service from planning to handover, led by Dipl.-Ing. Mehdi Mardi." },
-      { property: "og:title", content: "About Munich Construction GmbH" },
-      { property: "og:description", content: "Engineering-led construction in Munich, Germany." },
+      { title: "Über uns — Bauunternehmen in München | Munich Construction GmbH" },
+      { name: "description", content: "Munich Construction GmbH: ingenieurgeführtes Bauunternehmen in München. Vom ersten Entwurf bis zur Übergabe, geleitet von Dipl.-Ing. Mehdi Mardi." },
+      { property: "og:title", content: "Über uns | Munich Construction GmbH" },
+      { property: "og:description", content: "Ingenieurgeführtes Bauen in München und Bayern." },
       { property: "og:url", content: url("/about") },
-      { property: "og:image", content: aboutImg },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "About Munich Construction GmbH" },
-      { name: "twitter:description", content: "Engineering-led construction in Munich, Germany." },
+      { name: "twitter:title", content: "Über uns | Munich Construction GmbH" },
+      { name: "twitter:description", content: "Ingenieurgeführtes Bauen in München und Bayern." },
     ],
     links: [{ rel: "canonical", href: url("/about") }],
     scripts: [
       ldScript(breadcrumb([
-        { name: "Home", path: "/" },
-        { name: "About", path: "/about" },
+        { name: "Start", path: "/" },
+        { name: "Über uns", path: "/about" },
       ])),
     ],
   }),

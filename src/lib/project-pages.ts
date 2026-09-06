@@ -126,6 +126,10 @@ export function getProjectPage(slug: string): ProjectPage | undefined {
   return PROJECT_PAGES.find((p) => p.slug === slug);
 }
 
+export function getProjectPageBySource(sourceSlug: string): ProjectPage | undefined {
+  return PROJECT_PAGES.find((p) => p.sourceSlug === sourceSlug);
+}
+
 export function getProjectPagesForService(serviceSlug: string): ProjectPage[] {
   return PROJECT_PAGES.filter((p) => p.services.some((s) => s.slug === serviceSlug));
 }
