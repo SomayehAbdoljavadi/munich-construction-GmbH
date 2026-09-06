@@ -3,8 +3,9 @@ import { ArrowUpRight, Check, Star } from "lucide-react";
 import {
   getServiceI18nBySlug,
   localizeService,
-  HOME_SERVICES_I18N,
+  ALL_SERVICES_I18N,
 } from "@/lib/services-data";
+import { getProjectPagesForService } from "@/lib/project-pages";
 
 import { getProjectSlidesForService } from "@/lib/service-projects";
 import { ServiceGallery } from "@/components/ServiceGallery";
@@ -16,9 +17,12 @@ export const Route = createFileRoute("/services_/$slug")({
   head: ({ params }) => {
     const s = getServiceI18nBySlug(params.slug);
     const title = s
-      ? `${s.title.de} in München — Munich Construction GmbH`
-      : "Service — Munich Construction GmbH";
-    const description = s?.intro.de ?? "Bauleistungen von Munich Construction GmbH.";
+      ? (s.metaTitle?.de ?? `${s.title.de} in München | Munich Construction GmbH`)
+      : "Bauleistung | Munich Construction GmbH";
+    const description =
+      s?.metaDescription?.de ??
+      s?.intro.de ??
+      "Bauleistungen der Munich Construction GmbH in München und Bayern.";
     const pageUrl = url(`/services/${params.slug}`);
     const scripts: Array<{ type: string; children: string }> = [];
     if (s) {
@@ -120,6 +124,7 @@ function ServiceDetailPage() {
     }));
   }
   const Icon = service.icon;
+  const relatedProjects = getProjectPagesForService(slug);
 
   return (
     <>
@@ -134,15 +139,21 @@ function ServiceDetailPage() {
           }}
         />
         <div className="container-wide relative">
-          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold mb-5">
-            {t("sd.eyebrow")}
-          </p>
+          <nav aria-label="Breadcrumb" className="mb-5">
+            <ol className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-white/50">
+              <li><Link to="/" className="hover:text-gold transition-colors">{lang === "de" ? "Start" : "Home"}</Link></li>
+              <li aria-hidden className="text-gold">/</li>
+              <li><Link to="/services" className="hover:text-gold transition-colors">{lang === "de" ? "Leistungen" : "Services"}</Link></li>
+              <li aria-hidden className="text-gold">/</li>
+              <li className="text-gold">{service.title}</li>
+            </ol>
+          </nav>
           <div className="flex items-start gap-6 flex-wrap">
             <div className="size-16 grid place-items-center border border-gold/40 text-gold shrink-0">
               <Icon size={30} strokeWidth={1.5} />
             </div>
             <div className="min-w-0 flex-1">
-              <h1 className="font-display h-fluid-page text-balance">{service.title}</h1>
+              <h1 className="font-display h-fluid-page text-balance">{service.h1}</h1>
               <div className="gold-divider w-24 mt-6" />
               <p className="text-white/70 text-lg md:text-xl mt-6 max-w-3xl leading-relaxed">
                 {service.subtitle}
@@ -240,6 +251,104 @@ function ServiceDetailPage() {
         </div>
       </section>
 
+      {/* EINSATZBEREICHE + ABLAUF */}
+      {(service.applications.length > 0 || service.process.length > 0) && (
+        <section className="bg-secondary py-20 md:py-28">
+          <div className="container-wide grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+            {service.applications.length > 0 && (
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-4">
+                  {lang === "de" ? "Einsatzbereiche" : "Applications"}
+                </p>
+                <h2 className="font-display text-3xl md:text-4xl text-balance">
+                  {lang === "de"
+                    ? `Wo wir ${service.title} umsetzen`
+                    : `Where we deliver ${service.title}`}
+                </h2>
+                <div className="gold-divider w-16 mt-6 mb-8" />
+                <ul className="space-y-4">
+                  {service.applications.map((a) => (
+                    <li key={a} className="flex items-start gap-3">
+                      <Check size={18} className="text-gold mt-0.5 shrink-0" />
+                      <span className="leading-relaxed">{a}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {service.process.length > 0 && (
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-4">
+                  {lang === "de" ? "Ablauf" : "Process"}
+                </p>
+                <h2 className="font-display text-3xl md:text-4xl text-balance">
+                  {lang === "de" ? "So arbeiten wir" : "How we work"}
+                </h2>
+                <div className="gold-divider w-16 mt-6 mb-8" />
+                <ol className="space-y-6">
+                  {service.process.map((step, i) => (
+                    <li key={step.title} className="flex gap-4">
+                      <span className="font-mono text-[11px] text-gold mt-1 shrink-0">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <h3 className="font-display text-xl leading-tight">{step.title}</h3>
+                        <p className="mt-2 text-muted-foreground leading-relaxed">{step.text}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* REFERENZPROJEKTE */}
+      {relatedProjects.length > 0 && (
+        <section className="bg-background py-20 md:py-28">
+          <div className="container-wide">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-4">
+              {lang === "de" ? "Referenzen" : "References"}
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl text-balance">
+              {lang === "de"
+                ? `${service.title} – ausgeführte Projekte`
+                : `${service.title} – completed projects`}
+            </h2>
+            <div className="gold-divider w-24 mt-6 mb-10" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
+              {relatedProjects.map((p) => (
+                <Link
+                  key={p.slug}
+                  to="/projects/$slug"
+                  params={{ slug: p.slug }}
+                  className="bg-background p-8 group hover:bg-card transition-colors"
+                >
+                  <h3 className="font-display text-xl leading-tight group-hover:text-gold transition-colors">
+                    {p.name}
+                  </h3>
+                  <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
+                    {p.location}
+                  </p>
+                  <span className="mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-gold">
+                    {lang === "de" ? "Projekt ansehen" : "View project"}
+                    <ArrowUpRight size={14} />
+                  </span>
+                </Link>
+              ))}
+            </div>
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 mt-10 font-mono text-[11px] uppercase tracking-[0.2em] text-gold hover:underline"
+            >
+              {lang === "de" ? "Alle Referenzprojekte" : "All reference projects"}
+              <ArrowUpRight size={14} />
+            </Link>
+          </div>
+        </section>
+      )}
+
       {/* FAQ */}
       <section className="bg-secondary py-20 md:py-28">
         <div className="container-wide max-w-4xl">
@@ -320,4 +429,4 @@ function DetailBlock({
   );
 }
 
-export const _allSlugs = HOME_SERVICES_I18N.map((s) => s.slug);
+export const _allSlugs = ALL_SERVICES_I18N.map((s) => s.slug);
