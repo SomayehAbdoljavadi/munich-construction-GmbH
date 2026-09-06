@@ -11,14 +11,14 @@ import { breadcrumb, ldScript, ORG_ID, url } from "@/lib/seo";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Munich Construction GmbH — Munich Office" },
-      { name: "description", content: "Contact Munich Construction GmbH — phone, email, WhatsApp, and two offices in Munich. Free initial consultation for construction, renovation and refurbishment projects." },
-      { property: "og:title", content: "Contact — Munich Construction GmbH" },
-      { property: "og:description", content: "Phone, email, WhatsApp, and offices in Munich." },
+      { title: "Kontakt — Bauunternehmen in München | Munich Construction GmbH" },
+      { name: "description", content: "Kontakt zur Munich Construction GmbH: Telefon, E-Mail, WhatsApp und Büro in München. Kostenloses Erstgespräch für Bau-, Renovierungs- und Sanierungsprojekte." },
+      { property: "og:title", content: "Kontakt | Munich Construction GmbH" },
+      { property: "og:description", content: "Telefon, E-Mail, WhatsApp und Büro in München." },
       { property: "og:url", content: url("/contact") },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "Contact — Munich Construction GmbH" },
-      { name: "twitter:description", content: "Get in touch with our Munich office." },
+      { name: "twitter:title", content: "Kontakt | Munich Construction GmbH" },
+      { name: "twitter:description", content: "Sprechen Sie mit unserem Team in München." },
     ],
     links: [{ rel: "canonical", href: url("/contact") }],
     scripts: [
@@ -29,8 +29,8 @@ export const Route = createFileRoute("/contact")({
         about: { "@id": ORG_ID },
       }),
       ldScript(breadcrumb([
-        { name: "Home", path: "/" },
-        { name: "Contact", path: "/contact" },
+        { name: "Start", path: "/" },
+        { name: "Kontakt", path: "/contact" },
       ])),
     ],
   }),

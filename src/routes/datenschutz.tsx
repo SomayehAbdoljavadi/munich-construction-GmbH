@@ -27,8 +27,8 @@ const T = {
   eyebrow: { de: "Recht · Munich Construction GmbH", en: "Legal · Munich Construction GmbH" },
   title: { de: "Datenschutzerklärung", en: "Privacy Policy" },
   intro: {
-    de: "Diese Erklärung informiert Sie darüber, welche personenbezogenen Daten wir auf www.munichconstruction.de verarbeiten, auf welcher Rechtsgrundlage dies geschieht und welche Rechte Sie haben. Sie gilt zusätzlich zu den Angaben im Impressum.",
-    en: "This policy explains which personal data we process on www.munichconstruction.de, on what legal basis, and which rights you have. It applies in addition to the information in our legal notice.",
+    de: "Diese Erklärung informiert Sie darüber, welche personenbezogenen Daten wir auf munichconstruction.de verarbeiten, auf welcher Rechtsgrundlage dies geschieht und welche Rechte Sie haben. Sie gilt zusätzlich zu den Angaben im Impressum.",
+    en: "This policy explains which personal data we process on munichconstruction.de, on what legal basis, and which rights you have. It applies in addition to the information in our legal notice.",
   },
   controllerTitle: { de: "1. Verantwortlicher", en: "1. Controller" },
   controller: {

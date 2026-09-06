@@ -1,38 +1,36 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { useT } from "@/lib/i18n";
 import { PROJECTS, type Project } from "@/lib/projects-data";
 import { BASE_URL, breadcrumb, ldScript, url } from "@/lib/seo";
-
-const ogImage = PROJECTS[0]?.images[0] ?? "";
+import { getProjectPageBySource } from "@/lib/project-pages";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Projects in Munich & Bavaria — Munich Construction GmbH" },
+      { title: "Referenzprojekte in München und Bayern | Munich Construction GmbH" },
       {
         name: "description",
         content:
-          "Construction, refurbishment and renovation projects by Munich Construction GmbH in Munich, Bavaria and beyond — residential, hotel, commercial and heritage buildings.",
+          "Referenzprojekte der Munich Construction GmbH: Brandschutz, Trockenbau, Injektion sowie Fenster und Türen in München, Augsburg und Bayreuth.",
       },
-      { property: "og:title", content: "Projects — Munich Construction GmbH" },
+      { property: "og:title", content: "Referenzprojekte | Munich Construction GmbH" },
       {
         property: "og:description",
-        content: "Selected work in new construction, refurbishment and renovation across Munich and Bavaria.",
+        content: "Ausgeführte Bauprojekte in München und Bayern — Brandschutz, Trockenbau, Injektion, Fenster und Türen.",
       },
       { property: "og:url", content: url("/projects") },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "Projects — Munich Construction GmbH" },
-      { name: "twitter:description", content: "Construction projects in Munich and Bavaria." },
-      ...(ogImage ? [{ property: "og:image", content: ogImage }] : []),
+      { name: "twitter:title", content: "Referenzprojekte | Munich Construction GmbH" },
+      { name: "twitter:description", content: "Ausgeführte Bauprojekte in München und Bayern." },
     ],
     links: [{ rel: "canonical", href: url("/projects") }],
     scripts: [
       ldScript({
         "@context": "https://schema.org",
         "@type": "ItemList",
-        name: "Construction Projects — Munich Construction GmbH",
+        name: "Referenzprojekte — Munich Construction GmbH",
         itemListElement: PROJECTS.map((p, i) => ({
           "@type": "ListItem",
           position: i + 1,
@@ -40,13 +38,13 @@ export const Route = createFileRoute("/projects")({
             "@type": "Place",
             name: p.name,
             address: p.location,
-            url: `${BASE_URL}/projects#${p.slug}`,
+            url: `${BASE_URL}${getProjectPageBySource(p.slug) ? `/projects/${getProjectPageBySource(p.slug)!.slug}` : `/projects#${p.slug}`}`,
           },
         })),
       }),
       ldScript(breadcrumb([
-        { name: "Home", path: "/" },
-        { name: "Projects", path: "/projects" },
+        { name: "Start", path: "/" },
+        { name: "Projekte", path: "/projects" },
       ])),
     ],
   }),
@@ -276,7 +274,17 @@ function ProjectSection({ project, index, sectionRef }: ProjectSectionProps) {
               {project.name}
             </h2>
             <div className="gold-divider w-16 mt-4 md:mt-6" />
+            {getProjectPageBySource(project.slug) && (
+              <Link
+                to="/projects/$slug"
+                params={{ slug: getProjectPageBySource(project.slug)!.slug }}
+                className="inline-block mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-gold hover:underline"
+              >
+                Projektdetails ansehen →
+              </Link>
+            )}
           </div>
+
           {project.location && (
             <div className="md:text-right">
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold mb-2 flex md:justify-end items-center gap-2">
@@ -340,7 +348,7 @@ function ProjectSlideshow({ project }: { project: Project }) {
             <div className="absolute inset-0 bg-ink" />
             <img
               src={src}
-              alt={`${project.name} — ${idx + 1}`}
+              alt={`${project.name}${project.location ? `, ${project.location}` : ""} — Baudokumentation Bild ${idx + 1}`}
               loading={idx === 0 ? "eager" : "lazy"}
               className="absolute inset-0 w-full h-full object-contain object-center"
             />

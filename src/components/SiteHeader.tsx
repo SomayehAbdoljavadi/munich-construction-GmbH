@@ -4,7 +4,7 @@ import { Menu, X, Sun, Moon, ChevronDown } from "lucide-react";
 import { Logo } from "./Logo";
 import { useT, type Lang } from "@/lib/i18n";
 import { useTheme } from "@/lib/theme";
-import { HOME_SERVICES_I18N } from "@/lib/services-data";
+import { ALL_SERVICES_I18N } from "@/lib/services-data";
 
 const links = [
   { to: "/", key: "nav.home" },
@@ -69,7 +69,7 @@ export function SiteHeader() {
                   <div className="min-w-[280px] bg-background border border-border shadow-premium">
                     <div className="h-px bg-gold" />
                     <ul className="py-2">
-                      {HOME_SERVICES_I18N.map((s) => (
+                      {ALL_SERVICES_I18N.map((s) => (
                         <li key={s.slug}>
                           <Link
                             to="/services/$slug"
@@ -148,7 +148,7 @@ export function SiteHeader() {
                   </div>
                   {mobileServicesOpen && (
                     <ul className="mt-3 ml-3 pl-4 border-l border-border flex flex-col gap-3">
-                      {HOME_SERVICES_I18N.map((s) => (
+                      {ALL_SERVICES_I18N.map((s) => (
                         <li key={s.slug}>
                           <Link
                             to="/services/$slug"

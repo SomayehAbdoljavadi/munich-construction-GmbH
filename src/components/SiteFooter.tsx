@@ -116,7 +116,7 @@ export function SiteFooter() {
       <div className="border-t border-white/5">
         <div className="container-wide py-5 flex flex-col md:flex-row justify-between gap-2 text-[11px] text-white/40 font-mono uppercase tracking-widest">
           <span>© {new Date().getFullYear()} Munich Construction GmbH · {t("footer.rights")}</span>
-          <span>www.munichconstruction.de</span>
+          <span>munichconstruction.de</span>
         </div>
       </div>
     </footer>
