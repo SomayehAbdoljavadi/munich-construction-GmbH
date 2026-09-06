@@ -133,6 +133,61 @@ export const FAQS_BY_SERVICE: Record<string, FAQ[]> = {
       },
     },
   ],
+  neubau: [
+    ...COMMON_FAQS,
+    {
+      q: { de: "Übernehmen Sie Neubauprojekte schlüsselfertig?", en: "Do you deliver new builds turn-key?" },
+      a: { de: "Ja. Wir koordinieren Rohbau, Ausbau und Fachgewerke bis zur schlüsselfertigen Übergabe und bleiben dabei zentraler Ansprechpartner für den Bauherrn.", en: "Yes. We coordinate shell, fit-out and specialist trades through to turn-key handover and remain the client's central point of contact." },
+    },
+    {
+      q: { de: "Arbeiten Sie mit vorhandenen Architekten und Fachplanern zusammen?", en: "Do you work with existing architects and specialist planners?" },
+      a: { de: "Ja. Wir bauen auf vorhandenen Planungsunterlagen auf, prüfen sie auf Ausführbarkeit und stimmen offene Punkte direkt mit den beteiligten Planern ab.", en: "Yes. We build on existing planning documents, check them for buildability and clarify open points directly with the planners involved." },
+    },
+  ],
+  renovierung: [
+    ...COMMON_FAQS,
+    {
+      q: { de: "Kann während der Renovierung weiter gewohnt oder gearbeitet werden?", en: "Can the property stay in use during renovation?" },
+      a: { de: "In vielen Fällen ja. Wir planen die Arbeiten in Bauabschnitten, arbeiten staubarm und vereinbaren feste Zeitfenster, damit die Nutzung möglichst wenig eingeschränkt wird.", en: "In many cases yes. We plan the works in phases, keep dust to a minimum and agree fixed time windows so that use is restricted as little as possible." },
+    },
+    {
+      q: { de: "Was kostet eine Renovierung in München?", en: "What does a renovation in Munich cost?" },
+      a: { de: "Die Kosten hängen von Fläche, Zustand und Leistungsumfang ab. Nach einer Besichtigung erhalten Sie ein klar gegliedertes Angebot mit Einzelpositionen und Zeitrahmen.", en: "Cost depends on area, condition and scope. After a site visit you receive a clearly structured quote with individual line items and a time frame." },
+    },
+  ],
+  sanierung: [
+    ...COMMON_FAQS,
+    {
+      q: { de: "Wie gehen Sie bei Feuchteschäden vor?", en: "How do you deal with moisture damage?" },
+      a: { de: "Wir klären zuerst die Ursache, bevor wir instand setzen. Erst danach werden Abdichtung, Injektion oder Bauteilinstandsetzung festgelegt, damit der Schaden nicht wiederkehrt.", en: "We identify the cause before repairing. Only then do we decide on waterproofing, injection or component repair, so the damage does not return." },
+    },
+    {
+      q: { de: "Eignet sich eine Sanierung auch für Münchner Altbauten?", en: "Is refurbishment suitable for older Munich buildings?" },
+      a: { de: "Ja. Gerade im Altbau achten wir darauf, vorhandene Substanz zu erhalten und Verfahren zu wählen, die zum Bestand und zu den heutigen Anforderungen passen.", en: "Yes. In older buildings in particular we take care to preserve existing substance and choose methods that suit both the fabric and today's requirements." },
+    },
+  ],
+  genehmigungsplanung: [
+    ...COMMON_FAQS,
+    {
+      q: { de: "Übernehmen Sie den kompletten Bauantrag?", en: "Do you handle the entire building application?" },
+      a: { de: "Ja. Wir stellen die Unterlagen zusammen, koordinieren Statik und Brandschutz, reichen ein und bearbeiten Rückfragen der Behörde bis zur Genehmigung.", en: "Yes. We compile the documents, coordinate structural and fire-protection input, submit the application and handle authority queries through to approval." },
+    },
+    {
+      q: { de: "Wie lange dauert ein Genehmigungsverfahren in München?", en: "How long does an approval procedure in Munich take?" },
+      a: { de: "Die Dauer hängt von Vorhaben und Behörde ab. Vollständige, prüffähige Unterlagen sind der wirksamste Hebel, um vermeidbare Verzögerungen zu verhindern.", en: "Duration depends on the project and the authority. Complete, reviewable documents are the most effective way to avoid unnecessary delays." },
+    },
+  ],
+  werkplanung: [
+    ...COMMON_FAQS,
+    {
+      q: { de: "Worin unterscheidet sich Werkplanung von der Genehmigungsplanung?", en: "How does execution planning differ from permit planning?" },
+      a: { de: "Die Genehmigungsplanung dient der Behörde, die Werkplanung der Baustelle. Sie legt Details, Materialien und Anschlüsse so fest, dass sie unmittelbar baubar sind.", en: "Permit planning serves the authority, execution planning serves the site. It defines details, materials and interfaces so they can be built directly." },
+    },
+    {
+      q: { de: "Erstellen Sie Werkplanung auch für Bestandsgebäude?", en: "Do you also provide execution planning for existing buildings?" },
+      a: { de: "Ja. Auf Basis eines Bestandsaufmaßes entwickeln wir Details, die zu den tatsächlich vorhandenen Maßen und Anschlüssen passen.", en: "Yes. Based on an as-built survey we develop details that match the dimensions and connections actually present." },
+    },
+  ],
 };
 
 export function getFaqs(slug: string, lang: Lang): { q: string; a: string }[] {
