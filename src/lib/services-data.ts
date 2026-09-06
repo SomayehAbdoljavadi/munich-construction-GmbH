@@ -101,6 +101,7 @@ export const HOME_SERVICES_I18N: ServiceDetailI18n[] = [
     slug: "brandschutz",
     icon: Flame,
     title: { de: "Brandschutz", en: "Fire Protection" },
+    h1: { de: "Brandschutz in München", en: "Fire Protection in Munich" },
     subtitle: {
       de: "Normgerechter passiver Brandschutz für Neubau und Bestand",
       en: "Compliant passive fire protection for new builds and existing buildings",
@@ -161,6 +162,7 @@ export const HOME_SERVICES_I18N: ServiceDetailI18n[] = [
     slug: "trockenbau",
     icon: Hammer,
     title: { de: "Trockenbau", en: "Drywall Construction" },
+    h1: { de: "Trockenbau in München", en: "Drywall Construction in Munich" },
     subtitle: {
       de: "Präziser Innenausbau für Büro, Gewerbe und Wohnbau",
       en: "Precise interior fit-out for office, commercial and residential projects",
@@ -221,6 +223,7 @@ export const HOME_SERVICES_I18N: ServiceDetailI18n[] = [
     slug: "injektion-und-risssperrung",
     icon: Droplet,
     title: { de: "Injektion und Risssperrung", en: "Injection and Crack Sealing" },
+    h1: { de: "Injektion und Risssperrung in München", en: "Injection and Crack Sealing in Munich" },
     subtitle: {
       de: "Bauwerksabdichtung und Rissverpressung mit professionellen Injektionsverfahren",
       en: "Structural waterproofing and crack injection using professional injection methods",
@@ -281,6 +284,7 @@ export const HOME_SERVICES_I18N: ServiceDetailI18n[] = [
     slug: "fenster-und-tueren",
     icon: DoorOpen,
     title: { de: "Fenster und Türen", en: "Windows and Doors" },
+    h1: { de: "Fenster und Türen in München", en: "Windows and Doors in Munich" },
     subtitle: {
       de: "Energieeffiziente und einbruchhemmende Montage für Neubau und Sanierung",
       en: "Energy-efficient and burglar-resistant installation for new builds and refurbishments",
