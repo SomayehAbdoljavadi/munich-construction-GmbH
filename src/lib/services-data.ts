@@ -24,6 +24,8 @@ export interface ServiceDetailI18n {
   slug: string;
   icon: typeof Flame;
   title: L;
+  /** Locally intent-optimised page heading (H1). */
+  h1: L;
   subtitle: L;
   intro: L;
   paragraph: L;
@@ -31,6 +33,13 @@ export interface ServiceDetailI18n {
   includes: L[];
   benefits: L[];
   whyUs: L[];
+  /** Optional SEO overrides */
+  metaTitle?: L;
+  metaDescription?: L;
+  /** Typical applications / Einsatzbereiche */
+  applications?: L[];
+  /** Process steps / Ablauf */
+  process?: Array<{ title: L; text: L }>;
 }
 
 export interface GallerySlide {
@@ -48,6 +57,7 @@ export interface GallerySlide {
 export interface ServiceDetail {
   slug: string;
   title: string;
+  h1: string;
   subtitle: string;
   icon: typeof Flame;
   intro: string;
@@ -56,7 +66,10 @@ export interface ServiceDetail {
   includes: string[];
   benefits: string[];
   whyUs: string[];
+  applications: string[];
+  process: Array<{ title: string; text: string }>;
 }
+
 
 const WHY_US: L[] = [
   {
