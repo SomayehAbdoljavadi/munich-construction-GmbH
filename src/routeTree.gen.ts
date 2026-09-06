@@ -21,6 +21,7 @@ import { Route as BeratungRouteImport } from './routes/beratung'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesSlugRouteImport } from './routes/services_.$slug'
+import { Route as ProjectsSlugRouteImport } from './routes/projects_.$slug'
 import { Route as ApiPublicContactRequestRouteImport } from './routes/api/public/contact-request'
 import { Route as ApiPublicConsultationSlotsRouteImport } from './routes/api/public/consultation-slots'
 import { Route as ApiPublicConsultationRemindersRouteImport } from './routes/api/public/consultation-reminders'
@@ -90,6 +91,11 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
+  id: '/projects_/$slug',
+  path: '/projects/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicContactRequestRoute = ApiPublicContactRequestRouteImport.update({
   id: '/api/public/contact-request',
   path: '/api/public/contact-request',
@@ -150,6 +156,7 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termin': typeof TerminRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
@@ -172,6 +179,7 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termin': typeof TerminRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
@@ -195,6 +203,7 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termin': typeof TerminRoute
+  '/projects_/$slug': typeof ProjectsSlugRoute
   '/services_/$slug': typeof ServicesSlugRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
@@ -219,6 +228,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/termin'
+    | '/projects/$slug'
     | '/services/$slug'
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
@@ -241,6 +251,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/termin'
+    | '/projects/$slug'
     | '/services/$slug'
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
@@ -263,6 +274,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/termin'
+    | '/projects_/$slug'
     | '/services_/$slug'
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
@@ -286,6 +298,7 @@ export interface RootRouteChildren {
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TerminRoute: typeof TerminRoute
+  ProjectsSlugRoute: typeof ProjectsSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ApiPublicCareersApplicationRoute: typeof ApiPublicCareersApplicationRoute
   ApiPublicConsultationBookingRoute: typeof ApiPublicConsultationBookingRoute
@@ -383,6 +396,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projects_/$slug': {
+      id: '/projects_/$slug'
+      path: '/projects/$slug'
+      fullPath: '/projects/$slug'
+      preLoaderRoute: typeof ProjectsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/contact-request': {
       id: '/api/public/contact-request'
       path: '/api/public/contact-request'
@@ -454,6 +474,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TerminRoute: TerminRoute,
+  ProjectsSlugRoute: ProjectsSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ApiPublicCareersApplicationRoute: ApiPublicCareersApplicationRoute,
   ApiPublicConsultationBookingRoute: ApiPublicConsultationBookingRoute,
