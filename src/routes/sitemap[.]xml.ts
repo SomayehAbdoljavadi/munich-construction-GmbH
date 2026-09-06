@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { BASE_URL } from "@/lib/seo";
-import { HOME_SERVICES_I18N } from "@/lib/services-data";
+import { ALL_SERVICES_I18N } from "@/lib/services-data";
+import { PROJECT_PAGES } from "@/lib/project-pages";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -18,9 +19,15 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/imprint", priority: "0.3", changefreq: "yearly" },
           { path: "/datenschutz", priority: "0.3", changefreq: "yearly" },
 
-          ...HOME_SERVICES_I18N.map((s) => ({
+          ...ALL_SERVICES_I18N.map((s) => ({
             path: `/services/${s.slug}`,
             priority: "0.85",
+            changefreq: "monthly",
+          })),
+
+          ...PROJECT_PAGES.map((p) => ({
+            path: `/projects/${p.slug}`,
+            priority: "0.7",
             changefreq: "monthly",
           })),
         ];
