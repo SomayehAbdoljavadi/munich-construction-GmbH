@@ -274,7 +274,17 @@ function ProjectSection({ project, index, sectionRef }: ProjectSectionProps) {
               {project.name}
             </h2>
             <div className="gold-divider w-16 mt-4 md:mt-6" />
+            {getProjectPageBySource(project.slug) && (
+              <Link
+                to="/projects/$slug"
+                params={{ slug: getProjectPageBySource(project.slug)!.slug }}
+                className="inline-block mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-gold hover:underline"
+              >
+                Projektdetails ansehen →
+              </Link>
+            )}
           </div>
+
           {project.location && (
             <div className="md:text-right">
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold mb-2 flex md:justify-end items-center gap-2">
