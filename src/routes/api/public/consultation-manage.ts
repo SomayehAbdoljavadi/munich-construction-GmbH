@@ -12,6 +12,7 @@ import {
   table,
 } from "@/lib/consultation.server";
 import { calendarNote, icsAttachment, icsDownloadButton, icsFallbackAttachment } from "@/lib/consultation-ics.server";
+import { languageSummary, languageSummaryDe } from "@/lib/consultation-data";
 
 // Public endpoint: lets a customer load, reschedule or cancel their own
 // consultation booking using the secret cancel_token issued at booking time.
@@ -33,6 +34,7 @@ type ManageRow = {
   email: string | null;
   phone: string | null;
   lang: string | null;
+  consultation_languages: string[] | null;
 };
 
 export const Route = createFileRoute("/api/public/consultation-manage")({
@@ -106,6 +108,7 @@ async function handleManage(request: Request) {
     firstName: row.first_name ?? "",
     lastName: row.last_name ?? "",
     lang,
+    consultationLanguages: row.consultation_languages ?? [],
   };
 
   if (row.outcome === "already_cancelled") return json({ error: "already_cancelled" }, 409);
@@ -168,6 +171,7 @@ async function handleManage(request: Request) {
             ["Telefon", row.phone ?? ""],
             ["E-Mail", row.email ?? ""],
             ["Projektart", row.project_type ?? ""],
+            ["Beratungssprache(n)", languageSummaryDe(row.consultation_languages)],
           ])}${icsDownloadButton(icsUrl, true)}${calendarNote("de", true)}</div>`,
           attachments: [cancelInvite, cancelFallback],
         });
@@ -235,6 +239,7 @@ async function handleManage(request: Request) {
           ["Telefon", row.phone ?? ""],
           ["E-Mail", row.email ?? ""],
           ["Projektart", row.project_type ?? ""],
+          ["Beratungssprache(n)", languageSummaryDe(row.consultation_languages)],
         ])}${icsDownloadButton(icsUrl)}${calendarNote("de")}</div>`,
         attachments: [updateInvite, updateFallback],
       });
@@ -249,8 +254,8 @@ async function handleManage(request: Request) {
               : `Ihr Beratungstermin ist jetzt am ${to.day} um ${to.time} Uhr`,
           html:
             lang === "en"
-              ? `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6"><p>Dear ${escapeHtml(name)},</p><p>your consultation has been moved to <strong>${escapeHtml(to.day)}, ${escapeHtml(to.time)}</strong>.</p><p>We will call you on ${escapeHtml(row.phone ?? "")}.</p><p>Kind regards,<br/>Munich Construction GmbH</p></div>`
-              : `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6"><p>Guten Tag ${escapeHtml(name)},</p><p>Ihr Beratungstermin wurde auf <strong>${escapeHtml(to.day)}, ${escapeHtml(to.time)} Uhr</strong> verschoben.</p><p>Wir rufen Sie unter ${escapeHtml(row.phone ?? "")} an.</p><p>Mit freundlichen Grüßen<br/>Munich Construction GmbH</p>${calendarNote(lang)}</div>`,
+              ? `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6"><p>Dear ${escapeHtml(name)},</p><p>your consultation has been moved to <strong>${escapeHtml(to.day)}, ${escapeHtml(to.time)}</strong>.</p><p>We will call you on ${escapeHtml(row.phone ?? "")}.</p><p>Consultation language(s): <strong>${escapeHtml(languageSummary(row.consultation_languages, "en"))}</strong></p><p>Kind regards,<br/>Munich Construction GmbH</p></div>`
+              : `<div style="font-family:Arial,sans-serif;color:#111;line-height:1.6"><p>Guten Tag ${escapeHtml(name)},</p><p>Ihr Beratungstermin wurde auf <strong>${escapeHtml(to.day)}, ${escapeHtml(to.time)} Uhr</strong> verschoben.</p><p>Wir rufen Sie unter ${escapeHtml(row.phone ?? "")} an.</p><p>Beratungssprache(n): <strong>${escapeHtml(languageSummaryDe(row.consultation_languages))}</strong></p><p>Mit freundlichen Grüßen<br/>Munich Construction GmbH</p>${calendarNote(lang)}</div>`,
           attachments: [updateInvite],
         });
       }

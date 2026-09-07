@@ -9,6 +9,7 @@ import { getProjectPagesForService } from "@/lib/project-pages";
 
 import { getProjectSlidesForService } from "@/lib/service-projects";
 import { ServiceGallery } from "@/components/ServiceGallery";
+import { LANGUAGES } from "@/lib/consultation-data";
 import { useT } from "@/lib/i18n";
 import { breadcrumb, ldScript, url, ORG_ID, SITE_NAME } from "@/lib/seo";
 import { getFaqs, getFaqsBilingual } from "@/lib/faqs";
@@ -386,6 +387,7 @@ function ServiceDetailPage() {
           </h2>
           <div className="gold-divider w-24 mx-auto mt-8" />
           <p className="text-white/70 mt-8 max-w-2xl mx-auto">{t("sd.cta.lede")}</p>
+          <p className="text-gold mt-4 text-sm">{LANGUAGES.short[lang]}</p>
           <Link
             to="/contact"
             className="group inline-flex items-center gap-3 mt-10 bg-gold text-ink px-8 py-4 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors"

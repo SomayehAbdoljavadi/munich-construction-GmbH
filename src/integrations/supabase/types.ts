@@ -75,6 +75,7 @@ export type Database = {
           cancel_token: string
           city: string | null
           consent: boolean
+          consultation_languages: string[] | null
           contact_method: string
           created_at: string
           customer_email_status: string
@@ -104,6 +105,7 @@ export type Database = {
           cancel_token?: string
           city?: string | null
           consent?: boolean
+          consultation_languages?: string[] | null
           contact_method?: string
           created_at?: string
           customer_email_status?: string
@@ -133,6 +135,7 @@ export type Database = {
           cancel_token?: string
           city?: string | null
           consent?: boolean
+          consultation_languages?: string[] | null
           contact_method?: string
           created_at?: string
           customer_email_status?: string
@@ -238,29 +241,54 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      consultation_book_slot: {
-        Args: {
-          p_budget?: string
-          p_city?: string
-          p_contact_method: string
-          p_description?: string
-          p_email: string
-          p_first_name: string
-          p_lang?: string
-          p_last_name: string
-          p_phone: string
-          p_postal_code?: string
-          p_project_start?: string
-          p_project_type: string
-          p_slot_start: string
-        }
-        Returns: {
-          booking_id: string
-          cancel_token: string
-          customer_email_status: string
-          outcome: string
-        }[]
-      }
+      consultation_book_slot:
+        | {
+            Args: {
+              p_budget?: string
+              p_city?: string
+              p_contact_method: string
+              p_description?: string
+              p_email: string
+              p_first_name: string
+              p_lang?: string
+              p_last_name: string
+              p_phone: string
+              p_postal_code?: string
+              p_project_start?: string
+              p_project_type: string
+              p_slot_start: string
+            }
+            Returns: {
+              booking_id: string
+              cancel_token: string
+              customer_email_status: string
+              outcome: string
+            }[]
+          }
+        | {
+            Args: {
+              p_budget?: string
+              p_city?: string
+              p_consultation_languages?: string[]
+              p_contact_method: string
+              p_description?: string
+              p_email: string
+              p_first_name: string
+              p_lang?: string
+              p_last_name: string
+              p_phone: string
+              p_postal_code?: string
+              p_project_start?: string
+              p_project_type: string
+              p_slot_start: string
+            }
+            Returns: {
+              booking_id: string
+              cancel_token: string
+              customer_email_status: string
+              outcome: string
+            }[]
+          }
       consultation_bump_calendar_sequence: {
         Args: { p_id: string; p_token: string }
         Returns: number
@@ -279,6 +307,7 @@ export type Database = {
           p_token: string
         }
         Returns: {
+          consultation_languages: string[]
           email: string
           first_name: string
           lang: string

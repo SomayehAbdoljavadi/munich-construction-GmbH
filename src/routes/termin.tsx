@@ -4,7 +4,7 @@ import { CalendarClock, CheckCircle2, Loader2, Phone, XCircle } from "lucide-rea
 import { fetchFreeSlots } from "@/lib/slots";
 import { useT } from "@/lib/i18n";
 import { url } from "@/lib/seo";
-import { BERATUNG, CONTACT, MANAGE, type L } from "@/lib/consultation-data";
+import { BERATUNG, CONTACT, LANGUAGES, MANAGE, languageSummary, type L } from "@/lib/consultation-data";
 
 type Search = { id?: string; token?: string };
 
@@ -43,6 +43,7 @@ type Booking = {
   firstName: string;
   lastName: string;
   lang: "de" | "en";
+  consultationLanguages?: string[] | null;
 };
 
 const inputLabel = "block font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3";
@@ -234,6 +235,11 @@ function ManageAppointmentPage() {
                     <span className="tabular-nums"> · {fmtTime(booking.slotStart)}</span>
                   </p>
                   <p className="mt-1 text-sm text-muted-foreground">{booking.projectType}</p>
+                  {languageSummary(booking.consultationLanguages, lang === "en" ? "en" : "de") && (
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {l(LANGUAGES.summaryLabel)}: {languageSummary(booking.consultationLanguages, lang === "en" ? "en" : "de")}
+                    </p>
+                  )}
                   <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-gold">
                     {cancelled ? l(MANAGE.statusCancelled) : l(MANAGE.statusConfirmed)}
                   </p>

@@ -15,6 +15,7 @@ import {
   table,
 } from "@/lib/consultation.server";
 import { calendarNote, icsAttachment, icsDownloadButton, icsFallbackAttachment } from "@/lib/consultation-ics.server";
+import { languageSummary, languageSummaryDe } from "@/lib/consultation-data";
 
 // Public endpoint: books a consultation slot (double-booking safe) and sends
 // confirmation emails. All credentials stay server-side.
@@ -59,6 +60,10 @@ async function handleBooking(request: Request) {
         const contactMethod = clean(form.get("contactMethod"), 20) === "whatsapp" ? "whatsapp" : "phone";
         const lang = clean(form.get("lang"), 2) === "en" ? "en" : "de";
         const consent = clean(form.get("consent"), 10) === "true";
+        const consultationLanguages = clean(form.get("consultationLanguages"), 20)
+          .split(",")
+          .map((code) => code.trim().toLowerCase())
+          .filter((code, index, all) => (code === "de" || code === "fa") && all.indexOf(code) === index);
 
         const slotDate = new Date(slotStart);
         if (
@@ -68,6 +73,7 @@ async function handleBooking(request: Request) {
           !phoneValid(phone) ||
           !projectType ||
           !consent ||
+          consultationLanguages.length === 0 ||
           Number.isNaN(slotDate.getTime()) ||
           slotDate.getTime() < Date.now()
         ) {
@@ -111,6 +117,7 @@ async function handleBooking(request: Request) {
           p_budget: budget || null,
           p_description: description || null,
           p_lang: lang,
+          p_consultation_languages: consultationLanguages,
         });
 
         if (bookError) {
@@ -197,6 +204,7 @@ async function handleBooking(request: Request) {
                   ["Projektstart", projectStart],
                   ["Budget", budget],
                   ["Beschreibung", description],
+                  ["Beratungssprache(n)", languageSummaryDe(consultationLanguages)],
                   ["Sprache", lang.toUpperCase()],
                   ["Verwaltungslink", manageUrl],
                   ["Eingegangen am", new Date().toLocaleString("de-DE", { timeZone: "Europe/Berlin" })],
@@ -223,6 +231,7 @@ async function handleBooking(request: Request) {
                      <p>thank you for booking a free initial consultation with Munich Construction GmbH.</p>
                      <p><strong>${escapeHtml(fmt.day)}, ${escapeHtml(fmt.time)}</strong> (approx. ${slotMinutes} minutes)<br/>
                      We will call you on ${escapeHtml(phone)}.</p>
+                     <p>Consultation language(s): <strong>${escapeHtml(languageSummary(consultationLanguages, "en"))}</strong></p>
                      <p>Need a different time? You can <a href="${escapeHtml(manageUrl)}">reschedule or cancel your appointment here</a>.</p>
                      <p>Kind regards,<br/>Munich Construction GmbH<br/>+49 89 57843675<br/>info@munichconstruction.de</p>
                    </div>`
@@ -231,6 +240,7 @@ async function handleBooking(request: Request) {
                      <p>vielen Dank für die Buchung Ihres kostenlosen Erstgesprächs bei der Munich Construction GmbH.</p>
                      <p><strong>${escapeHtml(fmt.day)}, ${escapeHtml(fmt.time)} Uhr</strong> (ca. ${slotMinutes} Minuten)<br/>
                      Wir rufen Sie unter ${escapeHtml(phone)} an.</p>
+                     <p>Beratungssprache(n): <strong>${escapeHtml(languageSummaryDe(consultationLanguages))}</strong></p>
                      <p>Sollte Ihnen der Termin nicht mehr passen, können Sie ihn <a href="${escapeHtml(manageUrl)}">hier verschieben oder stornieren</a>.</p>
                      <p>Mit freundlichen Grüßen<br/>Munich Construction GmbH<br/>+49 89 57843675<br/>info@munichconstruction.de</p>
                    </div>`;
