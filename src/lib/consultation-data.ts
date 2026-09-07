@@ -570,3 +570,56 @@ export function photoLink(lang: "de" | "en") {
     external: false,
   };
 }
+
+/* ------------------- Consultation languages (DE / FA) ------------------- */
+
+export type ConsultationLangCode = "de" | "fa";
+
+export const CONSULTATION_LANG_OPTIONS: Array<{ id: ConsultationLangCode; label: L }> = [
+  { id: "de", label: { de: "Deutsch", en: "German" } },
+  { id: "fa", label: { de: "Persisch (فارسی)", en: "Persian (فارسی)" } },
+];
+
+export const LANGUAGES = {
+  headline: { de: "Beratung auf Deutsch und Persisch", en: "Consultations in German and Persian" },
+  description: {
+    de: "Wir beraten Sie auf Deutsch und Persisch. Wählen Sie bei der Terminbuchung Ihre gewünschte Beratungssprache aus – Deutsch, Persisch oder beide Sprachen.",
+    en: "We advise you in German and Persian. When booking your appointment, choose your preferred consultation language – German, Persian or both languages.",
+  },
+  cta: { de: "Beratungstermin vereinbaren", en: "Schedule a consultation" },
+  persian: "مشاوره به زبان آلمانی و فارسی؛ هنگام رزرو وقت، یک یا هر دو زبان را انتخاب کنید.",
+  short: {
+    de: "Beratung auf Deutsch und Persisch",
+    en: "Consultations in German and Persian",
+  },
+  fieldLabel: { de: "Gewünschte Beratungssprache(n)", en: "Preferred consultation language(s)" },
+  helper: {
+    de: "Bitte wählen Sie mindestens eine Sprache aus. Sie können auch beide Sprachen auswählen.",
+    en: "Please select at least one language. You may also select both languages.",
+  },
+  required: {
+    de: "Bitte wählen Sie mindestens eine Beratungssprache aus.",
+    en: "Please select at least one consultation language.",
+  },
+  summaryLabel: { de: "Beratungssprache(n)", en: "Consultation language(s)" },
+} as const;
+
+/** German-facing value used in summaries, emails and internal views. */
+export function languageSummaryDe(codes: readonly string[] | null | undefined): string {
+  const de = codes?.includes("de");
+  const fa = codes?.includes("fa");
+  if (de && fa) return "Deutsch und Persisch";
+  if (fa) return "Persisch";
+  if (de) return "Deutsch";
+  return "";
+}
+
+export function languageSummary(codes: readonly string[] | null | undefined, lang: "de" | "en"): string {
+  if (lang === "de") return languageSummaryDe(codes);
+  const de = codes?.includes("de");
+  const fa = codes?.includes("fa");
+  if (de && fa) return "German and Persian";
+  if (fa) return "Persian";
+  if (de) return "German";
+  return "";
+}

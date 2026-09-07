@@ -8,6 +8,7 @@ import {
   HardHat,
 } from "lucide-react";
 import { useT } from "@/lib/i18n";
+import { LANGUAGES } from "@/lib/consultation-data";
 import { HeroSkylineArt } from "@/components/HeroSkylineArt";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LocationMap } from "@/components/LocationMap";
@@ -96,7 +97,14 @@ function HomePage() {
               >
                 {t("hero.cta2")}
               </Link>
+              <Link
+                to="/beratung"
+                className="inline-flex items-center gap-3 border border-gold/60 text-gold px-7 py-4 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-gold hover:text-ink transition-colors"
+              >
+                {LANGUAGES.cta[lang]}
+              </Link>
             </div>
+            <p className="text-sm text-gold/90 animate-fade-up [animation-delay:600ms]">{LANGUAGES.short[lang]}</p>
 
             <ul className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 animate-fade-up [animation-delay:700ms]">
               {(["hero.trust1", "hero.trust2", "hero.trust3", "hero.trust4"] as const).map((k) => (

@@ -23,16 +23,21 @@ import { breadcrumb, ldScript, ORG_ID, url } from "@/lib/seo";
 import {
   BERATUNG,
   BERATUNG_FAQ,
+  CONSULTATION_LANG_OPTIONS,
   CONSULTATION_TOPICS,
   CONTACT,
   HOW_STEPS,
+  LANGUAGES,
   MANAGE,
   PREQUAL_QUESTIONS,
   PROJECT_PHASES,
   PROJECT_TYPES,
+  languageSummary,
   photoLink,
+  type ConsultationLangCode,
   type L,
 } from "@/lib/consultation-data";
+
 
 export const Route = createFileRoute("/beratung")({
   head: () => ({
@@ -358,7 +363,10 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
   const [budget, setBudget] = useState("");
   const [description, setDescription] = useState("");
   const [day, setDay] = useState<string>("");
+  const [consultLangs, setConsultLangs] = useState<ConsultationLangCode[]>([]);
   const [slot, setSlot] = useState<string>("");
+
+
   const [slots, setSlots] = useState<Slot[]>([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
   const [slotsError, setSlotsError] = useState(false);
@@ -439,6 +447,7 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
   const go = (next: number) => {
     setError(null);
     if (next === 1 && !projectType) return setError(l(BERATUNG.required));
+    if (next === 2 && consultLangs.length === 0) return setError(l(LANGUAGES.required));
     if (next === 2 && !slot) return setError(l(BERATUNG.required));
     if (next === 3) {
       if (!firstName.trim() || !lastName.trim()) return setError(l(BERATUNG.required));
@@ -462,6 +471,12 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
   };
 
   const submit = async () => {
+    if (consultLangs.length === 0) {
+      setError(l(LANGUAGES.required));
+      setStep(1);
+      scrollTop();
+      return;
+    }
     setSubmitting(true);
     setError(null);
     try {
@@ -480,6 +495,7 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
       fd.set("description", description);
       fd.set("contactMethod", contactMethod);
       fd.set("lang", lang);
+      fd.set("consultationLanguages", consultLangs.join(","));
       fd.set("consent", String(consent));
       files.forEach((f) => fd.append("files", f));
 
@@ -537,6 +553,25 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
         <h2 className="font-display h-fluid-section">{l(BERATUNG.bookingTitle)}</h2>
         <p className="mt-5 text-muted-foreground leading-relaxed max-w-2xl">{l(BERATUNG.bookingIntro)}</p>
 
+        {/* Consultation languages highlight */}
+        <div className="mt-10 border border-gold/40 bg-background p-6 md:p-8">
+          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold">
+            {l(LANGUAGES.short)}
+          </p>
+          <h3 className="mt-4 font-display text-2xl md:text-3xl">{l(LANGUAGES.headline)}</h3>
+          <p className="mt-3 max-w-2xl text-muted-foreground leading-relaxed">{l(LANGUAGES.description)}</p>
+          <p dir="rtl" lang="fa" className="mt-4 max-w-2xl text-right leading-loose text-muted-foreground">
+            {LANGUAGES.persian}
+          </p>
+          <a
+            href="#termin"
+            className="mt-6 inline-flex items-center gap-2 bg-gold text-ink px-6 py-3 text-sm font-medium hover:opacity-90 transition"
+          >
+            <CalendarClock className="h-4 w-4" />
+            {l(LANGUAGES.cta)}
+          </a>
+        </div>
+
         {done ? (
           <div className="mt-10 border border-gold/40 bg-background p-8 md:p-10">
             <CheckCircle2 className="h-9 w-9 text-gold" strokeWidth={1.4} />
@@ -561,6 +596,10 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
               <div>
                 <dt className={labelClass}>{l(BERATUNG.summaryContact)}</dt>
                 <dd>{l(BERATUNG.summaryContactValue)}</dd>
+              </div>
+              <div>
+                <dt className={labelClass}>{l(LANGUAGES.summaryLabel)}</dt>
+                <dd>{languageSummary(consultLangs, lang) || "—"}</dd>
               </div>
             </dl>
             {manageUrl && (
@@ -664,7 +703,45 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
 
               {step === 1 && (
                 <div className="space-y-8">
+                  <fieldset>
+                    <legend className={labelClass}>
+                      {l(LANGUAGES.fieldLabel)} {star}
+                    </legend>
+                    <div className="grid gap-2 sm:grid-cols-2">
+                      {CONSULTATION_LANG_OPTIONS.map((option) => {
+                        const checked = consultLangs.includes(option.id);
+                        return (
+                          <label
+                            key={option.id}
+                            className={`flex cursor-pointer items-center gap-3 border px-4 py-3 text-sm transition focus-within:border-gold ${
+                              checked ? "border-gold bg-gold/10" : "border-border hover:border-gold/60"
+                            }`}
+                          >
+                            <input
+                              type="checkbox"
+                              name="consultationLanguages"
+                              value={option.id}
+                              checked={checked}
+                              onChange={(e) => {
+                                setError(null);
+                                setConsultLangs((prev) =>
+                                  e.target.checked
+                                    ? [...prev, option.id]
+                                    : prev.filter((code) => code !== option.id),
+                                );
+                              }}
+                              className="accent-[color:var(--gold,#c9a227)]"
+                            />
+                            <span dir={option.id === "fa" ? "auto" : undefined}>{option.label[lang]}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                    <p className="mt-2 text-xs text-muted-foreground">{l(LANGUAGES.helper)}</p>
+                  </fieldset>
+
                   <div>
+
                     <span className={labelClass}>
                       {l(BERATUNG.qDate)} {star}
                     </span>
@@ -895,6 +972,10 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
                     <div>
                       <dt className={labelClass}>{l(BERATUNG.summaryProject)}</dt>
                       <dd>{typeLabel ? typeLabel.label[lang] : "—"}</dd>
+                    </div>
+                    <div>
+                      <dt className={labelClass}>{l(LANGUAGES.summaryLabel)}</dt>
+                      <dd>{languageSummary(consultLangs, lang) || "—"}</dd>
                     </div>
                     <div>
                       <dt className={labelClass}>{l(BERATUNG.phone)}</dt>
