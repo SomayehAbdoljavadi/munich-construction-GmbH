@@ -560,9 +560,6 @@ function BookingSection({ lang, l }: { lang: Lang; l: (v: L) => string }) {
           </p>
           <h3 className="mt-4 font-display text-2xl md:text-3xl">{l(LANGUAGES.headline)}</h3>
           <p className="mt-3 max-w-2xl text-muted-foreground leading-relaxed">{l(LANGUAGES.description)}</p>
-          <p dir="rtl" lang="fa" className="mt-4 max-w-2xl text-right leading-loose text-muted-foreground">
-            {LANGUAGES.persian}
-          </p>
           <a
             href="#termin"
             className="mt-6 inline-flex items-center gap-2 bg-gold text-ink px-6 py-3 text-sm font-medium hover:opacity-90 transition"

@@ -587,7 +587,6 @@ export const LANGUAGES = {
     en: "We advise you in German and Persian. When booking your appointment, choose your preferred consultation language – German, Persian or both languages.",
   },
   cta: { de: "Beratungstermin vereinbaren", en: "Schedule a consultation" },
-  persian: "مشاوره به زبان آلمانی و فارسی؛ هنگام رزرو وقت، یک یا هر دو زبان را انتخاب کنید.",
   short: {
     de: "Beratung auf Deutsch und Persisch",
     en: "Consultations in German and Persian",
