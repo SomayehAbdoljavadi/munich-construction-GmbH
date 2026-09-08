@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useT, type TranslationKey } from "@/lib/i18n";
 import aboutImg from "@/assets/mc-about.jpg";
-import { breadcrumb, ldScript, url } from "@/lib/seo";
+import { breadcrumb, ldScript, socialImage, url, webPage } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -14,9 +14,20 @@ export const Route = createFileRoute("/about")({
       { property: "og:type", content: "website" },
       { name: "twitter:title", content: "Über uns | Munich Construction GmbH" },
       { name: "twitter:description", content: "Ingenieurgeführtes Bauen in München und Bayern." },
+      ...socialImage(aboutImg, "Bauprojekt der Munich Construction GmbH in München"),
     ],
     links: [{ rel: "canonical", href: url("/about") }],
     scripts: [
+      ldScript(
+        webPage({
+          path: "/about",
+          type: "AboutPage",
+          name: "Über uns — Bauunternehmen in München | Munich Construction GmbH",
+          description:
+            "Munich Construction GmbH: ingenieurgeführtes Bauunternehmen in München, geleitet von Dipl.-Ing. Mehdi Mardi.",
+          primaryImage: aboutImg,
+        }),
+      ),
       ldScript(breadcrumb([
         { name: "Start", path: "/" },
         { name: "Über uns", path: "/about" },
