@@ -17,8 +17,12 @@ export const Route = createFileRoute("/projects_/$slug")({
       };
     }
     const copy = projectCopy(p, "de");
-    const title = `${copy.title} | ${SITE_NAME}`;
-    const description = copy.intro.slice(0, 158);
+    const title = copy.metaTitle;
+    const description =
+      copy.metaDescription.length > 158
+        ? `${copy.metaDescription.slice(0, 155).trimEnd()}…`
+        : copy.metaDescription;
+    const hero = p.images[0];
     return {
       meta: [
         { title },
@@ -29,15 +33,26 @@ export const Route = createFileRoute("/projects_/$slug")({
         { property: "og:type", content: "article" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
+        ...socialImage(hero, copy.alt(0)),
       ],
       links: [{ rel: "canonical", href: pageUrl }],
       scripts: [
+        ldScript(
+          webPage({
+            path: `/projects/${params.slug}`,
+            type: "ItemPage",
+            name: title,
+            description,
+            primaryImage: hero,
+          }),
+        ),
         ldScript({
           "@context": "https://schema.org",
           "@type": "CreativeWork",
           name: copy.title,
           description: copy.intro,
           url: pageUrl,
+          image: p.images.map((src) => assetUrl(src)).filter(Boolean),
           creator: { "@id": ORG_ID },
           locationCreated: {
             "@type": "Place",
