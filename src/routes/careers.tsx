@@ -22,21 +22,22 @@ export const Route = createFileRoute("/careers")({
         content:
           "Entdecken Sie offene Stellen bei Munich Construction GmbH in den Bereichen Bau, Handwerk, Planung und Projektmanagement.",
       },
-      { property: "og:title", content: "Careers | Munich Construction GmbH" },
+      { property: "og:title", content: "Karriere | Munich Construction GmbH" },
       {
         property: "og:description",
         content:
-          "Explore career opportunities at Munich Construction GmbH in construction, skilled trades, planning and project management.",
+          "Offene Stellen bei der Munich Construction GmbH in Bau, Handwerk, Planung und Projektmanagement in München.",
       },
       { property: "og:url", content: url("/careers") },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Careers | Munich Construction GmbH" },
+      { name: "twitter:title", content: "Karriere | Munich Construction GmbH" },
       {
         name: "twitter:description",
         content:
-          "Explore career opportunities at Munich Construction GmbH in construction, skilled trades, planning and project management.",
+          "Offene Stellen bei der Munich Construction GmbH in Bau, Handwerk, Planung und Projektmanagement.",
       },
+      ...socialImage(careersImg, "Team der Munich Construction GmbH auf einer Baustelle in München"),
     ],
     links: [{ rel: "canonical", href: url("/careers") }],
     scripts: [
