@@ -17,6 +17,8 @@ interface ProjectPageDef {
   services: string[];
   city: string;
   objectType: L;
+  /** Verified display name overriding the folder metadata name. */
+  displayName?: string;
 }
 
 const DEFS: ProjectPageDef[] = [
@@ -37,6 +39,7 @@ const DEFS: ProjectPageDef[] = [
   {
     slug: "bluetenstrasse-21-muenchen",
     source: "blutenstr-21-munchen",
+    displayName: "Blütenstraße 21",
     services: ["trockenbau", "injektion-und-risssperrung", "fenster-und-tueren"],
     city: "München",
     objectType: { de: "Bestandsgebäude", en: "existing building" },
@@ -51,6 +54,7 @@ const DEFS: ProjectPageDef[] = [
   {
     slug: "heiterwanger-strasse-30-muenchen",
     source: "heiterwanger-str-30-81373-munchen",
+    displayName: "Heiterwanger Straße 30",
     services: ["trockenbau"],
     city: "München",
     objectType: { de: "Bestandsgebäude", en: "existing building" },
@@ -58,6 +62,7 @@ const DEFS: ProjectPageDef[] = [
   {
     slug: "heiterwanger-strasse-32-muenchen",
     source: "heiterwanger-str-32-81373-munchen",
+    displayName: "Heiterwanger Straße 32",
     services: ["trockenbau"],
     city: "München",
     objectType: { de: "Bestandsgebäude", en: "existing building" },
@@ -107,7 +112,7 @@ function build(): ProjectPage[] {
     pages.push({
       slug: def.slug,
       sourceSlug: def.source,
-      name: p.name,
+      name: def.displayName ?? p.name,
       location: p.location,
       city: def.city,
       objectType: def.objectType,
@@ -142,13 +147,21 @@ export function projectCopy(p: ProjectPage, lang: Lang) {
   const shortList =
     services.length > 2 ? `${services[0]} & ${services[1]}` : services.join(" & ");
   const type = p.objectType[lang];
+  // Avoid "Name, Name 21, München" when the display name is the address itself.
+  const label = p.location.startsWith(p.name) ? p.location : `${p.name}, ${p.location}`;
   return {
-    /** Concise <title> — "Objekt: Leistung & Leistung | Munich Construction". */
-    metaTitle: `${p.name}: ${shortList} ${lang === "de" ? "in" : "in"} ${p.city} | Munich Construction`,
+    /** Concise <title> — "Objekt – Leistung Stadt | Munich Construction". */
+    metaTitle: (() => {
+      const full = `${p.name} – ${shortList} ${p.city} | Munich Construction`;
+      // Keep titles readable: drop to the leading trade when the pair is long.
+      return full.length > 70
+        ? `${p.name} – ${services[0]} ${p.city} | Munich Construction`
+        : full;
+    })(),
     metaDescription:
       lang === "de"
-        ? `Referenzprojekt ${p.name}, ${p.location}: ${list} durch die Munich Construction GmbH. Baudokumentation mit ${p.images.length} Aufnahmen.`
-        : `Reference project ${p.name}, ${p.location}: ${list} delivered by Munich Construction GmbH. Construction documentation with ${p.images.length} photographs.`,
+        ? `Referenzprojekt ${label}: ${list} durch die Munich Construction GmbH. Baudokumentation mit ${p.images.length} Aufnahmen.`
+        : `Reference project ${label}: ${list} delivered by Munich Construction GmbH. Construction documentation with ${p.images.length} photographs.`,
     title:
       lang === "de"
         ? `${p.name} – ${list} in ${p.city}`

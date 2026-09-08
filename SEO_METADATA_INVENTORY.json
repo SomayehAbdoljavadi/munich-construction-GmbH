@@ -1,6 +1,6 @@
 {
   "domain": "https://munichconstruction.de",
-  "verified_utc": "Tue Sep  8 19:34:25 UTC 2026",
+  "verified_utc": "2026-09-08T21:02:51.234022Z",
   "routes": [
     {
       "path": "/",
@@ -29,9 +29,9 @@
     {
       "path": "/services",
       "live_http": 200,
-      "live_status": "confirmed live",
+      "live_status": "implemented in preview — awaiting publication",
       "keywords": "bauleistungen münchen, bauunternehmen leistungen münchen",
-      "h1": "Transparente und faire Preise.",
+      "h1": "Bauleistungen in München und Bayern",
       "jsonld_top_level_types": [
         "GeneralContractor/LocalBusiness/Organization",
         "WebSite",
@@ -47,10 +47,12 @@
       "og:description": "Neubau und Sanierung München, Renovierung, Brandschutz, Trockenbau, Fenster und Türen sowie Genehmigungs- und Werkplanung aus einer Hand.",
       "og:url": "https://munichconstruction.de/services",
       "og:type": "website",
-      "og:image": "https://munichconstruction.de/assets/service-brandschutz-CPkRLG13.jpg",
+      "og:image": "https://munichconstruction.de/src/assets/service-brandschutz.jpg",
       "og:image:alt": "Bauleistungen der Munich Construction GmbH in München",
       "twitter:card": "summary_large_image",
-      "twitter:image": "https://munichconstruction.de/assets/service-brandschutz-CPkRLG13.jpg"
+      "twitter:image": "https://munichconstruction.de/src/assets/service-brandschutz.jpg",
+      "twitter:title": "Bauleistungen München | Munich Construction GmbH",
+      "twitter:description": "Bauleistungen in München und Bayern aus einer Hand."
     },
     {
       "path": "/beratung",
@@ -548,9 +550,9 @@
     {
       "path": "/projects/bluetenstrasse-21-muenchen",
       "live_http": 200,
-      "live_status": "confirmed live",
+      "live_status": "implemented in preview — awaiting publication",
       "keywords": "",
-      "h1": "Blütenstr. – Trockenbau und Injektion und Risssperrung und Fenster und Türen in München",
+      "h1": "Blütenstraße 21 – Trockenbau und Injektion und Risssperrung und Fenster und Türen in München",
       "jsonld_top_level_types": [
         "GeneralContractor/LocalBusiness/Organization",
         "WebSite",
@@ -558,18 +560,20 @@
         "CreativeWork",
         "BreadcrumbList"
       ],
-      "title": "Blütenstr.: Trockenbau & Injektion und Risssperrung in München | Munich Construction",
-      "description": "Referenzprojekt Blütenstr., Blütenstr. 21, München: Trockenbau und Injektion und Risssperrung und Fenster und Türen durch die Munich Construction GmbH. Bau…",
+      "title": "Blütenstraße 21 – Trockenbau München | Munich Construction",
+      "description": "Referenzprojekt Blütenstraße 21, München: Trockenbau und Injektion und Risssperrung und Fenster und Türen durch die Munich Construction GmbH. Baudokumentat…",
       "canonical": "https://munichconstruction.de/projects/bluetenstrasse-21-muenchen",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1",
-      "og:title": "Blütenstr.: Trockenbau & Injektion und Risssperrung in München | Munich Construction",
-      "og:description": "Referenzprojekt Blütenstr., Blütenstr. 21, München: Trockenbau und Injektion und Risssperrung und Fenster und Türen durch die Munich Construction GmbH. Bau…",
+      "og:title": "Blütenstraße 21 – Trockenbau München | Munich Construction",
+      "og:description": "Referenzprojekt Blütenstraße 21, München: Trockenbau und Injektion und Risssperrung und Fenster und Türen durch die Munich Construction GmbH. Baudokumentat…",
       "og:url": "https://munichconstruction.de/projects/bluetenstrasse-21-muenchen",
       "og:type": "article",
-      "og:image": "https://munichconstruction.de/assets/00-6Tvfh3na.jpeg",
-      "og:image:alt": "Trockenbau und Injektion und Risssperrung und Fenster und Türen – Blütenstr., Blütenstr. 21, München – Baudokumentation Bild 1",
+      "og:image": "https://munichconstruction.de/src/assets/projects/blutenstr-21-munchen/00.jpeg",
+      "og:image:alt": "Trockenbau und Injektion und Risssperrung und Fenster und Türen – Blütenstraße 21, Blütenstraße 21, München – Baudokumentation Bild 1",
       "twitter:card": "summary_large_image",
-      "twitter:image": "https://munichconstruction.de/assets/00-6Tvfh3na.jpeg"
+      "twitter:image": "https://munichconstruction.de/src/assets/projects/blutenstr-21-munchen/00.jpeg",
+      "twitter:title": "Blütenstraße 21 – Trockenbau München | Munich Construction",
+      "twitter:description": "Referenzprojekt Blütenstraße 21, München: Trockenbau und Injektion und Risssperrung und Fenster und Türen durch die Munich Construction GmbH. Baudokumentat…"
     },
     {
       "path": "/projects/boschtsrieder-strasse-muenchen",
@@ -600,9 +604,9 @@
     {
       "path": "/projects/heiterwanger-strasse-30-muenchen",
       "live_http": 200,
-      "live_status": "confirmed live",
+      "live_status": "implemented in preview — awaiting publication",
       "keywords": "",
-      "h1": "Heiterwanger Str. – Trockenbau in München",
+      "h1": "Heiterwanger Straße 30 – Trockenbau in München",
       "jsonld_top_level_types": [
         "GeneralContractor/LocalBusiness/Organization",
         "WebSite",
@@ -610,25 +614,27 @@
         "CreativeWork",
         "BreadcrumbList"
       ],
-      "title": "Heiterwanger Str.: Trockenbau in München | Munich Construction",
-      "description": "Referenzprojekt Heiterwanger Str., Heiterwanger Str. 30, 81373 München: Trockenbau durch die Munich Construction GmbH. Baudokumentation mit 18 Aufnahmen.",
+      "title": "Heiterwanger Straße 30 – Trockenbau München | Munich Construction",
+      "description": "Referenzprojekt Heiterwanger Straße 30, 81373 München: Trockenbau durch die Munich Construction GmbH. Baudokumentation mit 18 Aufnahmen.",
       "canonical": "https://munichconstruction.de/projects/heiterwanger-strasse-30-muenchen",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1",
-      "og:title": "Heiterwanger Str.: Trockenbau in München | Munich Construction",
-      "og:description": "Referenzprojekt Heiterwanger Str., Heiterwanger Str. 30, 81373 München: Trockenbau durch die Munich Construction GmbH. Baudokumentation mit 18 Aufnahmen.",
+      "og:title": "Heiterwanger Straße 30 – Trockenbau München | Munich Construction",
+      "og:description": "Referenzprojekt Heiterwanger Straße 30, 81373 München: Trockenbau durch die Munich Construction GmbH. Baudokumentation mit 18 Aufnahmen.",
       "og:url": "https://munichconstruction.de/projects/heiterwanger-strasse-30-muenchen",
       "og:type": "article",
-      "og:image": "https://munichconstruction.de/assets/00-CJGJwofU.jpeg",
-      "og:image:alt": "Trockenbau – Heiterwanger Str., Heiterwanger Str. 30, 81373 München – Baudokumentation Bild 1",
+      "og:image": "https://munichconstruction.de/src/assets/projects/heiterwanger-str-30-81373-munchen/00.jpeg",
+      "og:image:alt": "Trockenbau – Heiterwanger Straße 30, Heiterwanger Straße 30, 81373 München – Baudokumentation Bild 1",
       "twitter:card": "summary_large_image",
-      "twitter:image": "https://munichconstruction.de/assets/00-CJGJwofU.jpeg"
+      "twitter:image": "https://munichconstruction.de/src/assets/projects/heiterwanger-str-30-81373-munchen/00.jpeg",
+      "twitter:title": "Heiterwanger Straße 30 – Trockenbau München | Munich Construction",
+      "twitter:description": "Referenzprojekt Heiterwanger Straße 30, 81373 München: Trockenbau durch die Munich Construction GmbH. Baudokumentation mit 18 Aufnahmen."
     },
     {
       "path": "/projects/heiterwanger-strasse-32-muenchen",
       "live_http": 200,
-      "live_status": "confirmed live",
+      "live_status": "implemented in preview — awaiting publication",
       "keywords": "",
-      "h1": "Heiterwanger Str. – Trockenbau in München",
+      "h1": "Heiterwanger Straße 32 – Trockenbau in München",
       "jsonld_top_level_types": [
         "GeneralContractor/LocalBusiness/Organization",
         "WebSite",
@@ -636,18 +642,20 @@
         "CreativeWork",
         "BreadcrumbList"
       ],
-      "title": "Heiterwanger Str.: Trockenbau in München | Munich Construction",
-      "description": "Referenzprojekt Heiterwanger Str., Heiterwanger Str. 32, 81373 München: Trockenbau durch die Munich Construction GmbH. Baudokumentation mit 24 Aufnahmen.",
+      "title": "Heiterwanger Straße 32 – Trockenbau München | Munich Construction",
+      "description": "Referenzprojekt Heiterwanger Straße 32, 81373 München: Trockenbau durch die Munich Construction GmbH. Baudokumentation mit 24 Aufnahmen.",
       "canonical": "https://munichconstruction.de/projects/heiterwanger-strasse-32-muenchen",
       "robots": "index, follow, max-image-preview:large, max-snippet:-1",
-      "og:title": "Heiterwanger Str.: Trockenbau in München | Munich Construction",
-      "og:description": "Referenzprojekt Heiterwanger Str., Heiterwanger Str. 32, 81373 München: Trockenbau durch die Munich Construction GmbH. Baudokumentation mit 24 Aufnahmen.",
+      "og:title": "Heiterwanger Straße 32 – Trockenbau München | Munich Construction",
+      "og:description": "Referenzprojekt Heiterwanger Straße 32, 81373 München: Trockenbau durch die Munich Construction GmbH. Baudokumentation mit 24 Aufnahmen.",
       "og:url": "https://munichconstruction.de/projects/heiterwanger-strasse-32-muenchen",
       "og:type": "article",
-      "og:image": "https://munichconstruction.de/assets/00-DOJUDb0A.jpeg",
-      "og:image:alt": "Trockenbau – Heiterwanger Str., Heiterwanger Str. 32, 81373 München – Baudokumentation Bild 1",
+      "og:image": "https://munichconstruction.de/src/assets/projects/heiterwanger-str-32-81373-munchen/00.jpeg",
+      "og:image:alt": "Trockenbau – Heiterwanger Straße 32, Heiterwanger Straße 32, 81373 München – Baudokumentation Bild 1",
       "twitter:card": "summary_large_image",
-      "twitter:image": "https://munichconstruction.de/assets/00-DOJUDb0A.jpeg"
+      "twitter:image": "https://munichconstruction.de/src/assets/projects/heiterwanger-str-32-81373-munchen/00.jpeg",
+      "twitter:title": "Heiterwanger Straße 32 – Trockenbau München | Munich Construction",
+      "twitter:description": "Referenzprojekt Heiterwanger Straße 32, 81373 München: Trockenbau durch die Munich Construction GmbH. Baudokumentation mit 24 Aufnahmen."
     },
     {
       "path": "/projects/hotel-bayerischer-hof-bayreuth",
@@ -727,5 +735,6 @@
       "twitter:card": "summary_large_image",
       "twitter:image": "https://munichconstruction.de/assets/00-BMV5pQXW.jpeg"
     }
-  ]
+  ],
+  "note": "Routes marked \"implemented in preview — awaiting publication\" carry the corrected values; all other routes were verified live on munichconstruction.de."
 }
