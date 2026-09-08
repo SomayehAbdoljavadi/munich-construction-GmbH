@@ -6,7 +6,8 @@ import { useT } from "@/lib/i18n";
 import { LocationMap } from "@/components/LocationMap";
 import { COMPANY_MAPS_URL, OFFICE_MAPS_URL } from "@/lib/mapLinks";
 
-import { breadcrumb, ldScript, ORG_ID, url } from "@/lib/seo";
+import { breadcrumb, ldScript, socialImage, url, webPage, ORG_ID } from "@/lib/seo";
+import contactImg from "@/assets/mc-about.jpg";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -19,9 +20,20 @@ export const Route = createFileRoute("/contact")({
       { property: "og:type", content: "website" },
       { name: "twitter:title", content: "Kontakt | Munich Construction GmbH" },
       { name: "twitter:description", content: "Sprechen Sie mit unserem Team in München." },
+      ...socialImage(contactImg, "Büro der Munich Construction GmbH in München"),
     ],
     links: [{ rel: "canonical", href: url("/contact") }],
     scripts: [
+      ldScript(
+        webPage({
+          path: "/contact",
+          type: "ContactPage",
+          name: "Kontakt — Bauunternehmen in München | Munich Construction GmbH",
+          description:
+            "Kontakt zur Munich Construction GmbH: Telefon, E-Mail, WhatsApp und Büro in München.",
+          primaryImage: contactImg,
+        }),
+      ),
       ldScript({
         "@context": "https://schema.org",
         "@type": "ContactPage",
