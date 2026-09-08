@@ -8,7 +8,7 @@ import {
   GENERAL_POSITION,
   ALL_POSITIONS,
 } from "@/lib/careers-data";
-import { breadcrumb, ldScript, socialImage, url, webPage, ORG_ID } from "@/lib/seo";
+import { breadcrumb, ldScript, socialImage, url, ORG_ID } from "@/lib/seo";
 import careersImg from "@/assets/mc-about.jpg";
 import { PositionSelect, type SelectOption } from "@/components/PositionSelect";
 import { isValidEmail, isValidPhone, normalizeEmail, normalizePhone } from "@/lib/validation";
