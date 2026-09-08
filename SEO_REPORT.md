@@ -31,7 +31,7 @@ Companion files (not served publicly):
 
 ## 3. Tags implemented on every content route
 
-- `<title>` (unique, German-first, ≤ 60–65 chars where possible)
+- `<title>` (German-first, ≤ 60–70 chars where possible). Correction to the earlier report: titles were **not** all unique — `/projects/heiterwanger-strasse-30-muenchen` and `/projects/heiterwanger-strasse-32-muenchen` shared one title on the live site. After this round all 28 titles are unique (verified in preview).
 - `meta description` (unique, German, local intent)
 - `link rel="canonical"` — absolute, non-www, self-referencing, leaf routes only
 - `og:title`, `og:description`, `og:url`, `og:type`
@@ -71,11 +71,29 @@ All 28 URLs were fetched from `https://munichconstruction.de`:
 
 Everything described in this report is confirmed live. Nothing is awaiting publication.
 
-## 8. Remaining items
+## 8. Corrections made in this round (preview only, not yet published)
 
-- `/services` H1 is "Transparente und faire Preise." — accurate to the page, but a Munich-intent H1 would rank better.
-- `/projects/heiterwanger-strasse-30-muenchen` and `.../32-muenchen` share the title "Heiterwanger Str.: Trockenbau in München"; the descriptions differ, but the titles should be distinguished by house number.
-- Project titles truncate long names ("Hotel Bayerischer", "Blütenstr.").
+| Page | Field | Before (live) | After (preview) |
+|---|---|---|---|
+| `/services` | H1 | Transparente und faire Preise. | Bauleistungen in München und Bayern |
+| `/services` | supporting text | — | "Transparente und faire Preise." retained as visible sub-headline |
+| `/projects/heiterwanger-strasse-30-muenchen` | title | Heiterwanger Str.: Trockenbau in München \| Munich Construction | Heiterwanger Straße 30 – Trockenbau München \| Munich Construction |
+| `/projects/heiterwanger-strasse-32-muenchen` | title | Heiterwanger Str.: Trockenbau in München \| Munich Construction | Heiterwanger Straße 32 – Trockenbau München \| Munich Construction |
+| Both Heiterwanger pages | H1 / description / og / twitter / JSON-LD `name`, `locationCreated`, breadcrumb | "Heiterwanger Str." | "Heiterwanger Straße 30" / "… 32" |
+| `/projects/bluetenstrasse-21-muenchen` | name everywhere | Blütenstr. | Blütenstraße 21 |
+
+The `/services` H1 change improves topical clarity about what the page covers; it is not a ranking promise.
+
+URLs and self-referencing canonicals were not changed on any page.
+
+**Hotel Bayerischer:** the only authoritative data available in the project files is the folder metadata (`name: "Hotel Bayerischer"`, `Bahnhofstraße 14, 95444 Bayreuth`). The full hotel name is not documented there, so it was left unchanged rather than inferred from the URL. Provide the verified name and it will be applied to the H1, title and page content.
+
+Post-correction checks (preview): all 28 titles unique, `/termin` still `noindex, nofollow`, `sitemap.xml` still 27 URLs and still excludes `/termin`.
+
+## 9. Remaining items
+
+- The corrections in section 8 are live in preview only and reach munichconstruction.de on the next publish.
+- "Hotel Bayerischer" remains an incomplete name pending verified source data.
 - No dedicated 1200×630 branded share image exists; legal pages carry none rather than a placeholder.
 - No hreflang, by design — German and English share the same URLs.
 
