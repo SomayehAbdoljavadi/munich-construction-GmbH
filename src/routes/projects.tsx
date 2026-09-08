@@ -3,30 +3,43 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { useT } from "@/lib/i18n";
 import { PROJECTS, type Project } from "@/lib/projects-data";
-import { BASE_URL, breadcrumb, ldScript, url } from "@/lib/seo";
+import { BASE_URL, breadcrumb, ldScript, socialImage, url, webPage } from "@/lib/seo";
 import { getProjectPageBySource } from "@/lib/project-pages";
+
+const OVERVIEW_IMAGE = PROJECTS[0]?.images[0];
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Referenzprojekte in München und Bayern | Munich Construction GmbH" },
+      { title: "Bauprojekte München und Bayern | Munich Construction" },
       {
         name: "description",
         content:
-          "Referenzprojekte der Munich Construction GmbH: Brandschutz, Trockenbau, Injektion sowie Fenster und Türen in München, Augsburg und Bayreuth.",
+          "Referenzprojekte der Munich Construction GmbH: Bauausführung mit Brandschutz, Trockenbau, Injektion sowie Fenster und Türen in München, Augsburg und Bayreuth.",
       },
-      { property: "og:title", content: "Referenzprojekte | Munich Construction GmbH" },
+      { property: "og:title", content: "Bauprojekte München und Bayern | Munich Construction" },
       {
         property: "og:description",
-        content: "Ausgeführte Bauprojekte in München und Bayern — Brandschutz, Trockenbau, Injektion, Fenster und Türen.",
+        content: "Referenzprojekte der Bauausführung in München und Bayern — Brandschutz, Trockenbau, Injektion, Fenster und Türen.",
       },
       { property: "og:url", content: url("/projects") },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "Referenzprojekte | Munich Construction GmbH" },
+      { name: "twitter:title", content: "Bauprojekte München und Bayern | Munich Construction" },
       { name: "twitter:description", content: "Ausgeführte Bauprojekte in München und Bayern." },
+      ...socialImage(OVERVIEW_IMAGE, "Baudokumentation eines Referenzprojekts der Munich Construction GmbH"),
     ],
     links: [{ rel: "canonical", href: url("/projects") }],
     scripts: [
+      ldScript(
+        webPage({
+          path: "/projects",
+          type: "CollectionPage",
+          name: "Bauprojekte München und Bayern | Munich Construction",
+          description:
+            "Referenzprojekte der Munich Construction GmbH in München, Augsburg und Bayreuth.",
+          primaryImage: OVERVIEW_IMAGE,
+        }),
+      ),
       ldScript({
         "@context": "https://schema.org",
         "@type": "ItemList",
