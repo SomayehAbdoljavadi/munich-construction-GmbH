@@ -2,14 +2,15 @@
 
 Domain: **https://munichconstruction.de** (non-www canonical)
 Scope: every public route — 9 services, consultation, 9 projects, company and legal pages.
-Status of this report: implemented and verified in **preview**. Live head tags update on the next publish.
+Status of this report: **verified live on production, 9 September 2026.** Preview and production are identical.
 
 Companion files (not served publicly):
 
-- `SEO_METADATA_INVENTORY.json` — exact rendered tags for all 28 routes
-- `SEO_IMAGE_ALT_INVENTORY.csv` — image alt-text sources
+- `SEO_METADATA_INVENTORY.json` — exact rendered tags for all 28 production routes
+- `SEO_INVENTORY_FULL.md` — readable page-by-page inventory
+- `SEO_IMAGE_ALT_INVENTORY.csv` — image alt text as rendered on production
 
-## 1. Route inventory (28 indexable-checked URLs)
+## 1. Route inventory (28 URLs, all HTTP 200)
 
 | Group | Count | URLs |
 |---|---|---|
@@ -20,80 +21,56 @@ Companion files (not served publicly):
 | Legal | 2 | `/imprint`, `/datenschutz` |
 | Utility | 1 | `/termin` (noindex, nofollow — token-bearing) |
 
-`sitemap.xml` lists 27 URLs (all of the above except `/termin`), all non-www. `robots.txt` allows all crawlers, explicitly welcomes AI crawlers and references the non-www sitemap.
+`sitemap.xml` returns 200 with 27 `<loc>` entries, all non-www, `/termin` excluded. `robots.txt` allows all crawlers, welcomes AI crawlers and points at the non-www sitemap.
 
-## 2. Search intent mapping
+## 2. Verification of the published corrections (production, 9 Sep 2026)
 
-- **Service intent** — each service page targets "<Leistung> in München" in the title and H1, with local wording in the description (e.g. "Brandschutz in München", "Trockenbau in München").
-- **Consultation intent** — `/beratung` targets "Bauberatung München" and states the German/Persian consultation languages in title, description and `Service` schema (`availableLanguage: ["de","fa"]`, also on the organisation contact point).
-- **Project/proof intent** — each project page targets "<Objekt>: <Leistungen> in <Stadt>", using only verified facts (address, city, actual trades performed).
-- **Support stages** — `/about` (trust), `/contact` (enquiry), `/careers` (recruiting), legal pages (compliance).
+| Check | Result |
+|---|---|
+| `/services` H1 | **Bauleistungen in München und Bayern** — live. "Transparente und faire Preise." retained as visible supporting text. |
+| `/projects/heiterwanger-strasse-30-muenchen` title | `Heiterwanger Straße 30 – Trockenbau München \| Munich Construction` — live |
+| `/projects/heiterwanger-strasse-32-muenchen` title | `Heiterwanger Straße 32 – Trockenbau München \| Munich Construction` — live |
+| Heiterwanger H1 / description / og / twitter / JSON-LD | House number 30 / 32 present in every field on the respective page — live |
+| Blütenstraße 21 | Full name live in title, H1, description, Open Graph, Twitter and structured data |
+| Title uniqueness | 28 / 28 titles unique on production |
+| `/termin` | `noindex, nofollow` live; absent from the 27-URL sitemap |
+| Hotel Bayerischer | unchanged, as instructed |
+| Preview vs production | zero differences in title, description or robots across all 28 routes |
+
+The `/services` H1 change improves topical clarity about what the page covers; it is not a ranking promise.
 
 ## 3. Tags implemented on every content route
 
-- `<title>` (German-first, ≤ 60–70 chars where possible). Correction to the earlier report: titles were **not** all unique — `/projects/heiterwanger-strasse-30-muenchen` and `/projects/heiterwanger-strasse-32-muenchen` shared one title on the live site. After this round all 28 titles are unique (verified in preview).
+- `<title>` (German-first, unique across all 28 routes)
 - `meta description` (unique, German, local intent)
 - `link rel="canonical"` — absolute, non-www, self-referencing, leaf routes only
 - `og:title`, `og:description`, `og:url`, `og:type`
 - `twitter:card`, `twitter:title`, `twitter:description`
-- `og:image` + `twitter:image` (absolute) on all content routes: home, services overview and all 9 service pages, consultation, projects overview and all 9 project pages, about, contact, careers. Legal pages and `/termin` intentionally carry none rather than a low-quality placeholder.
+- `og:image` + `twitter:image` (absolute production URLs) on all 26 content routes. Legal pages and `/termin` intentionally carry none rather than a low-quality placeholder.
 - `robots`: `index, follow, max-image-preview:large, max-snippet:-1` sitewide; `noindex, nofollow` on `/termin`; `noindex, follow` on unknown service/project slugs.
 
 ## 4. Structured data
 
-- Sitewide: `GeneralContractor / LocalBusiness / Organization` (both addresses — Büro Blütenstraße 21 and Unternehmensanschrift Heiterwanger Straße 30), `WebSite`.
-- Per page: `WebPage` / `CollectionPage` / `ItemPage` / `AboutPage` / `ContactPage`, each tied to the site and organisation IDs.
-- Services: `Service` entities with provider, area served and the service list; consultation `Service` carries `availableLanguage: ["de","fa"]`.
-- Projects: `CreativeWork` with `locationCreated`, verified address and the trades performed.
+- Sitewide: `GeneralContractor / LocalBusiness / Organization` (Büro Blütenstraße 21 and Unternehmensanschrift Heiterwanger Straße 30), `WebSite`.
+- Per page: `WebPage` / `CollectionPage` / `ItemPage` / `AboutPage` / `ContactPage`, tied to the site and organisation IDs.
+- Services: `Service` entities with provider, area served and service list; consultation `Service` carries `availableLanguage: ["de","fa"]`.
+- Projects: `CreativeWork` with `locationCreated`, verified address and trades performed.
 - `BreadcrumbList` on every non-home route.
-- Existing FAQ content retained as-is.
 
-## 5. Language handling
+## 5. Search intent mapping
 
-The site switches German/English client-side on the same URL, so no separate language URLs exist. Therefore **no hreflang tags were invented** — that would be inaccurate. German is served as the crawlable default (`<html lang="de">`) and all indexed metadata is German-first.
+- **Service intent** — each service page targets "<Leistung> in München" in title and H1.
+- **Consultation intent** — `/beratung` targets "Bauberatung München" and declares German and Persian consultation languages in the `Service` schema and the organisation contact point.
+- **Project/proof intent** — each project page targets "<Objekt> – <Leistung> <Stadt>", using only verified facts.
+- **Support stages** — `/about` (trust), `/contact` (enquiry), `/careers` (recruiting), legal pages (compliance).
 
-## 6. Images and internal linking
+## 6. Language handling
 
-- All meaningful images carry descriptive alt text; the service slideshow now includes the service name plus project name and location. The decorative intro animation stays `alt=""`.
-- Cross-linking: services → related projects, projects → the services used, and both → `/beratung` with the descriptive anchor "Bauberatung München – kostenloses Erstgespräch buchen". Header dropdown lists all 9 service pages; the services overview links every service page.
+German and English share the same URLs (client-side switch), so **no hreflang tags were invented** — that would be inaccurate. German is the crawlable default (`<html lang="de">`).
 
-## 7. Verification performed (production, 8 Sep 2026)
+## 7. Remaining items
 
-All 28 URLs were fetched from `https://munichconstruction.de`:
-
-- 28/28 return HTTP 200.
-- 28/28 titles, descriptions and self-referencing non-www canonicals live and identical to the intended values.
-- `/termin` returns `noindex, nofollow` live and is absent from the sitemap.
-- `sitemap.xml` returns 200 with 27 `<loc>` entries, all `https://munichconstruction.de/...`.
-- `robots.txt` returns 200, allows all crawlers and points to the non-www sitemap.
-- og:image/twitter:image resolve to absolute hashed production asset URLs on all 26 content pages.
-- No `Theresienstraße` or `80333` references remain.
-
-Sections 1–7 describe the state confirmed live on production. The corrections in section 8 are implemented in preview only and are not yet on the live site.
-
-## 8. Corrections made in this round (preview only, not yet published)
-
-| Page | Field | Before (live) | After (preview) |
-|---|---|---|---|
-| `/services` | H1 | Transparente und faire Preise. | Bauleistungen in München und Bayern |
-| `/services` | supporting text | — | "Transparente und faire Preise." retained as visible sub-headline |
-| `/projects/heiterwanger-strasse-30-muenchen` | title | Heiterwanger Str.: Trockenbau in München \| Munich Construction | Heiterwanger Straße 30 – Trockenbau München \| Munich Construction |
-| `/projects/heiterwanger-strasse-32-muenchen` | title | Heiterwanger Str.: Trockenbau in München \| Munich Construction | Heiterwanger Straße 32 – Trockenbau München \| Munich Construction |
-| Both Heiterwanger pages | H1 / description / og / twitter / JSON-LD `name`, `locationCreated`, breadcrumb | "Heiterwanger Str." | "Heiterwanger Straße 30" / "… 32" |
-| `/projects/bluetenstrasse-21-muenchen` | name everywhere | Blütenstr. | Blütenstraße 21 |
-
-The `/services` H1 change improves topical clarity about what the page covers; it is not a ranking promise.
-
-URLs and self-referencing canonicals were not changed on any page.
-
-**Hotel Bayerischer:** the only authoritative data available in the project files is the folder metadata (`name: "Hotel Bayerischer"`, `Bahnhofstraße 14, 95444 Bayreuth`). The full hotel name is not documented there, so it was left unchanged rather than inferred from the URL. Provide the verified name and it will be applied to the H1, title and page content.
-
-Post-correction checks (preview): all 28 titles unique, `/termin` still `noindex, nofollow`, `sitemap.xml` still 27 URLs and still excludes `/termin`.
-
-## 9. Remaining items
-
-- The corrections in section 8 are live in preview only and reach munichconstruction.de on the next publish.
-- "Hotel Bayerischer" remains an incomplete name pending verified source data.
-- No dedicated 1200×630 branded share image exists; legal pages carry none rather than a placeholder.
-- No hreflang, by design — German and English share the same URLs.
-
+- **Hotel Bayerischer** — kept as-is. The only authoritative source in the project data is the folder metadata (`Hotel Bayerischer`, `Bahnhofstraße 14, 95444 Bayreuth`). Provide the verified full name and it will be applied to title, H1 and content.
+- **Blütenstraße 21 H1** reads "Trockenbau und Injektion und Risssperrung und Fenster und Türen" — grammatically clumsy because two service names themselves contain "und". A comma-separated join would read better; not changed here as it was outside the approved fix list.
+- No dedicated 1200×630 branded share image exists; the brand logo is used as the fallback and legal pages carry none.
+- No hreflang, by design.
