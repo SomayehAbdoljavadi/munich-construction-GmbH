@@ -15,25 +15,37 @@ import { LocationMap } from "@/components/LocationMap";
 import { COMPANY_MAPS_URL, OFFICE_MAPS_URL } from "@/lib/mapLinks";
 import { HOME_SERVICES_I18N, localizeService } from "@/lib/services-data";
 import heroBg from "@/assets/mc-hero-bg.jpg";
-import { url } from "@/lib/seo";
+import { ldScript, socialImage, url, webPage } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Bauunternehmen in München | Munich Construction GmbH" },
+      { title: "Bauunternehmen München | Munich Construction GmbH" },
       {
         name: "description",
         content:
-          "Bauunternehmen in München: Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau, Fenster und Türen sowie Genehmigungs- und Werkplanung in München und Bayern.",
+          "Bauunternehmen in München: Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau sowie Fenster und Türen. Bauleistungen München aus einer Hand — jetzt beraten lassen.",
       },
-      { property: "og:title", content: "Bauunternehmen in München | Munich Construction GmbH" },
-      { property: "og:description", content: "Neubau, Sanierung, Brandschutz und Planung in München und Bayern — aus einer Hand." },
+      { property: "og:title", content: "Bauunternehmen München | Munich Construction GmbH" },
+      { property: "og:description", content: "Baufirma in München: Neubau, Sanierung, Brandschutz, Trockenbau und Planung in München und Bayern." },
       { property: "og:url", content: url("/") },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "Bauunternehmen in München | Munich Construction GmbH" },
+      { name: "twitter:title", content: "Bauunternehmen München | Munich Construction GmbH" },
       { name: "twitter:description", content: "Bauen, Sanieren und Planen in München und Bayern." },
+      ...socialImage(heroBg, "Bauprojekt der Munich Construction GmbH in München"),
     ],
     links: [{ rel: "canonical", href: url("/") }],
+    scripts: [
+      ldScript(
+        webPage({
+          path: "/",
+          name: "Bauunternehmen München | Munich Construction GmbH",
+          description:
+            "Bauunternehmen in München: Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau sowie Fenster und Türen in München und Bayern.",
+          primaryImage: heroBg,
+        }),
+      ),
+    ],
   }),
   component: HomePage,
 });
