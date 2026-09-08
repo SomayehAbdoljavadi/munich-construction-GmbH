@@ -6,9 +6,11 @@ import { useT } from "@/lib/i18n";
 interface Props {
   slides: GallerySlide[];
   autoPlayMs?: number;
+  /** Service name used to describe the photographs (image alt text). */
+  serviceName?: string;
 }
 
-export function ServiceGallery({ slides, autoPlayMs = 6000 }: Props) {
+export function ServiceGallery({ slides, autoPlayMs = 6000, serviceName }: Props) {
   const { t } = useT();
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
