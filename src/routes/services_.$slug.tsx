@@ -11,7 +11,7 @@ import { getProjectSlidesForService } from "@/lib/service-projects";
 import { ServiceGallery } from "@/components/ServiceGallery";
 import { LANGUAGES } from "@/lib/consultation-data";
 import { useT } from "@/lib/i18n";
-import { breadcrumb, ldScript, url, ORG_ID, SITE_NAME } from "@/lib/seo";
+import { breadcrumb, ldScript, socialImage, url, webPage, ORG_ID, SITE_NAME } from "@/lib/seo";
 import { getFaqs, getFaqsBilingual } from "@/lib/faqs";
 
 export const Route = createFileRoute("/services_/$slug")({
