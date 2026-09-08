@@ -70,16 +70,35 @@ export const Route = createFileRoute("/services_/$slug")({
         ])),
       );
     }
+    if (s) {
+      scripts.push(
+        ldScript(
+          webPage({
+            path: `/services/${params.slug}`,
+            name: title,
+            description,
+            primaryImage: s.gallery[0]?.image,
+          }),
+        ),
+      );
+    }
+    const shortDescription =
+      description.length > 158 ? `${description.slice(0, 155).trimEnd()}…` : description;
     return {
       meta: [
         { title },
-        { name: "description", content: description },
+        { name: "description", content: shortDescription },
         { property: "og:title", content: title },
-        { property: "og:description", content: description },
+        { property: "og:description", content: shortDescription },
         { property: "og:url", content: pageUrl },
         { property: "og:type", content: "article" },
         { name: "twitter:title", content: title },
-        { name: "twitter:description", content: description },
+        { name: "twitter:description", content: shortDescription },
+        ...socialImage(
+          s?.gallery[0]?.image,
+          s ? `${s.title.de} in München — Munich Construction GmbH` : "Munich Construction GmbH",
+        ),
+        ...(s ? [] : [{ name: "robots", content: "noindex, follow" }]),
       ],
       links: [{ rel: "canonical", href: pageUrl }],
       scripts,
