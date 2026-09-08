@@ -417,6 +417,13 @@ function ServiceDetailPage() {
               className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
             />
           </Link>
+          <p className="mt-6 text-sm text-white/60">
+            <Link to="/beratung" className="text-gold underline underline-offset-4">
+              {lang === "de"
+                ? "Bauberatung München – kostenloses Erstgespräch buchen"
+                : "Construction consultation in Munich – book a free first call"}
+            </Link>
+          </p>
         </div>
       </section>
     </>
