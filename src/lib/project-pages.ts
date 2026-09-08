@@ -142,7 +142,14 @@ export function getProjectPagesForService(serviceSlug: string): ProjectPage[] {
 /** Localised, strictly fact-based copy for a project page. */
 export function projectCopy(p: ProjectPage, lang: Lang) {
   const services = p.services.map((s) => s.title[lang]);
-  const list = services.join(lang === "de" ? " und " : " and ");
+  // German: avoid "und" chains when service names already contain "und".
+  const list =
+    lang === "de"
+      ? services.length <= 2
+        ? services.join(" und ")
+        : `${services.slice(0, -1).join(", ")} sowie ${services.at(-1)}`
+      : services.join(" and ");
+
   // Readable meta title: services joined with "&", never a long "und" chain.
   const shortList =
     services.length > 2 ? `${services[0]} & ${services[1]}` : services.join(" & ");
