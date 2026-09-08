@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import { getProjectPage, projectCopy, PROJECT_PAGES } from "@/lib/project-pages";
 import { useT } from "@/lib/i18n";
-import { breadcrumb, ldScript, url, ORG_ID, SITE_NAME } from "@/lib/seo";
+import { breadcrumb, ldScript, socialImage, url, webPage, ORG_ID, assetUrl } from "@/lib/seo";
 
 export const Route = createFileRoute("/projects_/$slug")({
   head: ({ params }) => {

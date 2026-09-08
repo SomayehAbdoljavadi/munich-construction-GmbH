@@ -138,8 +138,17 @@ export function getProjectPagesForService(serviceSlug: string): ProjectPage[] {
 export function projectCopy(p: ProjectPage, lang: Lang) {
   const services = p.services.map((s) => s.title[lang]);
   const list = services.join(lang === "de" ? " und " : " and ");
+  // Readable meta title: services joined with "&", never a long "und" chain.
+  const shortList =
+    services.length > 2 ? `${services[0]} & ${services[1]}` : services.join(" & ");
   const type = p.objectType[lang];
   return {
+    /** Concise <title> — "Objekt: Leistung & Leistung | Munich Construction". */
+    metaTitle: `${p.name}: ${shortList} ${lang === "de" ? "in" : "in"} ${p.city} | Munich Construction`,
+    metaDescription:
+      lang === "de"
+        ? `Referenzprojekt ${p.name}, ${p.location}: ${list} durch die Munich Construction GmbH. Baudokumentation mit ${p.images.length} Aufnahmen.`
+        : `Reference project ${p.name}, ${p.location}: ${list} delivered by Munich Construction GmbH. Construction documentation with ${p.images.length} photographs.`,
     title:
       lang === "de"
         ? `${p.name} – ${list} in ${p.city}`
