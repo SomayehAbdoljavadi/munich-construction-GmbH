@@ -1,0 +1,8 @@
+file,line,alt_source,type
+src/components/LocationMap.tsx,61,"html: `<a href=""${OFFICE_MAPS_URL}"" target=""_blank"" rel=""noopener noreferrer"" class=""mc-map-marker-shell"" aria-label=""Open ${ADDRESS} in Google Maps"" title=""${ADDRESS}""><img src=""${markerImg}"" alt=""Mu",descriptive
+src/components/Logo.tsx,14,"alt=""Munich Construction GmbH""",descriptive
+src/components/ServiceGallery.tsx,62,alt={[,descriptive
+src/routes/__root.tsx,139,"<img className=""mc-initial-gif"" src={introGif} alt="""" draggable={false} />",decorative
+src/routes/about.tsx,68,"alt=""Munich Construction GmbH — Bauprojekt im Bau""",descriptive
+src/routes/projects.tsx,364,"alt={`${project.name}${project.location ? `, ${project.location}` : """"} — Baudokumentation Bild ${idx + 1}`}",descriptive
+src/routes/projects_.$slug.tsx,188,alt={copy.alt(i)},descriptive

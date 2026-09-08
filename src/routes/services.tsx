@@ -1,23 +1,36 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Building2, Hammer, Wrench, Flame, FileCheck2, Ruler, Check } from "lucide-react";
 import { useT, type TranslationKey } from "@/lib/i18n";
-import { breadcrumb, ldScript, url, BASE_URL } from "@/lib/seo";
+import { breadcrumb, ldScript, socialImage, url, webPage, BASE_URL } from "@/lib/seo";
 import { ALL_SERVICES_I18N } from "@/lib/services-data";
+
+const OVERVIEW_IMAGE = ALL_SERVICES_I18N[0]?.gallery[0]?.image;
 
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Bauleistungen in München | Munich Construction GmbH" },
-      { name: "description", content: "Bauleistungen in München und Bayern: Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau, Injektion, Fenster und Türen, Genehmigungs- und Werkplanung." },
-      { property: "og:title", content: "Bauleistungen in München | Munich Construction GmbH" },
-      { property: "og:description", content: "Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau, Fenster und Türen sowie Genehmigungs- und Werkplanung aus einer Hand." },
+      { title: "Bauleistungen München | Munich Construction GmbH" },
+      { name: "description", content: "Bauleistungen in München und Bayern: Neubau und Sanierung, Renovierung, Brandschutz, Trockenbau, Injektion, Fenster und Türen sowie Genehmigungs- und Werkplanung." },
+      { property: "og:title", content: "Bauleistungen München | Munich Construction GmbH" },
+      { property: "og:description", content: "Neubau und Sanierung München, Renovierung, Brandschutz, Trockenbau, Fenster und Türen sowie Genehmigungs- und Werkplanung aus einer Hand." },
       { property: "og:url", content: url("/services") },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "Bauleistungen in München | Munich Construction GmbH" },
+      { name: "twitter:title", content: "Bauleistungen München | Munich Construction GmbH" },
       { name: "twitter:description", content: "Bauleistungen in München und Bayern aus einer Hand." },
+      ...socialImage(OVERVIEW_IMAGE, "Bauleistungen der Munich Construction GmbH in München"),
     ],
     links: [{ rel: "canonical", href: url("/services") }],
     scripts: [
+      ldScript(
+        webPage({
+          path: "/services",
+          type: "CollectionPage",
+          name: "Bauleistungen München | Munich Construction GmbH",
+          description:
+            "Übersicht der Bauleistungen der Munich Construction GmbH in München und Bayern.",
+          primaryImage: OVERVIEW_IMAGE,
+        }),
+      ),
       ldScript({
         "@context": "https://schema.org",
         "@type": "ItemList",

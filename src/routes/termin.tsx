@@ -30,6 +30,9 @@ export const Route = createFileRoute("/termin")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Beratungstermin verwalten" },
       { name: "twitter:description", content: "Termin online verschieben oder stornieren." },
+      // Private, token-bearing management page: crawlable (so the directive is
+      // seen) but excluded from the index and from the sitemap.
+      { name: "robots", content: "noindex, nofollow" },
     ],
     links: [{ rel: "canonical", href: url("/termin") }],
   }),

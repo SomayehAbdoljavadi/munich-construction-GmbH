@@ -11,7 +11,7 @@ import { getProjectSlidesForService } from "@/lib/service-projects";
 import { ServiceGallery } from "@/components/ServiceGallery";
 import { LANGUAGES } from "@/lib/consultation-data";
 import { useT } from "@/lib/i18n";
-import { breadcrumb, ldScript, url, ORG_ID, SITE_NAME } from "@/lib/seo";
+import { breadcrumb, ldScript, socialImage, url, webPage, ORG_ID, SITE_NAME } from "@/lib/seo";
 import { getFaqs, getFaqsBilingual } from "@/lib/faqs";
 
 export const Route = createFileRoute("/services_/$slug")({
@@ -70,16 +70,35 @@ export const Route = createFileRoute("/services_/$slug")({
         ])),
       );
     }
+    if (s) {
+      scripts.push(
+        ldScript(
+          webPage({
+            path: `/services/${params.slug}`,
+            name: title,
+            description,
+            primaryImage: s.gallery[0]?.image,
+          }),
+        ),
+      );
+    }
+    const shortDescription =
+      description.length > 158 ? `${description.slice(0, 155).trimEnd()}…` : description;
     return {
       meta: [
         { title },
-        { name: "description", content: description },
+        { name: "description", content: shortDescription },
         { property: "og:title", content: title },
-        { property: "og:description", content: description },
+        { property: "og:description", content: shortDescription },
         { property: "og:url", content: pageUrl },
         { property: "og:type", content: "article" },
         { name: "twitter:title", content: title },
-        { name: "twitter:description", content: description },
+        { name: "twitter:description", content: shortDescription },
+        ...socialImage(
+          s?.gallery[0]?.image,
+          s ? `${s.title.de} in München — Munich Construction GmbH` : "Munich Construction GmbH",
+        ),
+        ...(s ? [] : [{ name: "robots", content: "noindex, follow" }]),
       ],
       links: [{ rel: "canonical", href: pageUrl }],
       scripts,
@@ -185,7 +204,7 @@ function ServiceDetailPage() {
               <h2 className="font-display text-3xl md:text-4xl">{t("sd.gallery.title")}</h2>
             </div>
           </div>
-          <ServiceGallery slides={service.gallery} />
+          <ServiceGallery slides={service.gallery} serviceName={service.title} />
         </div>
       </section>
 
@@ -398,6 +417,13 @@ function ServiceDetailPage() {
               className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
             />
           </Link>
+          <p className="mt-6 text-sm text-white/60">
+            <Link to="/beratung" className="text-gold underline underline-offset-4">
+              {lang === "de"
+                ? "Bauberatung München – kostenloses Erstgespräch buchen"
+                : "Construction consultation in Munich – book a free first call"}
+            </Link>
+          </p>
         </div>
       </section>
     </>

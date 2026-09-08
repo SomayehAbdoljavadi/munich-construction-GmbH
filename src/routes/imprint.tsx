@@ -9,6 +9,8 @@ export const Route = createFileRoute("/imprint")({
       { name: "description", content: "Impressum / Imprint — Munich Construction GmbH, Heiterwanger Straße 30, 81373 München. Geschäftsführer: Mehdi Mardi." },
       { property: "og:title", content: "Impressum — Munich Construction GmbH" },
       { property: "og:description", content: "Legal information for Munich Construction GmbH." },
+      { property: "og:url", content: url("/imprint") },
+      { property: "og:type", content: "website" },
     ],
     links: [{ rel: "canonical", href: url("/imprint") }],
   }),

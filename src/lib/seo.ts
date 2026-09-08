@@ -52,14 +52,23 @@ export const ORG_JSONLD = {
       contactType: "customer service",
       email: "info@munichconstruction.de",
       areaServed: ["DE", "Munich", "Bavaria"],
-      availableLanguage: ["German", "English"],
+      availableLanguage: ["de", "en"],
     },
     {
       "@type": "ContactPoint",
       telephone: "+49 176 32354815",
       contactType: "sales",
       areaServed: ["DE", "Munich", "Bavaria"],
-      availableLanguage: ["German", "English"],
+      availableLanguage: ["de", "en"],
+    },
+    {
+      "@type": "ContactPoint",
+      contactType: "reservations",
+      name: "Bauberatung / Erstgespräch",
+      url: `${BASE_URL}/beratung`,
+      email: "office@munichconstruction.de",
+      areaServed: ["DE", "Munich", "Bavaria"],
+      availableLanguage: ["de", "fa"],
     },
   ],
   areaServed: [
@@ -109,4 +118,55 @@ export const breadcrumb = (items: Array<{ name: string; path: string }>) => ({
 export const ldScript = (obj: unknown) => ({
   type: "application/ld+json",
   children: JSON.stringify(obj),
+});
+
+/**
+ * Absolute URL for a bundled asset (Vite emits root-relative paths in
+ * production). Returns undefined for anything that is not root-relative,
+ * so we never emit a broken/relative og:image.
+ */
+export const assetUrl = (src?: string): string | undefined => {
+  if (!src) return undefined;
+  if (src.startsWith("http://") || src.startsWith("https://")) return src;
+  if (src.startsWith("/")) return `${BASE_URL}${src}`;
+  return undefined;
+};
+
+/** Brand fallback share image. */
+export const DEFAULT_OG_IMAGE = `${BASE_URL}/favicon.png`;
+export const DEFAULT_OG_IMAGE_ALT = "Logo der Munich Construction GmbH, Bauunternehmen in München";
+
+/** og:image + twitter:image pair with alt text. Absolute URLs only. */
+export const socialImage = (src: string | undefined, alt: string) => {
+  const href = assetUrl(src) ?? DEFAULT_OG_IMAGE;
+  return [
+    { property: "og:image", content: href },
+    { property: "og:image:alt", content: alt },
+    { name: "twitter:image", content: href },
+    { name: "twitter:image:alt", content: alt },
+  ];
+};
+
+/** WebPage entity tied to the site + organisation identity. */
+export const webPage = (opts: {
+  path: string;
+  name: string;
+  description: string;
+  inLanguage?: string;
+  type?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage" | "ItemPage";
+  primaryImage?: string;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": opts.type ?? "WebPage",
+  "@id": `${url(opts.path)}#webpage`,
+  url: url(opts.path),
+  name: opts.name,
+  description: opts.description,
+  inLanguage: opts.inLanguage ?? "de-DE",
+  isPartOf: { "@id": WEBSITE_ID },
+  about: { "@id": ORG_ID },
+  publisher: { "@id": ORG_ID },
+  ...(assetUrl(opts.primaryImage)
+    ? { primaryImageOfPage: { "@type": "ImageObject", url: assetUrl(opts.primaryImage) } }
+    : {}),
 });

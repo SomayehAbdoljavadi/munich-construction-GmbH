@@ -6,9 +6,11 @@ import { useT } from "@/lib/i18n";
 interface Props {
   slides: GallerySlide[];
   autoPlayMs?: number;
+  /** Service name used to describe the photographs (image alt text). */
+  serviceName?: string;
 }
 
-export function ServiceGallery({ slides, autoPlayMs = 6000 }: Props) {
+export function ServiceGallery({ slides, autoPlayMs = 6000, serviceName }: Props) {
   const { t } = useT();
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -57,7 +59,14 @@ export function ServiceGallery({ slides, autoPlayMs = 6000 }: Props) {
               <div className="absolute inset-0 bg-ink" />
               <img
                 src={s.image}
-                alt={s.projectName ? `${s.projectName} — ${s.projectLocation ?? ""}` : s.title}
+                alt={[
+                  serviceName,
+                  s.projectName
+                    ? [s.projectName, s.projectLocation].filter(Boolean).join(", ")
+                    : s.title,
+                ]
+                  .filter(Boolean)
+                  .join(" — ")}
                 loading={idx === 0 ? "eager" : "lazy"}
                 className="absolute inset-0 w-full h-full object-contain object-center"
               />
