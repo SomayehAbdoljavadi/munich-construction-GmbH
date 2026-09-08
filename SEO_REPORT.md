@@ -57,14 +57,25 @@ The site switches German/English client-side on the same URL, so no separate lan
 - All meaningful images carry descriptive alt text; the service slideshow now includes the service name plus project name and location. The decorative intro animation stays `alt=""`.
 - Cross-linking: services → related projects, projects → the services used, and both → `/beratung` with the descriptive anchor "Bauberatung München – kostenloses Erstgespräch buchen". Header dropdown lists all 9 service pages; the services overview links every service page.
 
-## 7. Verification performed
+## 7. Verification performed (production, 8 Sep 2026)
 
-- Type check and route render check: all 28 URLs return 200 in preview.
-- Every route has a unique title, description and self-referencing non-www canonical (0 missing).
-- Sitemap: 27 `<loc>` entries, all `https://munichconstruction.de/...`.
+All 28 URLs were fetched from `https://munichconstruction.de`:
+
+- 28/28 return HTTP 200.
+- 28/28 titles, descriptions and self-referencing non-www canonicals live and identical to the intended values.
+- `/termin` returns `noindex, nofollow` live and is absent from the sitemap.
+- `sitemap.xml` returns 200 with 27 `<loc>` entries, all `https://munichconstruction.de/...`.
+- `robots.txt` returns 200, allows all crawlers and points to the non-www sitemap.
+- og:image/twitter:image resolve to absolute hashed production asset URLs on all 26 content pages.
 - No `Theresienstraße` or `80333` references remain.
+
+Everything described in this report is confirmed live. Nothing is awaiting publication.
 
 ## 8. Remaining items
 
-- **Publish required**: these head changes only reach the live domain after the next publish.
-- A dedicated 1200×630 branded share image would improve previews for legal pages and as a global fallback; none exists yet.
+- `/services` H1 is "Transparente und faire Preise." — accurate to the page, but a Munich-intent H1 would rank better.
+- `/projects/heiterwanger-strasse-30-muenchen` and `.../32-muenchen` share the title "Heiterwanger Str.: Trockenbau in München"; the descriptions differ, but the titles should be distinguished by house number.
+- Project titles truncate long names ("Hotel Bayerischer", "Blütenstr.").
+- No dedicated 1200×630 branded share image exists; legal pages carry none rather than a placeholder.
+- No hreflang, by design — German and English share the same URLs.
+
