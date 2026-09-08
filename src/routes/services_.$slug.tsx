@@ -204,7 +204,7 @@ function ServiceDetailPage() {
               <h2 className="font-display text-3xl md:text-4xl">{t("sd.gallery.title")}</h2>
             </div>
           </div>
-          <ServiceGallery slides={service.gallery} />
+          <ServiceGallery slides={service.gallery} serviceName={service.title} />
         </div>
       </section>
 

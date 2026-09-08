@@ -59,7 +59,14 @@ export function ServiceGallery({ slides, autoPlayMs = 6000, serviceName }: Props
               <div className="absolute inset-0 bg-ink" />
               <img
                 src={s.image}
-                alt={s.projectName ? `${s.projectName} — ${s.projectLocation ?? ""}` : s.title}
+                alt={[
+                  serviceName,
+                  s.projectName
+                    ? [s.projectName, s.projectLocation].filter(Boolean).join(", ")
+                    : s.title,
+                ]
+                  .filter(Boolean)
+                  .join(" — ")}
                 loading={idx === 0 ? "eager" : "lazy"}
                 className="absolute inset-0 w-full h-full object-contain object-center"
               />
