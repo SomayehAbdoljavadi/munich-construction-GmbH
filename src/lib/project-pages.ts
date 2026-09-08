@@ -147,8 +147,10 @@ export function projectCopy(p: ProjectPage, lang: Lang) {
   const shortList =
     services.length > 2 ? `${services[0]} & ${services[1]}` : services.join(" & ");
   const type = p.objectType[lang];
+  // Avoid "Name, Name 21, München" when the display name is the address itself.
+  const label = p.location.startsWith(p.name) ? p.location : `${p.name}, ${p.location}`;
   return {
-    /** Concise <title> — "Objekt: Leistung & Leistung | Munich Construction". */
+    /** Concise <title> — "Objekt – Leistung Stadt | Munich Construction". */
     metaTitle: (() => {
       const full = `${p.name} – ${shortList} ${p.city} | Munich Construction`;
       // Keep titles readable: drop to the leading trade when the pair is long.
@@ -158,8 +160,8 @@ export function projectCopy(p: ProjectPage, lang: Lang) {
     })(),
     metaDescription:
       lang === "de"
-        ? `Referenzprojekt ${p.name}, ${p.location}: ${list} durch die Munich Construction GmbH. Baudokumentation mit ${p.images.length} Aufnahmen.`
-        : `Reference project ${p.name}, ${p.location}: ${list} delivered by Munich Construction GmbH. Construction documentation with ${p.images.length} photographs.`,
+        ? `Referenzprojekt ${label}: ${list} durch die Munich Construction GmbH. Baudokumentation mit ${p.images.length} Aufnahmen.`
+        : `Reference project ${label}: ${list} delivered by Munich Construction GmbH. Construction documentation with ${p.images.length} photographs.`,
     title:
       lang === "de"
         ? `${p.name} – ${list} in ${p.city}`
