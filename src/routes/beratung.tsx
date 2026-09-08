@@ -19,7 +19,8 @@ import {
 } from "lucide-react";
 import { fetchFreeSlots } from "@/lib/slots";
 import { useT, type Lang } from "@/lib/i18n";
-import { breadcrumb, ldScript, ORG_ID, url } from "@/lib/seo";
+import { breadcrumb, ldScript, socialImage, webPage, ORG_ID, url } from "@/lib/seo";
+import beratungOg from "@/assets/mc-hero-bg.jpg";
 import {
   BERATUNG,
   BERATUNG_FAQ,
