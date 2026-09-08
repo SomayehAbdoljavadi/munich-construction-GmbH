@@ -17,6 +17,8 @@ interface ProjectPageDef {
   services: string[];
   city: string;
   objectType: L;
+  /** Verified display name overriding the folder metadata name. */
+  displayName?: string;
 }
 
 const DEFS: ProjectPageDef[] = [
@@ -37,6 +39,7 @@ const DEFS: ProjectPageDef[] = [
   {
     slug: "bluetenstrasse-21-muenchen",
     source: "blutenstr-21-munchen",
+    displayName: "Blütenstraße 21",
     services: ["trockenbau", "injektion-und-risssperrung", "fenster-und-tueren"],
     city: "München",
     objectType: { de: "Bestandsgebäude", en: "existing building" },
@@ -51,6 +54,7 @@ const DEFS: ProjectPageDef[] = [
   {
     slug: "heiterwanger-strasse-30-muenchen",
     source: "heiterwanger-str-30-81373-munchen",
+    displayName: "Heiterwanger Straße 30",
     services: ["trockenbau"],
     city: "München",
     objectType: { de: "Bestandsgebäude", en: "existing building" },
@@ -58,6 +62,7 @@ const DEFS: ProjectPageDef[] = [
   {
     slug: "heiterwanger-strasse-32-muenchen",
     source: "heiterwanger-str-32-81373-munchen",
+    displayName: "Heiterwanger Straße 32",
     services: ["trockenbau"],
     city: "München",
     objectType: { de: "Bestandsgebäude", en: "existing building" },
@@ -107,7 +112,7 @@ function build(): ProjectPage[] {
     pages.push({
       slug: def.slug,
       sourceSlug: def.source,
-      name: p.name,
+      name: def.displayName ?? p.name,
       location: p.location,
       city: def.city,
       objectType: def.objectType,
@@ -144,7 +149,13 @@ export function projectCopy(p: ProjectPage, lang: Lang) {
   const type = p.objectType[lang];
   return {
     /** Concise <title> — "Objekt: Leistung & Leistung | Munich Construction". */
-    metaTitle: `${p.name}: ${shortList} ${lang === "de" ? "in" : "in"} ${p.city} | Munich Construction`,
+    metaTitle: (() => {
+      const full = `${p.name} – ${shortList} ${p.city} | Munich Construction`;
+      // Keep titles readable: drop to the leading trade when the pair is long.
+      return full.length > 70
+        ? `${p.name} – ${services[0]} ${p.city} | Munich Construction`
+        : full;
+    })(),
     metaDescription:
       lang === "de"
         ? `Referenzprojekt ${p.name}, ${p.location}: ${list} durch die Munich Construction GmbH. Baudokumentation mit ${p.images.length} Aufnahmen.`
