@@ -69,7 +69,7 @@ All 28 URLs were fetched from `https://munichconstruction.de`:
 - og:image/twitter:image resolve to absolute hashed production asset URLs on all 26 content pages.
 - No `Theresienstraße` or `80333` references remain.
 
-Everything described in this report is confirmed live. Nothing is awaiting publication.
+Sections 1–7 describe the state confirmed live on production. The corrections in section 8 are implemented in preview only and are not yet on the live site.
 
 ## 8. Corrections made in this round (preview only, not yet published)
 
