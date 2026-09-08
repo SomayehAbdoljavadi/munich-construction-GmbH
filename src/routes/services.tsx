@@ -143,8 +143,12 @@ function ServicesPage() {
             {t("services.eyebrow")}
           </p>
           <h1 className="font-display h-fluid-page text-balance max-w-4xl">
-            {t("services.title")}
+            {t("services.h1")}
           </h1>
+          <p className="font-display text-2xl md:text-3xl text-white/80 mt-6 max-w-3xl text-balance">
+            {t("services.title")}
+          </p>
+
           <div className="gold-divider w-24 mt-8" />
           <p className="text-white/70 text-lg mt-8 max-w-2xl leading-relaxed">{t("services.lede")}</p>
         </div>
