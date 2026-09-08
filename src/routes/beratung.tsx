@@ -42,32 +42,46 @@ import {
 export const Route = createFileRoute("/beratung")({
   head: () => ({
     meta: [
-      { title: "Kostenlose Renovierungsberatung München | Munich Construction" },
+      { title: "Bauberatung München: Deutsch & Persisch | Munich Construction" },
       {
         name: "description",
         content:
-          "Kostenloses Erstgespräch für Renovierung, Umbau und Sanierung in München. Termin online buchen oder Rückruf anfordern — unverbindlich und persönlich.",
+          "Sie planen Renovierung, Umbau oder Sanierung in München? Buchen Sie Ihr kostenloses Erstgespräch auf Deutsch oder Persisch. Wir rufen Sie zum Termin an.",
       },
-      { property: "og:title", content: "Beratung — Munich Construction GmbH" },
+      { property: "og:title", content: "Bauberatung München: Deutsch & Persisch | Munich Construction" },
       {
         property: "og:description",
-        content: "Kostenloses telefonisches Erstgespräch für Ihr Bau- oder Renovierungsprojekt in München.",
+        content:
+          "Kostenloses telefonisches Erstgespräch zu Renovierung, Umbau und Sanierung in München — Renovierungsberatung auf Deutsch und Persisch.",
       },
       { property: "og:url", content: url("/beratung") },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Beratung — Munich Construction GmbH" },
+      { name: "twitter:title", content: "Bauberatung München: Deutsch & Persisch" },
       { name: "twitter:description", content: "Kostenloses Erstgespräch zu Ihrem Projekt — Termin online buchen." },
+      ...socialImage(beratungOg, "Bauberatung der Munich Construction GmbH in München"),
     ],
     links: [{ rel: "canonical", href: url("/beratung") }],
     scripts: [
+      ldScript(
+        webPage({
+          path: "/beratung",
+          name: "Bauberatung München: Deutsch & Persisch | Munich Construction",
+          description:
+            "Kostenloses Erstgespräch zu Renovierung, Umbau und Sanierung in München — Beratung auf Deutsch und Persisch.",
+          primaryImage: beratungOg,
+        }),
+      ),
       ldScript({
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "Kostenlose Bau- und Renovierungsberatung",
+        name: "Kostenloses Erstgespräch — Bau- und Renovierungsberatung München",
         serviceType: "Renovierungsberatung",
+        description:
+          "Kostenloses, unverbindliches Erstgespräch zu Renovierung, Umbau und Sanierung. Persischsprachige Bauberatung München: Das Gespräch ist auf Deutsch, Persisch oder in beiden Sprachen möglich.",
         provider: { "@id": ORG_ID },
         areaServed: { "@type": "City", name: "München" },
+        availableLanguage: ["de", "fa"],
         url: url("/beratung"),
         offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
       }),
