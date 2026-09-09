@@ -631,7 +631,8 @@
       "\"WebSite\"",
       "[\"GeneralContractor\",\"LocalBusiness\",\"Organization\"]"
     ],
-    "status": "live on production (verified 9 Sep 2026)",
+    "status": "preview verified; production pending next publish",
+
     "http_status": 200
   },
   {
