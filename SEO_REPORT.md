@@ -2,7 +2,7 @@
 
 Domain: **https://munichconstruction.de** (non-www canonical)
 Scope: every public route — 9 services, consultation, 9 projects, company and legal pages.
-Status of this report: **verified live on production, 9 September 2026.** Preview and production are identical.
+Status of this report: **verified live on production, 9 September 2026; Blütenstraße H1 correction verified in preview and pending next publish.**
 
 Companion files (not served publicly):
 
