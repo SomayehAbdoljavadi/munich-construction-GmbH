@@ -2,7 +2,7 @@
 
 Domain: **https://munichconstruction.de** (non-www canonical)
 Scope: every public route — 9 services, consultation, 9 projects, company and legal pages.
-Status of this report: **verified live on production, 9 September 2026.** Preview and production are identical.
+Status of this report: **verified live on production, 9 September 2026; Blütenstraße H1 correction verified in preview and pending next publish.**
 
 Companion files (not served publicly):
 
@@ -31,7 +31,7 @@ Companion files (not served publicly):
 | `/projects/heiterwanger-strasse-30-muenchen` title | `Heiterwanger Straße 30 – Trockenbau München \| Munich Construction` — live |
 | `/projects/heiterwanger-strasse-32-muenchen` title | `Heiterwanger Straße 32 – Trockenbau München \| Munich Construction` — live |
 | Heiterwanger H1 / description / og / twitter / JSON-LD | House number 30 / 32 present in every field on the respective page — live |
-| Blütenstraße 21 | Full name live in title, H1, description, Open Graph, Twitter and structured data |
+| Blütenstraße 21 | Full name live in title, H1, description, Open Graph, Twitter and structured data. **H1 updated in preview to** “Blütenstraße 21 – Trockenbau, Injektion und Risssperrung sowie Fenster und Türen in München” |
 | Title uniqueness | 28 / 28 titles unique on production |
 | `/termin` | `noindex, nofollow` live; absent from the 27-URL sitemap |
 | Hotel Bayerischer | unchanged, as instructed |
@@ -71,6 +71,7 @@ German and English share the same URLs (client-side switch), so **no hreflang ta
 ## 7. Remaining items
 
 - **Hotel Bayerischer** — kept as-is. The only authoritative source in the project data is the folder metadata (`Hotel Bayerischer`, `Bahnhofstraße 14, 95444 Bayreuth`). Provide the verified full name and it will be applied to title, H1 and content.
-- **Blütenstraße 21 H1** reads "Trockenbau und Injektion und Risssperrung und Fenster und Türen" — grammatically clumsy because two service names themselves contain "und". A comma-separated join would read better; not changed here as it was outside the approved fix list.
+- **Blütenstraße 21 H1** — corrected in preview to “Blütenstraße 21 – Trockenbau, Injektion und Risssperrung sowie Fenster und Türen in München”. Will be live on production after the next publish.
 - No dedicated 1200×630 branded share image exists; the brand logo is used as the fallback and legal pages carry none.
+
 - No hreflang, by design.

@@ -1,6 +1,7 @@
-# SEO Inventory — Munich Construction GmbH (production)
+# SEO Inventory — Munich Construction GmbH
 
-Source: live fetch of https://munichconstruction.de on 9 Sep 2026. All 28 routes returned HTTP 200.
+Source: verified on preview; production last verified 9 Sep 2026. Blütenstraße H1 correction is live in preview and pending next publish. All other routes remain as last verified on production.
+
 
 ## /
 
@@ -275,17 +276,19 @@ Source: live fetch of https://munichconstruction.de on 9 Sep 2026. All 28 routes
 ## /projects/bluetenstrasse-21-muenchen
 
 - **Title:** Blütenstraße 21 – Trockenbau München | Munich Construction
-- **H1:** Blütenstraße 21 – Trockenbau und Injektion und Risssperrung und Fenster und Türen in München
-- **Meta description:** Referenzprojekt Blütenstraße 21, München: Trockenbau und Injektion und Risssperrung und Fenster und Türen durch die Munich Construction GmbH. Baudokumentat…
+- **H1:** Blütenstraße 21 – Trockenbau, Injektion und Risssperrung sowie Fenster und Türen in München
+- **Meta description:** Referenzprojekt Blütenstraße 21, München: Trockenbau, Injektion und Risssperrung sowie Fenster und Türen durch die Munich Construction GmbH. Baudokumentat…
+
 - **Canonical:** https://munichconstruction.de/projects/bluetenstrasse-21-muenchen
 - **Robots:** index, follow, max-image-preview:large, max-snippet:-1
 - **og:title:** Blütenstraße 21 – Trockenbau München | Munich Construction
-- **og:description:** Referenzprojekt Blütenstraße 21, München: Trockenbau und Injektion und Risssperrung und Fenster und Türen durch die Munich Construction GmbH. Baudokumentat…
+- **og:description:** Referenzprojekt Blütenstraße 21, München: Trockenbau, Injektion und Risssperrung sowie Fenster und Türen durch die Munich Construction GmbH. Baudokumentat…
 - **og:url:** https://munichconstruction.de/projects/bluetenstrasse-21-muenchen
 - **og:image:** https://munichconstruction.de/assets/00-6Tvfh3na.jpeg
 - **twitter:card:** summary_large_image | **twitter:image:** https://munichconstruction.de/assets/00-6Tvfh3na.jpeg
 - **JSON-LD @type values:** "AdministrativeArea", "BreadcrumbList", "City", "ContactPoint", "Country", "CreativeWork", "ImageObject", "ItemPage", "ListItem", "Place", "PostalAddress", "Service", "WebSite", ["GeneralContractor","LocalBusiness","Organization"]
-- **Status:** live
+- **Status:** preview verified; production pending next publish
+
 
 ## /projects/boschtsrieder-strasse-muenchen
 
