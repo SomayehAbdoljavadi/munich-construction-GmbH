@@ -1,6 +1,7 @@
-# SEO Inventory — Munich Construction GmbH (production)
+# SEO Inventory — Munich Construction GmbH
 
-Source: live fetch of https://munichconstruction.de on 9 Sep 2026. All 28 routes returned HTTP 200.
+Source: verified on preview; production last verified 9 Sep 2026. Blütenstraße H1 correction is live in preview and pending next publish. All other routes remain as last verified on production.
+
 
 ## /
 
