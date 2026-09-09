@@ -286,7 +286,8 @@ Source: live fetch of https://munichconstruction.de on 9 Sep 2026. All 28 routes
 - **og:image:** https://munichconstruction.de/assets/00-6Tvfh3na.jpeg
 - **twitter:card:** summary_large_image | **twitter:image:** https://munichconstruction.de/assets/00-6Tvfh3na.jpeg
 - **JSON-LD @type values:** "AdministrativeArea", "BreadcrumbList", "City", "ContactPoint", "Country", "CreativeWork", "ImageObject", "ItemPage", "ListItem", "Place", "PostalAddress", "Service", "WebSite", ["GeneralContractor","LocalBusiness","Organization"]
-- **Status:** live
+- **Status:** preview verified; production pending next publish
+
 
 ## /projects/boschtsrieder-strasse-muenchen
 
