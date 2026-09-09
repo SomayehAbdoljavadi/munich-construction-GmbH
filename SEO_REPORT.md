@@ -31,7 +31,7 @@ Companion files (not served publicly):
 | `/projects/heiterwanger-strasse-30-muenchen` title | `Heiterwanger Straße 30 – Trockenbau München \| Munich Construction` — live |
 | `/projects/heiterwanger-strasse-32-muenchen` title | `Heiterwanger Straße 32 – Trockenbau München \| Munich Construction` — live |
 | Heiterwanger H1 / description / og / twitter / JSON-LD | House number 30 / 32 present in every field on the respective page — live |
-| Blütenstraße 21 | Full name live in title, H1, description, Open Graph, Twitter and structured data |
+| Blütenstraße 21 | Full name live in title, H1, description, Open Graph, Twitter and structured data. **H1 updated in preview to** “Blütenstraße 21 – Trockenbau, Injektion und Risssperrung sowie Fenster und Türen in München” |
 | Title uniqueness | 28 / 28 titles unique on production |
 | `/termin` | `noindex, nofollow` live; absent from the 27-URL sitemap |
 | Hotel Bayerischer | unchanged, as instructed |
