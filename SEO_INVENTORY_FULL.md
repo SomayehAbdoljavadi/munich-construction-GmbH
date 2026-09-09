@@ -281,7 +281,7 @@ Source: live fetch of https://munichconstruction.de on 9 Sep 2026. All 28 routes
 - **Canonical:** https://munichconstruction.de/projects/bluetenstrasse-21-muenchen
 - **Robots:** index, follow, max-image-preview:large, max-snippet:-1
 - **og:title:** Blütenstraße 21 – Trockenbau München | Munich Construction
-- **og:description:** Referenzprojekt Blütenstraße 21, München: Trockenbau und Injektion und Risssperrung und Fenster und Türen durch die Munich Construction GmbH. Baudokumentat…
+- **og:description:** Referenzprojekt Blütenstraße 21, München: Trockenbau, Injektion und Risssperrung sowie Fenster und Türen durch die Munich Construction GmbH. Baudokumentat…
 - **og:url:** https://munichconstruction.de/projects/bluetenstrasse-21-muenchen
 - **og:image:** https://munichconstruction.de/assets/00-6Tvfh3na.jpeg
 - **twitter:card:** summary_large_image | **twitter:image:** https://munichconstruction.de/assets/00-6Tvfh3na.jpeg
