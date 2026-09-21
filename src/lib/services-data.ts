@@ -101,7 +101,7 @@ export const HOME_SERVICES_I18N: ServiceDetailI18n[] = [
     slug: "brandschutz",
     icon: Flame,
     title: { de: "Brandschutz", en: "Fire Protection" },
-    h1: { de: "Brandschutz in München", en: "Fire Protection in Munich" },
+    h1: { de: "Brandschutz in Bayern", en: "Fire Protection in Bavaria" },
     subtitle: {
       de: "Normgerechter passiver Brandschutz für Neubau und Bestand",
       en: "Compliant passive fire protection for new builds and existing buildings",
@@ -162,7 +162,7 @@ export const HOME_SERVICES_I18N: ServiceDetailI18n[] = [
     slug: "trockenbau",
     icon: Hammer,
     title: { de: "Trockenbau", en: "Drywall Construction" },
-    h1: { de: "Trockenbau in München", en: "Drywall Construction in Munich" },
+    h1: { de: "Trockenbau in Bayern", en: "Drywall Construction in Bavaria" },
     subtitle: {
       de: "Präziser Innenausbau für Büro, Gewerbe und Wohnbau",
       en: "Precise interior fit-out for office, commercial and residential projects",
@@ -223,7 +223,7 @@ export const HOME_SERVICES_I18N: ServiceDetailI18n[] = [
     slug: "injektion-und-risssperrung",
     icon: Droplet,
     title: { de: "Injektion und Risssperrung", en: "Injection and Crack Sealing" },
-    h1: { de: "Injektion und Risssperrung in München", en: "Injection and Crack Sealing in Munich" },
+    h1: { de: "Injektion und Risssperrung in Bayern", en: "Injection and Crack Sealing in Bavaria" },
     subtitle: {
       de: "Bauwerksabdichtung und Rissverpressung mit professionellen Injektionsverfahren",
       en: "Structural waterproofing and crack injection using professional injection methods",
@@ -284,7 +284,7 @@ export const HOME_SERVICES_I18N: ServiceDetailI18n[] = [
     slug: "fenster-und-tueren",
     icon: DoorOpen,
     title: { de: "Fenster und Türen", en: "Windows and Doors" },
-    h1: { de: "Fenster und Türen in München", en: "Windows and Doors in Munich" },
+    h1: { de: "Fenster und Türen in Bayern", en: "Windows and Doors in Bavaria" },
     subtitle: {
       de: "Energieeffiziente und einbruchhemmende Montage für Neubau und Sanierung",
       en: "Energy-efficient and burglar-resistant installation for new builds and refurbishments",
@@ -362,10 +362,10 @@ export const EXTRA_SERVICES_I18N: ServiceDetailI18n[] = [
     slug: "neubau",
     icon: Building2,
     title: { de: "Neubau", en: "New Construction" },
-    h1: { de: "Neubau in München", en: "New Construction in Munich" },
-    metaTitle: { de: "Neubau in München | Munich Construction GmbH", en: "New Construction in Munich | Munich Construction GmbH" },
+    h1: { de: "Neubau in Bayern", en: "New Construction in Bavaria" },
+    metaTitle: { de: "Neubau in Bayern | Munich Construction GmbH", en: "New Construction in Bavaria | Munich Construction GmbH" },
     metaDescription: {
-      de: "Neubau in München und Bayern: Rohbau, Ausbau, Koordination der Gewerke und schlüsselfertige Übergabe durch Munich Construction GmbH.",
+      de: "Neubau in Bayern und Bayern: Rohbau, Ausbau, Koordination der Gewerke und schlüsselfertige Übergabe durch Munich Construction GmbH.",
       en: "New construction in Munich and Bavaria: shell, fit-out, trade coordination and turn-key handover by Munich Construction GmbH.",
     },
     subtitle: {
@@ -373,8 +373,8 @@ export const EXTRA_SERVICES_I18N: ServiceDetailI18n[] = [
       en: "From shell construction to turn-key handover – coordinated from a single source",
     },
     intro: {
-      de: "Wir realisieren Neubauvorhaben in München und Bayern von der Baustelleneinrichtung über den Rohbau bis zum vollständigen Innenausbau – mit klarer Terminplanung und durchgehender Qualitätskontrolle.",
-      en: "We deliver new-build projects in Munich and Bavaria from site setup and shell construction to complete interior fit-out – with clear scheduling and continuous quality control.",
+      de: "Wir realisieren Neubauvorhaben in ganz Bayern von der Baustelleneinrichtung über den Rohbau bis zum vollständigen Innenausbau – mit klarer Terminplanung und durchgehender Qualitätskontrolle.",
+      en: "We deliver new-build projects throughout Bavaria from site setup and shell construction to complete interior fit-out – with clear scheduling and continuous quality control.",
     },
     paragraph: {
       de: "Ein Neubau ist ein Zusammenspiel vieler Gewerke, Termine und technischer Anforderungen. Munich Construction GmbH übernimmt die Koordination dieser Schnittstellen und sorgt dafür, dass Rohbau, Ausbau und technische Gewerke ineinandergreifen. Wir arbeiten auf Grundlage geprüfter Planunterlagen, stimmen uns eng mit Bauherren, Architekten und Fachplanern ab und dokumentieren jeden Bauabschnitt nachvollziehbar. So entsteht ein Gebäude, das nicht nur termingerecht fertig wird, sondern in Ausführung und Detailqualität dauerhaft überzeugt.",
@@ -417,19 +417,19 @@ export const EXTRA_SERVICES_I18N: ServiceDetailI18n[] = [
     slug: "renovierung",
     icon: Hammer,
     title: { de: "Renovierung", en: "Renovation" },
-    h1: { de: "Renovierung in München", en: "Renovation in Munich" },
-    metaTitle: { de: "Renovierung in München | Munich Construction GmbH", en: "Renovation in Munich | Munich Construction GmbH" },
+    h1: { de: "Renovierung in Bayern", en: "Renovation in Bavaria" },
+    metaTitle: { de: "Renovierung in Bayern | Munich Construction GmbH", en: "Renovation in Bavaria | Munich Construction GmbH" },
     metaDescription: {
-      de: "Renovierung in München: Wohnungen, Büros und Gewerbeflächen modernisieren – Innenausbau, Oberflächen, Fenster und Türen aus einer Hand.",
-      en: "Renovation in Munich: modernising apartments, offices and commercial spaces – interior fit-out, surfaces, windows and doors from one source.",
+      de: "Renovierung in Bayern: Wohnungen, Büros und Gewerbeflächen modernisieren – Innenausbau, Oberflächen, Fenster und Türen aus einer Hand.",
+      en: "Renovation in Bavaria: modernising apartments, offices and commercial spaces – interior fit-out, surfaces, windows and doors from one source.",
     },
     subtitle: {
       de: "Bestandsflächen modernisieren – wohnlich, funktional und wertsteigernd",
       en: "Modernising existing spaces – comfortable, functional and value-enhancing",
     },
     intro: {
-      de: "Renovierungen für Wohnungen, Büros und Gewerbeflächen in München – von der Bestandsaufnahme bis zur besenreinen Übergabe, mit möglichst geringer Störung des laufenden Betriebs.",
-      en: "Renovations for apartments, offices and commercial spaces in Munich – from survey to clean handover, with minimal disruption to ongoing use.",
+      de: "Renovierungen für Wohnungen, Büros und Gewerbeflächen in ganz Bayern – von der Bestandsaufnahme bis zur besenreinen Übergabe, mit möglichst geringer Störung des laufenden Betriebs.",
+      en: "Renovations for apartments, offices and commercial spaces throughout Bavaria – from survey to clean handover, with minimal disruption to ongoing use.",
     },
     paragraph: {
       de: "Eine Renovierung verändert die Nutzung und Wirkung eines Gebäudes, ohne seine Struktur grundlegend anzutasten. Munich Construction GmbH nimmt den Bestand sorgfältig auf, plant die Arbeitsschritte in einer sinnvollen Reihenfolge und führt Innenausbau, Oberflächenarbeiten sowie den Austausch von Fenstern und Türen fachgerecht aus. Gerade in bewohnten oder genutzten Objekten in München achten wir auf staubarme Arbeitsweise, klare Zeitfenster und eine saubere Baustelle – damit das Ergebnis überzeugt und der Weg dorthin planbar bleibt.",
@@ -471,19 +471,19 @@ export const EXTRA_SERVICES_I18N: ServiceDetailI18n[] = [
     slug: "sanierung",
     icon: Wrench,
     title: { de: "Sanierung", en: "Refurbishment" },
-    h1: { de: "Sanierung in München", en: "Refurbishment in Munich" },
-    metaTitle: { de: "Sanierung in München | Munich Construction GmbH", en: "Refurbishment in Munich | Munich Construction GmbH" },
+    h1: { de: "Sanierung in Bayern", en: "Refurbishment in Bavaria" },
+    metaTitle: { de: "Sanierung in Bayern | Munich Construction GmbH", en: "Refurbishment in Bavaria | Munich Construction GmbH" },
     metaDescription: {
-      de: "Sanierung in München: Substanzerhalt, Feuchteschäden, Bauwerksabdichtung und Ertüchtigung im Bestand durch Munich Construction GmbH.",
-      en: "Refurbishment in Munich: preserving substance, moisture damage, structural waterproofing and upgrading existing buildings.",
+      de: "Sanierung in Bayern: Substanzerhalt, Feuchteschäden, Bauwerksabdichtung und Ertüchtigung im Bestand durch Munich Construction GmbH.",
+      en: "Refurbishment in Bavaria: preserving substance, moisture damage, structural waterproofing and upgrading existing buildings.",
     },
     subtitle: {
       de: "Bausubstanz erhalten, Schäden beheben, Gebäude zukunftsfähig machen",
       en: "Preserving substance, repairing damage, making buildings fit for the future",
     },
     intro: {
-      de: "Sanierung im Bestand für Gebäude in München und Bayern – Ursachenanalyse, Instandsetzung geschädigter Bauteile und dauerhafte Ertüchtigung statt kurzfristiger Kosmetik.",
-      en: "Refurbishment of existing buildings in Munich and Bavaria – root-cause analysis, repair of damaged components and lasting upgrades instead of short-term cosmetics.",
+      de: "Sanierung im Bestand für Gebäude in ganz Bayern – Ursachenanalyse, Instandsetzung geschädigter Bauteile und dauerhafte Ertüchtigung statt kurzfristiger Kosmetik.",
+      en: "Refurbishment of existing buildings throughout Bavaria – root-cause analysis, repair of damaged components and lasting upgrades instead of short-term cosmetics.",
     },
     paragraph: {
       de: "Sanierung beginnt mit dem Verstehen des Schadens. Bevor wir ausführen, klären wir Ursache und Ausmaß – ob Feuchteeintritt, Risse, veraltete Bauteile oder unzureichender Brandschutz. Auf dieser Grundlage wählt Munich Construction GmbH die passenden Verfahren: Bauwerksabdichtung und Injektion, Ertüchtigung von Wand- und Deckenaufbauten, Erneuerung von Fenstern und Türen oder brandschutztechnische Nachrüstung. Der Münchner Altbaubestand verlangt dabei besonderes Fingerspitzengefühl, weil vorhandene Substanz erhalten und gleichzeitig heutigen Anforderungen genügt werden muss.",
@@ -525,10 +525,10 @@ export const EXTRA_SERVICES_I18N: ServiceDetailI18n[] = [
     slug: "genehmigungsplanung",
     icon: FileCheck2,
     title: { de: "Genehmigungsplanung", en: "Permit Planning" },
-    h1: { de: "Genehmigungsplanung in München", en: "Permit Planning in Munich" },
-    metaTitle: { de: "Genehmigungsplanung in München | Munich Construction GmbH", en: "Permit Planning in Munich | Munich Construction GmbH" },
+    h1: { de: "Genehmigungsplanung in Bayern", en: "Permit Planning in Bavaria" },
+    metaTitle: { de: "Genehmigungsplanung in Bayern | Munich Construction GmbH", en: "Permit Planning in Bavaria | Munich Construction GmbH" },
     metaDescription: {
-      de: "Genehmigungsplanung in München: Bauantrag, vollständige Unterlagen und Behördenkommunikation – strukturiert begleitet von Munich Construction GmbH.",
+      de: "Genehmigungsplanung in Bayern: Bauantrag, vollständige Unterlagen und Behördenkommunikation – strukturiert begleitet von Munich Construction GmbH.",
       en: "Permit planning in Munich: building applications, complete documentation and authority liaison – guided by Munich Construction GmbH.",
     },
     subtitle: {
@@ -536,8 +536,8 @@ export const EXTRA_SERVICES_I18N: ServiceDetailI18n[] = [
       en: "Building application, documentation and authority liaison, structured end to end",
     },
     intro: {
-      de: "Genehmigungsplanung für Bauvorhaben in München und Bayern – vollständige, prüffähige Unterlagen und eine geordnete Kommunikation mit den zuständigen Behörden.",
-      en: "Permit planning for construction projects in Munich and Bavaria – complete, reviewable documentation and orderly communication with the responsible authorities.",
+      de: "Genehmigungsplanung für Bauvorhaben in ganz Bayern – vollständige, prüffähige Unterlagen und eine geordnete Kommunikation mit den zuständigen Behörden.",
+      en: "Permit planning for construction projects throughout Bavaria – complete, reviewable documentation and orderly communication with the responsible authorities.",
     },
     paragraph: {
       de: "Verzögerungen im Genehmigungsverfahren entstehen meist durch unvollständige oder widersprüchliche Unterlagen. Munich Construction GmbH stellt die Genehmigungsplanung so zusammen, dass sie prüffähig ist: Bauantragsunterlagen, Nachweise, Abstimmung mit Statik und Brandschutz sowie die Beantwortung von Rückfragen der Behörde. Im Rahmen der Bayerischen Bauordnung kennen wir die üblichen Anforderungen der Münchner Bauaufsicht und bereiten Projekte entsprechend vor, damit das Verfahren ohne vermeidbare Schleifen läuft.",
@@ -579,19 +579,19 @@ export const EXTRA_SERVICES_I18N: ServiceDetailI18n[] = [
     slug: "werkplanung",
     icon: Ruler,
     title: { de: "Werkplanung", en: "Execution Planning" },
-    h1: { de: "Werkplanung in München", en: "Execution Planning in Munich" },
-    metaTitle: { de: "Werkplanung in München | Munich Construction GmbH", en: "Execution Planning in Munich | Munich Construction GmbH" },
+    h1: { de: "Werkplanung in Bayern", en: "Execution Planning in Bavaria" },
+    metaTitle: { de: "Werkplanung in Bayern | Munich Construction GmbH", en: "Execution Planning in Bavaria | Munich Construction GmbH" },
     metaDescription: {
-      de: "Werkplanung in München: Ausführungs- und Detailpläne, Materialspezifikationen und Schnittstellenkoordination für einen reibungslosen Bauablauf.",
-      en: "Execution planning in Munich: detail drawings, material specifications and interface coordination for a smooth construction process.",
+      de: "Werkplanung in Bayern: Ausführungs- und Detailpläne, Materialspezifikationen und Schnittstellenkoordination für einen reibungslosen Bauablauf.",
+      en: "Execution planning in Bavaria: detail drawings, material specifications and interface coordination for a smooth construction process.",
     },
     subtitle: {
       de: "Ausführungs- und Detailplanung für einen reibungslosen Bauablauf",
       en: "Execution and detail planning for a smooth construction process",
     },
     intro: {
-      de: "Werkplanung für Bauprojekte in München und Bayern – baubare Details, eindeutige Materialangaben und abgestimmte Schnittstellen zwischen allen Gewerken.",
-      en: "Execution planning for construction projects in Munich and Bavaria – buildable details, unambiguous material specifications and coordinated interfaces between all trades.",
+      de: "Werkplanung für Bauprojekte in ganz Bayern – baubare Details, eindeutige Materialangaben und abgestimmte Schnittstellen zwischen allen Gewerken.",
+      en: "Execution planning for construction projects throughout Bavaria – buildable details, unambiguous material specifications and coordinated interfaces between all trades.",
     },
     paragraph: {
       de: "Die Werkplanung übersetzt die Genehmigungsplanung in das, was auf der Baustelle tatsächlich gebaut wird. Munich Construction GmbH erarbeitet Ausführungs- und Detailpläne, legt Materialien und Aufbauten eindeutig fest und klärt die Schnittstellen zwischen Rohbau, Ausbau und Haustechnik im Vorfeld. Dadurch entfallen Rückfragen und Improvisationen im laufenden Bau – Nachträge, Wartezeiten und Ausführungsfehler werden deutlich seltener. Besonders bei Bestandsprojekten in München zahlt sich eine präzise Werkplanung aus, weil vorhandene Maße und Anschlüsse selten dem Idealfall entsprechen.",

@@ -18,12 +18,12 @@ export const Route = createFileRoute("/services_/$slug")({
   head: ({ params }) => {
     const s = getServiceI18nBySlug(params.slug);
     const title = s
-      ? (s.metaTitle?.de ?? `${s.title.de} in München | Munich Construction GmbH`)
+      ? (s.metaTitle?.de ?? `${s.title.de} in Bayern | Munich Construction GmbH`)
       : "Bauleistung | Munich Construction GmbH";
     const description =
       s?.metaDescription?.de ??
       s?.intro.de ??
-      "Bauleistungen der Munich Construction GmbH in München und Bayern.";
+      "Bauleistungen der Munich Construction GmbH in ganz Bayern.";
     const pageUrl = url(`/services/${params.slug}`);
     const scripts: Array<{ type: string; children: string }> = [];
     if (s) {
@@ -36,7 +36,6 @@ export const Route = createFileRoute("/services_/$slug")({
           description: s.intro.de,
           provider: { "@id": ORG_ID },
           areaServed: [
-            { "@type": "City", name: "Munich" },
             { "@type": "AdministrativeArea", name: "Bavaria" },
           ],
           url: pageUrl,
@@ -96,7 +95,7 @@ export const Route = createFileRoute("/services_/$slug")({
         { name: "twitter:description", content: shortDescription },
         ...socialImage(
           s?.gallery[0]?.image,
-          s ? `${s.title.de} in München — Munich Construction GmbH` : "Munich Construction GmbH",
+          s ? `${s.title.de} in Bayern — Munich Construction GmbH` : "Munich Construction GmbH",
         ),
         ...(s ? [] : [{ name: "robots", content: "noindex, follow" }]),
       ],
@@ -420,8 +419,8 @@ function ServiceDetailPage() {
           <p className="mt-6 text-sm text-white/60">
             <Link to="/beratung" className="text-gold underline underline-offset-4">
               {lang === "de"
-                ? "Bauberatung München – kostenloses Erstgespräch buchen"
-                : "Construction consultation in Munich – book a free first call"}
+                ? "Bauberatung Bayern – kostenloses Erstgespräch buchen"
+                : "Construction consultation in Bavaria – book a free first call"}
             </Link>
           </p>
         </div>

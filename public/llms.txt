@@ -1,6 +1,6 @@
 # Munich Construction GmbH
 
-> Munich Construction GmbH is a Munich-based construction and renovation company serving private and commercial clients across Munich and the wider Bavaria region in Germany. We deliver end-to-end construction services from a single source — from first assessment and planning through clean, code-compliant execution and handover.
+> Munich Construction GmbH is a Munich-based construction and renovation company based in Munich and serving private and commercial clients throughout Bavaria, Germany. We deliver end-to-end construction services from a single source — from first assessment and planning through clean, code-compliant execution and handover.
 
 ## Company
 
@@ -13,7 +13,7 @@
 - **Phone:** +49 (0) 89 57 84 3675 / +49 (176) 3235 4815
 - **Email:** info@munichconstruction.de
 - **Website:** https://munichconstruction.de
-- **Service area:** Munich and surrounding Bavaria, Germany
+- **Service area:** All of Bavaria (bayernweit), Germany — based in Munich
 - **Languages:** German, English
 - **Managing Director:** Mehdi Mardi, Dipl.-Ing. (Bauingenieurwesen), Hochbau
 

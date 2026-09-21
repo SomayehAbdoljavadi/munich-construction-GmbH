@@ -11,21 +11,21 @@ const OVERVIEW_IMAGE = PROJECTS[0]?.images[0];
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Bauprojekte München und Bayern | Munich Construction" },
+      { title: "Bauprojekte in Bayern | Munich Construction" },
       {
         name: "description",
         content:
           "Referenzprojekte der Munich Construction GmbH: Bauausführung mit Brandschutz, Trockenbau, Injektion sowie Fenster und Türen in München, Augsburg und Bayreuth.",
       },
-      { property: "og:title", content: "Bauprojekte München und Bayern | Munich Construction" },
+      { property: "og:title", content: "Bauprojekte in Bayern | Munich Construction" },
       {
         property: "og:description",
-        content: "Referenzprojekte der Bauausführung in München und Bayern — Brandschutz, Trockenbau, Injektion, Fenster und Türen.",
+        content: "Referenzprojekte der Bauausführung in ganz Bayern — Brandschutz, Trockenbau, Injektion, Fenster und Türen.",
       },
       { property: "og:url", content: url("/projects") },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "Bauprojekte München und Bayern | Munich Construction" },
-      { name: "twitter:description", content: "Ausgeführte Bauprojekte in München und Bayern." },
+      { name: "twitter:title", content: "Bauprojekte in Bayern | Munich Construction" },
+      { name: "twitter:description", content: "Ausgeführte Bauprojekte in ganz Bayern." },
       ...socialImage(OVERVIEW_IMAGE, "Baudokumentation eines Referenzprojekts der Munich Construction GmbH"),
     ],
     links: [{ rel: "canonical", href: url("/projects") }],
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/projects")({
         webPage({
           path: "/projects",
           type: "CollectionPage",
-          name: "Bauprojekte München und Bayern | Munich Construction",
+          name: "Bauprojekte in Bayern | Munich Construction",
           description:
             "Referenzprojekte der Munich Construction GmbH in München, Augsburg und Bayreuth.",
           primaryImage: OVERVIEW_IMAGE,

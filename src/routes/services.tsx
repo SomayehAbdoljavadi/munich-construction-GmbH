@@ -9,15 +9,15 @@ const OVERVIEW_IMAGE = ALL_SERVICES_I18N[0]?.gallery[0]?.image;
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Bauleistungen München | Munich Construction GmbH" },
-      { name: "description", content: "Bauleistungen in München und Bayern: Neubau und Sanierung, Renovierung, Brandschutz, Trockenbau, Injektion, Fenster und Türen sowie Genehmigungs- und Werkplanung." },
-      { property: "og:title", content: "Bauleistungen München | Munich Construction GmbH" },
-      { property: "og:description", content: "Neubau und Sanierung München, Renovierung, Brandschutz, Trockenbau, Fenster und Türen sowie Genehmigungs- und Werkplanung aus einer Hand." },
+      { title: "Bauleistungen Bayern | Munich Construction GmbH" },
+      { name: "description", content: "Bauleistungen in ganz Bayern: Neubau und Sanierung, Renovierung, Brandschutz, Trockenbau, Injektion, Fenster und Türen sowie Genehmigungs- und Werkplanung." },
+      { property: "og:title", content: "Bauleistungen Bayern | Munich Construction GmbH" },
+      { property: "og:description", content: "Neubau und Sanierung, Renovierung, Brandschutz, Trockenbau, Fenster und Türen sowie Genehmigungs- und Werkplanung in ganz Bayern aus einer Hand." },
       { property: "og:url", content: url("/services") },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "Bauleistungen München | Munich Construction GmbH" },
-      { name: "twitter:description", content: "Bauleistungen in München und Bayern aus einer Hand." },
-      ...socialImage(OVERVIEW_IMAGE, "Bauleistungen der Munich Construction GmbH in München"),
+      { name: "twitter:title", content: "Bauleistungen Bayern | Munich Construction GmbH" },
+      { name: "twitter:description", content: "Bauleistungen in ganz Bayern aus einer Hand." },
+      ...socialImage(OVERVIEW_IMAGE, "Bauleistungen der Munich Construction GmbH in Bayern"),
     ],
     links: [{ rel: "canonical", href: url("/services") }],
     scripts: [
@@ -25,9 +25,9 @@ export const Route = createFileRoute("/services")({
         webPage({
           path: "/services",
           type: "CollectionPage",
-          name: "Bauleistungen München | Munich Construction GmbH",
+          name: "Bauleistungen Bayern | Munich Construction GmbH",
           description:
-            "Übersicht der Bauleistungen der Munich Construction GmbH in München und Bayern.",
+            "Übersicht der Bauleistungen der Munich Construction GmbH in ganz Bayern.",
           primaryImage: OVERVIEW_IMAGE,
         }),
       ),

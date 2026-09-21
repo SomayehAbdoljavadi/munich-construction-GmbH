@@ -109,8 +109,8 @@ export const CAREERS_COPY = {
   eyebrow: { de: "Karriere bei Munich Construction", en: "Careers at Munich Construction" },
   heading: { de: "Gemeinsam bauen wir Qualität.", en: "Together, we build quality." },
   lede: {
-    de: "Werden Sie Teil unseres Teams und gestalten Sie mit uns hochwertige Bauprojekte in München und darüber hinaus.",
-    en: "Join our team and help us deliver high-quality construction projects in Munich and beyond.",
+    de: "Werden Sie Teil unseres Teams und gestalten Sie mit uns hochwertige Bauprojekte in ganz Bayern.",
+    en: "Join our team and help us deliver high-quality construction projects throughout Bavaria.",
   },
   heroCta: { de: "Offene Stellen entdecken", en: "View open positions" },
   positionsEyebrow: { de: "Offene Stellen", en: "Open positions" },
