@@ -365,8 +365,8 @@ export const EXTRA_SERVICES_I18N: ServiceDetailI18n[] = [
     h1: { de: "Neubau in Bayern", en: "New Construction in Bavaria" },
     metaTitle: { de: "Neubau in Bayern | Munich Construction GmbH", en: "New Construction in Bavaria | Munich Construction GmbH" },
     metaDescription: {
-      de: "Neubau in Bayern und Bayern: Rohbau, Ausbau, Koordination der Gewerke und schlüsselfertige Übergabe durch Munich Construction GmbH.",
-      en: "New construction in Munich and Bavaria: shell, fit-out, trade coordination and turn-key handover by Munich Construction GmbH.",
+      de: "Neubau in Bayern: Rohbau, Ausbau, Koordination der Gewerke und schlüsselfertige Übergabe durch Munich Construction GmbH.",
+      en: "New construction in Bavaria: shell, fit-out, trade coordination and turn-key handover by Munich Construction GmbH.",
     },
     subtitle: {
       de: "Vom Rohbau bis zur schlüsselfertigen Übergabe – koordiniert aus einer Hand",
@@ -529,7 +529,7 @@ export const EXTRA_SERVICES_I18N: ServiceDetailI18n[] = [
     metaTitle: { de: "Genehmigungsplanung in Bayern | Munich Construction GmbH", en: "Permit Planning in Bavaria | Munich Construction GmbH" },
     metaDescription: {
       de: "Genehmigungsplanung in Bayern: Bauantrag, vollständige Unterlagen und Behördenkommunikation – strukturiert begleitet von Munich Construction GmbH.",
-      en: "Permit planning in Munich: building applications, complete documentation and authority liaison – guided by Munich Construction GmbH.",
+      en: "Permit planning in Bavaria: building applications, complete documentation and authority liaison – guided by Munich Construction GmbH.",
     },
     subtitle: {
       de: "Bauantrag, Unterlagen und Behördenabstimmung strukturiert begleitet",
