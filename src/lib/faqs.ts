@@ -24,8 +24,8 @@ const COMMON_FAQS: FAQ[] = [
       en: "Which areas do you serve?",
     },
     a: {
-      de: "Wir arbeiten in München und im gesamten Großraum Bayern. Auf Anfrage realisieren wir Projekte auch in weiteren Regionen Deutschlands.",
-      en: "We operate in Munich and across the wider Bavaria region. On request, we also deliver projects in other parts of Germany.",
+      de: "Wir arbeiten in ganz Bayern – von München über Augsburg bis Bayreuth. Auf Anfrage realisieren wir Projekte auch in weiteren Regionen Deutschlands.",
+      en: "We operate throughout Bavaria — from Munich to Augsburg and Bayreuth. On request, we also deliver projects in other parts of Germany.",
     },
   },
   {
@@ -151,7 +151,7 @@ export const FAQS_BY_SERVICE: Record<string, FAQ[]> = {
       a: { de: "In vielen Fällen ja. Wir planen die Arbeiten in Bauabschnitten, arbeiten staubarm und vereinbaren feste Zeitfenster, damit die Nutzung möglichst wenig eingeschränkt wird.", en: "In many cases yes. We plan the works in phases, keep dust to a minimum and agree fixed time windows so that use is restricted as little as possible." },
     },
     {
-      q: { de: "Was kostet eine Renovierung in München?", en: "What does a renovation in Munich cost?" },
+      q: { de: "Was kostet eine Renovierung in Bayern?", en: "What does a renovation in Bavaria cost?" },
       a: { de: "Die Kosten hängen von Fläche, Zustand und Leistungsumfang ab. Nach einer Besichtigung erhalten Sie ein klar gegliedertes Angebot mit Einzelpositionen und Zeitrahmen.", en: "Cost depends on area, condition and scope. After a site visit you receive a clearly structured quote with individual line items and a time frame." },
     },
   ],

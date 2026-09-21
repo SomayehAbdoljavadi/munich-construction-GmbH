@@ -27,16 +27,16 @@ const translations: Dict = {
   // hero
   "hero.eyebrow": { de: "Bester Preis und Qualität", en: "Best Price and Standards" },
   "hero.title": {
-    de: "Munich Construction GmbH — Ihr Partner für hochwertiges Bauen in München",
-    en: "Munich Construction GmbH — Your Partner for High-Quality Construction in Munich",
+    de: "Munich Construction GmbH — Ihr Partner für hochwertiges Bauen in Bayern",
+    en: "Munich Construction GmbH — Your Partner for High-Quality Construction in Bavaria",
   },
   "hero.titleBrand": {
     de: "Munich Construction GmbH",
     en: "Munich Construction GmbH",
   },
   "hero.titleRest": {
-    de: "Ihr Partner für hochwertiges Bauen in München",
-    en: "Your Partner for High-Quality Construction in Munich",
+    de: "Ihr Partner für hochwertiges Bauen in Bayern",
+    en: "Your Partner for High-Quality Construction in Bavaria",
   },
   "hero.subtitle": {
     de: "Neubau, Renovierung, Sanierung, Brandschutz, Genehmigung und Werkplanung — alles aus einer Hand.",
@@ -51,7 +51,7 @@ const translations: Dict = {
 
   // services index
   "services.eyebrow": { de: "Unsere Leistungen", en: "Our Services" },
-  "services.h1": { de: "Bauleistungen in München und Bayern", en: "Construction services in Munich and Bavaria" },
+  "services.h1": { de: "Bauleistungen in Bayern", en: "Construction services in Bavaria" },
   "services.title": { de: "Transparente und faire Preise.", en: "Transparent and fair prices." },
   "services.title.line1": { de: "Transparente und faire Preise.", en: "Transparent and fair prices." },
   "services.title.line2": { de: "Kostenlose Erstberatung vor Ort oder telefonisch.", en: "Free initial consultation on-site or by phone." },
@@ -153,8 +153,8 @@ const translations: Dict = {
   "projects.eyebrow": { de: "Referenzen", en: "Selected Work" },
   "projects.title": { de: "Bauten, die Bestand haben.", en: "Buildings that endure." },
   "projects.lede": {
-    de: "Eine Auswahl realisierter Projekte aus den Bereichen Neubau, Sanierung und Renovierung in München und Umgebung.",
-    en: "A selection of completed projects in new construction, refurbishment and renovation across Munich.",
+    de: "Eine Auswahl realisierter Projekte aus den Bereichen Neubau, Sanierung und Renovierung in ganz Bayern.",
+    en: "A selection of completed projects in new construction, refurbishment and renovation across Bavaria.",
   },
   "projects.all": { de: "Alle", en: "All" },
 
@@ -185,8 +185,8 @@ const translations: Dict = {
 
   // footer
   "footer.tagline": {
-    de: "Hochwertiges Bauen in München — Neubau, Sanierung, Brandschutz und Werkplanung aus einer Hand.",
-    en: "High-quality construction in Munich — new builds, refurbishment, fire protection and execution planning from one source.",
+    de: "Hochwertiges Bauen in Bayern — Neubau, Sanierung, Brandschutz und Werkplanung aus einer Hand.",
+    en: "High-quality construction in Bavaria — new builds, refurbishment, fire protection and execution planning from one source.",
   },
   "footer.quicklinks": { de: "Navigation", en: "Quick Links" },
   "footer.contact": { de: "Kontakt", en: "Contact" },

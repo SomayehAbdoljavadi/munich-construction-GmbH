@@ -72,15 +72,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Munich Construction GmbH — Hochwertiges Bauen in München" },
+      { title: "Munich Construction GmbH — Hochwertiges Bauen in Bayern" },
       {
         name: "description",
         content:
-          "Munich Construction GmbH — Bauunternehmen aus München. Neubau, Renovierung, Sanierung, Brandschutz, Genehmigung und Werkplanung aus einer Hand.",
+          "Munich Construction GmbH — Bauunternehmen aus München für ganz Bayern. Neubau, Renovierung, Sanierung, Brandschutz, Genehmigung und Werkplanung aus einer Hand.",
       },
       { name: "author", content: "Munich Construction GmbH" },
       { property: "og:title", content: "Munich Construction GmbH" },
-      { property: "og:description", content: "Hochwertiges Bauen in München — Neubau, Sanierung, Brandschutz und Werkplanung." },
+      { property: "og:description", content: "Hochwertiges Bauen in Bayern — Neubau, Sanierung, Brandschutz und Werkplanung." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@munichconstruction" },

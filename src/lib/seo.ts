@@ -22,7 +22,7 @@ export const ORG_JSONLD = {
   logo: `${BASE_URL}/favicon.png`,
   image: `${BASE_URL}/favicon.png`,
   description:
-    "Munich Construction GmbH is a Munich-based construction company offering fire protection, drywall, injection & crack sealing, windows & doors, renovation, refurbishment, interior construction and building modernisation across Munich and Bavaria.",
+    "Munich Construction GmbH is a Munich-based construction company offering fire protection, drywall, injection & crack sealing, windows & doors, renovation, refurbishment, interior construction and building modernisation. Based in Munich and serving clients throughout Bavaria.",
   email: "info@munichconstruction.de",
   telephone: "+49 89 57843675",
   priceRange: "€€",
@@ -51,14 +51,14 @@ export const ORG_JSONLD = {
       telephone: "+49 89 57843675",
       contactType: "customer service",
       email: "info@munichconstruction.de",
-      areaServed: ["DE", "Munich", "Bavaria"],
+      areaServed: ["DE", "Bavaria"],
       availableLanguage: ["de", "en"],
     },
     {
       "@type": "ContactPoint",
       telephone: "+49 176 32354815",
       contactType: "sales",
-      areaServed: ["DE", "Munich", "Bavaria"],
+      areaServed: ["DE", "Bavaria"],
       availableLanguage: ["de", "en"],
     },
     {
@@ -67,12 +67,11 @@ export const ORG_JSONLD = {
       name: "Bauberatung / Erstgespräch",
       url: `${BASE_URL}/beratung`,
       email: "office@munichconstruction.de",
-      areaServed: ["DE", "Munich", "Bavaria"],
+      areaServed: ["DE", "Bavaria"],
       availableLanguage: ["de", "fa"],
     },
   ],
   areaServed: [
-    { "@type": "City", name: "Munich" },
     { "@type": "AdministrativeArea", name: "Bavaria" },
     { "@type": "Country", name: "Germany" },
   ],
@@ -134,7 +133,7 @@ export const assetUrl = (src?: string): string | undefined => {
 
 /** Brand fallback share image. */
 export const DEFAULT_OG_IMAGE = `${BASE_URL}/favicon.png`;
-export const DEFAULT_OG_IMAGE_ALT = "Logo der Munich Construction GmbH, Bauunternehmen in München";
+export const DEFAULT_OG_IMAGE_ALT = "Logo der Munich Construction GmbH, Bauunternehmen in Bayern";
 
 /** og:image + twitter:image pair with alt text. Absolute URLs only. */
 export const socialImage = (src: string | undefined, alt: string) => {

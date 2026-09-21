@@ -20,18 +20,18 @@ import { ldScript, socialImage, url, webPage } from "@/lib/seo";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Bauunternehmen München | Munich Construction GmbH" },
+      { title: "Bauunternehmen Bayern | Munich Construction GmbH" },
       {
         name: "description",
         content:
-          "Bauunternehmen in München: Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau sowie Fenster und Türen. Bauleistungen München aus einer Hand — jetzt beraten lassen.",
+          "Bauunternehmen für ganz Bayern: Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau sowie Fenster und Türen — Bauleistungen aus einer Hand, jetzt beraten lassen.",
       },
-      { property: "og:title", content: "Bauunternehmen München | Munich Construction GmbH" },
-      { property: "og:description", content: "Baufirma in München: Neubau, Sanierung, Brandschutz, Trockenbau und Planung in München und Bayern." },
+      { property: "og:title", content: "Bauunternehmen Bayern | Munich Construction GmbH" },
+      { property: "og:description", content: "Baufirma aus München für ganz Bayern: Neubau, Sanierung, Brandschutz, Trockenbau und Planung aus einer Hand." },
       { property: "og:url", content: url("/") },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "Bauunternehmen München | Munich Construction GmbH" },
-      { name: "twitter:description", content: "Bauen, Sanieren und Planen in München und Bayern." },
+      { name: "twitter:title", content: "Bauunternehmen Bayern | Munich Construction GmbH" },
+      { name: "twitter:description", content: "Bauen, Sanieren und Planen in ganz Bayern." },
       ...socialImage(heroBg, "Bauprojekt der Munich Construction GmbH in München"),
     ],
     links: [{ rel: "canonical", href: url("/") }],
@@ -39,9 +39,9 @@ export const Route = createFileRoute("/")({
       ldScript(
         webPage({
           path: "/",
-          name: "Bauunternehmen München | Munich Construction GmbH",
+          name: "Bauunternehmen Bayern | Munich Construction GmbH",
           description:
-            "Bauunternehmen in München: Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau sowie Fenster und Türen in München und Bayern.",
+            "Bauunternehmen für ganz Bayern: Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau sowie Fenster und Türen aus einer Hand.",
           primaryImage: heroBg,
         }),
       ),
