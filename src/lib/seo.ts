@@ -73,7 +73,6 @@ export const ORG_JSONLD = {
   ],
   areaServed: [
     { "@type": "AdministrativeArea", name: "Bavaria" },
-    { "@type": "Country", name: "Germany" },
   ],
   knowsAbout: [
     "Construction",
