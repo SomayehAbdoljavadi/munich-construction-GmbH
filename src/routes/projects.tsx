@@ -20,7 +20,7 @@ export const Route = createFileRoute("/projects")({
       { property: "og:title", content: "Bauprojekte in Bayern | Munich Construction" },
       {
         property: "og:description",
-        content: "Referenzprojekte der Bauausführung in München und Bayern — Brandschutz, Trockenbau, Injektion, Fenster und Türen.",
+        content: "Referenzprojekte der Bauausführung in ganz Bayern — Brandschutz, Trockenbau, Injektion, Fenster und Türen.",
       },
       { property: "og:url", content: url("/projects") },
       { property: "og:type", content: "website" },

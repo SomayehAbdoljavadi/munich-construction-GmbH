@@ -583,7 +583,7 @@ export const EXTRA_SERVICES_I18N: ServiceDetailI18n[] = [
     metaTitle: { de: "Werkplanung in Bayern | Munich Construction GmbH", en: "Execution Planning in Bavaria | Munich Construction GmbH" },
     metaDescription: {
       de: "Werkplanung in Bayern: Ausführungs- und Detailpläne, Materialspezifikationen und Schnittstellenkoordination für einen reibungslosen Bauablauf.",
-      en: "Execution planning in Munich: detail drawings, material specifications and interface coordination for a smooth construction process.",
+      en: "Execution planning in Bavaria: detail drawings, material specifications and interface coordination for a smooth construction process.",
     },
     subtitle: {
       de: "Ausführungs- und Detailplanung für einen reibungslosen Bauablauf",
