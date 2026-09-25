@@ -6,7 +6,7 @@ import { useConsent } from "@/lib/consent";
 import { COMPANY_MAPS_URL, OFFICE_MAPS_URL } from "@/lib/mapLinks";
 
 export function SiteFooter() {
-  const { t } = useT();
+  const { t, lang } = useT();
   const { openSettings } = useConsent();
 
   return (
