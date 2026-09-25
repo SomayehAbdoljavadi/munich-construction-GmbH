@@ -7,3 +7,7 @@
 - [x] AI project advisor on /beratung
 - [x] Automated SEO checks: areaServed, duplicate titles, canonicals, language metadata across public routes
 - [x] Publish Bavaria-only schema + metadata corrections; verify every affected production route
+
+- [ ] Google coverage report for 28 pages
+- [ ] Optimize /beratung meta title, description, structured data (Bavaria-only)
+- [ ] Custom domain reconnect + AI key for advisor on munichconstruction.de (domain reconnect is a user action in Domains settings)
