@@ -28,12 +28,12 @@ export const BERATUNG = {
   // Hero
   eyebrow: { de: "Erstberatung", en: "Initial consultation" },
   heroTitle: {
-    de: "Kostenloses Erstgespräch für Ihr Bau- oder Renovierungsprojekt",
-    en: "Free initial consultation for your construction or renovation project",
+    de: "Bauberatung in München und Bayern – kostenloses Erstgespräch",
+    en: "Construction consultation in Munich and Bavaria – free initial call",
   },
   heroSubtitle: {
-    de: "Sie planen eine Renovierung, einen Umbau oder eine Sanierung? Sprechen Sie Ihr Vorhaben mit uns durch und klären Sie die wichtigsten ersten Fragen direkt mit unserem Team.",
-    en: "Planning a renovation, remodelling or refurbishment? Talk your project through with us and clarify the most important first questions directly with our team.",
+    de: "Sie planen eine Renovierung, einen Umbau oder eine Sanierung? Als Bauunternehmen mit Sitz in München – tätig in ganz Bayern – klären wir die wichtigsten ersten Fragen zu Ihrem Vorhaben in einer persönlichen Bau- und Renovierungsberatung.",
+    en: "Planning a renovation, remodelling or refurbishment? As a construction company based in Munich and working throughout Bavaria, we clarify the most important first questions about your project in a personal consultation.",
   },
   heroTrust: {
     de: "10–15 Minuten · unverbindlich · persönlich",

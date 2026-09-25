@@ -27,20 +27,20 @@ const translations: Dict = {
   // hero
   "hero.eyebrow": { de: "Bester Preis und Qualität", en: "Best Price and Standards" },
   "hero.title": {
-    de: "Munich Construction GmbH — Ihr Partner für hochwertiges Bauen in Bayern",
-    en: "Munich Construction GmbH — Your Partner for High-Quality Construction in Bavaria",
+    de: "Munich Construction GmbH — Ihr Bauunternehmen in München und ganz Bayern",
+    en: "Munich Construction GmbH — Your Construction Company in Munich and Throughout Bavaria",
   },
   "hero.titleBrand": {
     de: "Munich Construction GmbH",
     en: "Munich Construction GmbH",
   },
   "hero.titleRest": {
-    de: "Ihr Partner für hochwertiges Bauen in Bayern",
-    en: "Your Partner for High-Quality Construction in Bavaria",
+    de: "Ihr Bauunternehmen in München und ganz Bayern",
+    en: "Your Construction Company in Munich and Throughout Bavaria",
   },
   "hero.subtitle": {
-    de: "Neubau, Renovierung, Sanierung, Brandschutz, Genehmigung und Werkplanung — alles aus einer Hand.",
-    en: "New construction, renovation, refurbishment, fire protection, permit planning and execution planning — all from one source.",
+    de: "Bauunternehmen mit Sitz in München – tätig in ganz Bayern. Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau, Genehmigungs- und Werkplanung aus einer Hand.",
+    en: "Construction company based in Munich – working throughout Bavaria. New construction, renovation, refurbishment, fire protection, drywall, permit and execution planning from one source.",
   },
   "hero.cta1": { de: "Unsere Leistungen", en: "Our Services" },
   "hero.cta2": { de: "Kontakt", en: "Contact" },
