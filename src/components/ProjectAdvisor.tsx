@@ -44,7 +44,7 @@ const COPY = {
 const PATHS = {
   termin: { icon: CalendarClock, href: "#termin", label: { de: "Kostenlosen Beratungstermin buchen", en: "Book a free consultation" } },
   rueckruf: { icon: Phone, href: "#rueckruf", label: { de: "Rückruf anfordern", en: "Request a callback" } },
-  whatsapp: { icon: MessageCircle, href: "https://wa.me/4915256176906", label: { de: "Projektfotos per WhatsApp senden", en: "Send project photos via WhatsApp" } },
+  whatsapp: { icon: MessageCircle, href: "#rueckruf", label: { de: "Projektfotos per WhatsApp senden", en: "Send project photos via WhatsApp" } },
 } as const;
 
 export function ProjectAdvisor({ whatsappHref }: { whatsappHref?: string }) {
