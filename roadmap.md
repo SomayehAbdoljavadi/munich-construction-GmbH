@@ -8,6 +8,6 @@
 - [x] Automated SEO checks: areaServed, duplicate titles, canonicals, language metadata across public routes
 - [x] Publish Bavaria-only schema + metadata corrections; verify every affected production route
 
-- [ ] Google coverage report for 28 pages
-- [ ] Optimize /beratung meta title, description, structured data (Bavaria-only)
-- [ ] Custom domain reconnect + AI key for advisor on munichconstruction.de (domain reconnect is a user action in Domains settings)
+- [x] Google coverage report for 28 pages
+- [x] Optimize /beratung meta title, description, structured data (Bavaria-only)
+- [ ] Custom domain reconnect — blocked: user must remove & re-add munichconstruction.de in Project Settings → Domains
