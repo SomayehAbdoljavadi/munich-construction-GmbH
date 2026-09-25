@@ -1,0 +1,1 @@
+- Location pages live in src/lib/locations-data.ts (verified facts only) and render at /standorte and /standorte/$city; add towns there so the sitemap picks them up automatically. Why: keeps town pages consistent and free of invented references.

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TerminRouteImport } from './routes/termin'
+import { Route as StandorteRouteImport } from './routes/standorte'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProjectsRouteImport } from './routes/projects'
@@ -20,6 +21,7 @@ import { Route as CareersRouteImport } from './routes/careers'
 import { Route as BeratungRouteImport } from './routes/beratung'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StandorteCityRouteImport } from './routes/standorte_.$city'
 import { Route as ServicesSlugRouteImport } from './routes/services_.$slug'
 import { Route as ProjectsSlugRouteImport } from './routes/projects_.$slug'
 import { Route as ApiPublicProjectAdvisorRouteImport } from './routes/api/public/project-advisor'
@@ -35,6 +37,11 @@ import { Route as ApiPublicCareersApplicationRouteImport } from './routes/api/pu
 const TerminRoute = TerminRouteImport.update({
   id: '/termin',
   path: '/termin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StandorteRoute = StandorteRouteImport.update({
+  id: '/standorte',
+  path: '/standorte',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -85,6 +92,11 @@ const AboutRoute = AboutRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StandorteCityRoute = StandorteCityRouteImport.update({
+  id: '/standorte_/$city',
+  path: '/standorte/$city',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
@@ -161,9 +173,11 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/standorte': typeof StandorteRoute
   '/termin': typeof TerminRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/standorte/$city': typeof StandorteCityRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
@@ -185,9 +199,11 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/standorte': typeof StandorteRoute
   '/termin': typeof TerminRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/standorte/$city': typeof StandorteCityRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
@@ -210,9 +226,11 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/standorte': typeof StandorteRoute
   '/termin': typeof TerminRoute
   '/projects_/$slug': typeof ProjectsSlugRoute
   '/services_/$slug': typeof ServicesSlugRoute
+  '/standorte_/$city': typeof StandorteCityRoute
   '/api/public/careers-application': typeof ApiPublicCareersApplicationRoute
   '/api/public/consultation-booking': typeof ApiPublicConsultationBookingRoute
   '/api/public/consultation-callback': typeof ApiPublicConsultationCallbackRoute
@@ -236,9 +254,11 @@ export interface FileRouteTypes {
     | '/projects'
     | '/services'
     | '/sitemap.xml'
+    | '/standorte'
     | '/termin'
     | '/projects/$slug'
     | '/services/$slug'
+    | '/standorte/$city'
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
     | '/api/public/consultation-callback'
@@ -260,9 +280,11 @@ export interface FileRouteTypes {
     | '/projects'
     | '/services'
     | '/sitemap.xml'
+    | '/standorte'
     | '/termin'
     | '/projects/$slug'
     | '/services/$slug'
+    | '/standorte/$city'
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
     | '/api/public/consultation-callback'
@@ -284,9 +306,11 @@ export interface FileRouteTypes {
     | '/projects'
     | '/services'
     | '/sitemap.xml'
+    | '/standorte'
     | '/termin'
     | '/projects_/$slug'
     | '/services_/$slug'
+    | '/standorte_/$city'
     | '/api/public/careers-application'
     | '/api/public/consultation-booking'
     | '/api/public/consultation-callback'
@@ -309,9 +333,11 @@ export interface RootRouteChildren {
   ProjectsRoute: typeof ProjectsRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  StandorteRoute: typeof StandorteRoute
   TerminRoute: typeof TerminRoute
   ProjectsSlugRoute: typeof ProjectsSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
+  StandorteCityRoute: typeof StandorteCityRoute
   ApiPublicCareersApplicationRoute: typeof ApiPublicCareersApplicationRoute
   ApiPublicConsultationBookingRoute: typeof ApiPublicConsultationBookingRoute
   ApiPublicConsultationCallbackRoute: typeof ApiPublicConsultationCallbackRoute
@@ -330,6 +356,13 @@ declare module '@tanstack/react-router' {
       path: '/termin'
       fullPath: '/termin'
       preLoaderRoute: typeof TerminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/standorte': {
+      id: '/standorte'
+      path: '/standorte'
+      fullPath: '/standorte'
+      preLoaderRoute: typeof StandorteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -400,6 +433,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/standorte_/$city': {
+      id: '/standorte_/$city'
+      path: '/standorte/$city'
+      fullPath: '/standorte/$city'
+      preLoaderRoute: typeof StandorteCityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services_/$slug': {
@@ -493,9 +533,11 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsRoute: ProjectsRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  StandorteRoute: StandorteRoute,
   TerminRoute: TerminRoute,
   ProjectsSlugRoute: ProjectsSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
+  StandorteCityRoute: StandorteCityRoute,
   ApiPublicCareersApplicationRoute: ApiPublicCareersApplicationRoute,
   ApiPublicConsultationBookingRoute: ApiPublicConsultationBookingRoute,
   ApiPublicConsultationCallbackRoute: ApiPublicConsultationCallbackRoute,

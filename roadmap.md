@@ -20,3 +20,4 @@
 - [ ] Separate English URLs + hreflang — blocked: needs user approval (structural change)
 - [ ] Conversion tracking — blocked: no analytics tool/ID; GBP text delivered
 - [x] Persian final report
+- [x] Location pages München, Nürnberg, Regensburg, Augsburg (/standorte)

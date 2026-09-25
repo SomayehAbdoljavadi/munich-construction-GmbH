@@ -6,7 +6,7 @@ import { useConsent } from "@/lib/consent";
 import { COMPANY_MAPS_URL, OFFICE_MAPS_URL } from "@/lib/mapLinks";
 
 export function SiteFooter() {
-  const { t } = useT();
+  const { t, lang } = useT();
   const { openSettings } = useConsent();
 
   return (
@@ -42,6 +42,7 @@ export function SiteFooter() {
             <li><Link to="/about" className="hover:text-gold">{t("nav.about")}</Link></li>
             <li><Link to="/services" className="hover:text-gold">{t("nav.services")}</Link></li>
             <li><Link to="/projects" className="hover:text-gold">{t("nav.projects")}</Link></li>
+            <li><Link to="/standorte" className="hover:text-gold">{lang === "de" ? "Standorte" : "Locations"}</Link></li>
             <li><Link to="/beratung" className="hover:text-gold">{t("nav.beratung")}</Link></li>
             <li><Link to="/careers" className="hover:text-gold">{t("nav.careers")}</Link></li>
             <li><Link to="/contact" className="hover:text-gold">{t("nav.contact")}</Link></li>
