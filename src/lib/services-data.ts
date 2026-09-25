@@ -40,6 +40,10 @@ export interface ServiceDetailI18n {
   applications?: L[];
   /** Process steps / Ablauf */
   process?: Array<{ title: L; text: L }>;
+  /** Factors that influence cost (no prices). */
+  costFactors?: L[];
+  /** Information needed for a quotation. */
+  quoteChecklist?: L[];
 }
 
 export interface GallerySlide {
@@ -68,6 +72,8 @@ export interface ServiceDetail {
   whyUs: string[];
   applications: string[];
   process: Array<{ title: string; text: string }>;
+  costFactors: string[];
+  quoteChecklist: string[];
 }
 
 
@@ -728,6 +734,8 @@ export function localizeService(s: ServiceDetailI18n, lang: Lang): ServiceDetail
     whyUs: s.whyUs.map(pick),
     applications: (s.applications ?? []).map(pick),
     process: (s.process ?? []).map((p) => ({ title: pick(p.title), text: pick(p.text) })),
+    costFactors: (s.costFactors ?? []).map(pick),
+    quoteChecklist: (s.quoteChecklist ?? []).map(pick),
   };
 }
 

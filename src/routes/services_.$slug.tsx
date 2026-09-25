@@ -174,19 +174,31 @@ function ServiceDetailPage() {
             <div className="min-w-0 flex-1">
               <h1 className="font-display h-fluid-page text-balance">{service.h1}</h1>
               <div className="gold-divider w-24 mt-6" />
-              <p className="text-white/70 text-lg md:text-xl mt-6 max-w-3xl leading-relaxed">
+              <p className="text-gold/90 font-mono text-[11px] uppercase tracking-[0.25em] mt-6">
                 {service.subtitle}
               </p>
-              <Link
-                to="/contact"
-                className="group inline-flex items-center gap-3 mt-10 bg-gold text-ink px-8 py-4 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors"
-              >
-                {t("sd.cta")}
-                <ArrowUpRight
-                  size={16}
-                  className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                />
-              </Link>
+              <p className="text-white/75 text-lg md:text-xl mt-4 max-w-3xl leading-relaxed">
+                {service.intro}
+              </p>
+              <div className="flex flex-wrap items-center gap-4 mt-10">
+                <Link
+                  to="/contact"
+                  className="group inline-flex items-center gap-3 bg-gold text-ink px-8 py-4 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors"
+                >
+                  {t("sd.cta")}
+                  <ArrowUpRight
+                    size={16}
+                    className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                  />
+                </Link>
+                <Link
+                  to="/beratung"
+                  className="inline-flex items-center gap-3 border border-gold/60 text-gold px-8 py-4 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-gold hover:text-ink transition-colors"
+                >
+                  {lang === "de" ? "Kostenlose Beratung buchen" : "Book a free consultation"}
+                </Link>
+              </div>
+              <p className="text-white/55 text-sm mt-4">{LANGUAGES.short[lang]}</p>
             </div>
           </div>
         </div>
@@ -317,6 +329,62 @@ function ServiceDetailPage() {
                     </li>
                   ))}
                 </ol>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* KOSTEN + ANGEBOT */}
+      {(service.costFactors.length > 0 || service.quoteChecklist.length > 0) && (
+        <section className="bg-background py-20 md:py-28">
+          <div className="container-wide grid grid-cols-1 lg:grid-cols-2 gap-px bg-border border border-border">
+            {service.costFactors.length > 0 && (
+              <div className="bg-card p-8 md:p-12">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-4">
+                  {lang === "de" ? "Kosten" : "Costs"}
+                </p>
+                <h2 className="font-display text-2xl md:text-3xl text-balance">
+                  {lang === "de" ? "Was die Kosten beeinflusst" : "What influences the cost"}
+                </h2>
+                <p className="mt-4 text-muted-foreground leading-relaxed">
+                  {lang === "de"
+                    ? "Jedes Projekt ist anders. Pauschalpreise nennen wir daher nicht – der Preis richtet sich vor allem nach diesen Faktoren:"
+                    : "Every project is different, so we do not quote flat rates – the price depends mainly on these factors:"}
+                </p>
+                <ul className="mt-6 space-y-3">
+                  {service.costFactors.map((c) => (
+                    <li key={c} className="flex items-start gap-3">
+                      <Check size={18} className="text-gold mt-0.5 shrink-0" />
+                      <span className="leading-relaxed">{c}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {service.quoteChecklist.length > 0 && (
+              <div className="bg-ink text-white p-8 md:p-12">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-4">
+                  {lang === "de" ? "Angebot" : "Quotation"}
+                </p>
+                <h2 className="font-display text-2xl md:text-3xl text-balance">
+                  {lang === "de" ? "Diese Angaben helfen uns beim Angebot" : "Information that helps us quote"}
+                </h2>
+                <ul className="mt-6 space-y-3">
+                  {service.quoteChecklist.map((c) => (
+                    <li key={c} className="flex items-start gap-3">
+                      <Check size={18} className="text-gold mt-0.5 shrink-0" />
+                      <span className="leading-relaxed text-white/85">{c}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  to="/contact"
+                  className="group inline-flex items-center gap-3 mt-8 bg-gold text-ink px-6 py-3 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors"
+                >
+                  {lang === "de" ? "Anfrage senden" : "Send enquiry"}
+                  <ArrowUpRight size={14} />
+                </Link>
               </div>
             )}
           </div>
