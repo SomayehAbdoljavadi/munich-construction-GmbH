@@ -9,6 +9,7 @@ const CANONICAL_ORIGIN = "https://munichconstruction.de";
 const ALLOWED_AREA = new Set(["Bavaria", "Bayern"]);
 const EXTRA_ROUTES = ["/termin"]; // noindex route, not in sitemap
 const LANG = "de";
+const SITE_LANGS = ["de", "en"];
 
 const errors = [];
 const fail = (route, msg) => errors.push(`${route}: ${msg}`);
@@ -99,8 +100,11 @@ for (const route of routes) {
   }
   if (areas.length === 0) fail(route, "no areaServed found in JSON-LD");
   for (const a of areas) if (!ALLOWED_AREA.has(a)) fail(route, `incorrect areaServed "${a}" (Bavaria only)`);
-  for (const l of inLang.flat()) {
-    if (typeof l === "string" && !l.toLowerCase().startsWith(LANG)) fail(route, `JSON-LD inLanguage "${l}" inconsistent`);
+  // Bilingual site: inLanguage may list de + en, but must include the page language.
+  for (const v of inLang) {
+    const list = (Array.isArray(v) ? v : [v]).map((x) => String(x).toLowerCase());
+    if (!list.some((x) => x.startsWith(LANG))) fail(route, `JSON-LD inLanguage ${JSON.stringify(v)} lacks "${LANG}"`);
+    for (const x of list) if (!SITE_LANGS.some((s) => x.startsWith(s))) fail(route, `JSON-LD inLanguage "${x}" not a site language`);
   }
 }
 
