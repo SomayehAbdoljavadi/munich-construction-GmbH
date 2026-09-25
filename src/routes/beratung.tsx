@@ -18,6 +18,7 @@ import {
   Rocket,
 } from "lucide-react";
 import { fetchFreeSlots } from "@/lib/slots";
+import { ProjectAdvisor } from "@/components/ProjectAdvisor";
 import { useT, type Lang } from "@/lib/i18n";
 import { breadcrumb, ldScript, socialImage, webPage, ORG_ID, url } from "@/lib/seo";
 import beratungOg from "@/assets/mc-hero-bg.jpg";
@@ -175,6 +176,8 @@ function BeratungPage() {
           <p className="mt-6 text-sm text-white/50">{l(BERATUNG.heroNote)}</p>
         </div>
       </section>
+
+      <ProjectAdvisor whatsappHref={CONTACT.whatsapp} />
 
       {/* Topics */}
       <section className="py-20 md:py-28">
