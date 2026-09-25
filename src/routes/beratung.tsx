@@ -44,13 +44,13 @@ import {
 export const Route = createFileRoute("/beratung")({
   head: () => ({
     meta: [
-      { title: "Kostenlose Bauberatung in Bayern | Munich Construction" },
+      { title: "Bauberatung München & Bayern – kostenlos | Munich Construction" },
       {
         name: "description",
         content:
-          "Bauprojekt in Bayern? Kostenloses Erstgespräch zu Neubau, Renovierung, Sanierung und Brandschutz – auf Deutsch oder Persisch. Jetzt Termin online buchen.",
+          "Bau- und Renovierungsberatung in München und ganz Bayern: kostenloses Erstgespräch auf Deutsch oder Persisch. Jetzt Termin online buchen.",
       },
-      { property: "og:title", content: "Kostenlose Bauberatung in Bayern | Munich Construction" },
+      { property: "og:title", content: "Bauberatung München & Bayern – kostenlos | Munich Construction" },
       {
         property: "og:description",
         content:
@@ -59,7 +59,7 @@ export const Route = createFileRoute("/beratung")({
       { property: "og:url", content: url("/beratung") },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Kostenlose Bauberatung in Bayern" },
+      { name: "twitter:title", content: "Bauberatung München & Bayern – kostenlos" },
       {
         name: "twitter:description",
         content: "Erstgespräch zu Ihrem Bauprojekt in ganz Bayern – auf Deutsch oder Persisch, Termin online buchen.",
@@ -71,7 +71,7 @@ export const Route = createFileRoute("/beratung")({
       ldScript(
         webPage({
           path: "/beratung",
-          name: "Kostenlose Bauberatung in Bayern | Munich Construction",
+          name: "Bauberatung München & Bayern – kostenlos | Munich Construction",
           description:
             "Kostenloses Erstgespräch für Bauprojekte in ganz Bayern – Neubau, Renovierung, Sanierung, Brandschutz und Planung, auf Deutsch oder Persisch.",
           primaryImage: beratungOg,
