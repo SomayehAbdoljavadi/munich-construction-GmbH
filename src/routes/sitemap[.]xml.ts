@@ -3,6 +3,7 @@ import type {} from "@tanstack/react-start";
 import { BASE_URL } from "@/lib/seo";
 import { ALL_SERVICES_I18N } from "@/lib/services-data";
 import { PROJECT_PAGES } from "@/lib/project-pages";
+import { LOCATIONS } from "@/lib/locations-data";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -24,6 +25,9 @@ export const Route = createFileRoute("/sitemap.xml")({
             priority: "0.85",
             changefreq: "monthly",
           })),
+
+          { path: "/standorte", priority: "0.8", changefreq: "monthly" },
+          ...LOCATIONS.map((l) => ({ path: `/standorte/${l.slug}`, priority: "0.8", changefreq: "monthly" })),
 
           ...PROJECT_PAGES.map((p) => ({
             path: `/projects/${p.slug}`,
