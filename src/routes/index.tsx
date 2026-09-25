@@ -20,18 +20,18 @@ import { ldScript, socialImage, url, webPage } from "@/lib/seo";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Bauunternehmen Bayern | Munich Construction GmbH" },
+      { title: "Bauunternehmen München & Bayern | Munich Construction GmbH" },
       {
         name: "description",
         content:
-          "Bauunternehmen für ganz Bayern: Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau sowie Fenster und Türen — Bauleistungen aus einer Hand, jetzt beraten lassen.",
+          "Bauunternehmen mit Sitz in München – tätig in ganz Bayern: Neubau, Renovierung, Sanierung, Brandschutz und Trockenbau aus einer Hand. Jetzt anfragen.",
       },
-      { property: "og:title", content: "Bauunternehmen Bayern | Munich Construction GmbH" },
+      { property: "og:title", content: "Bauunternehmen München & Bayern | Munich Construction GmbH" },
       { property: "og:description", content: "Baufirma aus München für ganz Bayern: Neubau, Sanierung, Brandschutz, Trockenbau und Planung aus einer Hand." },
       { property: "og:url", content: url("/") },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "Bauunternehmen Bayern | Munich Construction GmbH" },
-      { name: "twitter:description", content: "Bauen, Sanieren und Planen in ganz Bayern." },
+      { name: "twitter:title", content: "Bauunternehmen München & Bayern | Munich Construction GmbH" },
+      { name: "twitter:description", content: "Bauunternehmen mit Sitz in München – tätig in ganz Bayern." },
       ...socialImage(heroBg, "Bauprojekt der Munich Construction GmbH in München"),
     ],
     links: [{ rel: "canonical", href: url("/") }],
@@ -39,9 +39,9 @@ export const Route = createFileRoute("/")({
       ldScript(
         webPage({
           path: "/",
-          name: "Bauunternehmen Bayern | Munich Construction GmbH",
+          name: "Bauunternehmen München & Bayern | Munich Construction GmbH",
           description:
-            "Bauunternehmen für ganz Bayern: Neubau, Renovierung, Sanierung, Brandschutz, Trockenbau sowie Fenster und Türen aus einer Hand.",
+            "Bauunternehmen mit Sitz in München – tätig in ganz Bayern: Neubau, Renovierung, Sanierung, Brandschutz und Trockenbau aus einer Hand.",
           primaryImage: heroBg,
         }),
       ),

@@ -63,6 +63,18 @@ export const FAQS_BY_SERVICE: Record<string, FAQ[]> = {
         en: "Yes. We develop fire-protection concepts per applicable codes and coordinate execution across all involved trades.",
       },
     },
+    {
+      q: { de: "Arbeiten Sie nur in München oder in ganz Bayern?", en: "Do you only work in Munich or throughout Bavaria?" },
+      a: { de: "Unser Sitz ist in München, Brandschutzarbeiten führen wir in ganz Bayern aus – unter anderem haben wir Brandschutzarbeiten in Hotels in München und Bayreuth umgesetzt.", en: "We are based in Munich and carry out fire protection works throughout Bavaria – including work in hotels in Munich and Bayreuth." },
+    },
+    {
+      q: { de: "Was kostet Brandschutz?", en: "How much does fire protection cost?" },
+      a: { de: "Die Kosten hängen unter anderem von Anzahl und Art der Durchführungen, der geforderten Feuerwiderstandsklasse, dem Zustand des Bestands und dem Dokumentationsumfang ab. Nach einer Besichtigung erhalten Sie ein konkretes Angebot.", en: "Costs depend on the number and type of penetrations, the required fire resistance rating, the condition of the building and the documentation scope, among other things. After a site visit you receive a specific quotation." },
+    },
+    {
+      q: { de: "Können Sie im laufenden Hotel- oder Bürobetrieb arbeiten?", en: "Can you work while a hotel or office stays open?" },
+      a: { de: "Das klären wir im Einzelfall bei der Besichtigung. Arbeitsbereiche und Zeitfenster stimmen wir mit Ihnen ab.", en: "We clarify this case by case during the site visit and agree work areas and time slots with you." },
+    },
   ],
   trockenbau: [
     ...COMMON_FAQS,
@@ -82,9 +94,21 @@ export const FAQS_BY_SERVICE: Record<string, FAQ[]> = {
         en: "How long does a typical drywall project take?",
       },
       a: {
-        de: "Die Dauer hängt von Größe und Anforderungen ab. Eine einzelne Wohnung ist meist in 1–2 Wochen umgesetzt, größere Gewerbeflächen entsprechend länger. Wir nennen Ihnen den genauen Zeitplan nach dem Aufmaß.",
-        en: "Duration depends on size and requirements. A single apartment is typically completed in 1–2 weeks; larger commercial spaces take longer. We confirm an exact schedule after the on-site survey.",
+        de: "Die Dauer hängt von Fläche, Schall- und Brandschutzanforderungen, Oberflächenqualität und dem Bauablauf der übrigen Gewerke ab. Einen verbindlichen Zeitplan nennen wir Ihnen nach Besichtigung und Aufmaß.",
+        en: "Duration depends on area, acoustic and fire protection requirements, surface quality and the schedule of the other trades. We confirm a binding schedule after the site visit and survey.",
       },
+    },
+    {
+      q: { de: "Arbeiten Sie nur in München oder in ganz Bayern?", en: "Do you only work in Munich or throughout Bavaria?" },
+      a: { de: "Unser Sitz ist in München, Trockenbauprojekte übernehmen wir in ganz Bayern – Referenzen gibt es unter anderem in München, Augsburg und Bayreuth.", en: "We are based in Munich and take on drywall projects throughout Bavaria – with references in Munich, Augsburg and Bayreuth, among others." },
+    },
+    {
+      q: { de: "Was kostet Trockenbau?", en: "How much does drywall construction cost?" },
+      a: { de: "Die Kosten hängen von Fläche, Schall-, Wärme- und Brandschutzanforderungen, Oberflächenqualität (Q1–Q4), Raumhöhen und Einbauten ab. Pauschalpreise nennen wir nicht – nach dem Aufmaß erhalten Sie ein konkretes Angebot.", en: "Costs depend on area, acoustic, thermal and fire protection requirements, surface quality (Q1–Q4), room heights and built-in elements. We do not quote flat rates – you receive a specific quotation after the survey." },
+    },
+    {
+      q: { de: "Welche Unterlagen brauchen Sie für ein Angebot?", en: "What do you need for a quotation?" },
+      a: { de: "Hilfreich sind Adresse, Grundriss oder Skizze mit Maßen, Fotos der Räume, bekannte Schall- oder Brandschutzanforderungen und Ihr gewünschter Zeitraum.", en: "Helpful are the address, a floor plan or sketch with dimensions, photos of the rooms, any known acoustic or fire protection requirements and your preferred timeframe." },
     },
   ],
   "injektion-und-risssperrung": [
