@@ -107,7 +107,7 @@ export const Route = createFileRoute("/services_/$slug")({
   errorComponent: ({ error }) => (
     <div className="container-wide py-32 text-center">
       <h1 className="font-display text-4xl mb-4">Etwas ist schiefgelaufen</h1>
-      <p className="text-muted-foreground">{error.message}</p>
+      <p className="text-muted-foreground">{error instanceof Error ? error.message : String(error)}</p>
     </div>
   ),
   component: ServiceDetailPage,
