@@ -70,7 +70,7 @@ function HomePage() {
   return (
     <>
       {/* SLIDE 1: HERO */}
-      <section className="homepage-section relative bg-ink text-white overflow-hidden min-h-screen flex items-center [scroll-snap-align:start]">
+      <section className="homepage-section relative bg-ink text-white overflow-hidden min-h-screen flex items-center">
         <div
           aria-hidden
           className="absolute inset-0 opacity-30"
@@ -141,7 +141,7 @@ function HomePage() {
       </section>
 
       {/* SLIDE 2: SERVICES */}
-      <section className="homepage-section bg-background py-[clamp(3.4rem,7vh,7rem)] min-h-screen flex items-center [scroll-snap-align:start]">
+      <section className="homepage-section bg-background py-[clamp(3.4rem,7vh,7rem)] min-h-screen flex items-center">
         <div className="homepage-wide w-full flex flex-col justify-center">
           <div className="max-w-none mb-[clamp(1.7rem,4.3vh,3.5rem)]">
             <p className="font-mono text-[18px] uppercase tracking-[0.3em] text-gold mb-4">
@@ -215,7 +215,7 @@ function HomePage() {
       </section>
 
       {/* SLIDE 3: CONTACT + FOOTER */}
-      <section className="homepage-section bg-ink text-white relative overflow-hidden min-h-screen flex flex-col [scroll-snap-align:start]">
+      <section className="homepage-section bg-ink text-white relative overflow-hidden min-h-screen flex flex-col">
         <div className="flex-1 py-[clamp(5rem,7vh,8rem)] flex items-center relative">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.04]" style={{
           backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
