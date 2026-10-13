@@ -9,79 +9,34 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TerminRouteImport } from './routes/termin'
-import { Route as StandorteRouteImport } from './routes/standorte'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ServicesRouteImport } from './routes/services'
-import { Route as ProjectsRouteImport } from './routes/projects'
-import { Route as ImprintRouteImport } from './routes/imprint'
-import { Route as DatenschutzRouteImport } from './routes/datenschutz'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CareersRouteImport } from './routes/careers'
-import { Route as BeratungRouteImport } from './routes/beratung'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as StandorteCityRouteImport } from './routes/standorte_.$city'
-import { Route as ServicesSlugRouteImport } from './routes/services_.$slug'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as BeratungRouteImport } from './routes/beratung'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
+import { Route as ImprintRouteImport } from './routes/imprint'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as StandorteRouteImport } from './routes/standorte'
+import { Route as TerminRouteImport } from './routes/termin'
 import { Route as ProjectsSlugRouteImport } from './routes/projects_.$slug'
-import { Route as ApiPublicProjectAdvisorRouteImport } from './routes/api/public/project-advisor'
-import { Route as ApiPublicContactRequestRouteImport } from './routes/api/public/contact-request'
-import { Route as ApiPublicConsultationSlotsRouteImport } from './routes/api/public/consultation-slots'
-import { Route as ApiPublicConsultationRemindersRouteImport } from './routes/api/public/consultation-reminders'
-import { Route as ApiPublicConsultationManageRouteImport } from './routes/api/public/consultation-manage'
-import { Route as ApiPublicConsultationIcsRouteImport } from './routes/api/public/consultation-ics'
-import { Route as ApiPublicConsultationCallbackRouteImport } from './routes/api/public/consultation-callback'
-import { Route as ApiPublicConsultationBookingRouteImport } from './routes/api/public/consultation-booking'
+import { Route as ServicesSlugRouteImport } from './routes/services_.$slug'
+import { Route as StandorteCityRouteImport } from './routes/standorte_.$city'
 import { Route as ApiPublicCareersApplicationRouteImport } from './routes/api/public/careers-application'
+import { Route as ApiPublicConsultationBookingRouteImport } from './routes/api/public/consultation-booking'
+import { Route as ApiPublicConsultationCallbackRouteImport } from './routes/api/public/consultation-callback'
+import { Route as ApiPublicConsultationIcsRouteImport } from './routes/api/public/consultation-ics'
+import { Route as ApiPublicConsultationManageRouteImport } from './routes/api/public/consultation-manage'
+import { Route as ApiPublicConsultationRemindersRouteImport } from './routes/api/public/consultation-reminders'
+import { Route as ApiPublicConsultationSlotsRouteImport } from './routes/api/public/consultation-slots'
+import { Route as ApiPublicContactRequestRouteImport } from './routes/api/public/contact-request'
+import { Route as ApiPublicProjectAdvisorRouteImport } from './routes/api/public/project-advisor'
 
-const TerminRoute = TerminRouteImport.update({
-  id: '/termin',
-  path: '/termin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StandorteRoute = StandorteRouteImport.update({
-  id: '/standorte',
-  path: '/standorte',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProjectsRoute = ProjectsRouteImport.update({
-  id: '/projects',
-  path: '/projects',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ImprintRoute = ImprintRouteImport.update({
-  id: '/imprint',
-  path: '/imprint',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DatenschutzRoute = DatenschutzRouteImport.update({
-  id: '/datenschutz',
-  path: '/datenschutz',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CareersRoute = CareersRouteImport.update({
-  id: '/careers',
-  path: '/careers',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BeratungRoute = BeratungRouteImport.update({
-  id: '/beratung',
-  path: '/beratung',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -89,19 +44,54 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const BeratungRoute = BeratungRouteImport.update({
+  id: '/beratung',
+  path: '/beratung',
   getParentRoute: () => rootRouteImport,
 } as any)
-const StandorteCityRoute = StandorteCityRouteImport.update({
-  id: '/standorte_/$city',
-  path: '/standorte/$city',
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesSlugRoute = ServicesSlugRouteImport.update({
-  id: '/services_/$slug',
-  path: '/services/$slug',
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImprintRoute = ImprintRouteImport.update({
+  id: '/imprint',
+  path: '/imprint',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StandorteRoute = StandorteRouteImport.update({
+  id: '/standorte',
+  path: '/standorte',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TerminRoute = TerminRouteImport.update({
+  id: '/termin',
+  path: '/termin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
@@ -109,44 +99,20 @@ const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
   path: '/projects/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicProjectAdvisorRoute = ApiPublicProjectAdvisorRouteImport.update({
-  id: '/api/public/project-advisor',
-  path: '/api/public/project-advisor',
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/services_/$slug',
+  path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicContactRequestRoute = ApiPublicContactRequestRouteImport.update({
-  id: '/api/public/contact-request',
-  path: '/api/public/contact-request',
+const StandorteCityRoute = StandorteCityRouteImport.update({
+  id: '/standorte_/$city',
+  path: '/standorte/$city',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicConsultationSlotsRoute =
-  ApiPublicConsultationSlotsRouteImport.update({
-    id: '/api/public/consultation-slots',
-    path: '/api/public/consultation-slots',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiPublicConsultationRemindersRoute =
-  ApiPublicConsultationRemindersRouteImport.update({
-    id: '/api/public/consultation-reminders',
-    path: '/api/public/consultation-reminders',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiPublicConsultationManageRoute =
-  ApiPublicConsultationManageRouteImport.update({
-    id: '/api/public/consultation-manage',
-    path: '/api/public/consultation-manage',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiPublicConsultationIcsRoute =
-  ApiPublicConsultationIcsRouteImport.update({
-    id: '/api/public/consultation-ics',
-    path: '/api/public/consultation-ics',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiPublicConsultationCallbackRoute =
-  ApiPublicConsultationCallbackRouteImport.update({
-    id: '/api/public/consultation-callback',
-    path: '/api/public/consultation-callback',
+const ApiPublicCareersApplicationRoute =
+  ApiPublicCareersApplicationRouteImport.update({
+    id: '/api/public/careers-application',
+    path: '/api/public/careers-application',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiPublicConsultationBookingRoute =
@@ -155,12 +121,46 @@ const ApiPublicConsultationBookingRoute =
     path: '/api/public/consultation-booking',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiPublicCareersApplicationRoute =
-  ApiPublicCareersApplicationRouteImport.update({
-    id: '/api/public/careers-application',
-    path: '/api/public/careers-application',
+const ApiPublicConsultationCallbackRoute =
+  ApiPublicConsultationCallbackRouteImport.update({
+    id: '/api/public/consultation-callback',
+    path: '/api/public/consultation-callback',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicConsultationIcsRoute =
+  ApiPublicConsultationIcsRouteImport.update({
+    id: '/api/public/consultation-ics',
+    path: '/api/public/consultation-ics',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicConsultationManageRoute =
+  ApiPublicConsultationManageRouteImport.update({
+    id: '/api/public/consultation-manage',
+    path: '/api/public/consultation-manage',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicConsultationRemindersRoute =
+  ApiPublicConsultationRemindersRouteImport.update({
+    id: '/api/public/consultation-reminders',
+    path: '/api/public/consultation-reminders',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicConsultationSlotsRoute =
+  ApiPublicConsultationSlotsRouteImport.update({
+    id: '/api/public/consultation-slots',
+    path: '/api/public/consultation-slots',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicContactRequestRoute = ApiPublicContactRequestRouteImport.update({
+  id: '/api/public/contact-request',
+  path: '/api/public/contact-request',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicProjectAdvisorRoute = ApiPublicProjectAdvisorRouteImport.update({
+  id: '/api/public/project-advisor',
+  path: '/api/public/project-advisor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -351,74 +351,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/termin': {
-      id: '/termin'
-      path: '/termin'
-      fullPath: '/termin'
-      preLoaderRoute: typeof TerminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/standorte': {
-      id: '/standorte'
-      path: '/standorte'
-      fullPath: '/standorte'
-      preLoaderRoute: typeof StandorteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/projects': {
-      id: '/projects'
-      path: '/projects'
-      fullPath: '/projects'
-      preLoaderRoute: typeof ProjectsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/imprint': {
-      id: '/imprint'
-      path: '/imprint'
-      fullPath: '/imprint'
-      preLoaderRoute: typeof ImprintRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/datenschutz': {
-      id: '/datenschutz'
-      path: '/datenschutz'
-      fullPath: '/datenschutz'
-      preLoaderRoute: typeof DatenschutzRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/careers': {
-      id: '/careers'
-      path: '/careers'
-      fullPath: '/careers'
-      preLoaderRoute: typeof CareersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/beratung': {
-      id: '/beratung'
-      path: '/beratung'
-      fullPath: '/beratung'
-      preLoaderRoute: typeof BeratungRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -428,25 +365,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/beratung': {
+      id: '/beratung'
+      path: '/beratung'
+      fullPath: '/beratung'
+      preLoaderRoute: typeof BeratungRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/standorte_/$city': {
-      id: '/standorte_/$city'
-      path: '/standorte/$city'
-      fullPath: '/standorte/$city'
-      preLoaderRoute: typeof StandorteCityRouteImport
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services_/$slug': {
-      id: '/services_/$slug'
-      path: '/services/$slug'
-      fullPath: '/services/$slug'
-      preLoaderRoute: typeof ServicesSlugRouteImport
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/imprint': {
+      id: '/imprint'
+      path: '/imprint'
+      fullPath: '/imprint'
+      preLoaderRoute: typeof ImprintRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/standorte': {
+      id: '/standorte'
+      path: '/standorte'
+      fullPath: '/standorte'
+      preLoaderRoute: typeof StandorteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/termin': {
+      id: '/termin'
+      path: '/termin'
+      fullPath: '/termin'
+      preLoaderRoute: typeof TerminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects_/$slug': {
@@ -456,53 +442,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/project-advisor': {
-      id: '/api/public/project-advisor'
-      path: '/api/public/project-advisor'
-      fullPath: '/api/public/project-advisor'
-      preLoaderRoute: typeof ApiPublicProjectAdvisorRouteImport
+    '/services_/$slug': {
+      id: '/services_/$slug'
+      path: '/services/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/contact-request': {
-      id: '/api/public/contact-request'
-      path: '/api/public/contact-request'
-      fullPath: '/api/public/contact-request'
-      preLoaderRoute: typeof ApiPublicContactRequestRouteImport
+    '/standorte_/$city': {
+      id: '/standorte_/$city'
+      path: '/standorte/$city'
+      fullPath: '/standorte/$city'
+      preLoaderRoute: typeof StandorteCityRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/consultation-slots': {
-      id: '/api/public/consultation-slots'
-      path: '/api/public/consultation-slots'
-      fullPath: '/api/public/consultation-slots'
-      preLoaderRoute: typeof ApiPublicConsultationSlotsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/consultation-reminders': {
-      id: '/api/public/consultation-reminders'
-      path: '/api/public/consultation-reminders'
-      fullPath: '/api/public/consultation-reminders'
-      preLoaderRoute: typeof ApiPublicConsultationRemindersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/consultation-manage': {
-      id: '/api/public/consultation-manage'
-      path: '/api/public/consultation-manage'
-      fullPath: '/api/public/consultation-manage'
-      preLoaderRoute: typeof ApiPublicConsultationManageRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/consultation-ics': {
-      id: '/api/public/consultation-ics'
-      path: '/api/public/consultation-ics'
-      fullPath: '/api/public/consultation-ics'
-      preLoaderRoute: typeof ApiPublicConsultationIcsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/consultation-callback': {
-      id: '/api/public/consultation-callback'
-      path: '/api/public/consultation-callback'
-      fullPath: '/api/public/consultation-callback'
-      preLoaderRoute: typeof ApiPublicConsultationCallbackRouteImport
+    '/api/public/careers-application': {
+      id: '/api/public/careers-application'
+      path: '/api/public/careers-application'
+      fullPath: '/api/public/careers-application'
+      preLoaderRoute: typeof ApiPublicCareersApplicationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/consultation-booking': {
@@ -512,11 +470,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicConsultationBookingRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/careers-application': {
-      id: '/api/public/careers-application'
-      path: '/api/public/careers-application'
-      fullPath: '/api/public/careers-application'
-      preLoaderRoute: typeof ApiPublicCareersApplicationRouteImport
+    '/api/public/consultation-callback': {
+      id: '/api/public/consultation-callback'
+      path: '/api/public/consultation-callback'
+      fullPath: '/api/public/consultation-callback'
+      preLoaderRoute: typeof ApiPublicConsultationCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/consultation-ics': {
+      id: '/api/public/consultation-ics'
+      path: '/api/public/consultation-ics'
+      fullPath: '/api/public/consultation-ics'
+      preLoaderRoute: typeof ApiPublicConsultationIcsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/consultation-manage': {
+      id: '/api/public/consultation-manage'
+      path: '/api/public/consultation-manage'
+      fullPath: '/api/public/consultation-manage'
+      preLoaderRoute: typeof ApiPublicConsultationManageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/consultation-reminders': {
+      id: '/api/public/consultation-reminders'
+      path: '/api/public/consultation-reminders'
+      fullPath: '/api/public/consultation-reminders'
+      preLoaderRoute: typeof ApiPublicConsultationRemindersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/consultation-slots': {
+      id: '/api/public/consultation-slots'
+      path: '/api/public/consultation-slots'
+      fullPath: '/api/public/consultation-slots'
+      preLoaderRoute: typeof ApiPublicConsultationSlotsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/contact-request': {
+      id: '/api/public/contact-request'
+      path: '/api/public/contact-request'
+      fullPath: '/api/public/contact-request'
+      preLoaderRoute: typeof ApiPublicContactRequestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/project-advisor': {
+      id: '/api/public/project-advisor'
+      path: '/api/public/project-advisor'
+      fullPath: '/api/public/project-advisor'
+      preLoaderRoute: typeof ApiPublicProjectAdvisorRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
