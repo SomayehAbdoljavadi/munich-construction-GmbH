@@ -194,14 +194,20 @@ const translations: Dict = {
 
   // imprint
   "imprint.title": { de: "Impressum", en: "Imprint" },
-  "imprint.responsible": { de: "Angaben gemäß § 5 TMG", en: "Information according to § 5 TMG" },
+  "imprint.responsible": { de: "Angaben gemäß § 5 DDG", en: "Information according to § 5 DDG" },
   "imprint.contact": { de: "Kontakt", en: "Contact" },
   "imprint.represented": { de: "Vertretungsberechtigter Geschäftsführer", en: "Authorized Managing Director" },
   "imprint.register": { de: "Registereintrag", en: "Register Entry" },
-  "imprint.register.body": { de: "Handelsregister: HRB 264907", en: "Commercial register: HRB 264907" },
+  "imprint.register.body": { de: "Registergericht: Amtsgericht München · Handelsregister: HRB 264907", en: "Register court: Amtsgericht München · Commercial register: HRB 264907" },
   "imprint.vat": { de: "Steuernummer", en: "Tax number" },
   "imprint.vat.body": { de: "143/165/30681", en: "143/165/30681" },
-  "imprint.responsible.content": { de: "Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV", en: "Responsible for content per § 55 (2) RStV" },
+  "imprint.responsible.content": { de: "Verantwortlich für den Inhalt gemäß § 18 Abs. 2 MStV", en: "Responsible for content according to § 18 (2) MStV" },
+  "imprint.brand": { de: "Weitere Marke und Geschäftsbereich", en: "Additional brand and business division" },
+  "imprint.brand.body": {
+    de: "MUCLIVA Immobilien ist eine Marke der Munich Construction GmbH. Unter dieser Marke entwickelt das Unternehmen seinen Geschäftsbereich für Immobilienvermittlung mit Schwerpunkt München und Umgebung.",
+    en: "MUCLIVA Immobilien is a brand of Munich Construction GmbH. Under this brand, the company is developing its real estate brokerage division with a focus on Munich and the surrounding area.",
+  },
+  "imprint.brand.operator": { de: "Rechtlicher Betreiber", en: "Legal operator" },
   "imprint.disclaimer": { de: "Haftungsausschluss", en: "Disclaimer" },
   "imprint.disclaimer.body": {
     de: "Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.",

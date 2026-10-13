@@ -63,6 +63,16 @@ function ImprintPage() {
             <p>Mehdi Mardi · Heiterwanger Straße 30 · 81373 München</p>
           </Section>
 
+          <Section title={t("imprint.brand")}>
+            <p>{t("imprint.brand.body")}</p>
+            <p className="pt-2 font-medium">MUCLIVA Immobilien</p>
+            <p>Website: <a href="https://mucliva.de" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">https://mucliva.de</a></p>
+            <p>E-Mail: <a href="mailto:info@mucliva.de" className="text-gold hover:underline">info@mucliva.de</a></p>
+            <p>{t("imprint.brand.operator")}: Munich Construction GmbH</p>
+          </Section>
+
+
+
           <Section title={t("imprint.disclaimer")}>
             <p className="text-muted-foreground leading-relaxed">{t("imprint.disclaimer.body")}</p>
           </Section>
