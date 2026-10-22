@@ -102,7 +102,7 @@ const T = {
     de: "Eine Übermittlung in Länder außerhalb des EWR findet nur im Rahmen der oben genannten Dienste statt (Hosting über Cloudflare, E-Mail-Versand über Resend, KI-Gateway unseres Plattformbetreibers Lovable für den Projektberater) und ist durch Standardvertragsklauseln bzw. das EU-US Data Privacy Framework abgesichert. Die Kartenansicht nutzt Server der OpenStreetMap Foundation im Vereinigten Königreich (Angemessenheitsbeschluss der EU-Kommission). Rückruf- und Termindaten werden in einer Datenbank in der EU gespeichert; E-Mail-Inhalte und Bewerbungsunterlagen durchlaufen den genannten E-Mail-Dienst.",
     en: "Transfers to countries outside the EEA only occur within the services listed above (hosting via Cloudflare, email delivery via Resend, the AI gateway of our platform operator Lovable for the project advisor) and are safeguarded by standard contractual clauses or the EU-US Data Privacy Framework. The map view uses servers of the OpenStreetMap Foundation in the United Kingdom (EU adequacy decision). Callback and booking data is stored in a database in the EU; email contents and application documents pass through the email service named above.",
   },
-  updated: { de: "Stand: August 2026 · Einwilligungsversion 1", en: "Last updated: August 2026 · Consent version 1" },
+  updated: { de: "Stand: Oktober 2026 · Einwilligungsversion 1", en: "Last updated: October 2026 · Consent version 1" },
 } satisfies Record<string, L>;
 
 const COOKIE_ROWS: Array<Record<"name" | "provider" | "purpose" | "category" | "duration" | "basis", L>> = [
