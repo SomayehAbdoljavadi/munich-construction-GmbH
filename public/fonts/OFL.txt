@@ -1,0 +1,11 @@
+Fonts in this directory are licensed under the SIL Open Font License, Version 1.1.
+
+- Inter — Copyright (c) 2016-2024 The Inter Project Authors (https://github.com/rsms/inter)
+- Playfair Display — Copyright 2017 The Playfair Display Project Authors (https://github.com/clauseggers/Playfair-Display)
+- JetBrains Mono — Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)
+
+Full license text: https://openfontlicense.org/open-font-license-official-text/
+
+The SIL Open Font License 1.1 permits use, embedding, self-hosting, modification and
+redistribution, including for commercial purposes, provided the license and copyright
+notices are retained and the fonts are not sold by themselves.
