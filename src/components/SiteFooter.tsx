@@ -18,7 +18,7 @@ export function SiteFooter() {
             {t("footer.tagline")}
           </p>
           <div className="flex gap-3">
-            <SocialLink href="https://wa.me/491763235481 5" label="WhatsApp">
+            <SocialLink href="https://wa.me/4917632354815" label="WhatsApp">
               <WhatsAppIcon />
             </SocialLink>
             <SocialLink href="https://instagram.com" label="Instagram">

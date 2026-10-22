@@ -8,7 +8,14 @@ import { calendarNote, icsAttachment } from "@/lib/consultation-ics.server";
 export const Route = createFileRoute("/api/public/consultation-reminders")({
   server: {
     handlers: {
-      POST: async () => {
+      POST: async ({ request }) => {
+        // Only the internal scheduler (database cron job) may trigger this.
+        // It authenticates with the project's publishable key in the apikey header.
+        const expectedKey = process.env["SUPABASE_PUBLISHABLE_KEY"] ?? process.env["VITE_SUPABASE_PUBLISHABLE_KEY"];
+        if (!expectedKey || request.headers.get("apikey") !== expectedKey) {
+          return json({ error: "unauthorized" }, 401);
+        }
+
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
         const now = Date.now();
