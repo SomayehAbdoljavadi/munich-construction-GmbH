@@ -18,7 +18,7 @@ export const Route = createFileRoute("/imprint")({
 });
 
 function ImprintPage() {
-  const { t } = useT();
+  const { t, lang } = useT();
   return (
     <>
       <section className="bg-ink text-white py-20 md:py-28">
