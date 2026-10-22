@@ -62,8 +62,8 @@ const T = {
     en: "OpenStreetMap: The map view on the home and contact pages is loaded from servers of the OpenStreetMap Foundation (United Kingdom, EU adequacy decision). Your IP address is transmitted to OpenStreetMap. The map is only loaded after you consent to the “External Media” category; before that you see a placeholder. OpenStreetMap does not set marketing cookies. Legal basis: Art. 6(1)(a) GDPR.",
   },
   fonts: {
-    de: "Google Fonts: Die Schriftarten dieser Website werden von Google Fonts (Google Ireland Limited, Irland) geladen; dabei wird Ihre IP-Adresse an Google übertragen und ggf. an Google LLC in den USA (Standardvertragsklauseln, EU-US Data Privacy Framework) weitergegeben. Google Fonts setzt keine Cookies. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (einheitliche und barrierefreie Darstellung der Website).",
-    en: "Google Fonts: The website's typefaces are loaded from Google Fonts (Google Ireland Limited, Ireland); your IP address is transmitted to Google and may be forwarded to Google LLC in the USA (standard contractual clauses, EU-US Data Privacy Framework). Google Fonts does not set cookies. Legal basis: Art. 6(1)(f) GDPR (consistent and accessible presentation of the website).",
+    de: "Schriftarten: Die Schriftarten dieser Website (Inter, Playfair Display, JetBrains Mono) werden vollständig von unserem eigenen Server geladen. Es findet keine Verbindung zu Google Fonts oder anderen externen Schriftarten-Diensten statt; Ihre IP-Adresse wird dabei nicht an Dritte übertragen.",
+    en: "Fonts: The website's typefaces (Inter, Playfair Display, JetBrains Mono) are loaded entirely from our own server. No connection is made to Google Fonts or other external font services; your IP address is not transmitted to third parties for fonts.",
   },
   whatsapp: {
     de: "WhatsApp / Telefon / E-Mail: Links zu WhatsApp, Telefon und E-Mail sind reine Verweise. Eine Verbindung zu WhatsApp (Meta Platforms Ireland Ltd.) entsteht erst, wenn Sie den Link aktiv anklicken. Es werden keine Meta-Skripte oder Pixel auf dieser Website eingebunden.",
@@ -87,8 +87,8 @@ const T = {
   },
   transferTitle: { de: "9. Datenübermittlung in Drittländer", en: "9. Transfers outside the EEA" },
   transfer: {
-    de: "Eine Übermittlung in Länder außerhalb des EWR findet nur im Rahmen der oben genannten Dienste statt (Cloudflare, Google Fonts, E-Mail-Versand über Resend) und ist durch Standardvertragsklauseln bzw. das EU-US Data Privacy Framework abgesichert. Formular- und Termindaten werden in der EU gespeichert.",
-    en: "Transfers to countries outside the EEA only occur within the services listed above (Cloudflare, Google Fonts, email delivery via Resend) and are safeguarded by standard contractual clauses or the EU-US Data Privacy Framework. Form and booking data is stored in the EU.",
+    de: "Eine Übermittlung in Länder außerhalb des EWR findet nur im Rahmen der oben genannten Dienste statt (Cloudflare, E-Mail-Versand über Resend) und ist durch Standardvertragsklauseln bzw. das EU-US Data Privacy Framework abgesichert. Formular- und Termindaten werden in der EU gespeichert.",
+    en: "Transfers to countries outside the EEA only occur within the services listed above (Cloudflare, email delivery via Resend) and are safeguarded by standard contractual clauses or the EU-US Data Privacy Framework. Form and booking data is stored in the EU.",
   },
   updated: { de: "Stand: August 2026 · Einwilligungsversion 1", en: "Last updated: August 2026 · Consent version 1" },
 } satisfies Record<string, L>;
@@ -144,12 +144,12 @@ const COOKIE_ROWS: Array<Record<"name" | "provider" | "purpose" | "category" | "
     basis: { de: "Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG", en: "Art. 6(1)(a) GDPR, Sec. 25(1) TDDDG" },
   },
   {
-    name: { de: "Google Fonts (kein Cookie)", en: "Google Fonts (no cookie)" },
-    provider: { de: "Google Ireland Limited", en: "Google Ireland Limited" },
-    purpose: { de: "Laden der Schriftarten der Website.", en: "Loading the website's typefaces." },
+    name: { de: "Schriftarten (kein Cookie)", en: "Fonts (no cookie)" },
+    provider: { de: "Munich Construction GmbH (eigener Server)", en: "Munich Construction GmbH (own server)" },
+    purpose: { de: "Laden der Schriftarten der Website von unserem eigenen Server.", en: "Loading the website's typefaces from our own server." },
     category: { de: "Notwendig (Darstellung)", en: "Necessary (presentation)" },
     duration: { de: "Browser-Cache (bis 1 Jahr)", en: "Browser cache (up to 1 year)" },
-    basis: { de: "Art. 6 Abs. 1 lit. f DSGVO", en: "Art. 6(1)(f) GDPR" },
+    basis: { de: "§ 25 Abs. 2 TDDDG, Art. 6 Abs. 1 lit. f DSGVO", en: "Sec. 25(2) TDDDG, Art. 6(1)(f) GDPR" },
   },
 ];
 
