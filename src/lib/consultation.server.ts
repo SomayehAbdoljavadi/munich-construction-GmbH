@@ -8,6 +8,13 @@ const hits = new Map<string, number[]>();
 
 export function rateLimited(ip: string, limit = 8, windowMs = 60 * 60 * 1000) {
   const now = Date.now();
+  // Periodically drop IP keys with no recent hits so addresses are not kept
+  // in memory longer than the one-hour counting window.
+  if (hits.size > 1000) {
+    for (const [key, times] of hits) {
+      if (times.every((t) => now - t >= windowMs)) hits.delete(key);
+    }
+  }
   const list = (hits.get(ip) ?? []).filter((t) => now - t < windowMs);
   list.push(now);
   hits.set(ip, list);
@@ -99,8 +106,9 @@ export function mailer() {
       body: JSON.stringify(payload),
     });
     if (!res.ok) {
-      const detail = (await res.text().catch(() => "")).slice(0, 300);
-      console.error(`[email] delivery failed with status ${res.status}: ${detail}`);
+      // Log the status only — the provider response body may echo submitted
+      // personal data (recipient addresses, subjects).
+      console.error(`[email] delivery failed with status ${res.status}`);
       throw new Error(`email_failed_${res.status}`);
     }
     const body = (await res.json().catch(() => ({}))) as { id?: string };

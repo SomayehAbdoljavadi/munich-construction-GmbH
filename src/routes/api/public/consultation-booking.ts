@@ -137,14 +137,15 @@ async function handleBooking(request: Request) {
         const slotMinutes = 15;
 
         if (result.outcome === "duplicate") {
+          // A booking for this email+slot already exists. Never hand out the
+          // management token/URL here — anyone who knows an email address and
+          // a booked slot could otherwise take over that booking. The customer
+          // already received the management link in their confirmation email.
           return json(
             {
               ok: true,
-              id: booking.id,
-              cancelToken: booking.cancel_token,
-              manageUrl: `${origin}/termin?id=${booking.id}&token=${booking.cancel_token}`,
-              emailPending: result.customer_email_status !== "sent",
               duplicate: true,
+              emailPending: result.customer_email_status !== "sent",
             },
             200,
           );

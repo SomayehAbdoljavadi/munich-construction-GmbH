@@ -21,3 +21,12 @@
 - [ ] Conversion tracking — blocked: no analytics tool/ID; GBP text delivered
 - [x] Persian final report
 - [x] Location pages München, Nürnberg, Regensburg, Augsburg (/standorte)
+
+## Legal/compliance audit (uploaded brief, 22 Oct)
+- [x] Fonts: self-hosted Inter, Playfair Display, JetBrains Mono (OFL) — removed Google Fonts requests; privacy policy updated
+- [ ] Asset/license inventory (agent running)
+- [ ] Data-flow map + legal bases (agent running)
+- [ ] Legal pages vs actual behavior (agent running)
+- [ ] Implement remaining corrections
+- [ ] Tests with synthetic data (consent, forms, network)
+- [ ] Final internal report with statuses

@@ -62,17 +62,29 @@ const T = {
     en: "OpenStreetMap: The map view on the home and contact pages is loaded from servers of the OpenStreetMap Foundation (United Kingdom, EU adequacy decision). Your IP address is transmitted to OpenStreetMap. The map is only loaded after you consent to the “External Media” category; before that you see a placeholder. OpenStreetMap does not set marketing cookies. Legal basis: Art. 6(1)(a) GDPR.",
   },
   fonts: {
-    de: "Google Fonts: Die Schriftarten dieser Website werden von Google Fonts (Google Ireland Limited, Irland) geladen; dabei wird Ihre IP-Adresse an Google übertragen und ggf. an Google LLC in den USA (Standardvertragsklauseln, EU-US Data Privacy Framework) weitergegeben. Google Fonts setzt keine Cookies. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (einheitliche und barrierefreie Darstellung der Website).",
-    en: "Google Fonts: The website's typefaces are loaded from Google Fonts (Google Ireland Limited, Ireland); your IP address is transmitted to Google and may be forwarded to Google LLC in the USA (standard contractual clauses, EU-US Data Privacy Framework). Google Fonts does not set cookies. Legal basis: Art. 6(1)(f) GDPR (consistent and accessible presentation of the website).",
+    de: "Schriftarten: Die Schriftarten dieser Website (Inter, Playfair Display, JetBrains Mono) werden vollständig von unserem eigenen Server geladen. Es findet keine Verbindung zu Google Fonts oder anderen externen Schriftarten-Diensten statt; Ihre IP-Adresse wird dabei nicht an Dritte übertragen.",
+    en: "Fonts: The website's typefaces (Inter, Playfair Display, JetBrains Mono) are loaded entirely from our own server. No connection is made to Google Fonts or other external font services; your IP address is not transmitted to third parties for fonts.",
   },
   whatsapp: {
-    de: "WhatsApp / Telefon / E-Mail: Links zu WhatsApp, Telefon und E-Mail sind reine Verweise. Eine Verbindung zu WhatsApp (Meta Platforms Ireland Ltd.) entsteht erst, wenn Sie den Link aktiv anklicken. Es werden keine Meta-Skripte oder Pixel auf dieser Website eingebunden.",
-    en: "WhatsApp / phone / email: Links to WhatsApp, phone and email are plain links. A connection to WhatsApp (Meta Platforms Ireland Ltd.) is only established when you actively click the link. No Meta scripts or pixels are embedded on this website.",
+    de: "WhatsApp / Telefon / E-Mail: Links zu WhatsApp, Telefon und E-Mail sind reine Verweise. Eine Verbindung zu WhatsApp (Meta Platforms Ireland Ltd.) entsteht erst, wenn Sie den Link aktiv anklicken. Es werden keine Meta-Skripte oder Pixel auf dieser Website eingebunden. Wenn Sie uns über WhatsApp kontaktieren (z. B. um Projektfotos zu senden), verarbeiten wir Ihre Nachrichten und Anhänge zur Bearbeitung Ihrer Anfrage (Art. 6 Abs. 1 lit. b DSGVO); die Verarbeitung durch Meta erfolgt nach den Bedingungen von WhatsApp, auf die wir keinen Einfluss haben.",
+    en: "WhatsApp / phone / email: Links to WhatsApp, phone and email are plain links. A connection to WhatsApp (Meta Platforms Ireland Ltd.) is only established when you actively click the link. No Meta scripts or pixels are embedded on this website. If you contact us via WhatsApp (e.g. to send project photos), we process your messages and attachments to handle your enquiry (Art. 6(1)(b) GDPR); Meta's own processing is governed by WhatsApp's terms, over which we have no control.",
+  },
+  advisor: {
+    de: "KI-Projektberater: Auf der Beratungsseite können Sie Ihr Bauvorhaben in Freitext beschreiben. Diese Beschreibung wird zur Erstellung einer unverbindlichen Leistungsempfehlung an ein KI-Modell über das Gateway unseres Plattformbetreibers (Lovable) übertragen. Die Eingabe wird nicht in unserer Datenbank gespeichert und nicht per E-Mail versendet; die Übertragung erfolgt mit der Einstellung, dass sie nicht dauerhaft gespeichert wird (store: false). Bitte geben Sie in das Freitextfeld keine unnötigen personenbezogenen Daten ein. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen auf Ihre Anfrage).",
+    en: "AI project advisor: On the consultation page you can describe your construction project in free text. This description is transmitted to an AI model via our platform operator's gateway (Lovable) to produce a non-binding service recommendation. The input is not stored in our database and not sent by email; the request is made with the setting that it is not retained (store: false). Please do not enter unnecessary personal data into the free-text field. Legal basis: Art. 6(1)(b) GDPR (pre-contractual measures at your request).",
+  },
+  emailProcessor: {
+    de: "E-Mail-Versand (Resend): Formularinhalte, Bewerbungsunterlagen, Terminbestätigungen, Kalenderdateien und Erinnerungen werden über den E-Mail-Dienst Resend (Resend, Inc., USA) versendet. Dabei werden die jeweiligen Inhalte einschließlich E-Mail-Adressen und Anhänge an Resend übertragen (Auftragsverarbeitung, EU-US Data Privacy Framework bzw. Standardvertragsklauseln).",
+    en: "Email delivery (Resend): Form contents, application documents, appointment confirmations, calendar files and reminders are sent via the email service Resend (Resend, Inc., USA). The respective contents, including email addresses and attachments, are transmitted to Resend (data processing agreement, EU-US Data Privacy Framework or standard contractual clauses).",
   },
   formsTitle: { de: "6. Formulare (Kontakt, Bewerbung, Beratungstermin)", en: "6. Forms (contact, applications, consultation booking)" },
   forms: {
-    de: "Wenn Sie das Kontakt-, Bewerbungs-, Rückruf- oder Terminbuchungsformular nutzen, verarbeiten wir die von Ihnen angegebenen Daten (z. B. Name, E-Mail-Adresse, Telefonnummer, Projektangaben, hochgeladene Dateien) zur Bearbeitung Ihrer Anfrage. Diese Daten werden in unserer Datenbank (Supabase, EU-Region) gespeichert und per E-Mail an uns übermittelt. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. f DSGVO. Terminbuchungen werden gelöscht, sobald sie für die Bearbeitung nicht mehr erforderlich sind; Bewerbungsunterlagen spätestens 6 Monate nach Abschluss des Verfahrens. Wir nutzen keine externen Terminbuchungs-Tools von Drittanbietern.",
-    en: "If you use the contact, application, callback or appointment-booking form, we process the data you provide (e.g. name, email address, phone number, project details, uploaded files) in order to handle your request. This data is stored in our database (Supabase, EU region) and sent to us by email. Legal basis: Art. 6(1)(b) GDPR (pre-contractual measures) or Art. 6(1)(f) GDPR. Bookings are deleted once no longer required; application documents at the latest 6 months after the process ends. We do not use any third-party appointment-booking tools.",
+    de: "Wenn Sie eines unserer Formulare nutzen, verarbeiten wir die von Ihnen angegebenen Daten zur Bearbeitung Ihrer Anfrage (Art. 6 Abs. 1 lit. b DSGVO, bei Bewerbungen zusätzlich § 26 BDSG). Im Einzelnen: Kontaktformular: Name, E-Mail, optional Telefon, Betreff und Nachricht werden ausschließlich per E-Mail an uns übermittelt und nicht in einer Datenbank gespeichert. Bewerbungsformular: Angaben und PDF-Unterlagen (Lebenslauf, optional Anschreiben) werden als E-Mail-Anhang an uns übermittelt und nicht in einer Datenbank gespeichert; Bewerbungsunterlagen löschen wir spätestens 6 Monate nach Abschluss des Verfahrens. Rückruf- und Terminbuchungsformular: Ihre Angaben werden in unserer Datenbank (EU-Region) gespeichert; hochgeladene Dateien werden nur als E-Mail-Anhang weitergeleitet. Zu Terminbuchungen erhalten Sie eine Bestätigung mit Kalenderdatei (.ics) sowie einen persönlichen Verwaltungslink (Termin verschieben/stornieren); ca. 24 Stunden vor dem Termin senden wir eine automatische Erinnerung. Beim Stornieren wird der Termin auf den Status „storniert“ gesetzt und der Zeitslot wieder freigegeben. Buchungsdaten werden gelöscht, sobald sie für die Bearbeitung nicht mehr erforderlich sind. Wir nutzen keine externen Terminbuchungs-Tools von Drittanbietern.",
+    en: "When you use one of our forms, we process the data you provide to handle your enquiry (Art. 6(1)(b) GDPR; for applications additionally Sec. 26 BDSG). In detail: Contact form: name, email, optional phone, subject and message are transmitted to us by email only and are not stored in a database. Application form: your details and PDF documents (CV, optional cover letter) are transmitted to us as email attachments and are not stored in a database; we delete application documents no later than 6 months after the process ends. Callback and appointment-booking forms: your details are stored in our database (EU region); uploaded files are only forwarded as email attachments. For bookings you receive a confirmation with a calendar file (.ics) and a personal management link (reschedule/cancel); about 24 hours before the appointment we send an automated reminder. Cancelling sets the appointment to “cancelled” and releases the time slot. Booking data is deleted once it is no longer required for handling. We do not use any third-party appointment-booking tools.",
+  },
+  antiAbuse: {
+    de: "Missbrauchsschutz: Zum Schutz vor automatisiertem Missbrauch verarbeiten unsere Formular-Endpunkte Ihre IP-Adresse kurzzeitig im Arbeitsspeicher des Servers (Ratenbegrenzung, in der Regel maximal eine Stunde) und verwenden ein verstecktes Honeypot-Feld. Eine dauerhafte Speicherung der IP-Adresse in einer Datenbank findet dabei nicht statt. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am Schutz der Systeme).",
+    en: "Abuse protection: To protect against automated abuse, our form endpoints process your IP address briefly in the server's memory (rate limiting, usually no longer than one hour) and use a hidden honeypot field. The IP address is not permanently stored in a database. Legal basis: Art. 6(1)(f) GDPR (legitimate interest in protecting our systems).",
   },
   withdrawTitle: { de: "7. Widerruf der Einwilligung", en: "7. Withdrawing consent" },
   withdrawBody: {
@@ -87,10 +99,10 @@ const T = {
   },
   transferTitle: { de: "9. Datenübermittlung in Drittländer", en: "9. Transfers outside the EEA" },
   transfer: {
-    de: "Eine Übermittlung in Länder außerhalb des EWR findet nur im Rahmen der oben genannten Dienste statt (Cloudflare, Google Fonts, E-Mail-Versand über Resend) und ist durch Standardvertragsklauseln bzw. das EU-US Data Privacy Framework abgesichert. Formular- und Termindaten werden in der EU gespeichert.",
-    en: "Transfers to countries outside the EEA only occur within the services listed above (Cloudflare, Google Fonts, email delivery via Resend) and are safeguarded by standard contractual clauses or the EU-US Data Privacy Framework. Form and booking data is stored in the EU.",
+    de: "Eine Übermittlung in Länder außerhalb des EWR findet nur im Rahmen der oben genannten Dienste statt (Hosting über Cloudflare, E-Mail-Versand über Resend, KI-Gateway unseres Plattformbetreibers Lovable für den Projektberater) und ist durch Standardvertragsklauseln bzw. das EU-US Data Privacy Framework abgesichert. Die Kartenansicht nutzt Server der OpenStreetMap Foundation im Vereinigten Königreich (Angemessenheitsbeschluss der EU-Kommission). Rückruf- und Termindaten werden in einer Datenbank in der EU gespeichert; E-Mail-Inhalte und Bewerbungsunterlagen durchlaufen den genannten E-Mail-Dienst.",
+    en: "Transfers to countries outside the EEA only occur within the services listed above (hosting via Cloudflare, email delivery via Resend, the AI gateway of our platform operator Lovable for the project advisor) and are safeguarded by standard contractual clauses or the EU-US Data Privacy Framework. The map view uses servers of the OpenStreetMap Foundation in the United Kingdom (EU adequacy decision). Callback and booking data is stored in a database in the EU; email contents and application documents pass through the email service named above.",
   },
-  updated: { de: "Stand: August 2026 · Einwilligungsversion 1", en: "Last updated: August 2026 · Consent version 1" },
+  updated: { de: "Stand: Oktober 2026 · Einwilligungsversion 1", en: "Last updated: October 2026 · Consent version 1" },
 } satisfies Record<string, L>;
 
 const COOKIE_ROWS: Array<Record<"name" | "provider" | "purpose" | "category" | "duration" | "basis", L>> = [
@@ -144,12 +156,12 @@ const COOKIE_ROWS: Array<Record<"name" | "provider" | "purpose" | "category" | "
     basis: { de: "Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG", en: "Art. 6(1)(a) GDPR, Sec. 25(1) TDDDG" },
   },
   {
-    name: { de: "Google Fonts (kein Cookie)", en: "Google Fonts (no cookie)" },
-    provider: { de: "Google Ireland Limited", en: "Google Ireland Limited" },
-    purpose: { de: "Laden der Schriftarten der Website.", en: "Loading the website's typefaces." },
+    name: { de: "Schriftarten (kein Cookie)", en: "Fonts (no cookie)" },
+    provider: { de: "Munich Construction GmbH (eigener Server)", en: "Munich Construction GmbH (own server)" },
+    purpose: { de: "Laden der Schriftarten der Website von unserem eigenen Server.", en: "Loading the website's typefaces from our own server." },
     category: { de: "Notwendig (Darstellung)", en: "Necessary (presentation)" },
     duration: { de: "Browser-Cache (bis 1 Jahr)", en: "Browser cache (up to 1 year)" },
-    basis: { de: "Art. 6 Abs. 1 lit. f DSGVO", en: "Art. 6(1)(f) GDPR" },
+    basis: { de: "§ 25 Abs. 2 TDDDG, Art. 6 Abs. 1 lit. f DSGVO", en: "Sec. 25(2) TDDDG, Art. 6(1)(f) GDPR" },
   },
 ];
 
@@ -217,10 +229,13 @@ function PrivacyPage() {
             <p>{l(T.osm)}</p>
             <p>{l(T.fonts)}</p>
             <p>{l(T.whatsapp)}</p>
+            <p>{l(T.advisor)}</p>
+            <p>{l(T.emailProcessor)}</p>
           </Block>
 
           <Block title={l(T.formsTitle)}>
             <p>{l(T.forms)}</p>
+            <p>{l(T.antiAbuse)}</p>
           </Block>
 
           <Block title={l(T.withdrawTitle)}>
